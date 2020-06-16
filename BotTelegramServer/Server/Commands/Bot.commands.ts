@@ -30,7 +30,6 @@ export const botCommands = [
   {command: 'ayuda',
   response: (ctx:any) => 
     { 
-      console.log('algo')
       return ctx.reply("¿Qué necesitas?", 
         Markup.keyboard([
           ['🔍 Search', '😎 Popular'], 

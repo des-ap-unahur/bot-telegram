@@ -8,7 +8,7 @@ import UserInterface from '../Interfaces/User.interface';
     timestamps: true,
   }
 )
-export class User extends Model<User> implements UserInterface {
+class User extends Model<User> implements UserInterface {
   @AutoIncrement
   @PrimaryKey
   @Column(DataTypes.NUMBER)
@@ -31,3 +31,5 @@ export class User extends Model<User> implements UserInterface {
   @Column(DataTypes.DATE)
   updatedAt: Date;
 }
+
+export default User;

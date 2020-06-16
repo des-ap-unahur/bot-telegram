@@ -1,9 +1,9 @@
-import express from 'express';
+import { Router } from 'express';
 
-const router = express.Router();
+const HomeRoute = Router();
 
-router.get('/', (req, res) => {
-  res.send('buenas noches');
+HomeRoute.get('/', (req, res) => {
+  res.send('bienvenido al servicio BotTelegramServer.');
 });
 
-export const Home = router;
+export default HomeRoute;

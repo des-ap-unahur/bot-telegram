@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 import AppConfig from './Interfaces/AppConfig.interface';
 import bot from './Services/Bot.service';
 import { botHears, botCommands } from './Commands/Bot.commands';
+import Database from './Database/Database'
 
 class App {
   public app: Application;
@@ -22,6 +23,7 @@ class App {
 
     this.routes(routes);
     this.middlewares(middlewares);
+    this.dbSetup()
     this.botSetup();
   }
 
@@ -43,6 +45,15 @@ class App {
     })
   }
 
+  public dbSetup = () => {
+    this.app.use((req: any, res, next) => 
+      {
+        req.database = Database;
+        next();
+      }
+    )
+  }
+  
   public botSetup = () => {
     bot.start((ctx) => {});
     botHears.map(hears => bot.hears(hears.message, hears.response));

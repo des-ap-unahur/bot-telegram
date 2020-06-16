@@ -3,7 +3,8 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
 import { configServer } from './Config/Server/Server.config';
-import { Home } from './Routes/Home.route';
+import HomeRoute from './Routes/Home.route';
+import UserRoute from './Routes/User.route';
 
 const app = new App({
   port: Number(configServer.get('PORT')),
@@ -15,7 +16,8 @@ const app = new App({
     morgan('dev'),
   ],
   routes: [
-    {route: Home, path: '/'}
+    {route: HomeRoute, path: '/'},
+    {route: UserRoute, path: '/api'}
   ]
 })
 
