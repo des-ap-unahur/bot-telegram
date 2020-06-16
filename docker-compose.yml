@@ -32,4 +32,4 @@ services:
       dockerfile: DockerfileDatabase.Dockerfile
     restart: always
     ports:
-      - 3307:3306
+      - 3307:5432

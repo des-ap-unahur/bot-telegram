@@ -1,5 +1,7 @@
 import express, { Application } from 'express';
 import AppConfig from './Interfaces/AppConfig.interface';
+import bot from './Services/Bot.service';
+import { botHears, botCommands } from './Commands/Bot.commands';
 
 class App {
   public app: Application;
@@ -18,8 +20,9 @@ class App {
     this.port = port;
     this.name = name;
 
-    this.routes(routes)
-    this.middlewares(middlewares)
+    this.routes(routes);
+    this.middlewares(middlewares);
+    this.botSetup();
   }
 
   public middlewares = (middlewares: Array<any>) => {
@@ -38,6 +41,13 @@ class App {
     this.app.listen(this.port, () => {
       console.log('%s running.', this.name);
     })
+  }
+
+  public botSetup = () => {
+    bot.start((ctx) => {});
+    botHears.map(hears => bot.hears(hears.message, hears.response));
+    botCommands.map(command => bot.command(command.command, command.response));
+    bot.launch();
   }
 }
 
