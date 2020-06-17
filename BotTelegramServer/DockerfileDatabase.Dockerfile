@@ -1,6 +1,6 @@
-FROM postgres:11
+FROM mariadb:10.4.5-bionic
 
-ENV POSTGRES_DB=bot-telegram-database
-ENV POSTGRES_USER=bot-telegram-user
-ENV POSTGRES_PASSWORD=bot-telegram-secret
-ENV PGPASSWORD=bot-telegram-password
+ENV MYSQL_DB=bot-telegram-database
+ENV MYSQL_USER=bot-telegram-user
+ENV MYSQL_PASSWORD=bot-telegram-secret
+ENV MYSQL_ROOT_PASSWORD=bot-telegram-password

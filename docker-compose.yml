@@ -26,10 +26,12 @@ services:
       - ./BotTelegramServer:/opt/api
 
   bot-telegram-database:
-    image: postgres:11
+    image: mariadb:10.4.5-bionic
+    volumes:
+      - ./BotTelegramServer/Database:/var/lib/mysql
     build:
       context: ./BotTelegramServer    
       dockerfile: DockerfileDatabase.Dockerfile
     restart: always
     ports:
-      - 5432:5432
+      - 3307:3306

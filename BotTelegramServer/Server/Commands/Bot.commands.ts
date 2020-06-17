@@ -30,7 +30,7 @@ export const botCommands = [
   {command: 'ayuda',
   response: (ctx:any) => 
     { 
-      return ctx.reply("¿Qué necesitas?", 
+      return ctx.reply("¿Qué necesitas?", () => {
         Markup.keyboard([
           ['🔍 Search', '😎 Popular'], 
           ['☸ Setting', '📞 Feedback'], 
@@ -39,7 +39,7 @@ export const botCommands = [
         .oneTime()
         .resize()
         .extra()
-      ).then(res=>console.log(res))
+      }).then(res=>console.log(res))
     }
   }
 ]
