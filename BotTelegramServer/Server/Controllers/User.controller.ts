@@ -1,4 +1,4 @@
-import User from '../models/User.model';
+import User from '../Models/User.model';
 
 class UserController {
   post = async (req: any, res: any): Promise<User> => {
