@@ -3,6 +3,6 @@ import PollController from '../Controllers/Poll.controller';
 
 const PollRoute = Router();
 
-PollRoute.get('/Polls', PollController.get);
+PollRoute.get('/encuestas', PollController.get);
 
 export default PollRoute;
