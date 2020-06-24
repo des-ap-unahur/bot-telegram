@@ -27,8 +27,8 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface{
     @Column(DataTypes.STRING)
     name!: string;
 
-    @Column(DataTypes.STRING)
-    status!: string;
+    @Column(DataTypes.BOOLEAN)
+    status!: boolean;
 
     @Column(DataTypes.STRING)
     description!: string;
