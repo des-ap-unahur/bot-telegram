@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config({ path: `environments/${process.env.NODE_ENV}.env` });
+const dotenv = require('dotenv').config({ path: `Environments/${process.env.NODE_ENV}.env` });
 
 module.exports = {
   development: {

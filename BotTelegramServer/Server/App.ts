@@ -24,7 +24,7 @@ class App {
     this.routes(routes);
     this.middlewares(middlewares);
     this.dbSetup()
-//    this.botSetup();
+    this.botSetup();
   }
 
   public middlewares = (middlewares: Array<any>) => {

@@ -11,7 +11,6 @@ package-lock.json*
 
 # production
 /build
-/src/App/Config/Constants.config.js
 
 # misc
 .DS_Store
