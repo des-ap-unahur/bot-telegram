@@ -1,6 +1,6 @@
 #!/bin/bash
 # General
-# git fetch --all && git checkout . && git checkout develop && git pull
+git fetch --all && git checkout . && git checkout develop && git pull
 
 # BotTelegramDatabase
 echo "";
