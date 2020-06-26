@@ -7,7 +7,7 @@ const sequelize = new Sequelize(
   databaseConfig.DB_PASSWORD, 
   {
     host: databaseConfig.HOST,
-    dialect: 'postgres',
+    dialect: 'mysql',
     models: ['../Models'],
     pool: {
       max: databaseConfig.POOL_MAX,

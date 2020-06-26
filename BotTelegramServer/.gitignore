@@ -13,6 +13,7 @@ package-lock.json*
 # production
 /build
 /Dist/**/*
+/Database/**/*
 
 # misc
 .DS_Store

@@ -4,10 +4,14 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node Server/Server.ts",
-    "dev": "nodemon",
+    "nodemon": "nodemon",
     "clean": "rm -rf Dist",
     "start:compiled": "node Dist/Server/Server.js",
-    "start:development": "NODE_ENV=development npm run dev"
+    "start:development": "NODE_ENV=development npm run nodemon",
+    "start:prod": "NODE_ENV=production npm run nodemon",
+    "start:test": "NODE_ENV=test npm run nodemon",
+    "watch:build": "tsc --watch",
+    "watch:server": "nodemon './dist/index.js' --watch './dist'"
   },
   "dependencies": {
     "@babel/runtime": "^7.7.7",
@@ -20,6 +24,7 @@
     "es6-promise": "^4.2.8",
     "express": "^4.14.0",
     "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.1.0",
     "passport": "^0.4.1",
     "pg": "^8.2.1",
     "reflect-metadata": "^0.1.13",

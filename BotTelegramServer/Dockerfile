@@ -12,12 +12,11 @@ RUN cd /tmp/$PROJECT_NAME/ && npm install
 RUN mkdir -p $PROJECT_ROOT
 RUN cp -a /tmp/$PROJECT_NAME/node_modules $PROJECT_ROOT
 RUN npm install -g sequelize-cli
-RUN npm install -g pg
 
 WORKDIR $PROJECT_ROOT
 
 COPY . $PROJECT_ROOT
 
-CMD npm run dev
+CMD npm run nodemon
 
 EXPOSE 5000
