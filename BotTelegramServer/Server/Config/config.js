@@ -1,4 +1,4 @@
-const dotenv = require('dotenv').config({ path: `environments/${process.env.NODE_ENV}.env` });
+const dotenv = require('dotenv').config({ path: `Environments/${process.env.NODE_ENV}.env` });
 
 module.exports = {
   development: {
@@ -7,6 +7,6 @@ module.exports = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    dialect: 'postgres',
+    dialect: 'mysql',
   },
 };

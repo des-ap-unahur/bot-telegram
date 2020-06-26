@@ -26,12 +26,14 @@ services:
       - ./BotTelegramServer:/opt/api
 
   bot-telegram-database:
-    image: mariadb:10.4.5-bionic
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - ./BotTelegramServer/Database:/var/lib/mysql
-    build:
-      context: ./BotTelegramServer    
-      dockerfile: DockerfileDatabase.Dockerfile
+      - ./BotTelegramDatabase:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=bot_telegram_secret
     restart: always
     ports:
       - 3307:3306
+    security_opt:
+    - seccomp:unconfined
