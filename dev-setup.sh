@@ -17,7 +17,9 @@ echo "####### BotTelegramServer ########"
 echo "#################################";
 cd BotTelegramServer
 npm i
-cd ..
+cd Environments
+cp development.env.local development.env
+cd ../..
 
 # BotTelegramView
 echo "";
@@ -26,4 +28,6 @@ echo "######## BotTelegramView #########"
 echo "#################################";
 cd BotTelegramView
 npm i
-cd ..
+cd src/App/Config
+cp Constants.config.js.local Constants.config.js
+cd ../../../..
