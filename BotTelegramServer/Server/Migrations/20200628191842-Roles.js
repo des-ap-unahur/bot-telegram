@@ -2,25 +2,17 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Bot_response_files', {
-      
-      bot_response_id: {
+    return queryInterface.createTable('Roles', {
+      role_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Bot_responses',
-          key: 'bot_response_id'
-        }
+        type: Sequelize.INTEGER
       },
-      filename: {
+        role: {
         type: Sequelize.STRING,
       },
       description: {
-        type: Sequelize.STRING,
-      },
-      url: {
         type: Sequelize.STRING,
       },
       createdAt: {
@@ -33,8 +25,8 @@ module.exports = {
       }
     });
   },
-
+ 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Bot_response_files');
+    return queryInterface.dropTable('Roles');
   }
 };

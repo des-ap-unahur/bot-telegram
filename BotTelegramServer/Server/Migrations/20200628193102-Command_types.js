@@ -2,14 +2,15 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Roles', {
-      role_id: {
+    return queryInterface.createTable('Command_types', {
+      
+      command_type_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-        role: {
+      type: {
         type: Sequelize.STRING,
       },
       description: {
@@ -25,8 +26,8 @@ module.exports = {
       }
     });
   },
- 
+
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Roles');
+    return queryInterface.dropTable('Command_types');
   }
 };
