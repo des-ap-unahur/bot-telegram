@@ -2,27 +2,23 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Poll_responses', {
+    return queryInterface.createTable('Bot_responses', {
       
-      poll_response_id: {
+      bot_response_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-      },
-      user_id: {
-        type: Sequelize.INTEGER,
         references: {
           model: 'Bot_users',
-          key: 'user_type_id'
+          key: 'bot_user_id'
         }
       },
-      response_id: {
+      bot_id: {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Poll_questions',
-          key: 'poll_question_id'
-        }
+      },
+      response: {
+        type: Sequelize.STRING,
       },
       description: {
         type: Sequelize.STRING,
@@ -39,6 +35,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Poll_responses');
+    return queryInterface.dropTable('Bot_responses');
   }
 };

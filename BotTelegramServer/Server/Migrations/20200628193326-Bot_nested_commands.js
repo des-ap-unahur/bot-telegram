@@ -2,20 +2,20 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Polls_roles_access', {
+    return queryInterface.createTable('Bot_nested_commands', {
       
-      role_id: {
+      bot_father_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Roles',
-          key: 'role_id'
+          model: 'Bot_commands',
+          key: 'bot_command_id'
         }
       },
-      poll_id: {
+      bot_child_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Roles',
-          key: 'poll_id'
+          model: 'Bot_commands',
+          key: 'bot_command_id'
         }
       },
       createdAt: {
@@ -30,6 +30,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Poll_roles_access');
+    return queryInterface.dropTable('Bot_nested_commands');
   }
 };

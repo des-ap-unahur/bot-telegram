@@ -2,25 +2,27 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Poll_question', {
-      
-      poll_question_id: {
+    return queryInterface.createTable('Backoffice_user', {
+      back_user_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      poll_id: {
+      user_role_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Poll',
-          key: 'poll_id'
+          model: 'Roles',
+          key: 'role_id'
         }
       },
-      name: {
+      fname: {
         type: Sequelize.STRING,
       },
-      description: {
+      lname: {
+        type: Sequelize.STRING,
+      },
+      email: {
         type: Sequelize.STRING,
       },
       createdAt: {
@@ -35,6 +37,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Poll_question');
+    return queryInterface.dropTable('Backoffice_user');
   }
 };

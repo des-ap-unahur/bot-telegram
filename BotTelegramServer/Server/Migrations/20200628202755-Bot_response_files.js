@@ -2,21 +2,23 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Bot_nested_commands', {
+    return queryInterface.createTable('Bot_response_files', {
       
-      bot_father_id: {
+      bot_response_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Bot_commands',
-          key: 'command_type_id'
+          model: 'Bot_responses',
+          key: 'bot_response_id'
         }
       },
-      bot_child_id: {
+      filename: {
         type: Sequelize.STRING,
-        references: {
-          model: 'Bot_commands',
-          key: 'command_type_id'
-        }
+      },
+      description: {
+        type: Sequelize.STRING,
+      },
+      url: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -30,6 +32,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Bot_nested_commands');
+    return queryInterface.dropTable('Bot_response_files');
   }
 };
