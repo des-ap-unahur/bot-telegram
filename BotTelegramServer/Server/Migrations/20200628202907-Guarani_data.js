@@ -2,7 +2,7 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Bot_nested_commands', {
+    return queryInterface.createTable('Guarani_data', {
       
       dni: {
         allowNull: false,
@@ -28,6 +28,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Bot_nested_commands');
+    return queryInterface.dropTable('Guarani_data');
   }
 };
