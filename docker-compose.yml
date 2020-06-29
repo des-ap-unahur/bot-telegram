@@ -1,0 +1,37 @@
+version: "3"
+services:
+  bot-telegram-view:
+    build:
+      context: ./BotTelegramView
+      args:
+        environment: local
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./BotTelegramView:/opt/app
+
+  bot-telegram-server:
+    build:
+      context: ./BotTelegramServer
+      args:
+        environment: development
+    restart: always
+    depends_on: 
+      - bot-telegram-database
+    links: 
+      - bot-telegram-database
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./BotTelegramServer:/opt/api
+
+  bot-telegram-database:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./BotTelegramDatabase:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=bot_telegram_secret
+    restart: always
+    ports:
+      - 3307:3306
