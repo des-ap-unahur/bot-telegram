@@ -5,6 +5,7 @@ class PollController {
     const poll = await Poll.create();
     return poll;
   }
+  
   get = async (req: any, res: any): Promise<void> => {
     const polls = await Poll.findAll();
     res.send();
