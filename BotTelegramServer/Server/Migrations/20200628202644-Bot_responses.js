@@ -2,41 +2,25 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Bots_commands', {
+    return queryInterface.createTable('Bot_responses', {
       
-      bot_command_id: {
+      bot_response_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-      },
-      command_type_id: {
-        type: Sequelize.INTEGER,
         references: {
-          model: 'Commands_types',
-          key: 'command_type_id'
+          model: 'Bot_users',
+          key: 'bot_user_id'
         }
       },
-      user_type_id: {
+      bot_id: {
         type: Sequelize.INTEGER,
-        references: {
-          model: 'User_types',
-          key: 'user_types_id'
-        }
       },
-      tel_command: {
+      response: {
         type: Sequelize.STRING,
-      },
-      name: {
-        type: Sequelize.STRING,
-      },
-      status: {
-        type: Sequelize.BOOLEAN,
       },
       description: {
-        type: Sequelize.STRING,
-      },
-      parameter: {
         type: Sequelize.STRING,
       },
       createdAt: {
@@ -51,6 +35,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Bot_commands');
+    return queryInterface.dropTable('Bot_responses');
   }
 };

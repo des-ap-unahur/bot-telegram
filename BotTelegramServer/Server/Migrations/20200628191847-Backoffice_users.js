@@ -2,18 +2,27 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Bot_nested_commands', {
-      
-      dni: {
+    return queryInterface.createTable('Backoffice_user', {
+      back_user_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      email: {
+      user_role_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Roles',
+          key: 'role_id'
+        }
+      },
+      fname: {
         type: Sequelize.STRING,
       },
-      profile: {
+      lname: {
+        type: Sequelize.STRING,
+      },
+      email: {
         type: Sequelize.STRING,
       },
       createdAt: {
@@ -28,6 +37,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Bot_nested_commands');
+    return queryInterface.dropTable('Backoffice_user');
   }
 };

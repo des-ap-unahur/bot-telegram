@@ -2,9 +2,9 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Bot_susc_users', {
+    return queryInterface.createTable('User_types', {
       
-      user_id: {
+      user_type_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -14,20 +14,11 @@ module.exports = {
           key: 'bot_user_id'
         }
       },
-      dni: {
-        type: Sequelize.INTEGER,
-      },
-      fname: {
+      type: {
         type: Sequelize.STRING,
       },
-      lname: {
+      description: {
         type: Sequelize.STRING,
-      },
-      date_suscribe: {
-        type: Sequelize.DATE,
-      },
-      verified: {
-        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
@@ -41,7 +32,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Bot_susc_users');
+    return queryInterface.dropTable('User_types');
   }
 };
-

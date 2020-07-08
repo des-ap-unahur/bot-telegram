@@ -2,15 +2,22 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Command_types', {
+    return queryInterface.createTable('Poll_questions', {
       
-      command_type_id: {
+      poll_question_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      type: {
+      poll_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Poll',
+          key: 'poll_id'
+        }
+      },
+      name: {
         type: Sequelize.STRING,
       },
       description: {
@@ -28,6 +35,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Command_types');
+    return queryInterface.dropTable('Poll_questions');
   }
 };
