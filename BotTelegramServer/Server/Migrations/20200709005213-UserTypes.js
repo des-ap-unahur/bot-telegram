@@ -8,11 +8,7 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Bot_users',
-          key: 'bot_user_id'
-        }
+        type: Sequelize.INTEGER
       },
       type: {
         type: Sequelize.STRING,
