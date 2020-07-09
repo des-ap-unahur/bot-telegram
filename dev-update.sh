@@ -1,7 +1,4 @@
 #!/bin/bash
-# General
-git fetch --all && git checkout . && git checkout develop && git pull
-
 # BotTelegramDatabase
 echo "";
 echo "#################################";
@@ -15,9 +12,7 @@ echo "";
 echo "#################################";
 echo "####### BotTelegramServer ########"
 echo "#################################";
-cd BotTelegramServer
-npm i
-cd Environments
+cd BotTelegramServer/Environments
 cp development.env.local development.env
 cd ../..
 
@@ -26,8 +21,6 @@ echo "";
 echo "#################################";
 echo "######## BotTelegramView #########"
 echo "#################################";
-cd BotTelegramView
-npm i
-cd src/App/Config
+cd BotTelegramView/src/App/Config
 cp Constants.config.js.local Constants.config.js
 cd ../../../..
