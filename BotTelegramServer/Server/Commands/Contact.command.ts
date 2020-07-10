@@ -12,7 +12,6 @@ export const contactCommand = (ctx:any, bot: any): void => {
   if(Boolean(verifiedProfile)){
     if(verifiedProfile.isTeacher){
       teacherCommands.map(command => bot.command(command.command, command.response));
- 
     }else{
       studentsCommands.map(command => bot.command(command.command, command.response));
     }

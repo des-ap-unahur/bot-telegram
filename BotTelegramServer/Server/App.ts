@@ -1,6 +1,9 @@
 import express, { Application } from 'express';
 import AppConfig from './Interfaces/AppConfig.interface';
 import bot from './Services/Bot.service';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import cors from 'cors';
 import { botHears, baseBotCommands, botCommandStart } from './Commands/Bot.commands';
 import { contactCommand } from './Commands/Contact.command';
 import Database from './Database/Database'
@@ -15,27 +18,27 @@ class App {
       port, 
       name, 
       routes,
-      middlewares
     } = appConfig;
 
     this.app = express();
     this.port = port;
     this.name = name;
 
+    this.middlewares();
     this.routes(routes);
-    this.middlewares(middlewares);
     this.dbSetup()
     this.botSetup();
   }
 
-  public middlewares = (middlewares: Array<any>) => {
-    middlewares.map(middleware => {
-      this.app.use(middleware)
-    })
+  public middlewares = (): void => {
+    this.app.use(bodyParser.json())
+    this.app.use(bodyParser.urlencoded({ extended: true }))
+    this.app.use(cors())
+    this.app.use(morgan('dev'))
   }
 
-  public routes = (routes: Array<any>) => {
-    routes.map(route => {
+  public routes = async (routes: Array<any>) => {
+    await routes.map(route => {
       this.app.use(route.path, route.route)
     })
   }
