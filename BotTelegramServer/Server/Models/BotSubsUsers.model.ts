@@ -1,20 +1,20 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from 'sequelize-typescript';
-import { DataTypes } from 'sequelize';
-import BotSubsUsersInterface from '../Interfaces/BotSubsUsers.interface';
-import BotUsers from '../Models/BotUsers.model';
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, BelongsTo } from "sequelize-typescript";
+import { DataTypes } from "sequelize";
+import BotSubsUsersInterface from "../Interfaces/BotSubsUsers.interface";
+import BotUsers from "./BotUsers.model";
 
-@Table(
-  {
-    tableName: "Bot_susc_users",
-    timestamps: true,
-  }
-)
+@Table({
+  tableName: "Bot_susc_users",
+  timestamps: true,
+})
 
-class BotSubsUsers extends Model<BotSubsUsers> implements BotSubsUsersInterface{
+class BotSubsUsers extends Model<BotSubsUsers>
+  implements BotSubsUsersInterface {
   @AutoIncrement
   @PrimaryKey
+  @ForeignKey(() => BotUsers)
   @Column(DataTypes.NUMBER)
-  user_id?: number
+  user_id?: number;
 
   @Column(DataTypes.STRING)
   dni!: number;
@@ -38,12 +38,9 @@ class BotSubsUsers extends Model<BotSubsUsers> implements BotSubsUsersInterface{
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
+
+  @BelongsTo(() => BotUsers)
+  botUsers: BotUsers;
 }
-
-BotSubsUsers.hasOne(BotUsers,{
-  foreignKey:'bot_user_id',
-  sourceKey:'user_id'
-});
-
 
 export default BotSubsUsers;

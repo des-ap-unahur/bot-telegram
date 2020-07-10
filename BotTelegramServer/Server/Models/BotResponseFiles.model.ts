@@ -1,20 +1,17 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from 'sequelize-typescript';
-import { DataTypes } from 'sequelize';
-import BotResponseFilesInterface from '../Interfaces/BotResponseFiles.interface';
-import BotResponses from './BotResponses.model';
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
+import { DataTypes } from "sequelize";
+import BotResponseFilesInterface from "../Interfaces/BotResponseFiles.interface";
+import BotResponses from "./BotResponses.model";
 
-@Table(
-  {
-    tableName: "Bot_responses_files",
-    timestamps: true,
-  }
-)
-
-class BotResponseFiles extends Model<BotResponseFiles> implements BotResponseFilesInterface{
+@Table({
+  tableName: "Bot_responses_files",
+  timestamps: true,
+})
+class BotResponseFiles extends Model<BotResponseFiles> implements BotResponseFilesInterface {
   @AutoIncrement
   @PrimaryKey
   @Column(DataTypes.NUMBER)
-  bot_response_id?: number
+  bot_response_id?: number;
 
   @Column(DataTypes.STRING)
   filename!: string;
@@ -28,16 +25,10 @@ class BotResponseFiles extends Model<BotResponseFiles> implements BotResponseFil
   @CreatedAt
   @Column(DataTypes.DATE)
   createdAt: Date;
-  
+
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
 }
-
-BotResponseFiles.hasOne(BotResponses,{
-  foreignKey:'bot_command_id',
-  sourceKey:'bot_response_id'
-});
-
 
 export default BotResponseFiles;

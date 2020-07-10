@@ -1,21 +1,18 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from 'sequelize-typescript';
-import { DataTypes } from 'sequelize';
-import BotUsersInterface from '../Interfaces/BotUsers.interface';
-import PollResponses from './PollResponses.model';
-import BotSubsUsers from './BotSubsUsers.model';
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, HasOne } from "sequelize-typescript";
+import { DataTypes, Association } from "sequelize";
+import BotUsersInterface from "../Interfaces/BotUsers.interface";
 
-@Table(
-  {
-    tableName: "Bot_users",
-    timestamps: true,
-  }
-)
+import BotSubsUsers from "./BotSubsUsers.model";
 
-class BotUsers extends Model<BotUsers> implements BotUsersInterface{
+@Table({
+  tableName: "Bot_users",
+  timestamps: true,
+})
+class BotUsers extends Model<BotUsers> implements BotUsersInterface {
   @AutoIncrement
   @PrimaryKey
   @Column(DataTypes.NUMBER)
-  bot_user_id?: number
+  bot_user_id?: number;
 
   @Column(DataTypes.STRING)
   user_type_id!: number;
@@ -39,17 +36,9 @@ class BotUsers extends Model<BotUsers> implements BotUsersInterface{
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
+
+  @HasOne(()=>BotSubsUsers)
+  botSubUsers: BotSubsUsers
 }
-
-BotUsers.hasMany(PollResponses,{
-  foreignKey:'user_id',
-  sourceKey:'user_type_id'
-});
-
-BotUsers.hasOne(BotSubsUsers,{
-  foreignKey: 'user_id',
-  sourceKey: 'bot_user_id'
-})
-
 
 export default BotUsers;

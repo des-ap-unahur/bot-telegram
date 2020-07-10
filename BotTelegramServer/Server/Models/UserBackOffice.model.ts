@@ -1,7 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import UserBackOfficeInterface from '../Interfaces/UserBackOffice.interface';
-import Roles from './Roles.model';
 
 @Table(
   {
@@ -10,14 +9,16 @@ import Roles from './Roles.model';
   }
 )
 
-class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInterface{
+class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInterface {
+
   @AutoIncrement
   @PrimaryKey
   @Column(DataTypes.NUMBER)
-  user_role_id?: number
-  
-  @Column(DataTypes.NUMBER)
   back_user_id?: number
+
+
+  @Column(DataTypes.NUMBER)
+  user_role_id?: number
 
   @Column(DataTypes.STRING)
   fname!: string;
@@ -40,9 +41,6 @@ class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInte
   updatedAt: Date;
 }
 
-UserBackOffice.hasMany(Roles,{
-  foreignKey:'role_id',
-  sourceKey:'user_role_id'
-})
+
 
 export default UserBackOffice;

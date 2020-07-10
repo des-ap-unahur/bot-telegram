@@ -1,4 +1,4 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey } from 'sequelize-typescript';
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
 import { DataTypes } from 'sequelize';
 import PollRolesAccessInterface from '../Interfaces/PollRolesAccess.interface';
 import Roles from './Roles.model';

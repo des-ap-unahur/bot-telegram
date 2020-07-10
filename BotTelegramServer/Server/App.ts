@@ -2,8 +2,7 @@ import express, { Application } from 'express';
 import AppConfig from './Interfaces/AppConfig.interface';
 import bot from './Services/Bot.service';
 import { botHears, botCommands } from './Commands/Bot.commands';
-import Database from './Database/Database'
-import BotCommands from './Models/BotCommands.model';
+import Database from './Database/Database';
 
 class App {
   public app: Application;
@@ -57,11 +56,6 @@ class App {
   
   public botSetup = () => {
     bot.start((ctx) => {});
-    const fetchCommands = async () => {
-      return await BotCommands.findAll();
-    }
-    
-    console.log(fetchCommands(), '-------------------')
     botHears.map(hears => bot.hears(hears.message, hears.response));
     botCommands.map(command => bot.command(command.command, command.response));
     bot.launch();
