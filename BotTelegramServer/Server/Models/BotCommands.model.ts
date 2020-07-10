@@ -9,15 +9,12 @@ import {
 } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import BotCommandsInterface from "../Interfaces/BotCommands.interface";
-import BotNestedCommands from "./BotNestedCommands.model";
-import BotResponses from "./BotResponses.model";
-import UserTypes from "./UserTypes.model";
-import CommandsTypes from "./CommandsTypes.model";
 
 @Table({
   tableName: "Bot_commands",
   timestamps: true,
 })
+
 class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @AutoIncrement
   @PrimaryKey
@@ -29,7 +26,7 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
 
   @Column(DataTypes.STRING)
   tel_command!: string;
-
+  
   @Column(DataTypes.STRING)
   name!: string;
 
@@ -50,6 +47,5 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @Column(DataTypes.DATE)
   updatedAt: Date;
 }
-
 
 export default BotCommands;

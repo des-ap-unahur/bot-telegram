@@ -1,12 +1,12 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import BotResponsesInterface from "../Interfaces/BotResponses.interface";
-import BotResponseFiles from "./BotResponseFiles.model";
-import BotCommands from "./BotCommands.model";
+
 @Table({
   tableName: "Bot_responses",
   timestamps: true,
 })
+
 class BotResponses extends Model<BotResponses>
   implements BotResponsesInterface {
   @AutoIncrement
@@ -28,6 +28,5 @@ class BotResponses extends Model<BotResponses>
   @Column(DataTypes.DATE)
   updatedAt: Date;
 }
-
 
 export default BotResponses;

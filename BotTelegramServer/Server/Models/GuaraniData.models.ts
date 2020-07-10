@@ -1,10 +1,12 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import GuaraniDataInterface from "../Interfaces/GuaraniData.interface";
+
 @Table({
   tableName: "Guarani_data",
   timestamps: true,
 })
+
 class GuaraniData extends Model<GuaraniData> implements GuaraniDataInterface {
   @AutoIncrement
   @PrimaryKey

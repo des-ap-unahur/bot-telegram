@@ -8,5 +8,8 @@ module.exports = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: 'mysql',
+    modelPaths: [
+      __dirname + '/../Models/*.ts'
+    ]
   },
 };

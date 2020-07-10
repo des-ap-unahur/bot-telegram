@@ -1,13 +1,14 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey } from 'sequelize-typescript';
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import UserBackOfficeInterface from '../Interfaces/UserBackOffice.interface';
-import Roles from './Roles.model';
+
 @Table(
   {
     tableName: "user",
     timestamps: true,
   }
 )
+
 class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInterface {
 
   @AutoIncrement
@@ -38,7 +39,6 @@ class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInte
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
-
 }
 
 

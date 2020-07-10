@@ -1,7 +1,7 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey,HasOne } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, HasOne } from "sequelize-typescript";
 import { DataTypes, Association } from "sequelize";
 import BotUsersInterface from "../Interfaces/BotUsers.interface";
-import PollResponses from "./PollResponses.model";
+
 import BotSubsUsers from "./BotSubsUsers.model";
 
 @Table({

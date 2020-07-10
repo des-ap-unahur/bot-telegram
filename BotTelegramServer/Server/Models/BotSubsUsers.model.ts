@@ -1,13 +1,13 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, BelongsTo } from "sequelize-typescript";
-import { DataTypes, Association } from "sequelize";
+import { DataTypes } from "sequelize";
 import BotSubsUsersInterface from "../Interfaces/BotSubsUsers.interface";
 import BotUsers from "./BotUsers.model";
-import bot from "../Services/Bot.service";
 
 @Table({
   tableName: "Bot_susc_users",
   timestamps: true,
 })
+
 class BotSubsUsers extends Model<BotSubsUsers>
   implements BotSubsUsersInterface {
   @AutoIncrement
@@ -41,14 +41,6 @@ class BotSubsUsers extends Model<BotSubsUsers>
 
   @BelongsTo(() => BotUsers)
   botUsers: BotUsers;
-
 }
-
-
-
-
-
-
-
 
 export default BotSubsUsers;

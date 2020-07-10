@@ -7,8 +7,8 @@ import BotCommands from "./BotCommands.model";
   tableName: "Bot_nested_commands",
   timestamps: true,
 })
-class BotNestedCommands extends Model<BotNestedCommands>
-  implements BotNestedCommandsInterface {
+
+class BotNestedCommands extends Model<BotNestedCommands> implements BotNestedCommandsInterface {
   @AutoIncrement
   @PrimaryKey
   @Column(DataTypes.NUMBER)

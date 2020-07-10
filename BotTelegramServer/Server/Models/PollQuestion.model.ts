@@ -1,12 +1,13 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, BelongsTo } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import PollQuestionInterface from "../Interfaces/PollQuestion.interface";
 import Poll from "./Poll.model";
-import PollResponses from "./PollResponses.model";
+
 @Table({
   tableName: "Poll_question",
   timestamps: true,
 })
+
 class PollQuestion extends Model<PollQuestion>
   implements PollQuestionInterface {
   @AutoIncrement

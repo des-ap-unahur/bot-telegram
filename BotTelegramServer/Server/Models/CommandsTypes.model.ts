@@ -1,12 +1,12 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import CommandTypesInterface from "../Interfaces/CommandTypes.interface";
-import BotCommands from "./BotCommands.model";
 
 @Table({
   tableName: "Command_types",
   timestamps: true,
 })
+
 class CommandTypes extends Model<CommandTypes>
   implements CommandTypesInterface {
   @AutoIncrement
@@ -28,6 +28,5 @@ class CommandTypes extends Model<CommandTypes>
   @Column(DataTypes.DATE)
   updatedAt: Date;
 }
-
 
 export default CommandTypes;

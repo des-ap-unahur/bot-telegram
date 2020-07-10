@@ -8,6 +8,7 @@ import UserInterface from '../Interfaces/User.interface';
     timestamps: true,
   }
 )
+
 class User extends Model<User> implements UserInterface {
   @AutoIncrement
   @PrimaryKey

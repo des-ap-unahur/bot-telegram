@@ -2,25 +2,20 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Poll_questions', {
-      
-      poll_question_id: {
+    return queryInterface.createTable('User', {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      poll_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Poll',
-          key: 'poll_id'
-        }
-      },
-      name: {
+      username: {
         type: Sequelize.STRING,
       },
-      description: {
+      email: {
+        type: Sequelize.STRING,
+      },
+      password: {
         type: Sequelize.STRING,
       },
       createdAt: {
@@ -30,11 +25,10 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-      }
+      },
     });
   },
-
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Poll_questions');
-  }
+    return queryInterface.dropTable('User');
+  },
 };

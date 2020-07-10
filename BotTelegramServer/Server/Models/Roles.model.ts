@@ -1,8 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import RolesInterface from "../Interfaces/Roles.interface";
-import UserBackOffice from "./UserBackOffice.model";
-import PollRolesAccess from "./PollRolesAccess.model";
 
 @Table({
   tableName: "Roles",
@@ -25,7 +23,5 @@ class Roles extends Model<Roles> implements RolesInterface {
   @Column(DataTypes.DATE)
   updatedAt: Date;
 }
-
-
 
 export default Roles;

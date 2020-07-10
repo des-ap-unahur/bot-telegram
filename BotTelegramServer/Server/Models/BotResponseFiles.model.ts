@@ -7,8 +7,7 @@ import BotResponses from "./BotResponses.model";
   tableName: "Bot_responses_files",
   timestamps: true,
 })
-class BotResponseFiles extends Model<BotResponseFiles>
-  implements BotResponseFilesInterface {
+class BotResponseFiles extends Model<BotResponseFiles> implements BotResponseFilesInterface {
   @AutoIncrement
   @PrimaryKey
   @Column(DataTypes.NUMBER)
@@ -31,6 +30,5 @@ class BotResponseFiles extends Model<BotResponseFiles>
   @Column(DataTypes.DATE)
   updatedAt: Date;
 }
-
 
 export default BotResponseFiles;

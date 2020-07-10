@@ -1,12 +1,12 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import UserTypesInterface from "../Interfaces/UserTypes.interface";
-import BotCommand from "./BotCommands.model";
 
 @Table({
   tableName: "Bot_commands",
   timestamps: true,
 })
+
 class UserTypes extends Model<UserTypes> implements UserTypesInterface {
   @AutoIncrement
   @PrimaryKey
@@ -27,6 +27,5 @@ class UserTypes extends Model<UserTypes> implements UserTypesInterface {
   @Column(DataTypes.DATE)
   updatedAt: Date;
 }
-
 
 export default UserTypes;
