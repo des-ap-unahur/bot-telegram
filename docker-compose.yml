@@ -35,3 +35,5 @@ services:
     restart: always
     ports:
       - 3307:3306
+    security_opt:
+    - seccomp:unconfined
