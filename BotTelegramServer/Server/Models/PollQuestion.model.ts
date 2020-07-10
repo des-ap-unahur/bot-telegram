@@ -1,23 +1,23 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey } from 'sequelize-typescript';
-import { DataTypes } from 'sequelize';
-import PollQuestionInterface from '../Interfaces/PollQuestion.interface'
-import Poll from '../Models/Poll.model'
-import PollResponses from './PollResponses.model';
-@Table(
-  {
-    tableName: "Poll_question",
-    timestamps: true,
-  }
-)
-class PollQuestion extends Model<PollQuestion> implements PollQuestionInterface {
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey } from "sequelize-typescript";
+import { DataTypes } from "sequelize";
+import PollQuestionInterface from "../Interfaces/PollQuestion.interface";
+import Poll from "./Poll.model";
+
+@Table({
+  tableName: "Poll_question",
+  timestamps: true,
+})
+
+class PollQuestion extends Model<PollQuestion>
+  implements PollQuestionInterface {
   @AutoIncrement
   @PrimaryKey
   @Column(DataTypes.NUMBER)
-  poll_question_id?: number
+  poll_question_id?: number;
 
- 
+  @ForeignKey(() => Poll)
   @Column(DataTypes.NUMBER)
-  poll_id!: number
+  poll_id!: number;
 
   @Column(DataTypes.STRING)
   question!: string;
@@ -26,23 +26,12 @@ class PollQuestion extends Model<PollQuestion> implements PollQuestionInterface 
   description!: string;
 
   @CreatedAt
-    @Column(DataTypes.DATE)
-    createdAt: Date;
-  
-    @UpdatedAt
-    @Column(DataTypes.DATE)
-    updatedAt: Date;
+  @Column(DataTypes.DATE)
+  createdAt: Date;
+
+  @UpdatedAt
+  @Column(DataTypes.DATE)
+  updatedAt: Date;
 }
- PollQuestion.hasOne(Poll,{
-     foreignKey:'poll_id',
-     sourceKey: 'poll_id'
- })
 
- PollQuestion.hasMany(PollResponses,{
-     foreignKey:'response_id',
-     sourceKey:'poll_question_id'
- })
-
-
-
-  export default PollQuestion;
+export default PollQuestion;

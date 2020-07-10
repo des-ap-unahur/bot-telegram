@@ -10,8 +10,8 @@ class UserController {
   }
 
   get = async (req: any, res: any): Promise<void> => {
-    const users = await User.findAll();
-    res.send(users);
+    
+    res.send("gola");
   }
 }
 
