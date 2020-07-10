@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import databaseConfig from '../Config/Database/Database.config';
+import { ModelList } from "../Config/Database/Models.config";
 
 const sequelize = new Sequelize(
   databaseConfig.DB_NAME, 
@@ -17,5 +18,7 @@ const sequelize = new Sequelize(
     logging: databaseConfig.LOGGING === 'true',
   },
 );
+
+sequelize.addModels(ModelList)
 
 export default sequelize;
