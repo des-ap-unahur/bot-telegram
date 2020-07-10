@@ -1,8 +1,8 @@
 import express, { Application } from 'express';
 import AppConfig from './Interfaces/AppConfig.interface';
 import bot from './Services/Bot.service';
-import { botHears, botCommands } from './Commands/Bot.commands';
-import Database from './Database/Database';
+import { botHears, baseBotCommands, botCommandStart, botOnCommand } from './Commands/Bot.commands';
+import Database from './Database/Database'
 
 class App {
   public app: Application;
@@ -55,11 +55,19 @@ class App {
   }
   
   public botSetup = () => {
-    bot.start((ctx) => {});
-    botHears.map(hears => bot.hears(hears.message, hears.response));
-    botCommands.map(command => bot.command(command.command, command.response));
+    bot.start(botCommandStart);
+
+    baseBotCommands.map(command => bot.command(command.command, command.response))
+    
+    botHears.map(hear => bot.hears(hear.message, hear.response));
+
+    botOnCommand.map(command => 
+      bot.on("contact", (ctx:any) => command.response(ctx, bot))
+    );
+   
     bot.launch();
   }
 }
+
 
 export default App;
