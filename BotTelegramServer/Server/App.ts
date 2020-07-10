@@ -1,7 +1,8 @@
 import express, { Application } from 'express';
 import AppConfig from './Interfaces/AppConfig.interface';
 import bot from './Services/Bot.service';
-import { botHears, baseBotCommands, botCommandStart, botOnCommand } from './Commands/Bot.commands';
+import { botHears, baseBotCommands, botCommandStart } from './Commands/Bot.commands';
+import { contactCommand } from './Commands/Contact.command';
 import Database from './Database/Database'
 
 class App {
@@ -60,10 +61,8 @@ class App {
     baseBotCommands.map(command => bot.command(command.command, command.response))
     
     botHears.map(hear => bot.hears(hear.message, hear.response));
-
-    botOnCommand.map(command => 
-      bot.on("contact", (ctx:any) => command.response(ctx, bot))
-    );
+ 
+    bot.on("contact", (ctx:any) => contactCommand(ctx, bot));    
    
     bot.launch();
   }
