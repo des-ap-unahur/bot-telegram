@@ -5,6 +5,7 @@ import cors from 'cors';
 import { configServer } from './Config/Server/Server.config';
 import HomeRoute from './Routes/Home.route';
 import UserRoute from './Routes/User.route';
+import PollRoute from './Routes/Poll.route';
 
 const app = new App({
   port: Number(configServer.get('PORT')),
@@ -17,7 +18,8 @@ const app = new App({
   ],
   routes: [
     {route: HomeRoute, path: '/'},
-    {route: UserRoute, path: '/api'}
+    {route: UserRoute, path: '/api'},
+    {route: PollRoute, path: '/api'}
   ]
 })
 
