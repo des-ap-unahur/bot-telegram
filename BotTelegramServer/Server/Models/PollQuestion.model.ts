@@ -4,7 +4,7 @@ import PollQuestionInterface from "../Interfaces/PollQuestion.interface";
 import Poll from "./Poll.model";
 
 @Table({
-  tableName: "Poll_question",
+  tableName: "Poll_questions",
   timestamps: true,
 })
 
@@ -20,7 +20,7 @@ class PollQuestion extends Model<PollQuestion>
   poll_id!: number;
 
   @Column(DataTypes.STRING)
-  question!: string;
+  name!: string;
 
   @Column(DataTypes.STRING)
   description!: string;
