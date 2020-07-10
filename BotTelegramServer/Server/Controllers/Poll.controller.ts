@@ -1,5 +1,5 @@
 import PollRepository from "../Repositories/Poll.repository";
-import Poll from "../Models/Poll.model";
+
 
 class PollController {
 
@@ -11,7 +11,7 @@ class PollController {
       console.log(e);
     }
   };
-  
+
   getPollById = async (req: any, res: any): Promise<void>=>{
     try{
       const poll = await PollRepository.getPoll(req.params.id);
