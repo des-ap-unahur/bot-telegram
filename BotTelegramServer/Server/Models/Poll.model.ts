@@ -31,7 +31,7 @@ class Poll extends Model<Poll> implements PollInterface {
   updatedAt: Date;
 
   @HasMany(()=>PollQuestion)
-  pollQuestion: PollQuestion[]
+  questions: PollQuestion[]
 }
 
 export default Poll;
