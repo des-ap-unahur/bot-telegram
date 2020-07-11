@@ -1,7 +1,7 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
 import { DataTypes } from 'sequelize';
 import PollResponsesInterface from '../Interfaces/PollResponses.interface'
-import PollQuestion from './PollQuestion.model'
+import PollQuestion from './PollQuestions.model'
 import BotUsers from './BotUsers.model';
 
 @Table(
