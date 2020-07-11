@@ -1,4 +1,5 @@
 import PollRepository from "../Repositories/Poll.repository";
+import Poll from "../Models/Poll.model";
 
 
 class PollController {
@@ -21,22 +22,9 @@ class PollController {
     }
   }
 
-  getPollsQuestions = async (req: any, res: any): Promise<void>=>{
-    try{
-      const poll = await PollRepository.getPollsQuestions();
-      res.send(poll);
-    }catch(e){
-      console.log(e);
-    }
-  }
-
-  getPollQuestionsById = async (req: any, res: any): Promise<void>=>{
-    try{
-      const pollQuestions = await PollRepository.getPollQuestionsById(req.params.id);
-      res.send(pollQuestions);
-    }catch(e){
-      console.log(e);
-    }
+  postPoll = async (req:any, res:any): Promise<void>=>{
+    const poll = await PollRepository.postPoll(req.body)
+    res.send("ok")
   }
 }
 export default new PollController();
