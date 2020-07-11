@@ -1,5 +1,5 @@
 import Poll from "../Models/Poll.model";
-import PollQuestion from "../Models/PollQuestion.model";
+import PollQuestion from "../Models/PollQuestions.model";
 class PollRepository {
 
   getPolls = async (): Promise<any> => {
@@ -8,19 +8,15 @@ class PollRepository {
   };
 
   getPoll = async (id: number): Promise<any> =>{
-    const poll: Poll = await Poll.findOne({where: {poll_id: id}});
+    const poll: Poll = await Poll.findByPk(id);
     return poll;
   }
 
-  getPollsQuestions = async (): Promise<any> =>{
-    const pollsQuestions :Array<Poll>= await Poll.findAll({include: [PollQuestion]});
-    return pollsQuestions;
+  postPoll = async (obj:any): Promise<any>=>{
+    const poll = await Poll.create(obj);
+    return poll;
   }
-  
-  getPollQuestionsById = async (id: number): Promise<any> =>{
-    const pollsQuestions :Poll= await Poll.findByPk(id,{include: [PollQuestion]});
-    return pollsQuestions;
-}
+
 
 }
 export default new PollRepository();
