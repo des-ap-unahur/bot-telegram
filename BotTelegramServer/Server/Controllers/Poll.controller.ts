@@ -5,7 +5,7 @@ class PollController {
   
   getPolls = async (req: any, res: any): Promise<void> => {
     try {
-      const polls = await PollRepository.getPolls(req);
+      const polls = await PollRepository.getPolls();
       res.send(polls);
     } catch (e) {
       console.log(e);
