@@ -1,17 +1,11 @@
 import { Router } from 'express';
 import PollController from '../Controllers/Poll.controller';
 
-
 const PollRoute = Router();
 
-
-
-PollRoute.post('/encuesta', PollController.post);
-
-PollRoute.get('/poll/:id/questions', PollController.getQuestions);
-
-
-
+PollRoute.get('/polls', PollController.getPolls);
+PollRoute.get('/poll/:id', PollController.getPollById);
+PollRoute.post('/poll', PollController.postPoll);
 
 
 export default PollRoute;

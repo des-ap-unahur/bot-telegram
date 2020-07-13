@@ -1,8 +1,14 @@
 import express, { Application } from 'express';
 import AppConfig from './Interfaces/AppConfig.interface';
 import bot from './Services/Bot.service';
-import { botHears, baseBotCommands, botCommandStart, botOnCommand } from './Commands/Bot.commands';
-import Database from './Database/Database'
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import cors from 'cors';
+import { botHears, baseBotCommands, botCommandStart } from './Commands/Bot.commands';
+import { contactCommand } from './Commands/Contact.command';
+import Database from './Database/Database';
+import UserTypeRepository from './Repositories/UserTypes.repository';
+//import BotCommandsRepository from './Repositories/BotCommand.repository';
 
 class App {
   public app: Application;
@@ -14,27 +20,27 @@ class App {
       port, 
       name, 
       routes,
-      middlewares
     } = appConfig;
 
     this.app = express();
     this.port = port;
     this.name = name;
 
+    this.middlewares();
     this.routes(routes);
-    this.middlewares(middlewares);
     this.dbSetup()
     this.botSetup();
   }
 
-  public middlewares = (middlewares: Array<any>) => {
-    middlewares.map(middleware => {
-      this.app.use(middleware)
-    })
+  public middlewares = (): void => {
+    this.app.use(bodyParser.json())
+    this.app.use(bodyParser.urlencoded({ extended: true }))
+    this.app.use(cors())
+    this.app.use(morgan('dev'))
   }
 
-  public routes = (routes: Array<any>) => {
-    routes.map(route => {
+  public routes = async (routes: Array<any>) => {
+    await routes.map(route => {
       this.app.use(route.path, route.route)
     })
   }
@@ -54,16 +60,16 @@ class App {
     )
   }
   
-  public botSetup = () => {
+  public botSetup = async () => {
     bot.start(botCommandStart);
+    const data = { user_type_id: 1, type: null, description: 'estudiante' };
+    console.log(await UserTypeRepository.postUserType(data))
 
     baseBotCommands.map(command => bot.command(command.command, command.response))
     
     botHears.map(hear => bot.hears(hear.message, hear.response));
-
-    botOnCommand.map(command => 
-      bot.on("contact", (ctx:any) => command.response(ctx, bot))
-    );
+ 
+    bot.on("contact", (ctx:any) => contactCommand(ctx, bot));    
    
     bot.launch();
   }

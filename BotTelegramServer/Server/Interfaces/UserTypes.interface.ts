@@ -4,5 +4,4 @@ interface UserTypesInterface{
     description: string | null;
 }
 
-
 export default UserTypesInterface;

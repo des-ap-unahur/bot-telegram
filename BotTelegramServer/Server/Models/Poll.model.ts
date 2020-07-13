@@ -1,7 +1,7 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, HasMany } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import PollInterface from '../Interfaces/Poll.interface';
-import PollQuestion  from './PollQuestion.model';
+import PollQuestion  from './PollQuestions.model';
 
 @Table(
   {
@@ -31,7 +31,7 @@ class Poll extends Model<Poll> implements PollInterface {
   updatedAt: Date;
 
   @HasMany(()=>PollQuestion)
-  pollQuestion: PollQuestion[]
+  questions: PollQuestion[]
 }
 
 export default Poll;

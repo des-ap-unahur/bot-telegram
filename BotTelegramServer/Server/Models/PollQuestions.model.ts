@@ -4,7 +4,7 @@ import PollQuestionInterface from "../Interfaces/PollQuestion.interface";
 import Poll from "./Poll.model";
 
 @Table({
-  tableName: "Poll_question",
+  tableName: "Poll_questions",
   timestamps: true,
 })
 
