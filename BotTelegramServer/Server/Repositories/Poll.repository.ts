@@ -17,9 +17,10 @@ class PollRepository {
     return poll;
   }
 
-  update = async (data: PollInterface): Promise<void>=>{
-    const poll: Poll = await Poll.findByPk(data.poll_id);
+  update = async (id: number, data: PollInterface): Promise<Poll>=>{
+    const poll: Poll = await Poll.findByPk(id);
     poll.update(data);
+    return poll;
   }
 
   delete = async (id: number): Promise<void> =>{

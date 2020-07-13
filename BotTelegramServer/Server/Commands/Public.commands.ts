@@ -1,4 +1,4 @@
-import Markup from 'telegraf/markup';
+import { Extra } from 'telegraf';
 
 export const publicCommands = [
   {
@@ -6,14 +6,15 @@ export const publicCommands = [
     response: (ctx:any) => 
     { 
       console.log('SEND HELP')
-      return ctx.reply("¿Qué necesitas? nene", 
-        Markup.keyboard([
-          ['📢 Cosas de publico general'], 
-          ['📢 registrarme']
-        ])
-        .oneTime()
-        .resize()
-        .extra()
+      return ctx.reply("¿Qué necesitas? nene", Extra.markup((markup)=>
+          markup.keyboard([
+            ['📢 Cosas de publico general'], 
+            ['📢 registrarme']
+          ])
+          .oneTime()
+          .resize()
+          .extra()
+        )
       ).then(res=>console.log(res))
     }
   }

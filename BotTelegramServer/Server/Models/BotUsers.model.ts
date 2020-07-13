@@ -1,13 +1,13 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, HasOne } from "sequelize-typescript";
 import { DataTypes, Association } from "sequelize";
 import BotUsersInterface from "../Interfaces/BotUsers.interface";
-
 import BotSubsUsers from "./BotSubsUsers.model";
 
 @Table({
   tableName: "Bot_users",
   timestamps: true,
 })
+
 class BotUsers extends Model<BotUsers> implements BotUsersInterface {
   @AutoIncrement
   @PrimaryKey
