@@ -1,6 +1,6 @@
 interface RolesInterface{
-    role_id?: number | null;
-    description?: string | null;
-   }
+  role_id?: number | null;
+  description?: string | null;
+}
    
- export default RolesInterface;
+export default RolesInterface;

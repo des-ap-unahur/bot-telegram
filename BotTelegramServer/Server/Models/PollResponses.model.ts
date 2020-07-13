@@ -17,7 +17,6 @@ class PollResponses extends Model<PollResponses> implements PollResponsesInterfa
   @Column(DataTypes.NUMBER)
   poll_response_id?: number
 
- 
   @Column(DataTypes.NUMBER)
   user_id!: number
 

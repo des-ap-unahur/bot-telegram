@@ -11,7 +11,6 @@ import PollQuestion from '../../Models/PollQuestions.model';
 import PollResponses from '../../Models/PollResponses.model';
 import PollRolesAccess from '../../Models/PollRolesAccess.model';
 import Roles from '../../Models/Roles.model';
-import User from '../../Models/User.model';
 import UserBackOffice from '../../Models/UserBackOffice.model';
 import UserTypes from '../../Models/UserTypes.model';
 
@@ -29,7 +28,6 @@ export const ModelList = [
   PollResponses,
   PollRolesAccess,
   Roles,
-  User,
   UserBackOffice,
   UserTypes
 ]

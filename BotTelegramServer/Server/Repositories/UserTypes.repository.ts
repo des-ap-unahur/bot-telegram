@@ -16,6 +16,17 @@ class UserTypesRepository {
     const userType = await UserTypes.create(data);
     return userType;
   }
+
+  update = async (id: number, data: UserTypesInterface): Promise<UserTypes>=>{
+    const userTypes: UserTypes = await UserTypes.findByPk(id);
+    userTypes.update(data);
+    return userTypes;
+  }
+
+  delete = async (id: number): Promise<void> =>{
+    const userTypes: UserTypes = await UserTypes.findByPk(id);
+    userTypes.destroy();
+  }
 }
 
 export default new UserTypesRepository();
