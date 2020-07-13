@@ -1,22 +1,31 @@
 import Poll from "../Models/Poll.model";
-import PollQuestion from "../Models/PollQuestions.model";
-class PollRepository {
+import PollInterface from "../Interfaces/Poll.interface"
 
-  getPolls = async (): Promise<any> => {
-    const polls :Array<Poll> = await Poll.findAll();
+class PollRepository {
+  getAll = async (): Promise<Poll[]> => {
+    const polls: Poll[] = await Poll.findAll();
     return polls;
   };
 
-  getPoll = async (id: number): Promise<any> =>{
+  get = async (id: number): Promise<Poll> =>{
     const poll: Poll = await Poll.findByPk(id);
     return poll;
   }
 
-  postPoll = async (obj:any): Promise<any>=>{
-    const poll = await Poll.create(obj);
+  post = async (data:PollInterface): Promise<Poll>=>{
+    const poll: Poll = await Poll.create(data);
     return poll;
   }
 
+  update = async (data: PollInterface): Promise<void>=>{
+    const poll: Poll = await Poll.findByPk(data.poll_id);
+    poll.update(data);
+  }
 
+  delete = async (id: number): Promise<void> =>{
+    const poll: Poll = await Poll.findByPk(id);
+    poll.destroy();
+  }
 }
+
 export default new PollRepository();

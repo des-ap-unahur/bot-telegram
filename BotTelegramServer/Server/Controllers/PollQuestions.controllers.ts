@@ -4,7 +4,7 @@ import Poll from "../Models/Poll.model";
 class PollController {
   getPollsQuestions = async (req: any, res: any): Promise<void> => {
     try {
-      const poll = await PollQuestionsRepository.getPollsQuestions();
+      const poll: Poll[] = await PollQuestionsRepository.getAll();
       res.send(poll);
     } catch (e) {
       console.log(e);
@@ -13,7 +13,7 @@ class PollController {
 
   getPollQuestionsById = async (req: any, res: any): Promise<void> => {
     try {
-      const pollQuestions = await PollQuestionsRepository.getPollQuestionsById(req.params.id);
+      const pollQuestions = await PollQuestionsRepository.get(req.params.id);
       res.send(pollQuestions);
     } catch (e) {
       console.log(e);
@@ -21,8 +21,8 @@ class PollController {
   };
 
   postPollQuestions = async (req: any, res: any): Promise<void> => {
-    const questions = await PollQuestionsRepository.postPollQuestions(req.body);
-    res.send('Ok');
+    const questions = await PollQuestionsRepository.post(req.body);
+    res.send(questions);
   };
 }
 export default new PollController();

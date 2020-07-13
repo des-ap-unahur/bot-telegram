@@ -1,6 +1,4 @@
-import Markup from 'telegraf/markup';
 import { Extra } from 'telegraf';
-
 
 export const botCommandStart = (ctx:any) => {ctx.reply(`¡Bienvenido al botTestUnahur!
 
