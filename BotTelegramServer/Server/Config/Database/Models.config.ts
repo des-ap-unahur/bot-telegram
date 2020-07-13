@@ -7,7 +7,7 @@ import BotUsers from '../../Models/BotUsers.model';
 import CommandTypes from '../../Models/CommandsTypes.model';
 import GuaraniData from '../../Models/GuaraniData.models';
 import Poll from '../../Models/Poll.model';
-import PollQuestion from '../../Models/PollQuestion.model';
+import PollQuestion from '../../Models/PollQuestions.model';
 import PollResponses from '../../Models/PollResponses.model';
 import PollRolesAccess from '../../Models/PollRolesAccess.model';
 import Roles from '../../Models/Roles.model';

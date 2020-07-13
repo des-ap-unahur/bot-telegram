@@ -17,7 +17,7 @@ module.exports = {
           key: 'poll_id'
         }
       },
-      name: {
+      question: {
         type: Sequelize.STRING,
       },
       description: {
