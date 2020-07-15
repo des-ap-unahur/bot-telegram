@@ -10,12 +10,10 @@ import UserBackOfficeInterface from '../Interfaces/UserBackOffice.interface';
 )
 
 class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInterface {
-
   @AutoIncrement
   @PrimaryKey
   @Column(DataTypes.NUMBER)
   back_user_id?: number
-
 
   @Column(DataTypes.NUMBER)
   user_role_id?: number
