@@ -6,10 +6,11 @@ import {
   UpdatedAt,
   AutoIncrement,
   PrimaryKey,
+  HasMany
 } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import BotCommandsInterface from "../Interfaces/BotCommands.interface";
-
+import CommandsTypes from './CommandsTypes.model';
 @Table({
   tableName: "Bot_commands",
   timestamps: true,
@@ -46,6 +47,9 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
+
+  @HasMany(()=>CommandsTypes)
+  commands_types: CommandsTypes[];
 }
 
 export default BotCommands;
