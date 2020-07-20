@@ -2,6 +2,7 @@ import PollQuestionsRepository from "../Repositories/PollQuestions.repository";
 import Poll from "../Models/Poll.model";
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
 import PollQuestion from "../Models/PollQuestions.model";
+import PollQuestionInterface from "../Interfaces/PollQuestion.interface"
 
 class PollQuestionsController {
   getPollsQuestions = async (req: any, res: any): Promise<void> => {
@@ -35,7 +36,7 @@ class PollQuestionsController {
     
     try {
       const pollQuestions: PollQuestion[] = await PollQuestionsRepository.post(body);
-      res.sendStatus(pollQuestions);
+      res.sendStatus(200);
     } catch (e) {
       res.send({
         errorCodes: e, 
