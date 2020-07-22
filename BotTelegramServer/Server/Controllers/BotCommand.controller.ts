@@ -28,6 +28,33 @@ class BotCommandController {
       });
     }
   };
+  getCommandsTypes = async (req: any, res: any): Promise<void> => {
+    console.log("hola")
+    try {
+      const botCommandsTypes: BotCommand[] = await BotCommandRepository.getCommandsTypes();
+      res.send(botCommandsTypes);
+    } catch (e) {
+      res.send({
+        errorCodes: e, 
+        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
+      });
+    }
+  };
+  getCommandsTypesById = async (req: any, res: any): Promise<void> => {
+    console.log("hola")
+    const { id } = req.params;
+
+    try {
+      const botCommandsTypes: BotCommand = await BotCommandRepository.getCommandsTypesById(id);
+      res.send(botCommandsTypes);
+    } catch (e) {
+      res.send({
+        errorCodes: e, 
+        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
+      });
+    }
+  };
+
 
   postCommand = async (req: any, res: any): Promise<void> => {
     const { body } = req;
@@ -71,6 +98,7 @@ class BotCommandController {
       });
     }
   };
+
 }
 
 export default new BotCommandController();
