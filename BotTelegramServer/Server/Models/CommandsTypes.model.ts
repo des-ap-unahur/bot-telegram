@@ -1,4 +1,5 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, BelongsTo } from "sequelize-typescript";
+
 import { DataTypes } from "sequelize";
 import CommandTypesInterface from "../Interfaces/CommandTypes.interface";
 import BotCommands from './BotCommands.model';
