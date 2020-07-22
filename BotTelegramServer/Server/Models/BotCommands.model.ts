@@ -6,7 +6,8 @@ import {
   UpdatedAt,
   AutoIncrement,
   PrimaryKey,
-  HasMany
+  HasMany,
+  ForeignKey
 } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import BotCommandsInterface from "../Interfaces/BotCommands.interface";
@@ -19,6 +20,7 @@ import CommandsTypes from './CommandsTypes.model';
 class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @AutoIncrement
   @PrimaryKey
+  @ForeignKey(() => CommandsTypes)
   @Column(DataTypes.NUMBER)
   bot_command_id?: number;
 
