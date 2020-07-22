@@ -49,7 +49,7 @@ class UserBackOfficeController {
 
     try {
       const User: UserBackOffice = await UserBackOfficeRepository.update(id, body);
-      res.sendStatus(User);
+      res.send(User);
     } catch (e) {
       res.send({
         errorCodes: e, 

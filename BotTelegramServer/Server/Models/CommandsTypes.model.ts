@@ -1,4 +1,5 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasOne } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, BelongsTo } from "sequelize-typescript";
+
 import { DataTypes } from "sequelize";
 import CommandTypesInterface from "../Interfaces/CommandTypes.interface";
 import BotCommands from './BotCommands.model';
@@ -30,8 +31,8 @@ class CommandTypes extends Model<CommandTypes>
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasOne(()=> BotCommands)
-  botCommand: BotCommands
+  @BelongsTo(() => BotCommands)
+  botCommands: BotCommands;
 }
 
 export default CommandTypes;
