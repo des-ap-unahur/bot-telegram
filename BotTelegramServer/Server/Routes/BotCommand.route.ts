@@ -3,6 +3,8 @@ import BotCommandController from '../Controllers/BotCommand.controller';
 
 const BotCommandRoute = Router();
 
+BotCommandRoute.get('/bot-commands/types', BotCommandController.getCommandsTypes);
+BotCommandRoute.get('/bot-commands/:id/types', BotCommandController.getCommandsTypesById);
 BotCommandRoute.get('/bot-commands', BotCommandController.getCommands);
 BotCommandRoute.get('/bot-commands/:id', BotCommandController.getCommandById);
 BotCommandRoute.post('/bot-commands', BotCommandController.postCommand);
