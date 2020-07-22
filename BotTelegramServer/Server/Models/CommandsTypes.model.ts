@@ -1,14 +1,24 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, BelongsTo } from "sequelize-typescript";
+import {
+  Model,
+  Column,
+  Table,
+  CreatedAt,
+  UpdatedAt,
+  AutoIncrement,
+  PrimaryKey,
+  ForeignKey,
+  HasOne,
+  BelongsTo,
+} from "sequelize-typescript";
 
 import { DataTypes } from "sequelize";
 import CommandTypesInterface from "../Interfaces/CommandTypes.interface";
-import BotCommands from './BotCommands.model';
+import BotCommands from "./BotCommands.model";
 
 @Table({
   tableName: "Command_types",
   timestamps: true,
 })
-
 class CommandTypes extends Model<CommandTypes>
   implements CommandTypesInterface {
   @AutoIncrement
@@ -31,8 +41,11 @@ class CommandTypes extends Model<CommandTypes>
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @BelongsTo(() => BotCommands)
-  botCommands: BotCommands;
+  @HasOne(() => BotCommands, {
+    sourceKey: "command_type_id",
+    foreignKey: "command_type_id",
+  })
+  botCommand: BotCommands;
 }
 
 export default CommandTypes;
