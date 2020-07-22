@@ -14,13 +14,15 @@ class PollRepository {
   };
 
   post = async (data: PollQuestionInterface[]): Promise<PollQuestion[]> => {
+  
     const pollQuestions = await PollQuestion.bulkCreate(data);
     return pollQuestions;
   };
 
-  update = async (data: PollQuestionInterface): Promise<void>=>{
-    const pollQuestions: PollQuestion = await PollQuestion.findByPk(data.poll_id);
+  update = async (id: number, data: PollQuestionInterface): Promise<PollQuestion>=>{
+    const pollQuestions: PollQuestion = await PollQuestion.findByPk(id);
     pollQuestions.update(data);
+    return pollQuestions;
   }
 
   delete = async (id: number): Promise<void> =>{

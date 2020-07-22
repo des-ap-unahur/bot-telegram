@@ -6,9 +6,13 @@ import {
   UpdatedAt,
   AutoIncrement,
   PrimaryKey,
+  HasMany,
+  ForeignKey,
+  HasOne
 } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import BotCommandsInterface from "../Interfaces/BotCommands.interface";
+import CommandsTypes from './CommandsTypes.model';
 
 @Table({
   tableName: "Bot_commands",
@@ -26,6 +30,10 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
 
   @Column(DataTypes.STRING)
   tel_command!: string;
+  
+  @ForeignKey(() => CommandsTypes)
+  @Column(DataTypes.NUMBER)
+  command_type_id!: number;
   
   @Column(DataTypes.STRING)
   name!: string;
@@ -46,6 +54,9 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
+  
+  @HasOne(()=>CommandsTypes)
+  commandsTypes: CommandsTypes;
 }
 
 export default BotCommands;

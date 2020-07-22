@@ -17,11 +17,41 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        type: "L",
-        Description: "Lista",
+        type: "B",
+        Description: "Boton",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        type: "M",
+        Description: "Mail",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "R",
+        Description: "Registracion",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "S",
+        Description: "Start",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "T",
+        Description: "Texto",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "H",
+        Description: "Ayuda",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
     ]);
   },
   down: (queryInterface, Sequelize) => {

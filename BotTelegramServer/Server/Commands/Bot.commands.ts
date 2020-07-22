@@ -1,4 +1,6 @@
 import { Extra } from 'telegraf';
+import BotCommandRepository from '../Repositories/BotCommand.repository';
+import BotCommand from '../Models/BotCommands.model';
 
 export const botCommandStart = (ctx:any) => {ctx.reply(`¡Bienvenido al botTestUnahur!
 
@@ -16,72 +18,85 @@ export const botCommandStart = (ctx:any) => {ctx.reply(`¡Bienvenido al botTestU
   *Escribe /ayuda para ver los comando disponibles`)
 }
 
-export const botHears = [
-  { message: "Hola",
-    response: (ctx:any) => 
-    {
-      ctx.reply(`Hola ${ctx.from.first_name} ${ctx.from.last_name}`);
-      console.log(ctx.from);
+export const typeCommandsGenerate = [
+  {
+    type: 1,
+    generateCommand: (command: BotCommand) => {
+      const { tel_command, parameter } = command;
+      return {
+        message: tel_command, 
+        response: (ctx:any) => 
+        {
+          ctx.replyWithDocument(
+            parameter
+          );
+        }
+      }
     }
   },
   {
-    message: '📢 Plan de estudios', 
-    response: (ctx:any) => 
-    {
-      ctx.replyWithDocument(
-        "http://www.unahur.edu.ar/sites/default/files/2017-10/Tecnicatura%20Universitaria%20en%20Inform%C3%A1tica.pdf"
-      );
-    }
-  },
-   {
-    message: '📢 Ubicacion de la UNAHUR', 
-    response: (ctx:any) => 
-    {
-      ctx.replyWithLocation(
-        "-34.618246","-58.637199" 
-      );
+    type: 2,
+    generateCommand: (command: BotCommand) => {
+      const { tel_command, parameter } = command;
+      return {
+        message: tel_command, 
+        response: (ctx:any) => 
+        {
+          ctx.replyWithLocation(
+            parameter 
+          );
+        }
+      }
     }
   },
   {
-    message: '📢 Oferta Academica', 
-    response: (ctx:any) => 
-    {
-      ctx.reply(
-        "http://www.unahur.edu.ar/es/oferta-academica" 
-      );
+    type: 3,
+    generateCommand: (command: BotCommand, externalParameter?:Array<any>) => {
+      const { tel_command, description, parameter } = command;
+      const list = parameter.split(',');
+      return {
+        message: tel_command, 
+        response: (ctx:any) => 
+        {
+          console.log(ctx)
+          ctx.reply(description,
+            Extra.markup((markup) => {
+              return markup.keyboard([
+                externalParameter || list
+              ])
+              .oneTime()
+              .resize()
+              .extra()
+            })
+          );
+        }
+      }
     }
-  },  
-  {
-    message:  '📢 registrarme', 
-    response: (ctx:any) => 
-    {
-      ctx.reply('Por favor, enviame tu numero para configurar tu usuario', Extra.markup((markup) => {
-        return markup.resize()
-          .keyboard([
-          markup.contactRequestButton('Enviar mi numero')
-        ]).oneTime()
-      }))
-    }  
-  }
-];
- 
-
-
-export const baseBotCommands=[
-  {
-    command: 'registrarme',
-    response: (ctx:any) => 
-    { 
-      console.log('SEND NUM')
-      return ctx.reply('Por favor, enviame tu numero para configurar tu usuario', Extra.markup((markup) => {
-        return markup.resize()
-          .keyboard(
-            [markup.contactRequestButton('Enviar mi numero')]
-          )
-          .oneTime()
-        })
-      )
-    }
-  } 
+  },
 ]
+
+export const buildCommands = async (bot) => {
+  const botCommands = await BotCommandRepository.getCommandsTypes();
+  const commands = await botCommands.map(command => 
+    { 
+      const type = typeCommandsGenerate.find(typeCommand => typeCommand.type === command.command_type_id)
+      const hasExternalParameter = command.command_type_id === 3;
+      if(type){
+        return hasExternalParameter ?
+          type.generateCommand(command)
+        :
+          type.generateCommand(
+            command, 
+            botCommands.map(
+              commandName => commandName.tel_command
+            )
+          )
+      }
+    } 
+  )
+  commands.map(command => bot.command(command.message, command.response))
+  commands.map(command => bot.hears(command.message, command.response))
+}
+
+
 
