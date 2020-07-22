@@ -9,7 +9,6 @@ class BotCommandRepository {
   };
 
   getCommandsTypes = async (): Promise<BotCommand[]> => {
-    console.log("hola")
     const commands: BotCommand[] = await BotCommand.findAll({include:[CommandTypes]});
     return commands;
   }

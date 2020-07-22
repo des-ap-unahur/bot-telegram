@@ -4,13 +4,13 @@ module.exports = {
    
     return queryInterface.bulkInsert('User_types',[
       {
-        type: "E",
+        type: "S",
         Description: "Estudiante",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        type: "P",
+        type: "T",
         Description: "Profesor",
         createdAt: new Date(),
         updatedAt: new Date(),

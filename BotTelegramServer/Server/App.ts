@@ -4,7 +4,7 @@ import bot from './Services/Bot.service';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
-import { botHears, baseBotCommands, botCommandStart } from './Commands/Bot.commands';
+import { botCommandStart, buildCommands } from './Commands/Bot.commands';
 import { contactCommand } from './Commands/Contact.command';
 import { messageCommand } from './Commands/Message.command';
 import Database from './Database/Database';
@@ -62,11 +62,9 @@ class App {
   public botSetup = async () => {
     bot.start(botCommandStart);
 
-    baseBotCommands.map(command => bot.command(command.command, command.response))
-    
-    botHears.map(hear => bot.hears(hear.message, hear.response));
+    buildCommands(bot);
  
-    bot.on("contact", (ctx:any) => contactCommand(ctx, bot));   
+    //bot.on("contact", (ctx:any) => contactCommand(ctx, bot));   
 
     //bot.on("message", messageCommand);
 

@@ -28,8 +28,8 @@ class BotCommandController {
       });
     }
   };
+
   getCommandsTypes = async (req: any, res: any): Promise<void> => {
-    console.log("hola")
     try {
       const botCommandsTypes: BotCommand[] = await BotCommandRepository.getCommandsTypes();
       res.send(botCommandsTypes);
@@ -40,8 +40,8 @@ class BotCommandController {
       });
     }
   };
+  
   getCommandsTypesById = async (req: any, res: any): Promise<void> => {
-    console.log("hola")
     const { id } = req.params;
 
     try {
@@ -54,7 +54,6 @@ class BotCommandController {
       });
     }
   };
-
 
   postCommand = async (req: any, res: any): Promise<void> => {
     const { body } = req;
