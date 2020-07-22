@@ -33,7 +33,7 @@ class PollResponsesController {
     const { body } = req;
     try {
       const pollResponse: PollResponses = await PollResponsesRepository.post(body);
-      res.sendStatus(pollResponse);
+      res.send(pollResponse);
     } catch (e) {
       res.send({
         errorCodes: e, 
@@ -48,7 +48,7 @@ class PollResponsesController {
 
     try {
       const pollResponse: PollResponses = await PollResponsesRepository.update(id, body);
-      res.sendStatus(pollResponse);
+      res.send(pollResponse);
     } catch (e) {
       res.send({
         errorCodes: e, 

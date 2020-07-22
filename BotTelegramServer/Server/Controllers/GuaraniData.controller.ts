@@ -49,7 +49,7 @@ class GuaraniDataController {
 
     try {
       const guaraniData: GuaraniData = await GuaraniDataRepository.update(id, body);
-      res.sendStatus(guaraniData);
+      res.send(guaraniData);
     } catch (e) {
       res.send({
         errorCodes: e, 

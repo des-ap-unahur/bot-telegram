@@ -34,7 +34,7 @@ class RolesController {
 
     try {
       const rol: Roles = await RolesRepository.post(body);
-      res.sendStatus(rol);
+      res.send(rol);
     } catch (e) {
       res.send({
         errorCodes: e, 
@@ -49,7 +49,7 @@ class RolesController {
 
     try {
       const rol: Roles = await RolesRepository.update(id, body);
-      res.sendStatus(rol);
+      res.send(rol);
     } catch (e) {
       res.send({
         errorCodes: e, 

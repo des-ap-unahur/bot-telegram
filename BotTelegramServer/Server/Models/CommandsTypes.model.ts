@@ -1,4 +1,4 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import CommandTypesInterface from "../Interfaces/CommandTypes.interface";
 import BotCommands from './BotCommands.model';
@@ -29,6 +29,9 @@ class CommandTypes extends Model<CommandTypes>
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
+
+  @BelongsTo(() => BotCommands)
+  botCommands: BotCommands;
 }
 
 export default CommandTypes;
