@@ -49,7 +49,7 @@ class BotResponsesController {
 
     try {
       const botResponse: BotResponse = await BotResponsesRepository.update(id, body);
-      res.sendStatus(botResponse);
+      res.send(botResponse);
     } catch (e) {
       res.send({
         errorCodes: e, 

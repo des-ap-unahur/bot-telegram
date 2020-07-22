@@ -36,7 +36,7 @@ class PollQuestionsController {
     
     try {
       const pollQuestions: PollQuestion[] = await PollQuestionsRepository.post(body);
-      res.sendStatus(200);
+      res.send(pollQuestions);
     } catch (e) {
       res.send({
         errorCodes: e, 
@@ -51,7 +51,7 @@ class PollQuestionsController {
 
     try {
       const pollQuestion: PollQuestion = await PollQuestionsRepository.update(id, body);
-      res.sendStatus(pollQuestion);
+      res.send(pollQuestion);
     } catch (e) {
       res.send({
         errorCodes: e, 

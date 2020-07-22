@@ -49,7 +49,7 @@ class PollController {
 
     try {
       const poll: Poll = await PollRepository.update(id, body);
-      res.sendStatus(poll);
+      res.send(poll);
     } catch (e) {
       res.send({
         errorCodes: e, 
