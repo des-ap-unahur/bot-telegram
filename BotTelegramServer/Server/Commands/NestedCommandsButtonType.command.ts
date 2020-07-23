@@ -1,5 +1,5 @@
-import { Extra } from 'telegraf';
 import BotCommand from '../Models/BotCommands.model';
+import Keyboard from '../Markups/Keyboard.markup';
 
 export const NestedCommandsButtonType = {
   type: "NestedCommandsButtons",
@@ -11,18 +11,7 @@ export const NestedCommandsButtonType = {
       message: name, 
       response: (ctx:any) => 
       {
-        ctx.reply(description,
-          Extra
-            .markdown()
-            .markup(
-              (markup) =>
-                markup.keyboard([
-                  [...list]
-                ])
-                .oneTime()
-                .resize()
-            )
-        );
+        ctx.reply(description, Keyboard(list));
       }
     }
   }

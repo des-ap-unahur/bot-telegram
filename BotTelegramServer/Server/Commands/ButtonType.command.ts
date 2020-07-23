@@ -1,5 +1,5 @@
-import { Extra } from 'telegraf';
 import BotCommand from '../Models/BotCommands.model';
+import Keyboard from '../Markups/Keyboard.markup';
 
 export const ButtonType = {
   type: "Button",
@@ -11,17 +11,7 @@ export const ButtonType = {
       message: name, 
       response: (ctx:any) => 
       {
-        console.log(ctx)
-        ctx.reply(description,
-          Extra.markup((markup) => {
-            return markup.keyboard([
-              [...list]
-            ])
-            .oneTime()
-            .resize()
-            .extra()
-          })
-        );
+        ctx.reply(description, Keyboard(list));
       }
     }
   }

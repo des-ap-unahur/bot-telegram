@@ -8,7 +8,7 @@ export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
   const botCommands:BotCommand[] = await BotCommandRepository.getCommandsTypes();
   const commandsWithoutContact = botCommands.filter(command => command.commandsTypes.type !== "Contact")
 
-  const commands = await commandsWithoutContact.map(command => 
+  const commands = commandsWithoutContact.map(command => 
     { 
       const type = typeCommands.find(typeCommand => typeCommand.type === command.commandsTypes.type)
       const hasExternalParameter = command.commandsTypes.type === "NestedCommandsList";
