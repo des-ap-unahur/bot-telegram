@@ -6,8 +6,9 @@ import BotCommand from '../Models/BotCommands.model';
 
 export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
   const botCommands:BotCommand[] = await BotCommandRepository.getCommandsTypes();
+  const commandsWithoutContact = botCommands.filter(command => command.commandsTypes.type !== "Contact")
 
-  const commands = await botCommands.map(command => 
+  const commands = await commandsWithoutContact.map(command => 
     { 
       const type = typeCommands.find(typeCommand => typeCommand.type === command.commandsTypes.type)
       const hasExternalParameter = command.commandsTypes.type === "NestedCommandsList";
@@ -17,17 +18,17 @@ export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
         :
           type.generateCommand(
             command, 
-            botCommands.map(
+            commandsWithoutContact.map(
               commandName => commandName.tel_command
             )
           )
       }
     } 
   )
-  
+
   bot.start(ctx => {});
-  commands.map(command => bot.command(command.command, command.response))
-  commands.map(command => bot.hears(command.message, command.response))
+  commands.map(command => typeof command === 'object' && bot.command(command.command, command.response))
+  commands.map(command => typeof command === 'object' && bot.hears(command.message, command.response))
   bot.launch();
 }
 

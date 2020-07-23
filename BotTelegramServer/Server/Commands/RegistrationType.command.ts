@@ -1,5 +1,5 @@
-import { Extra } from 'telegraf';
 import BotCommand from '../Models/BotCommands.model';
+import ContactButton from '../Markups/ContactButton.markup';
 
 export const RegistrationType = {
   type: "Registration",
@@ -10,18 +10,7 @@ export const RegistrationType = {
       message: name, 
       response: (ctx:any) => 
       {
-        ctx.reply(description,
-          Extra
-            .markdown()
-            .markup(
-              (markup) =>
-                markup.keyboard([
-                  [markup.contactRequestButton(parameter)]
-                ])
-                .oneTime()
-                .resize()
-            )
-        );
+        ctx.reply(description, ContactButton(parameter));
       }
     }
   }

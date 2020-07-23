@@ -5,6 +5,15 @@ export const NestedCommandsListType = {
   generateCommand: (command: BotCommand, externalParameter?:Array<string>) => {
     const { tel_command, name, description, parameter } = command;
     const list = parameter.split(',');
+
+    const buildMessage = (list:Array<string>) => {
+      const message = list.map(
+        param => "/" + param + '\n'
+      )
+      const messageReplace = message.toString().replace(/,/g, '')
+      return messageReplace
+    }
+
     return {
       command: tel_command,
       message: name, 
@@ -12,16 +21,9 @@ export const NestedCommandsListType = {
       {
         ctx.reply(description);
         externalParameter ? 
-          externalParameter.map(
-            params => 
-              ctx.reply("/" + params)
-          ) 
+          ctx.reply(buildMessage(externalParameter))
         :
-          list.map(
-            params => 
-              ctx.reply("/" + params)
-          ) 
-        
+          ctx.reply(buildMessage(list))        
       }
     }
   }

@@ -18,7 +18,7 @@ module.exports = {
       {
         user_type_id: 1,
         command_type_id:1,
-        tel_command: "Plan de estudio",
+        tel_command: "Plan_de_estudio",
         name: "Plan de estudio",
         status: true,
         description:"Envio de documento del plan de estudios",
@@ -62,7 +62,37 @@ module.exports = {
         parameter:"",
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
+      {
+        user_type_id: 1,
+        command_type_id:5,
+        tel_command: "Registrarme",
+        name: "Registrarme",
+        status: true,
+        description:"Por favor, enviame tu numero para configurar tu usuario.",
+        parameter:"Enviar mi numero",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        user_type_id: 1,
+        command_type_id:10,
+        tel_command: "Contacto",
+        name: "Contacto",
+        status: true,
+        description:`
+          Genial, pudimos verificar tu perfil y quedo de la siguiente manera 
+          NOMBRE   ---> :name
+          APELLIDO ---> :lastname
+          TELEFONO ---> :phone_number
+          PERFIL   ---> :user_type
+          
+          Podes ver las funcionalidades que tenes con /ayuda
+        `,
+        parameter:"Enviar mi numero",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
   down: (queryInterface, Sequelize) => {

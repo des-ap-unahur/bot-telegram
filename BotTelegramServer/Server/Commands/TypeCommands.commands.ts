@@ -4,6 +4,8 @@ import { LocationType } from "./LocationType.command";
 import { NestedCommandsListType } from "./NestedCommandsListType.command";
 import { NestedCommandsButtonType } from "./NestedCommandsButtonType.command";
 import { StartType } from "./StartType.command";
+import { RegistrationType } from "./RegistrationType.command";
+import { ContactType } from "./ContactType.command";
 
 export const typeCommands = [
   ButtonType,
@@ -11,5 +13,7 @@ export const typeCommands = [
   LocationType,
   StartType,
   NestedCommandsListType,
-  NestedCommandsButtonType
+  NestedCommandsButtonType,
+  RegistrationType,
+  ContactType
 ]
