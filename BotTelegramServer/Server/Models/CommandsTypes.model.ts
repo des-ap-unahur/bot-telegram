@@ -9,6 +9,7 @@ import {
   ForeignKey,
   HasOne,
   BelongsTo,
+  HasMany,
 } from "sequelize-typescript";
 
 import { DataTypes } from "sequelize";
@@ -41,7 +42,7 @@ class CommandTypes extends Model<CommandTypes>
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasOne(() => BotCommands, {
+  @HasMany(() => BotCommands, {
     sourceKey: "command_type_id",
     foreignKey: "command_type_id",
   })

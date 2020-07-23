@@ -34,7 +34,7 @@ module.exports = {
         type: Sequelize.BOOLEAN,
       },
       description: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT('medium'),
       },
       parameter: {
         type: Sequelize.STRING,

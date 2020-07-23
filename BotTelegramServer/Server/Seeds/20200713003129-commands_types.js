@@ -5,20 +5,62 @@ module.exports = {
    
     return queryInterface.bulkInsert('Command_types',[
       {
-        type: "D",
+        type: "Document",
         Description: "Documento",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        type: "U",
+        type: "Location",
         Description: "Ubicacion",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        type: "L",
-        Description: "Lista",
+        type: "Button",
+        Description: "Boton",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "Mail",
+        Description: "Mail",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "Registration",
+        Description: "Registracion",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "Start",
+        Description: "Empezar",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "Text",
+        Description: "Texto",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "NestedCommandsList",
+        Description: "Lista de comandos anidados ",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "NestedCommandsButton",
+        Description: "Lista de botones de comandos anidados",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "Contact",
+        Description: "Contacto",
         createdAt: new Date(),
         updatedAt: new Date(),
       },

@@ -1,87 +1,36 @@
-import { Extra } from 'telegraf';
+import Telegraf from 'telegraf';
+import { TelegrafContext } from 'telegraf/typings/context';
+import { typeCommands } from './TypeCommands.commands'; 
+import BotCommandRepository from '../Repositories/BotCommand.repository';
+import BotCommand from '../Models/BotCommands.model';
 
-export const botCommandStart = (ctx:any) => {ctx.reply(`¡Bienvenido al botTestUnahur!
+export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
+  const botCommands:BotCommand[] = await BotCommandRepository.getCommandsTypes();
+  const commandsWithoutContact = botCommands.filter(command => command.commandsTypes.type !== "Contact")
 
-  Características (por ahora):
-  - Ubicacion de la unahur
-  - Programas de carreras
-  - Oferta Academica
-  - Encuestas
-  Recorda que tenes que registrarte para acceder a diferentes 
-  acciones!
-  
-  *Primero te pido que te registres, podes hacerlo
-   apretando aca /registrarme o escribiendo el comando.
+  const commands = await commandsWithoutContact.map(command => 
+    { 
+      const type = typeCommands.find(typeCommand => typeCommand.type === command.commandsTypes.type)
+      const hasExternalParameter = command.commandsTypes.type === "NestedCommandsList";
+      if(type){
+        return !hasExternalParameter ?
+          type.generateCommand(command)
+        :
+          type.generateCommand(
+            command, 
+            commandsWithoutContact.map(
+              commandName => commandName.tel_command
+            )
+          )
+      }
+    } 
+  )
 
-  *Escribe /ayuda para ver los comando disponibles`)
+  bot.start(ctx => {});
+  commands.map(command => typeof command === 'object' && bot.command(command.command, command.response))
+  commands.map(command => typeof command === 'object' && bot.hears(command.message, command.response))
+  bot.launch();
 }
 
-export const botHears = [
-  { message: "Hola",
-    response: (ctx:any) => 
-    {
-      ctx.reply(`Hola ${ctx.from.first_name} ${ctx.from.last_name}`);
-      console.log(ctx.from);
-    }
-  },
-  {
-    message: '📢 Plan de estudios', 
-    response: (ctx:any) => 
-    {
-      ctx.replyWithDocument(
-        "http://www.unahur.edu.ar/sites/default/files/2017-10/Tecnicatura%20Universitaria%20en%20Inform%C3%A1tica.pdf"
-      );
-    }
-  },
-   {
-    message: '📢 Ubicacion de la UNAHUR', 
-    response: (ctx:any) => 
-    {
-      ctx.replyWithLocation(
-        "-34.618246","-58.637199" 
-      );
-    }
-  },
-  {
-    message: '📢 Oferta Academica', 
-    response: (ctx:any) => 
-    {
-      ctx.reply(
-        "http://www.unahur.edu.ar/es/oferta-academica" 
-      );
-    }
-  },  
-  {
-    message:  '📢 registrarme', 
-    response: (ctx:any) => 
-    {
-      ctx.reply('Por favor, enviame tu numero para configurar tu usuario', Extra.markup((markup) => {
-        return markup.resize()
-          .keyboard([
-          markup.contactRequestButton('Enviar mi numero')
-        ]).oneTime()
-      }))
-    }  
-  }
-];
- 
 
-
-export const baseBotCommands=[
-  {
-    command: 'registrarme',
-    response: (ctx:any) => 
-    { 
-      console.log('SEND NUM')
-      return ctx.reply('Por favor, enviame tu numero para configurar tu usuario', Extra.markup((markup) => {
-        return markup.resize()
-          .keyboard(
-            [markup.contactRequestButton('Enviar mi numero')]
-          )
-          .oneTime()
-        })
-      )
-    }
-  } 
-]
 
