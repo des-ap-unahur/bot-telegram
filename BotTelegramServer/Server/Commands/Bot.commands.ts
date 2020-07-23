@@ -13,7 +13,6 @@ export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
     return ContactType.generateCommand(commandContact) 
   }
 
-
   const commands = commandsWithoutContact.map(command => 
     { 
       const type = typeCommands.find(typeCommand => typeCommand.type === command.commandsTypes.type)
@@ -32,14 +31,15 @@ export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
       }
     } 
   )
-  const commandStart = commands.find(command => typeof command === 'object' && command.message === "Start")
+  const commandStart = commands.find(command => command.message === "Start")
   
-  bot.start(typeof commandStart === 'object' && commandStart.response);
+  bot.start(commandStart.response);
 
-  commands.map(command => typeof command === 'object' && bot.command(command.command, command.response))
-  commands.map(command => typeof command === 'object' && bot.hears(command.message, command.response))
+  commands.map(command => bot.command(command.command, command.response))
+  commands.map(command => bot.hears(command.message, command.response))
 
   bot.on("contact", buildContactCommand())
+
   bot.launch();
 }
 
