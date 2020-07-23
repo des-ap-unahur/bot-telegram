@@ -15,5 +15,4 @@ export const typeCommands = [
   NestedCommandsListType,
   NestedCommandsButtonType,
   RegistrationType,
-  ContactType
 ]

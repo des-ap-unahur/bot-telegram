@@ -1,14 +1,14 @@
-import Markup from 'telegraf/markup';
+import { Extra } from 'telegraf';
 
-const Keyboard = () => {
-  Markup.keyboard([
-    ['🔍 Search', '😎 Popular'], 
-    ['☸ Setting', '📞 Feedback'], 
-    ['📢 Ads', '⭐️ Rate us', '👥 Share']
-  ])
-  .oneTime()
-  .resize()
-  .extra()
-}
+const Keyboard = (param) => Extra
+  .markdown()
+  .markup(
+    (markup) =>
+      markup.keyboard([
+        [...param]
+      ])
+      .oneTime()
+      .resize()
+  )
 
 export default Keyboard;
