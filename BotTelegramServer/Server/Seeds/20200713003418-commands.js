@@ -10,14 +10,14 @@ module.exports = {
         tel_command: "Ayuda",
         name: "Ayuda",
         status: true,
-        description:"ayuda para los usuarios",
-        parameter:"Plan de estudio, Ubicacion",
+        description:"Los comandos disponibles, son: ",
+        parameter:"",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         user_type_id: 1,
-        command_type_id:3,
+        command_type_id:1,
         tel_command: "Plan de estudio",
         name: "Plan de estudio",
         status: true,
@@ -43,7 +43,22 @@ module.exports = {
         tel_command: "Start",
         name: "Start",
         status: true,
-        description:"",
+        description:`
+          ¡Bienvenido al botTestUnahur!
+
+          Características (por ahora):
+          - Ubicacion de la unahur
+          - Programas de carreras
+          - Oferta Academica
+          - Encuestas
+          Recorda que tenes que registrarte para acceder a diferentes 
+          acciones!
+
+          *Primero te pido que te registres, podes hacerlo
+           apretando aca /registrarme o escribiendo el comando.
+        
+          *Escribe /ayuda para ver los comando disponibles
+        `,
         parameter:"",
         createdAt: new Date(),
         updatedAt: new Date(),

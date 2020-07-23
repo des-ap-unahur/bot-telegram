@@ -5,53 +5,65 @@ module.exports = {
    
     return queryInterface.bulkInsert('Command_types',[
       {
-        type: "D",
+        type: "Document",
         Description: "Documento",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        type: "U",
+        type: "Location",
         Description: "Ubicacion",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        type: "B",
+        type: "Button",
         Description: "Boton",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        type: "M",
+        type: "Mail",
         Description: "Mail",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        type: "R",
+        type: "Registration",
         Description: "Registracion",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        type: "S",
-        Description: "Start",
+        type: "Start",
+        Description: "Empezar",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        type: "T",
+        type: "Text",
         Description: "Texto",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        type: "H",
-        Description: "Ayuda",
+        type: "NestedCommandsList",
+        Description: "Lista de comandos anidados ",
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
+      {
+        type: "NestedCommandsButton",
+        Description: "Lista de botones de comandos anidados",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "Contact",
+        Description: "Contacto",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
   down: (queryInterface, Sequelize) => {

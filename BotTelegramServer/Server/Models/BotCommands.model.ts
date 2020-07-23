@@ -54,11 +54,11 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasMany(() => CommandsTypes, {
+  @HasOne(() => CommandsTypes, {
     sourceKey: "command_type_id",
     foreignKey: "command_type_id",
   })
-  commandsTypes: CommandsTypes[];
+  commandsTypes: CommandsTypes;
 }
 
 export default BotCommands;
