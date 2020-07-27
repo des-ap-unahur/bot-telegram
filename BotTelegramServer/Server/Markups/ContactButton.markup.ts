@@ -1,14 +1,14 @@
 import { Extra } from 'telegraf';
 
-const Keyboard = (param) => Extra
+const ContactButton = (parameter) => Extra
   .markdown()
   .markup(
     (markup) =>
       markup.keyboard([
-        [...param]
+        [markup.contactRequestButton(parameter)]
       ])
       .oneTime()
       .resize()
   )
 
-export default Keyboard;
+export default ContactButton;

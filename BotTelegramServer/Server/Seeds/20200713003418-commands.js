@@ -10,15 +10,15 @@ module.exports = {
         tel_command: "Ayuda",
         name: "Ayuda",
         status: true,
-        description:"ayuda para los usuarios",
-        parameter:"Plan de estudio, Ubicacion",
+        description:"Los comandos disponibles, son: ",
+        parameter:"",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         user_type_id: 1,
-        command_type_id:3,
-        tel_command: "Plan de estudio",
+        command_type_id:1,
+        tel_command: "Plan_de_estudio",
         name: "Plan de estudio",
         status: true,
         description:"Envio de documento del plan de estudios",
@@ -43,11 +43,67 @@ module.exports = {
         tel_command: "Start",
         name: "Start",
         status: true,
-        description:"",
+        description:`
+          ¡Bienvenido al botTestUnahur!
+
+          Características (por ahora):
+          - Ubicacion de la unahur
+          - Programas de carreras
+          - Oferta Academica
+          - Encuestas
+          Recorda que tenes que registrarte para acceder a diferentes 
+          acciones!
+
+          *Primero te pido que te registres, podes hacerlo
+           apretando aca /Registrarme o escribiendo el comando.
+        
+          *Escribe /Ayuda para ver los comando disponibles
+        `,
         parameter:"",
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
+      {
+        user_type_id: 1,
+        command_type_id:5,
+        tel_command: "Registrarme",
+        name: "Registrarme",
+        status: true,
+        description:"Por favor, enviame tu numero para configurar tu usuario.",
+        parameter:"Enviar mi numero",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        user_type_id: 1,
+        command_type_id:10,
+        tel_command: "Contacto",
+        name: "Contacto",
+        status: true,
+        description:`
+          Genial, pudimos verificar tu perfil y quedo de la siguiente manera 
+          NOMBRE   ---> :name
+          APELLIDO ---> :lastname
+          TELEFONO ---> :phone_number
+          PERFIL   ---> :user_type
+          
+          Podes ver las funcionalidades que tenes con /Ayuda
+        `,
+        parameter:"Enviar mi numero",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        user_type_id: 2,
+        command_type_id:4,
+        tel_command: "Mail_de_bienvenida",
+        name: "Mail de bienvenida",
+        status: true,
+        description:"Ingrese mail",
+        parameter:"Bienvenido al bot telegram UNAHUR",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
   down: (queryInterface, Sequelize) => {

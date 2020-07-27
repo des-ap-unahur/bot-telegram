@@ -1,101 +1,51 @@
-import { Extra } from 'telegraf';
+import Telegraf from 'telegraf';
+import { TelegrafContext } from 'telegraf/typings/context';
+import { typeCommands } from './TypeCommands.commands'; 
 import BotCommandRepository from '../Repositories/BotCommand.repository';
 import BotCommand from '../Models/BotCommands.model';
+import { messageCommand } from './Message.command';
+import { removeSensitiveCase } from '../Utils/RemoveSensitiveCase.utils';
+import { buildContactCommand } from '../Utils/BuildContactCommand.utils';
+import { assambleCommands } from '../Utils/AssambleCommands.utils';
+import { callMail } from '../Utils/CallMail.utils';
 
-export const botCommandStart = (ctx:any) => {ctx.reply(`¡Bienvenido al botTestUnahur!
 
-  Características (por ahora):
-  - Ubicacion de la unahur
-  - Programas de carreras
-  - Oferta Academica
-  - Encuestas
-  Recorda que tenes que registrarte para acceder a diferentes 
-  acciones!
-  
-  *Primero te pido que te registres, podes hacerlo
-   apretando aca /registrarme o escribiendo el comando.
+export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
+  const botCommands:BotCommand[] = await BotCommandRepository.getCommandsTypes();
+  const commandsWithoutContact = botCommands.filter(command => command.commandsTypes.type !== "Contact")
+  const contactCommand = buildContactCommand(botCommands);
+  const commands = assambleCommands(commandsWithoutContact, typeCommands);
+  let callMailCommand;
+  let callMailHear;
 
-  *Escribe /ayuda para ver los comando disponibles`)
-}
+  bot.on("contact", contactCommand)
 
-export const typeCommandsGenerate = [
-  {
-    type: 1,
-    generateCommand: (command: BotCommand) => {
-      const { tel_command, parameter } = command;
-      return {
-        message: tel_command, 
-        response: (ctx:any) => 
-        {
-          ctx.replyWithDocument(
-            parameter
-          );
-        }
-      }
+  bot.on("message", (ctx:any) => {
+    const { text } = ctx.message
+
+    if(text){
+      //Commands
+      commands.map(
+        command => removeSensitiveCase(command.command) === removeSensitiveCase(text) && command.response(ctx)
+      )
+      //Hears
+      commands.map(
+        command => removeSensitiveCase(command.message) === removeSensitiveCase(text) && command.response(ctx)
+      )
+      //Message if it can't find the command or hear
+      !commands.some(
+        command => removeSensitiveCase(command.command) === removeSensitiveCase(text) || 
+        removeSensitiveCase(command.message) === removeSensitiveCase(text) ||
+        Boolean(callMailCommand) ||
+        Boolean(callMailHear)
+      ) && messageCommand(ctx)
+      //Mails Admin
+      callMailCommand = callMail(callMailCommand, text, commands, ctx);
+      callMailHear = callMail(callMailHear, text, commands, ctx);
     }
-  },
-  {
-    type: 2,
-    generateCommand: (command: BotCommand) => {
-      const { tel_command, parameter } = command;
-      return {
-        message: tel_command, 
-        response: (ctx:any) => 
-        {
-          ctx.replyWithLocation(
-            parameter 
-          );
-        }
-      }
-    }
-  },
-  {
-    type: 3,
-    generateCommand: (command: BotCommand, externalParameter?:Array<any>) => {
-      const { tel_command, description, parameter } = command;
-      const list = parameter.split(',');
-      return {
-        message: tel_command, 
-        response: (ctx:any) => 
-        {
-          console.log(ctx)
-          ctx.reply(description,
-            Extra.markup((markup) => {
-              return markup.keyboard([
-                externalParameter || list
-              ])
-              .oneTime()
-              .resize()
-              .extra()
-            })
-          );
-        }
-      }
-    }
-  },
-]
+  })
 
-export const buildCommands = async (bot) => {
-  const botCommands = await BotCommandRepository.getCommandsTypes();
-  const commands = await botCommands.map(command => 
-    { 
-      const type = typeCommandsGenerate.find(typeCommand => typeCommand.type === command.command_type_id)
-      const hasExternalParameter = command.command_type_id === 3;
-      if(type){
-        return hasExternalParameter ?
-          type.generateCommand(command)
-        :
-          type.generateCommand(
-            command, 
-            botCommands.map(
-              commandName => commandName.tel_command
-            )
-          )
-      }
-    } 
-  )
-  commands.map(command => bot.command(command.message, command.response))
-  commands.map(command => bot.hears(command.message, command.response))
+  bot.launch();
 }
 
 
