@@ -40,8 +40,8 @@ export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
         Boolean(callMailHear)
       ) && messageCommand(ctx)
       //Mails Admin
-      callMailCommand(callMail(callMailCommand, text, commands, ctx));
-      callMailHear = callMail(callMailHear, text, commands, ctx)
+      callMailCommand = callMail(callMailCommand, text, commands, ctx);
+      callMailHear = callMail(callMailHear, text, commands, ctx);
     }
   })
 
