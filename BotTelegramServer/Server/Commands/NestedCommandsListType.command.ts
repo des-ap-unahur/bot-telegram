@@ -1,4 +1,5 @@
 import BotCommand from '../Models/BotCommands.model';
+import { toCommand } from '../Utils/ToCommand.utils';
 
 export const NestedCommandsListType = {
   type: "NestedCommandsList",
@@ -15,7 +16,7 @@ export const NestedCommandsListType = {
     }
 
     return {
-      command: tel_command,
+      command: toCommand(tel_command),
       message: name, 
       response: (ctx:any) => 
       {
