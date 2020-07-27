@@ -3,42 +3,47 @@ import { TelegrafContext } from 'telegraf/typings/context';
 import { typeCommands } from './TypeCommands.commands'; 
 import BotCommandRepository from '../Repositories/BotCommand.repository';
 import BotCommand from '../Models/BotCommands.model';
-import { ContactType } from './ContactType.command';
+import { messageCommand } from './Message.command';
+import { removeSensitiveCase } from '../Utils/RemoveSensitiveCase.utils';
+import { buildContactCommand } from '../Utils/BuildContactCommand.utils';
+import { assambleCommands } from '../Utils/AssambleCommands.utils';
+import { callMail } from '../Utils/CallMail.utils';
+
 
 export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
   const botCommands:BotCommand[] = await BotCommandRepository.getCommandsTypes();
   const commandsWithoutContact = botCommands.filter(command => command.commandsTypes.type !== "Contact")
-  const buildContactCommand = () => {
-    const commandContact = botCommands.find(command => command.commandsTypes.type === "Contact")
-    return ContactType.generateCommand(commandContact) 
-  }
+  const contactCommand = buildContactCommand(botCommands);
+  const commands = assambleCommands(commandsWithoutContact, typeCommands);
+  let callMailCommand;
+  let callMailHear;
 
-  const commands = commandsWithoutContact.map(command => 
-    { 
-      const type = typeCommands.find(typeCommand => typeCommand.type === command.commandsTypes.type)
-      const hasExternalParameter = command.commandsTypes.type === "NestedCommandsList";
+  bot.on("contact", contactCommand)
 
-      if(type){
-        return !hasExternalParameter ?
-          type.generateCommand(command)
-        :
-          type.generateCommand(
-            command, 
-            commandsWithoutContact.map(
-              commandName => commandName.tel_command
-            )
-          )
-      }
-    } 
-  )
-  const commandStart = commands.find(command => command.message === "Start")
-  
-  bot.start(commandStart.response);
+  bot.on("message", (ctx:any) => {
+    const { text } = ctx.message
 
-  commands.map(command => bot.command(command.command, command.response))
-  commands.map(command => bot.hears(command.message, command.response))
-
-  bot.on("contact", buildContactCommand())
+    if(text){
+      //Commands
+      commands.map(
+        command => removeSensitiveCase(command.command) === removeSensitiveCase(text) && command.response(ctx)
+      )
+      //Hears
+      commands.map(
+        command => removeSensitiveCase(command.message) === removeSensitiveCase(text) && command.response(ctx)
+      )
+      //Message if it can't find the command or hear
+      !commands.some(
+        command => removeSensitiveCase(command.command) === removeSensitiveCase(text) || 
+        removeSensitiveCase(command.message) === removeSensitiveCase(text) ||
+        Boolean(callMailCommand) ||
+        Boolean(callMailHear)
+      ) && messageCommand(ctx)
+      //Mails Admin
+      callMailCommand = callMail(callMailCommand, text, commands, ctx);
+      callMailHear = callMail(callMailHear, text, commands, ctx);
+    }
+  })
 
   bot.launch();
 }

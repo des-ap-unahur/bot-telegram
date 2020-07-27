@@ -55,9 +55,9 @@ module.exports = {
           acciones!
 
           *Primero te pido que te registres, podes hacerlo
-           apretando aca /registrarme o escribiendo el comando.
+           apretando aca /Registrarme o escribiendo el comando.
         
-          *Escribe /ayuda para ver los comando disponibles
+          *Escribe /Ayuda para ver los comando disponibles
         `,
         parameter:"",
         createdAt: new Date(),
@@ -87,9 +87,20 @@ module.exports = {
           TELEFONO ---> :phone_number
           PERFIL   ---> :user_type
           
-          Podes ver las funcionalidades que tenes con /ayuda
+          Podes ver las funcionalidades que tenes con /Ayuda
         `,
         parameter:"Enviar mi numero",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        user_type_id: 2,
+        command_type_id:4,
+        tel_command: "Mail_de_bienvenida",
+        name: "Mail de bienvenida",
+        status: true,
+        description:"Ingrese mail",
+        parameter:"Bienvenido al bot telegram UNAHUR",
         createdAt: new Date(),
         updatedAt: new Date(),
       },

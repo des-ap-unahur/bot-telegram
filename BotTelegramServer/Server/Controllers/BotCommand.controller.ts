@@ -1,6 +1,8 @@
 import BotCommandRepository from '../Repositories/BotCommand.repository';
 import BotCommand from '../Models/BotCommands.model';
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+import { buildCommands } from '../Commands/Bot.commands'
+import bot from '../Services/Bot.service';
 
 class BotCommandController {
   getCommands = async (req: any, res: any): Promise<void> => {
@@ -57,9 +59,10 @@ class BotCommandController {
 
   postCommand = async (req: any, res: any): Promise<void> => {
     const { body } = req;
-
+    
     try {
       const botCommands: BotCommand = await BotCommandRepository.post(body);
+      await buildCommands(bot);
       res.send(botCommands);
     } catch (e) {
       res.send({

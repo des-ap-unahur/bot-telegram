@@ -1,21 +1,20 @@
 import nodemailer from 'nodemailer';
+import nodeMailerConfig from '../Config/NodeMailer/NodeMailer.config';
 
 export const MailTransporter = nodemailer.createTransport({
-  host: 'mail.fazttech.net',
-  port: 587,
-  secure: false,
+  host: nodeMailerConfig.NODEMAILER_HOST,
+  port: nodeMailerConfig.NODEMAILER_PORT,
+  secure: true,
   auth: {
-    user: 'testtwo@fazttech.net',
-    pass: 'testtwocontraseña'
+    type: "OAuth2",
+    user: nodeMailerConfig.USER,
+    pass: nodeMailerConfig.PASSWORD,
+    clientId: nodeMailerConfig.CLIENT_ID,
+    clientSecret: nodeMailerConfig.CLIENT_SECRET,
+    refreshToken: nodeMailerConfig.REFRESH_TOKEN,
+    accessToken: nodeMailerConfig.ACCESS_TOKEN,
   },
-  tls: {
-    rejectUnauthorized: false
+  tls:{
+    rejectUnauthorized:false 
   }
 });
-
-const Info = MailTransporter.sendMail({
-  from: '"FaztTech Server" <testtwo@fazttech.xyz>', // sender address,
-  to: 'fazttech@gmail.com',
-  subject: 'Website Contact Form',
-  text: 'Hello World'
-})

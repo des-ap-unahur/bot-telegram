@@ -23,7 +23,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        type: "Mail",
+        type: "MailText",
         Description: "Mail",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -61,6 +61,12 @@ module.exports = {
       {
         type: "Contact",
         Description: "Contacto",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        type: "MailDocument",
+        Description: "Mail con documento adjunto",
         createdAt: new Date(),
         updatedAt: new Date(),
       },

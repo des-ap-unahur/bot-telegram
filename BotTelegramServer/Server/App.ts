@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
 import { buildCommands } from './Commands/Bot.commands';
+import { MailTransporter } from './Services/NodeMailer.service';
 import Database from './Database/Database';
 
 class App {

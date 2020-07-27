@@ -1,5 +1,6 @@
 import BotCommand from '../Models/BotCommands.model';
 import Keyboard from '../Markups/Keyboard.markup';
+import { toCommand } from '../Utils/ToCommand.utils';
 
 export const ButtonType = {
   type: "Button",
@@ -7,7 +8,7 @@ export const ButtonType = {
     const { tel_command, name, description, parameter } = command;
     const list = parameter.split(',');
     return {
-      command: tel_command,
+      command: toCommand(tel_command),
       message: name, 
       response: (ctx:any) => 
       {
