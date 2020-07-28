@@ -16,6 +16,9 @@ class GuaraniData extends Model<GuaraniData> implements GuaraniDataInterface {
   @Column(DataTypes.STRING)
   email!: string;
 
+  @Column(DataTypes.NUMBER)
+  phone_number!: number;
+  
   @Column(DataTypes.STRING)
   profile!: string;
 

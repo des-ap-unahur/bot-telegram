@@ -16,7 +16,7 @@ module.exports = {
       profile: {
         type: Sequelize.STRING,
       },
-      telefono: {
+      phone_number: {
         type: Sequelize.STRING,
       },
       createdAt: {
