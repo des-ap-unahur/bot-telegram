@@ -1,0 +1,349 @@
+{
+	"info": {
+		"_postman_id": "86e2aec8-e09c-4c8c-a232-e6cd854cad87",
+		"name": "BotTelegram",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Encuestas",
+			"item": [
+				{
+					"name": "Obtener encuestas por id",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/poll/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"poll",
+								"2"
+							]
+						},
+						"description": "Obtención las encuestas del bot por el id"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener encuestas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/polls",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"polls"
+							]
+						},
+						"description": "Obtención de todas las encuestas"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener encuestas con sus preguntas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/polls/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"polls",
+								"questions"
+							]
+						},
+						"description": "Obtención de las encuestas con todas sus preguntas"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener encuestas con sus preguntas por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/poll/1/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"poll",
+								"1",
+								"questions"
+							]
+						},
+						"description": "Obtención de una encuesta con sus preguntas por id"
+					},
+					"response": []
+				},
+				{
+					"name": "Crear encuesta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user_type_id\": 1,\n\t\"name\": \"Charla de Haskell\",\n\t\"description\": \"Charla para los alumnos de Objetos 3\"\n\t\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/poll/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"poll",
+								""
+							]
+						},
+						"description": "Creación de una encuesta"
+					},
+					"response": []
+				},
+				{
+					"name": "Crear preguntas de una encuesta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n {\n\t\t\"poll_id\":3,\n\t\t\"question\": \"¿Que te parecios la charla\",\n\t\t\"description\": \"...\"\n\t},\n\t{\n\t\t\"poll_id\":3,\n\t\t\"question\": \"¿Participarias denuevo?\",\n\t\t\"description\": \"...\"\n\t},\n\t{\n\t\t\"poll_id\":3,\n\t\t\"question\": \"¿La recomendarias?\",\n\t\t\"description\": \"...\"\n\t},\n\t{\n\t\t\"poll_id\":3,\n\t\t\"question\": \"¿En que podriamos mejorar?\",\n\t\t\"description\": \"...\"\n\t}\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/poll/questions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"poll",
+								"questions"
+							]
+						},
+						"description": "Creación de preguntas para una encuesta mediante una lista en el body"
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar encuesta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/poll/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"poll",
+								"1"
+							]
+						},
+						"description": "Eliminación de una encuesta"
+					},
+					"response": []
+				},
+				{
+					"name": "Responder preguntas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \n        \"response_id\":5,\n        \"response\":\"respuesta 1\"\n    },\n    {\n        \n        \"response_id\":5,\n        \"response\":\"respuesta 2\"\n    },\n    {\n        \n        \"response_id\":5,\n        \"response\":\"respuesta 3\"\n    }\n\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/poll-responses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"poll-responses"
+							]
+						},
+						"description": "Responder una pregunta de una encuesta"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener respuestas de una encuesta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/poll/2/responses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"poll",
+								"2",
+								"responses"
+							]
+						},
+						"description": "Obtención de las respuestas de las preguntas de una encuesta"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener las respuestas de una pregunta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/question/2/responses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"question",
+								"2",
+								"responses"
+							]
+						},
+						"description": "Obtención de las respuestas de una pregunta"
+					},
+					"response": []
+				}
+			],
+			"description": "ABM de encuestas",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Comandos-bot",
+			"item": [
+				{
+					"name": "Crear comando",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						},
+						"description": "Creacíon de un comando para el bot"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener comandos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/bot-commands/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"bot-commands",
+								""
+							]
+						},
+						"description": "Obtención de comandos\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener comando por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/bot-commands/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"bot-commands",
+								"1"
+							]
+						},
+						"description": "Obtención de un comando por id"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar comando",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/bot-commands/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"bot-commands",
+								"1"
+							]
+						},
+						"description": "Eliminar un comando"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,7 +1,8 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasMany } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import PollQuestionInterface from "../Interfaces/PollQuestion.interface";
 import Poll from "./Poll.model";
+import PollResponses from './PollResponses.model';
 
 @Table({
   tableName: "Poll_questions",
@@ -32,6 +33,9 @@ class PollQuestion extends Model<PollQuestion>
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
+
+  @HasMany(()=>PollResponses)
+  responses: PollResponses[]
 }
 
 export default PollQuestion;

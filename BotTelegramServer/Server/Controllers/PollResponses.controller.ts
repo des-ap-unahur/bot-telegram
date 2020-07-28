@@ -1,7 +1,8 @@
 import PollResponsesRepository from "../Repositories/PollResponses.repository";
 import PollResponses from "../Models/PollResponses.model";
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
-
+import Poll from '../Models/Poll.model';
+import PollQuestions from '../Models/PollQuestions.model';
 class PollResponsesController {
   getPollsResponses = async (req: any, res: any): Promise<void> => {
     try {
@@ -14,7 +15,7 @@ class PollResponsesController {
       });
     }
   };
-
+  
   getPollResponseById = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
     
@@ -28,11 +29,34 @@ class PollResponsesController {
       });
     }
   };
-
+  getPollResponsesById = async (req: any, res: any): Promise<void> => {
+    const { id } = req.params;
+    try {
+      const pollResponses: Poll = await PollResponsesRepository.getPollResponses(id);
+      res.send(pollResponses);
+    } catch (e) {
+      res.send({
+        errorCodes: e, 
+        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
+      });
+    }
+  };
+  getQuestionsResponses = async (req: any, res: any): Promise<void> => {
+    const { id } = req.params;
+    try {
+      const pollQuestionsResponses: PollQuestions = await PollResponsesRepository.getQuestionsResponses(id);
+      res.send(pollQuestionsResponses);
+    } catch (e) {
+      res.send({
+        errorCodes: e, 
+        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
+      });
+    }
+  };
   postPollResponse = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     try {
-      const pollResponse: PollResponses = await PollResponsesRepository.post(body);
+      const pollResponse: PollResponses []= await PollResponsesRepository.post(body);
       res.send(pollResponse);
     } catch (e) {
       res.send({
@@ -41,7 +65,6 @@ class PollResponsesController {
       });
     }
   };
-
   updatePollResponse = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     const { id } = req.params;
@@ -71,5 +94,6 @@ class PollResponsesController {
     }
   };
 }
+
 
 export default new PollResponsesController();
