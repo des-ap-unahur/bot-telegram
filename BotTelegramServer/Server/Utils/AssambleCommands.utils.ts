@@ -1,8 +1,9 @@
 export const assambleCommands = (commands: any[], typeCommands: any[]) => {
   return commands.map(command => 
     { 
-      const type = typeCommands.find(typeCommand => typeCommand.type === command.commandsTypes.type)
+      const type = typeCommands.find(typeCommand => typeCommand.type === command.commandsTypes.type);
       const hasExternalParameter = command.commandsTypes.type === "NestedCommandsList";
+      const genericType = !type && typeCommands.find(typeCommands => typeCommands.type === 'Text');
 
       if(type){
         return !hasExternalParameter ?
@@ -15,6 +16,7 @@ export const assambleCommands = (commands: any[], typeCommands: any[]) => {
             )
           )
       }
+      return genericType.generateCommand(command);
     } 
   )
 }

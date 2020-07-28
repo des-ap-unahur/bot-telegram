@@ -8,13 +8,13 @@ import { removeSensitiveCase } from '../Utils/RemoveSensitiveCase.utils';
 import { buildContactCommand } from '../Utils/BuildContactCommand.utils';
 import { assambleCommands } from '../Utils/AssambleCommands.utils';
 import { callMail } from '../Utils/CallMail.utils';
-
+import CommandInterface from '../Interfaces/Command.interface';
 
 export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
   const botCommands:BotCommand[] = await BotCommandRepository.getCommandsTypes();
   const commandsWithoutContact = botCommands.filter(command => command.commandsTypes.type !== "Contact")
   const contactCommand = buildContactCommand(botCommands);
-  const commands = assambleCommands(commandsWithoutContact, typeCommands);
+  const commands:CommandInterface[] = assambleCommands(commandsWithoutContact, typeCommands);
   let callMailCommand;
   let callMailHear;
 
@@ -23,7 +23,7 @@ export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
   bot.on("message", (ctx:any) => {
     const { text } = ctx.message
 
-    if(text){
+    if(text && commands.length){
       //Commands
       commands.map(
         command => removeSensitiveCase(command.command) === removeSensitiveCase(text) && command.response(ctx)

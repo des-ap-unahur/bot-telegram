@@ -3,7 +3,7 @@ import { DataTypes } from "sequelize";
 import UserTypesInterface from "../Interfaces/UserTypes.interface";
 
 @Table({
-  tableName: "Bot_commands",
+  tableName: "User_types",
   timestamps: true,
 })
 

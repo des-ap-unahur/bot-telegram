@@ -4,7 +4,7 @@ import UserBackOfficeInterface from '../Interfaces/UserBackOffice.interface';
 
 @Table(
   {
-    tableName: "user",
+    tableName: "User",
     timestamps: true,
   }
 )
