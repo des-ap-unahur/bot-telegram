@@ -1,3 +1,3 @@
-export const messageCommand = (ctx:any): void => {
+export const invalidMessageCommand = (ctx:any): void => {
   ctx.reply(`Los comandos disponibles se encuentran en /Ayuda`)
 }
