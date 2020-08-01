@@ -1,12 +1,12 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey } from "sequelize-typescript";
 import { DataTypes } from 'sequelize';
 import PollResponsesInterface from '../Interfaces/PollResponses.interface'
-import PollQuestion from './PollQuestions.model'
-import BotUsers from './BotUsers.model';
+import PollQuestions from './PollQuestions.model'
+
 
 @Table(
   {
-    tableName: "Poll_response",
+    tableName: "Poll_responses",
     timestamps: true,
   }
 )
@@ -20,6 +20,7 @@ class PollResponses extends Model<PollResponses> implements PollResponsesInterfa
   @Column(DataTypes.NUMBER)
   user_id!: number
 
+  @ForeignKey(() => PollQuestions)
   @Column(DataTypes.STRING)
   response_id!: number;
 
