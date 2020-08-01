@@ -4,7 +4,7 @@ import PollQuestionInterface from "../Interfaces/PollQuestion.interface"
 
 class PollRepository {
   getAll = async (): Promise<Poll[]> => {
-    const pollsQuestions: Poll[] = await Poll.findAll({  include: [PollQuestion],});
+    const pollsQuestions: Poll[] = await Poll.findAll({  include: [PollQuestion]});
     return pollsQuestions;
   };
 

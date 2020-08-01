@@ -7,6 +7,7 @@ import { StartType } from "./StartType.command";
 import { RegistrationType } from "./RegistrationType.command";
 import { MailTextType } from "./MailTextType.command";
 import { TextType } from "./TextType.command";
+import { MailDocumentType } from "./MailDocumentType.command";
 
 export const typeCommands = [
   ButtonType,
@@ -17,5 +18,6 @@ export const typeCommands = [
   NestedCommandsButtonType,
   RegistrationType,
   MailTextType,
-  TextType
+  TextType,
+  MailDocumentType
 ]

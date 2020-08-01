@@ -1,14 +1,24 @@
 import { removeSensitiveCase } from "./RemoveSensitiveCase.utils"
 
-export const callMail = (callMail:any, text: string, commands: any[], ctx: any) => {
-  const sendMail = (mailCommand, text, ctx) => {
-    mailCommand && text.includes('@') && mailCommand.response(ctx, Boolean(text))
+export const callMail = (callMail:any, text: string, commands: any[], ctx: any, isAnCommand?: boolean) => {
+  const isAnEmail = text.includes('@');
+  const sendMail = (mailCommand, ctx) => {
+    mailCommand && mailCommand.response(ctx, Boolean(text))
+    return null
   }
 
-  if(text.includes('@')){
-    sendMail(callMail, text, ctx)
-    return null
+  const findCommandOrHear = (text, command) => {
+    return isAnCommand ? 
+      removeSensitiveCase(text) === removeSensitiveCase(command.command)
+    : 
+      removeSensitiveCase(text) === removeSensitiveCase(command.message)
+  }
+
+  if(isAnEmail){
+    return sendMail(callMail, ctx)
   } else {
-    return commands.find(command => removeSensitiveCase(text).includes('mail') && removeSensitiveCase(text) === removeSensitiveCase(command.command))
+    return commands.find(
+      command => removeSensitiveCase(text).includes('mail') && findCommandOrHear(text, command)
+    )
   }
 }

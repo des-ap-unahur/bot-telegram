@@ -3,7 +3,7 @@ import { TelegrafContext } from 'telegraf/typings/context';
 import { typeCommands } from './TypeCommands.commands'; 
 import BotCommandRepository from '../Repositories/BotCommand.repository';
 import BotCommand from '../Models/BotCommands.model';
-import { messageCommand } from './Message.command';
+import { invalidMessageCommand } from './Message.command';
 import { removeSensitiveCase } from '../Utils/RemoveSensitiveCase.utils';
 import { buildContactCommand } from '../Utils/BuildContactCommand.utils';
 import { assambleCommands } from '../Utils/AssambleCommands.utils';
@@ -38,9 +38,9 @@ export const buildCommands = async (bot: Telegraf<TelegrafContext>) => {
         removeSensitiveCase(command.message) === removeSensitiveCase(text) ||
         Boolean(callMailCommand) ||
         Boolean(callMailHear)
-      ) && messageCommand(ctx)
+      ) && invalidMessageCommand(ctx)
       //Mails Admin
-      callMailCommand = callMail(callMailCommand, text, commands, ctx);
+      callMailCommand = callMail(callMailCommand, text, commands, ctx, true);
       callMailHear = callMail(callMailHear, text, commands, ctx);
     }
   })

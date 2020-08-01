@@ -24,7 +24,7 @@ module.exports = {
           key: 'poll_question_id'
         }
       },
-      description: {
+      response: {
         type: Sequelize.STRING,
       },
       createdAt: {
