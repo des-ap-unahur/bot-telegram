@@ -12,6 +12,7 @@ cd bot-telegram
 docker-compose up
 sudo ./dev-setup.sh
 sudo ./run-migrations.sh
+sudo ./run-seeds.sh
 ```
 
 Con esto el entorno deberia estar listo para desarrollar.
@@ -64,6 +65,14 @@ Como 4to paso correr las migraciones.
 docker-compose exec bot-telegram-server bash
 alias sequelize=node_modules/.bin/sequelize
 sequelize db:migrate
+```
+
+Como 5to paso correr las semillas.
+
+```bash
+docker-compose exec bot-telegram-server bash
+alias sequelize=node_modules/.bin/sequelize
+sequelize db:seed:all
 ```
 
 Con esto ya el setup de desarrollo ya estaria listo para que puedas darle un buen aporte a este proyecto.
