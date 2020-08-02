@@ -10,14 +10,24 @@
 			"item": [
 				{
 					"name": "Obtener encuestas por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "http://localhost:5000/api/poll/2",
+							"raw": "http://54.232.141.51:5000/api/poll/2",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"54",
+								"232",
+								"141",
+								"51"
 							],
 							"port": "5000",
 							"path": [
@@ -269,7 +279,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "http://localhost:5000/api/bot-commands/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"bot-commands",
+								""
+							]
 						},
 						"description": "Creacíon de un comando para el bot"
 					},
@@ -338,6 +358,27 @@
 							]
 						},
 						"description": "Eliminar un comando"
+					},
+					"response": []
+				},
+				{
+					"name": "Obenter los tipos de comandos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/command-types",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"command-types"
+							]
+						},
+						"description": "Obtención de los tipos de comando"
 					},
 					"response": []
 				}
