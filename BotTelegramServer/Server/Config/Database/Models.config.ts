@@ -1,18 +1,18 @@
-import BotCommand from '../../Models/BotCommands.model';
-import BotNestedCommands from '../../Models/BotNestedCommands.model';
-import BotResponseFiles from '../../Models/BotResponseFiles.model';
-import BotResponses from '../../Models/BotResponses.model';
-import BotSubsUsers from '../../Models/BotSubsUsers.model';
-import BotUsers from '../../Models/BotUsers.model';
-import CommandTypes from '../../Models/CommandsTypes.model';
-import GuaraniData from '../../Models/GuaraniData.models';
-import Poll from '../../Models/Poll.model';
-import PollQuestion from '../../Models/PollQuestions.model';
-import PollResponses from '../../Models/PollResponses.model';
-import PollRolesAccess from '../../Models/PollRolesAccess.model';
-import Roles from '../../Models/Roles.model';
-import UserBackOffice from '../../Models/UserBackOffice.model';
-import UserTypes from '../../Models/UserTypes.model';
+import BotCommand from '../../Entities/Models/BotCommands.model';
+import BotNestedCommands from '../../Entities/Models/BotNestedCommands.model';
+import BotResponseFiles from '../../Entities/Models/BotResponseFiles.model';
+import BotResponses from '../../Entities/Models/BotResponses.model';
+import BotSubsUsers from '../../Entities/Models/BotSubsUsers.model';
+import BotUsers from '../../Entities/Models/BotUsers.model';
+import CommandTypes from '../../Entities/Models/CommandsTypes.model';
+import GuaraniUsers from '../../Entities/Models/GuaraniUsers.models';
+import Poll from '../../Entities/Models/Poll.model';
+import PollQuestion from '../../Entities/Models/PollQuestions.model';
+import PollResponses from '../../Entities/Models/PollResponses.model';
+import PollRolesAccess from '../../Entities/Models/PollRolesAccess.model';
+import Roles from '../../Entities/Models/Roles.model';
+import UserBackOffice from '../../Entities/Models/UserBackOffice.model';
+import UserTypes from '../../Entities/Models/UserTypes.model';
 
 export const ModelList = [
   BotCommand,
@@ -22,7 +22,7 @@ export const ModelList = [
   BotSubsUsers,
   BotUsers,
   CommandTypes,
-  GuaraniData,
+  GuaraniUsers,
   Poll,
   PollQuestion,
   PollResponses,

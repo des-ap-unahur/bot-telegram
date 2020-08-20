@@ -1,6 +1,7 @@
-import UserTypesRepository from '../Repositories/UserTypes.repository';
-import UserTypes from "../Models/UserTypes.model";
+import UserTypesRepository from '../Entities/Repositories/UserTypes.repository';
+import UserTypes from "../Entities/Models/UserTypes.model";
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+
 
 class UserTypesController {
   getUserTypes = async (req: any, res: any): Promise<void> => {

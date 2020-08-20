@@ -1,6 +1,7 @@
-import BotResponsesFilesRepository from '../Repositories/BotResponsesFiles.repository';
-import BotResponseFiles from '../Models/BotResponseFiles.model';
+import BotResponsesFilesRepository from '../Entities/Repositories/BotResponsesFiles.repository';
+import BotResponseFiles from '../Entities/Models/BotResponseFiles.model';
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+
 
 class BotResponsesFilesController {
   getResponses = async (req: any, res: any): Promise<void> => {

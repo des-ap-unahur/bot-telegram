@@ -1,6 +1,7 @@
-import RolesRepository from "../Repositories/Roles.repository";
-import Roles from "../Models/Roles.model";
+import RolesRepository from "../Entities/Repositories/Roles.repository";
+import Roles from "../Entities/Models/Roles.model";
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+
 
 class RolesController {
   getRoles = async (req: any, res: any): Promise<void> => {

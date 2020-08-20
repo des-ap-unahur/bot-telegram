@@ -1,6 +1,7 @@
-import PollRepository from "../Repositories/Poll.repository";
-import Poll from "../Models/Poll.model";
+import PollRepository from "../Entities/Repositories/Poll.repository";
+import Poll from "../Entities/Models/Poll.model";
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+
 
 class PollController {
   getPolls = async (req: any, res: any): Promise<void> => {

@@ -1,6 +1,7 @@
-import UserBackOfficeRepository from '../Repositories/UserBackOffice.repository';
-import UserBackOffice from '../Models/UserBackOffice.model';
+import UserBackOfficeRepository from '../Entities/Repositories/UserBackOffice.repository';
+import UserBackOffice from '../Entities/Models/UserBackOffice.model';
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+
 
 class UserBackOfficeController {
   getUsers = async (req: any, res: any): Promise<void> => {

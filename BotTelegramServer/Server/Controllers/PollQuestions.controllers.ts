@@ -1,8 +1,9 @@
-import PollQuestionsRepository from "../Repositories/PollQuestions.repository";
-import Poll from "../Models/Poll.model";
+import PollQuestionsRepository from "../Entities/Repositories/PollQuestions.repository";
+import Poll from "../Entities/Models/Poll.model";
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
-import PollQuestion from "../Models/PollQuestions.model";
-import PollQuestionInterface from "../Interfaces/PollQuestion.interface"
+import PollQuestion from "../Entities/Models/PollQuestions.model";
+import PollQuestionInterface from "../Interfaces/PollQuestion.interface";
+
 
 class PollQuestionsController {
   getPollsQuestions = async (req: any, res: any): Promise<void> => {

@@ -1,6 +1,7 @@
-import BotsubsUsersRepository from '../Repositories/BotSubsUsers.repository';
-import BotSubsUsers from '../Models/BotSubsUsers.model';
+import BotsubsUsersRepository from '../Entities/Repositories/BotSubsUsers.repository';
+import BotSubsUsers from '../Entities/Models/BotSubsUsers.model';
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+
 
 class BotSubsUsersController {
   getBotSubsUsers = async (req: any, res: any): Promise<void> => {

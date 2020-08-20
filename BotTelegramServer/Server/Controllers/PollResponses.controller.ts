@@ -1,8 +1,10 @@
-import PollResponsesRepository from "../Repositories/PollResponses.repository";
-import PollResponses from "../Models/PollResponses.model";
+import PollResponsesRepository from "../Entities/Repositories/PollResponses.repository";
+import PollResponses from "../Entities/Models/PollResponses.model";
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
-import Poll from '../Models/Poll.model';
-import PollQuestions from '../Models/PollQuestions.model';
+import Poll from '../Entities/Models/Poll.model';
+import PollQuestions from '../Entities/Models/PollQuestions.model';
+
+
 class PollResponsesController {
   getPollsResponses = async (req: any, res: any): Promise<void> => {
     try {
@@ -29,6 +31,7 @@ class PollResponsesController {
       });
     }
   };
+
   getPollResponsesById = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
     try {
@@ -41,6 +44,7 @@ class PollResponsesController {
       });
     }
   };
+
   getQuestionsResponses = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
     try {
@@ -53,6 +57,7 @@ class PollResponsesController {
       });
     }
   };
+
   postPollResponse = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     try {
@@ -65,6 +70,7 @@ class PollResponsesController {
       });
     }
   };
+
   updatePollResponse = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     const { id } = req.params;
@@ -94,6 +100,5 @@ class PollResponsesController {
     }
   };
 }
-
 
 export default new PollResponsesController();
