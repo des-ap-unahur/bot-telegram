@@ -9,7 +9,7 @@ module.exports = {
     port: process.env.DB_PORT,
     dialect: 'mysql',
     modelPaths: [
-      __dirname + '/../Models/*.ts'
+      __dirname + '/../Entities/Models/*.ts'
     ]
   },
 };
