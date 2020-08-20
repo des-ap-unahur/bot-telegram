@@ -3,17 +3,17 @@ import { useHistory } from 'react-router-dom';
 import { connect } from "react-redux";
 
 
-const RedirectWithLogin = ({auth}) => {
+const RedirectWithLogin = ({auth}:any) => {
   const history = useHistory();
+
   useEffect(()=>{
     auth ? history.push('/dashboard') : history.push('/login');
-  }, [auth])
-  return (
-    <>
-    </>
-  )
+  }, [auth, history])
+
+  return <></>  
 }
-const mapStateToProps = (state) => ({
+
+const mapStateToProps = (state:any) => ({
   auth: true
 });
 

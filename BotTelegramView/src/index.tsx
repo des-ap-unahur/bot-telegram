@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App/View/View';
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import store from './App/Store/Store.redux';
 
@@ -11,7 +11,7 @@ const IuApp = () => (
       <App/>
     </Provider>
   </>
-)
+);
 
 ReactDOM.render(<IuApp />, document.getElementById('root'));
 

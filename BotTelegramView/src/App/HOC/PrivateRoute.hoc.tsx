@@ -2,10 +2,10 @@ import React, { useMemo } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 
-const PrivateRoute = ({auth, path, component, exact, userPermissions, permissions}) => {
+const PrivateRoute = ({auth, path, component, exact, userPermissions, permissions}:any) => {
   const hasRequiredPermissions = useMemo(() => {
     return !permissions || (userPermissions &&
-      userPermissions.some(userPermission => 
+      userPermissions.some((userPermission:any) => 
         userPermission.name.includes(permissions)  
       )
     )
@@ -19,7 +19,7 @@ const PrivateRoute = ({auth, path, component, exact, userPermissions, permission
   )
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state:any) => ({
   auth: true,
   userPermissions: []
 });

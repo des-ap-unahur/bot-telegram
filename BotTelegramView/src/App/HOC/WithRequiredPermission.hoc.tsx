@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import { connect } from "react-redux";
 
-const WithRequiredPermission = ({ requiredPermission, userPermissions, children}) => {
+const WithRequiredPermission = ({ requiredPermission, userPermissions, children}:any) => {
 
   const hasRequiredPermissions = useMemo(() => {
     return !requiredPermission || (userPermissions &&
-      userPermissions.some(userPermission => 
+      userPermissions.some((userPermission:any) => 
         userPermission.name.includes(requiredPermission)  
       )
     )
@@ -19,7 +19,7 @@ const WithRequiredPermission = ({ requiredPermission, userPermissions, children}
 
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state:any) => ({
   userPermissions: []
 });
 

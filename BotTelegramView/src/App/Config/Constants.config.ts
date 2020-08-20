@@ -13,5 +13,5 @@ const constants = {
 const store = new Confidence.Store(constants)
 
 export default {
-  get: (key) => store.get(key, criteria)
+  get: (key: any) => store.get(key, criteria)
 }

@@ -1,27 +1,32 @@
-import api from './Api.utils';
-import { getLocalValue } from '../../../Utils/LocalStorage.utils'
+import api from '../Services/Api.service';
+import AsyncActionsParams from '../Interfaces/AsyncActionsParams.interface';
 
-export default function createAsyncAction ({name, endpoint: originEndpoint, method: defaultMethod, response }) {
+
+const buildAsyncAction = ({name, endpoint: originEndpoint, method: defaultMethod, response }:AsyncActionsParams) => {
   const actionsTypes = {
     [name + 'Attempt']: `${name}-attempt`,
     [name + 'Success']: `${name}-success`,
     [name + 'Failure']: `${name}-failure`
   }
 
-  const storeActions = {
+  const storeActions:any = {
     [name + 'Attempt']: pseudoDispatch(name, 'Attempt', actionsTypes),
     [name + 'Success']: pseudoDispatch(name, 'Success', actionsTypes),
     [name + 'Failure']: pseudoDispatch(name, 'Failure', actionsTypes)
   }
   
-  const asyncActionRequest = function (requestOptions = {}) {
-    return async function (dispatch) {
+  const asyncActionRequest = (requestOptions:any) => {
+    return async (dispatch:any) => {
       const actionName = name + 'Attempt'
       dispatch(storeActions[actionName](requestOptions.data))
 
-      let options = {
+      let options: any = {
         method: 'GET',
-        headers: {}
+        headers: {
+          'Cache-Control': '',
+          'Content-Type': '',
+          'credentials': 'include'
+        }
       }
 
       //copy endpoint
@@ -39,7 +44,7 @@ export default function createAsyncAction ({name, endpoint: originEndpoint, meth
         options.data = requestOptions.data
       }
 
-      const { method, headers, qs, url, params, param_1, param_2, param_3, customProperties } = requestOptions;
+      const { method, headers, qs, url, params, param_1, param_2, param_3, customProperties }:any = requestOptions;
 
       if (requestOptions.data && requestOptions.data.id) {
         endpoint = endpoint.replace(':id', requestOptions.data.id)
@@ -111,11 +116,13 @@ export default function createAsyncAction ({name, endpoint: originEndpoint, meth
   return { actionsTypes, actionCreators: storeActions }
 }
 
-function pseudoDispatch (name, cicleState, actionsTypes) {
-  return function (payload) {
+const pseudoDispatch = (name:string, cicleState:string, actionsTypes:any) => {
+  return function (payload:any) {
     return {
       type: actionsTypes[name + cicleState],
       payload
     }
   }
 }
+
+export default buildAsyncAction;

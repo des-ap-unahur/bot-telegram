@@ -2,10 +2,10 @@ import React, { useState, createContext } from 'react';
 
 export const ModalControllerContext = createContext({
   isOpenDrawer: false,
-  setOpenState: () => {}
+  setOpenState: (open:boolean) => {}
 });
 
-const ModalController = ({children}) => {
+const ModalController = ({children}:any) => {
   const [ open, setOpen ] = useState(false)
   return(
     <ModalControllerContext.Provider

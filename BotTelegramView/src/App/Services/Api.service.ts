@@ -1,12 +1,12 @@
 import axios from 'axios';
-import constants from '../../../Config/Constants.config';
+import constants from '../Config/Constants.config';
 
 const api = axios.create({
   baseURL: constants.get('/endpoints/server'),
   validateStatus: (status) => status < 404, // throw only error for statusCodes >= 404
 })
 
-function addErrorData (error) {
+const addErrorData = (error: any) => {
   error.name = 'RequestError'
   error.message = error.message || error.name
   if (!error.message) {
@@ -20,7 +20,7 @@ function addErrorData (error) {
   throw error.response
 }
 
-function checkStatus (response) {
+const checkStatus = (response: any) => {
   const { status } = response
   if (!status) {
     throw new Error('statusNotFound')

@@ -1,4 +1,4 @@
-export const getLocalValue = (name) => {
+export const getLocalValue = (name:any) => {
   try {
     const serializedData = localStorage.getItem(name);
     if (serializedData === null) {
@@ -10,7 +10,7 @@ export const getLocalValue = (name) => {
   }
 };
 
-export const setLocalValue = (name, value) => {
+export const setLocalValue = (name:any, value:any) => {
   try {
     const serializedData = JSON.stringify(value);
     localStorage.setItem(name, serializedData);
@@ -19,7 +19,7 @@ export const setLocalValue = (name, value) => {
   }
 };
 
-export const removeLocalValue = (name) => {
+export const removeLocalValue = (name:any) => {
   try {
     localStorage.removeItem(name);
   } catch {
