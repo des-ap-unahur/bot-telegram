@@ -4,7 +4,7 @@ import bot from './Entities/Services/Bot.service';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
-import { buildCommands } from './Bot/Controller/Bot.controller';
+import { botController } from './Bot/Controller/Bot.controller';
 import Database from './Database/Database';
 
 class App {
@@ -58,7 +58,9 @@ class App {
   }
   
   public botSetup = async () => {
-    await buildCommands(bot);
+    await botController.fetchCommands();
+    await botController.buildCommands();
+    await botController.runCommands();
   }
 }
 

@@ -1,8 +1,7 @@
 import BotCommandRepository from '../Entities/Repositories/BotCommand.repository';
 import BotCommand from '../Entities/Models/BotCommands.model';
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
-import { buildCommands } from '../Bot/Controller/Bot.controller';
-import bot from '../Entities/Services/Bot.service';
+import { botController } from '../Bot/Controller/Bot.controller';
 
 
 class BotCommandController {
@@ -62,8 +61,8 @@ class BotCommandController {
     const { body } = req;
     
     try {
-      const botCommands: BotCommand = await BotCommandRepository.post(body);
-      await buildCommands(bot);
+      const botCommands: BotCommand = await BotCommandRepository.post(body)
+      await botController.refreshCommands();
       res.send(botCommands);
     } catch (e) {
       res.send({
