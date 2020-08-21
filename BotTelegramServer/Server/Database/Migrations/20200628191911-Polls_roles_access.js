@@ -3,7 +3,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Polls_roles_access', {
-      
       role_id: {
         type: Sequelize.INTEGER,
         references: {
@@ -28,7 +27,6 @@ module.exports = {
       }
     });
   },
-
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Poll_roles_access');
   }
