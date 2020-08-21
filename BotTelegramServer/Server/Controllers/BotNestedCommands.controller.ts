@@ -1,6 +1,7 @@
-import BotNestedCommandsRepository from '../Repositories/BotNestedCommands.respository';
-import BotNestedCommand from '../Models/BotNestedCommands.model';
+import BotNestedCommandsRepository from '../Entities/Repositories/BotNestedCommands.respository';
+import BotNestedCommand from '../Entities/Models/BotNestedCommands.model';
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+
 
 class BotNestedCommandController {
   getCommands = async (req: any, res: any): Promise<void> => {

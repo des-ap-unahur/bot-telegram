@@ -1,17 +1,16 @@
 import express, { Application } from 'express';
 import AppConfig from './Interfaces/AppConfig.interface';
-import bot from './Services/Bot.service';
+import bot from './Entities/Services/Bot.service';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
-import { buildCommands } from './Commands/Bot.commands';
-import { MailTransporter } from './Services/NodeMailer.service';
+import { buildCommands } from './Bot/Controller/Bot.controller';
 import Database from './Database/Database';
 
 class App {
-  public app: Application;
-  public port: Number;
-  public name: String;
+  private app: Application;
+  private port: Number;
+  private name: String;
 
   constructor(appConfig: AppConfig){
     const {

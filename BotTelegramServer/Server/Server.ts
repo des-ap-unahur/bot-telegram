@@ -7,7 +7,7 @@ import BotResponsesFilesRoute from './Routes/BotResponsesFiles.route';
 import BotSubsUserRoute from './Routes/BotSubsUsers.route';
 import BotUserRoute from './Routes/BotUser.route';
 import CommandsTypes from './Routes/CommandsTypes.route';
-import GuaraniUserRoute from './Routes/GuaraniData.route';
+import GuaraniUserRoute from './Routes/GuaraniUsers.route';
 import HomeRoute from './Routes/Home.route';
 import PollRoute from './Routes/Poll.route';
 import PollQuestionsRoute from './Routes/PollQuestions.route';

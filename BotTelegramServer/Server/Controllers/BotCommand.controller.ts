@@ -1,8 +1,9 @@
-import BotCommandRepository from '../Repositories/BotCommand.repository';
-import BotCommand from '../Models/BotCommands.model';
+import BotCommandRepository from '../Entities/Repositories/BotCommand.repository';
+import BotCommand from '../Entities/Models/BotCommands.model';
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
-import { buildCommands } from '../Commands/Bot.commands'
-import bot from '../Services/Bot.service';
+import { buildCommands } from '../Bot/Controller/Bot.controller';
+import bot from '../Entities/Services/Bot.service';
+
 
 class BotCommandController {
   getCommands = async (req: any, res: any): Promise<void> => {

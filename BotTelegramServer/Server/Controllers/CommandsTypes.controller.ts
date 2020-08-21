@@ -1,6 +1,7 @@
-import CommandsTypesRepository from '../Repositories/CommandsTypes.repository';
-import CommandsTypes from '../Models/CommandsTypes.model';
+import CommandsTypesRepository from '../Entities/Repositories/CommandsTypes.repository';
+import CommandsTypes from '../Entities/Models/CommandsTypes.model';
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+
 
 class CommandsTypesController {
   getCommandsTypes = async (req: any, res: any): Promise<void> => {
