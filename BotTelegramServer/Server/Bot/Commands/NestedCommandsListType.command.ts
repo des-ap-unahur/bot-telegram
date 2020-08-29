@@ -18,9 +18,9 @@ export const NestedCommandsListType = {
     return {
       command: toCommand(tel_command),
       message: name, 
-      response: (ctx:any) => 
+      response: async (ctx:any) => 
       {
-        ctx.reply(description);
+        await ctx.reply(description);
         externalParameter ? 
           ctx.reply(buildMessage(externalParameter))
         :
