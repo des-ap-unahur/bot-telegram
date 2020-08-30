@@ -15,7 +15,7 @@ import bot from '../../Entities/Services/Bot.service';
 class BotController {
   private commands: CommandInterface[];
   private contactCommand: (ctx) => void;
-  private botCommands: BotCommand[]
+  private botCommands: BotCommand[];
   private commandsWithoutContact;
   private bot: Telegraf<TelegrafContext>;
   private callMailCommand: CommandInterface | null;
@@ -39,6 +39,46 @@ class BotController {
     this.contactCommand = buildContactCommand(this.botCommands);
   }
 
+  execCommand = (text, ctx) => {
+    this.commands.map(
+      command => removeSensitiveCase(command.command) === removeSensitiveCase(text) && command.response(ctx)
+    )
+  }
+
+  execHear = (text, ctx) => {
+    this.commands.map(
+      command => removeSensitiveCase(command.message) === removeSensitiveCase(text) && command.response(ctx)
+    )
+  }
+
+  notUnderstandMessage = (text, ctx) => {
+    !this.commands.some(
+      command => removeSensitiveCase(command.command) === removeSensitiveCase(text) || 
+      removeSensitiveCase(command.message) === removeSensitiveCase(text) ||
+      Boolean(this.callMailCommand) ||
+      Boolean(this.callMailHear)
+    ) && invalidMessageCommand(ctx)
+  }
+
+  execCallMailCommand = (text, ctx) => {
+    this.callMailCommand = callMail(
+      this.callMailCommand, 
+      text, 
+      this.commands, 
+      ctx, 
+      true
+    );
+  }
+
+  execCallMailHear = (text, ctx) => {
+    this.callMailHear = callMail(
+      this.callMailHear, 
+      text, 
+      this.commands, 
+      ctx
+    );
+  }
+
   runCommands = () => {
     this.bot.on("contact", this.contactCommand)
   
@@ -46,39 +86,15 @@ class BotController {
       const { text } = ctx.message
   
       if(text && this.commands.length){
-        //Commands
-        this.commands.map(
-          command => removeSensitiveCase(command.command) === removeSensitiveCase(text) && command.response(ctx)
-        )
+        this.execCommand(text, ctx);
 
-        //Hears
-        this.commands.map(
-          command => removeSensitiveCase(command.message) === removeSensitiveCase(text) && command.response(ctx)
-        )
+        this.execHear(text, ctx);
+        
+        this.notUnderstandMessage(text, ctx);
 
-        //Message if it can't find the command or hear
-        !this.commands.some(
-          command => removeSensitiveCase(command.command) === removeSensitiveCase(text) || 
-          removeSensitiveCase(command.message) === removeSensitiveCase(text) ||
-          Boolean(this.callMailCommand) ||
-          Boolean(this.callMailHear)
-        ) && invalidMessageCommand(ctx)
+        this.execCallMailCommand(text, ctx);
 
-        //Mails Admin
-        this.callMailCommand = callMail(
-          this.callMailCommand, 
-          text, 
-          this.commands, 
-          ctx, 
-          true
-        );
-
-        this.callMailHear = callMail(
-          this.callMailHear, 
-          text, 
-          this.commands, 
-          ctx
-        );
+        this.execCallMailHear(text, ctx);
       }
     })
   
