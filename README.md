@@ -80,38 +80,43 @@ Con esto ya el setup de desarrollo ya estaria listo para que puedas darle un bue
 ## Servicios disponibles:
 
 ### BotTelegramServer:
+----------------------------
 Este es nuestro servicio de backend, el cual incluye la logica de negocios del lado del servidor y el backoffice.
 En este servicio se utilizan las siguientes tecnologias:
-  Entorno de ejecucion:
-    -Ts-Node
-  Como lenguaje/herramienta de desarrollo:
-    -Typescript
-    -Nodemon
-    -Morgan
-    -Jest
-  Frameworks:
-    -Express
-    -Telegraf
-    -Jest
-  Middlewares:
-    -Json Web Token
-    -Passport
-  ORM:
-    -Sequelize-typescript
+  * Entorno de ejecucion:
+    * Ts-Node
+  * Como lenguaje/herramienta de desarrollo:
+    * Typescript
+    * Nodemon
+    * Morgan
+    * Jest
+  * Frameworks:
+    * Express
+    * Telegraf
+    * Jest
+    * Middlewares:
+    * Json Web Token
+    * Passport
+  *ORM:
+    *Sequelize-typescript
 
 Url de acceso http://localhost:5000/
 
 ### BotTelegramView:
+----------------------------
 Este es nuestro servicio de vistas, se encarga especialmente de las vistas del backoffice.
 En este servicio se utilizan las siguientes tecnologias:
-  Entorno de ejecucion:
-    -Node:
-  Frameworks:
-    -React
-    -Redux
-    -Material-ui
-  Herramientas:
-    -Browser-Routes
+  * Entorno de ejecucion:
+    * Node:
+  * Lenguaje:
+    * Typescript
+  * Frameworks:
+    * React
+    * Redux
+    * Material-ui
+  * Herramientas:
+    * Browser-Routes
+    * Axios
 
 Url de acceso http://localhost:3000/
 
@@ -119,3 +124,52 @@ Url de acceso http://localhost:3000/
 Este es nuestro servicio de base de datos que esta en mysql.
 
 Url de acceso http://localhost:3306/
+
+## sección de ayuda:
+
+### docker 
+Ejecutar bash de un contenedor:
+```bash
+docker-compose nombre-de-contenedor exec bash
+```
+
+Parar a todos los contendores que estan corriendo:
+```bash
+docker rm -f $(docker ps -qa)
+```
+
+### Sequelize:
+Establecer alias al entrar en bash:
+```bash
+alias sequelize=node_modules/.bin/sequelize
+```
+
+Correr las migraciones pendientes:
+
+```bash
+sequelize db:migrate
+```
+
+Generar una migración:
+
+```bash
+sequelize migration:generate
+```
+
+Generar un modelo:
+
+```bash
+sequelize model:generate
+```
+
+Generar una semilla:
+
+```bash
+sequelize seed:generate
+```
+
+Correr todas las semillas:
+
+```bash
+sequelize db:seed:all
+```
