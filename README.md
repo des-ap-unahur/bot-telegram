@@ -97,8 +97,8 @@ En este servicio se utilizan las siguientes tecnologias:
     * Middlewares:
     * Json Web Token
     * Passport
-  *ORM:
-    *Sequelize-typescript
+  * ORM:
+    * Sequelize-typescript
 
 Url de acceso http://localhost:5000/
 
