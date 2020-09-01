@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import clsx from 'clsx'
+import clsx from 'clsx';
 import { Grid, Typography, Box } from '@material-ui/core';
 import { useStyles } from './Dashboard.style';
 import { ModalControllerContext } from '../../HOC/ModalController.hoc';

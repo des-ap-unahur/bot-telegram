@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider } from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/core';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Routes from '../Routes/Router.routes';
 import PrivateRoutes from '../HOC/PrivateRoute.hoc';
