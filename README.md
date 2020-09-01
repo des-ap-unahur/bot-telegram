@@ -97,8 +97,8 @@ En este servicio se utilizan las siguientes tecnologias:
     * Middlewares:
     * Json Web Token
     * Passport
-  *ORM:
-    *Sequelize-typescript
+  * ORM:
+    * Sequelize-typescript
 
 Url de acceso http://localhost:5000/
 
@@ -125,9 +125,11 @@ Este es nuestro servicio de base de datos que esta en mysql.
 
 Url de acceso http://localhost:3306/
 
+
 ## Sección de ayuda:
 
 ### Docker 
+
 Ejecutar bash de un contenedor:
 ```bash
 docker-compose nombre-de-contenedor exec bash
