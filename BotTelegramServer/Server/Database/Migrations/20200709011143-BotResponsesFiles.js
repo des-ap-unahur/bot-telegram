@@ -4,6 +4,12 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Bot_response_files', {
       
+      bot_respose_files_id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
+        },
       bot_response_id: {
         type: Sequelize.INTEGER,
         references: {

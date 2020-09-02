@@ -4,7 +4,6 @@ interface UserInterface{
   fname: string;
   lname: string;
   email: string;
-  telephone: number;
 }
   
 export default UserInterface;

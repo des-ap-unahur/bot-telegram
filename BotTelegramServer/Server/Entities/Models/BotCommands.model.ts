@@ -13,6 +13,9 @@ import {
 import { DataTypes } from "sequelize";
 import BotCommandsInterface from "../../Interfaces/BotCommands.interface";
 import CommandsTypes from "./CommandsTypes.model";
+import BotNestedCommands from "./BotNestedCommands.model";
+import UserTypes from "./UserTypes.model";
+import BotResponses from "./BotResponses.model";
 
 @Table({
   tableName: "Bot_commands",
@@ -21,9 +24,12 @@ import CommandsTypes from "./CommandsTypes.model";
 class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @AutoIncrement
   @PrimaryKey
+  @ForeignKey(()  => BotNestedCommands)
+  @ForeignKey( () => BotResponses)
   @Column(DataTypes.NUMBER)
   bot_command_id?: number;
 
+  @ForeignKey(() => UserTypes)
   @Column(DataTypes.NUMBER)
   user_type_id!: number;
 
@@ -59,6 +65,25 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
     foreignKey: "command_type_id",
   })
   commandsTypes: CommandsTypes;
+
+  @HasMany(()  =>  BotNestedCommands,{
+    sourceKey: "bot_command_id",
+    foreignKey: "bot_child_id",
+  })
+  botNestedCommands: BotNestedCommands;
+  
+  @HasOne(()  =>  UserTypes,{
+    sourceKey: "user_type_id",
+    foreignKey: "user_type_id",
+  })
+  userTypes: UserTypes;
+
+  @HasOne(()  =>  BotResponses,{
+    sourceKey: "bot_command_id",
+    foreignKey: "bot_id",
+  })
+  botResponses: BotResponses;
+
 }
 
 export default BotCommands;

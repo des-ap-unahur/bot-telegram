@@ -1,6 +1,8 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasOne, HasMany } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import UserTypesInterface from "../../Interfaces/UserTypes.interface";
+import BotCommands from "./BotCommands.model";
+import BotUsers from "./BotUsers.model";
 
 @Table({
   tableName: "User_types",
@@ -10,6 +12,8 @@ import UserTypesInterface from "../../Interfaces/UserTypes.interface";
 class UserTypes extends Model<UserTypes> implements UserTypesInterface {
   @AutoIncrement
   @PrimaryKey
+  @ForeignKey(()=> BotCommands)
+  @ForeignKey(() => BotUsers)
   @Column(DataTypes.NUMBER)
   user_type_id?: number;
 
@@ -26,6 +30,18 @@ class UserTypes extends Model<UserTypes> implements UserTypesInterface {
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
+
+  @HasMany(() => BotCommands, {
+    sourceKey: "user_type_id",
+    foreignKey: "user_type_id",
+  } )
+  botCommand: BotCommands;
+
+  @HasMany( () => BotUsers,{
+    sourceKey: "user_type_id",
+    foreignKey: "user_type_id",
+  } )
+  botUsers: BotUsers 
 }
 
 export default UserTypes;

@@ -1,7 +1,8 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasMany } from "sequelize-typescript";
 import { DataTypes } from 'sequelize';
 import PollResponsesInterface from '../../Interfaces/PollResponses.interface'
 import PollQuestions from './PollQuestions.model'
+import BotUsers from "./BotUsers.model";
 
 
 @Table(
@@ -17,12 +18,13 @@ class PollResponses extends Model<PollResponses> implements PollResponsesInterfa
   @Column(DataTypes.NUMBER)
   poll_response_id?: number
 
+  @ForeignKey( ()=> BotUsers)
   @Column(DataTypes.NUMBER)
   user_id!: number
 
   @ForeignKey(() => PollQuestions)
-  @Column(DataTypes.STRING)
-  response_id!: number;
+  @Column(DataTypes.NUMBER)
+  response_id?: number;
 
   @Column(DataTypes.STRING)
   response!: string;
@@ -34,6 +36,12 @@ class PollResponses extends Model<PollResponses> implements PollResponsesInterfa
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
+
+  @HasMany( ()=> BotUsers,{
+    sourceKey:"user_id",
+    foreignKey:"bot_user_id",
+  })
+  botUsers: BotUsers[]
 }
 
 export default PollResponses;
