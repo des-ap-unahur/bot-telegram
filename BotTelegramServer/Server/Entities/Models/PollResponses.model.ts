@@ -1,4 +1,4 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasMany } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasMany, HasOne } from "sequelize-typescript";
 import { DataTypes } from 'sequelize';
 import PollResponsesInterface from '../../Interfaces/PollResponses.interface'
 import PollQuestions from './PollQuestions.model'
@@ -37,7 +37,7 @@ class PollResponses extends Model<PollResponses> implements PollResponsesInterfa
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasMany( ()=> BotUsers,{
+  @HasOne( ()=> BotUsers,{
     sourceKey:"user_id",
     foreignKey:"bot_user_id",
   })

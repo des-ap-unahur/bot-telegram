@@ -26,12 +26,17 @@ class BotNestedCommands extends Model<BotNestedCommands> implements BotNestedCom
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasMany(() => BotCommands, {
+  @HasOne(() => BotCommands, {
     sourceKey: "bot_child_id",
     foreignKey: "bot_command_id",
   })
   botCommand: BotCommands;
-}
 
+  @HasOne(() => BotCommands, {
+    sourceKey: "bot_father_id",
+    foreignKey: "bot_command_id",
+  })
+  botCommands: BotCommands;
+}
 
 export default BotNestedCommands;

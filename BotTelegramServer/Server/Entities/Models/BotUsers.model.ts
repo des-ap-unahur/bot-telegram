@@ -42,7 +42,7 @@ class BotUsers extends Model<BotUsers> implements BotUsersInterface {
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @BelongsTo(() => UserTypes)
+  @HasOne(() => UserTypes)
   userTypes: UserTypes
 
   @HasOne(()=>BotSubsUsers)

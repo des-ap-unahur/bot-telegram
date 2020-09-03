@@ -1,4 +1,4 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, ForeignKey, HasMany } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, ForeignKey, HasMany, HasOne } from "sequelize-typescript";
 import { DataTypes } from 'sequelize';
 import PollRolesAccessInterface from '../../Interfaces/PollRolesAccess.interface';
 import Roles from "./Roles.model";
@@ -29,13 +29,13 @@ class PollRolesAccess extends Model<PollRolesAccess> implements PollRolesAccessI
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasMany( ()=> Roles,{
+  @HasOne( ()=> Roles,{
   sourceKey:"role_id",
   foreignKey:"role_id",
   })
   roles: Roles
 
-  @HasMany( ()=> Poll,{
+  @HasOne( ()=> Poll,{
     sourceKey:"poll_id",
     foreignKey:"poll_id",
     })

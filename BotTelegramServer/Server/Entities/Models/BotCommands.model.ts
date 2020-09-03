@@ -66,11 +66,17 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   })
   commandsTypes: CommandsTypes;
 
-  @HasMany(()  =>  BotNestedCommands,{
+  @HasOne(()  =>  BotNestedCommands,{
     sourceKey: "bot_command_id",
     foreignKey: "bot_child_id",
   })
   botNestedCommands: BotNestedCommands;
+
+  @HasOne(()  =>  BotNestedCommands,{
+    sourceKey: "bot_command_id",
+    foreignKey: "bot_father_id",
+  })
+  botNestedCommand: BotNestedCommands;
   
   @HasOne(()  =>  UserTypes,{
     sourceKey: "user_type_id",
