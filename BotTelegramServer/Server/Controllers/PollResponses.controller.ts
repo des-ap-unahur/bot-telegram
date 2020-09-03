@@ -20,84 +20,39 @@ class PollResponsesController {
   
   getPollResponseById = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
-    
-    try {
       const pollResponse: PollResponses = await PollResponsesRepository.get(id);
       res.send(pollResponse);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
   };
 
   getPollResponsesById = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
-    try {
       const pollResponses: Poll = await PollResponsesRepository.getPollResponses(id);
       res.send(pollResponses);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
   };
 
   getQuestionsResponses = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
-    try {
       const pollQuestionsResponses: PollQuestions = await PollResponsesRepository.getQuestionsResponses(id);
       res.send(pollQuestionsResponses);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
   };
 
   postPollResponse = async (req: any, res: any): Promise<void> => {
     const { body } = req;
-    try {
       const pollResponse: PollResponses []= await PollResponsesRepository.post(body);
       res.send(pollResponse);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
   };
 
   updatePollResponse = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     const { id } = req.params;
-
-    try {
       const pollResponse: PollResponses = await PollResponsesRepository.update(id, body);
       res.send(pollResponse);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
   };
 
   deletePollResponse = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
-
-    try {
       await PollResponsesRepository.delete(id);
       res.sendStatus(HttpStatus.OK);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
   };
 }
 
