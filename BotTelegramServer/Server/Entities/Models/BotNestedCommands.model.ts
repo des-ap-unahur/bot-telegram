@@ -1,4 +1,4 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasMany, HasOne } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import BotNestedCommandsInterface from "../../Interfaces/BotNestedCommands.interface";
 import BotCommands from "./BotCommands.model";
@@ -14,6 +14,7 @@ class BotNestedCommands extends Model<BotNestedCommands> implements BotNestedCom
   @Column(DataTypes.NUMBER)
   bot_father_id?: number;
 
+  @ForeignKey(()  => BotCommands)
   @Column(DataTypes.NUMBER)
   bot_child_id!: number;
 
@@ -24,7 +25,18 @@ class BotNestedCommands extends Model<BotNestedCommands> implements BotNestedCom
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
-}
 
+  @HasOne(() => BotCommands, {
+    sourceKey: "bot_child_id",
+    foreignKey: "bot_command_id",
+  })
+  botCommand: BotCommands;
+
+  @HasOne(() => BotCommands, {
+    sourceKey: "bot_father_id",
+    foreignKey: "bot_command_id",
+  })
+  botCommands: BotCommands;
+}
 
 export default BotNestedCommands;

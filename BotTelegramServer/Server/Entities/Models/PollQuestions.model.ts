@@ -1,4 +1,4 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasMany } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasMany, HasOne } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import PollQuestionInterface from "../../Interfaces/PollQuestion.interface";
 import Poll from "./Poll.model";
@@ -36,6 +36,12 @@ class PollQuestion extends Model<PollQuestion>
 
   @HasMany(()=>PollResponses)
   responses: PollResponses[]
+
+  @HasOne( ()=> Poll,{
+    sourceKey:"poll_id",
+    foreignKey:"poll_id",
+  })
+  poll: Poll
 }
 
 export default PollQuestion;
