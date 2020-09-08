@@ -24,6 +24,9 @@ class PollQuestion extends Model<PollQuestion>
   question!: string;
 
   @Column(DataTypes.STRING)
+  type_question!: string; 
+
+  @Column(DataTypes.STRING)
   description!: string;
 
   @CreatedAt
