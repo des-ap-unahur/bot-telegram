@@ -5,12 +5,10 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import store from './App/Store/Store.redux';
 
-const IuApp = () => (
-  <>
-    <Provider store={store}>
-      <App/>
-    </Provider>
-  </>
+const IuApp: React.FC = () => (
+  <Provider store={store}>
+    <App/>
+  </Provider>
 );
 
 ReactDOM.render(<IuApp />, document.getElementById('root'));
