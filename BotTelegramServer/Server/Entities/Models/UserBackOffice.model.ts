@@ -1,10 +1,11 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from 'sequelize-typescript';
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, HasMany, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import UserBackOfficeInterface from '../../Interfaces/UserBackOffice.interface';
+import Roles from './Roles.model';
 
 @Table(
   {
-    tableName: "User",
+    tableName: "Backoffice_user",
     timestamps: true,
   }
 )
@@ -15,6 +16,7 @@ class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInte
   @Column(DataTypes.NUMBER)
   back_user_id?: number
 
+  @ForeignKey( ()=> Roles)
   @Column(DataTypes.NUMBER)
   user_role_id?: number
 
@@ -27,9 +29,6 @@ class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInte
   @Column(DataTypes.STRING)
   email!: string;
 
-  @Column(DataTypes.NUMBER)
-  telephone!: number;
-
   @CreatedAt
   @Column(DataTypes.DATE)
   createdAt: Date;
@@ -37,8 +36,9 @@ class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInte
   @UpdatedAt
   @Column(DataTypes.DATE)
   updatedAt: Date;
+
+  @HasMany( ()=> Roles)
+  roles: Roles[]
 }
-
-
 
 export default UserBackOffice;
