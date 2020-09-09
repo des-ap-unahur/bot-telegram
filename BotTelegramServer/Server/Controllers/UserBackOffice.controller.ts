@@ -5,72 +5,37 @@ import { HttpStatus } from '../Config/Server/HTTPStatus.config';
 
 class UserBackOfficeController {
   getUsers = async (req: any, res: any): Promise<void> => {
-    try {
-      const Users: UserBackOffice[] = await UserBackOfficeRepository.getAll();
-      res.send(Users);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const Users: UserBackOffice[] = await UserBackOfficeRepository.getAll();
+    res.send(Users);
   };
 
   getUserById = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    try {
-      const user: UserBackOffice = await UserBackOfficeRepository.get(id);
-      res.send(user);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const user: UserBackOffice = await UserBackOfficeRepository.get(id);
+    res.send(user);
   };
 
   postUser = async (req: any, res: any): Promise<void> => {
     const { body } = req;
 
-    try {
-      const User: UserBackOffice = await UserBackOfficeRepository.post(body);
-      res.send(User);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const User: UserBackOffice = await UserBackOfficeRepository.post(body);
+    res.send(User);
   };
 
   updateUser = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     const { id } = req.params;
 
-    try {
-      const User: UserBackOffice = await UserBackOfficeRepository.update(id, body);
-      res.send(User);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const User: UserBackOffice = await UserBackOfficeRepository.update(id, body);
+    res.send(User);
   };
 
   deleteUser = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
     
-    try {
-      await UserBackOfficeRepository.delete(id);
-      res.sendStatus(HttpStatus.OK);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    await UserBackOfficeRepository.delete(id);
+    res.sendStatus(HttpStatus.OK);
   };
 }
 

@@ -5,72 +5,37 @@ import { HttpStatus } from '../Config/Server/HTTPStatus.config';
 
 class BotSubsUsersController {
   getBotSubsUsers = async (req: any, res: any): Promise<void> => {
-    try {
-      const botSubsUsers: BotSubsUsers[] = await BotsubsUsersRepository.getAll();
-      res.send(botSubsUsers);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const botSubsUsers: BotSubsUsers[] = await BotsubsUsersRepository.getAll();
+    res.send(botSubsUsers);
   };
 
   getBotSubsUserById = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    try {
-      const botSubsUser: BotSubsUsers = await BotsubsUsersRepository.get(id);
-      res.send(botSubsUser);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const botSubsUser: BotSubsUsers = await BotsubsUsersRepository.get(id);
+    res.send(botSubsUser);
   };
 
   postBotSubsUser = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     
-    try {
-      const botSubsUser: BotSubsUsers = await BotsubsUsersRepository.post(body);
-      res.send(botSubsUser);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const botSubsUser: BotSubsUsers = await BotsubsUsersRepository.post(body);
+    res.send(botSubsUser);
   };
 
   updateBotSubsUser = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     const { id } = req.params;
 
-    try {
-      const botSubsUser: BotSubsUsers = await BotsubsUsersRepository.update(id, body);
-      res.send(botSubsUser);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const botSubsUser: BotSubsUsers = await BotsubsUsersRepository.update(id, body);
+    res.send(botSubsUser);
   };
 
   deleteBotSubsUser = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    try {
-      await BotsubsUsersRepository.delete(id);
-      res.sendStatus(HttpStatus.OK);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    await BotsubsUsersRepository.delete(id);
+    res.sendStatus(HttpStatus.OK);
   };
 }
 

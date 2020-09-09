@@ -5,72 +5,37 @@ import { HttpStatus } from '../Config/Server/HTTPStatus.config';
 
 class RolesController {
   getRoles = async (req: any, res: any): Promise<void> => {
-    try {
-      const roles: Roles[] = await RolesRepository.getAll();
-      res.send(roles);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const roles: Roles[] = await RolesRepository.getAll();
+    res.send(roles);
   };
 
   getRolById = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    try {
-      const rol: Roles = await RolesRepository.get(id);
-      res.send(rol);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const rol: Roles = await RolesRepository.get(id);
+    res.send(rol);
   };
 
   postRol = async (req: any, res: any): Promise<void> => {
     const { body } = req;
 
-    try {
-      const rol: Roles = await RolesRepository.post(body);
-      res.send(rol);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const rol: Roles = await RolesRepository.post(body);
+    res.send(rol);
   };
 
   updateRol = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     const { id } = req.params;
 
-    try {
-      const rol: Roles = await RolesRepository.update(id, body);
-      res.send(rol);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const rol: Roles = await RolesRepository.update(id, body);
+    res.send(rol);
   };
 
   deleteRol = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
     
-    try {
-      await RolesRepository.delete(id);
-      res.sendStatus(HttpStatus.OK);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    await RolesRepository.delete(id);
+    res.sendStatus(HttpStatus.OK);
   };
 }
 
