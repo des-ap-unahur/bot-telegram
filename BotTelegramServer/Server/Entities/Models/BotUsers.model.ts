@@ -26,10 +26,10 @@ class BotUsers extends Model<BotUsers> implements BotUsersInterface {
   tel_user_id!: number;
 
   @Column(DataTypes.STRING)
-  tel_lname!: string;
+  tel_last_name!: string;
 
   @Column(DataTypes.STRING)
-  tel_lfname!: string;
+  tel_lfirst_name!: string;
 
   @Column(DataTypes.STRING)
   tel_username!: string;
@@ -45,7 +45,7 @@ class BotUsers extends Model<BotUsers> implements BotUsersInterface {
   @HasOne(() => UserTypes)
   userTypes: UserTypes
 
-  @HasOne(()=>BotSubsUsers)
+  @HasOne(() => BotSubsUsers)
   botSubUsers: BotSubsUsers
 
   @HasMany (() => PollResponses)

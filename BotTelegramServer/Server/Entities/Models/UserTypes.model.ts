@@ -3,6 +3,7 @@ import { DataTypes } from "sequelize";
 import UserTypesInterface from "../../Interfaces/UserTypes.interface";
 import BotCommands from "./BotCommands.model";
 import BotUsers from "./BotUsers.model";
+import { botCommandRelation, botUsersRelation } from "../Relations/UserTypes.relation";
 
 @Table({
   tableName: "User_types",
@@ -12,7 +13,7 @@ import BotUsers from "./BotUsers.model";
 class UserTypes extends Model<UserTypes> implements UserTypesInterface {
   @AutoIncrement
   @PrimaryKey
-  @ForeignKey(()=> BotCommands)
+  @ForeignKey(() => BotCommands)
   @ForeignKey(() => BotUsers)
   @Column(DataTypes.NUMBER)
   user_type_id?: number;
@@ -31,16 +32,10 @@ class UserTypes extends Model<UserTypes> implements UserTypesInterface {
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasMany(() => BotCommands, {
-    sourceKey: "user_type_id",
-    foreignKey: "user_type_id",
-  } )
+  @HasMany(() => BotCommands, botCommandRelation)
   botCommand: BotCommands;
 
-  @HasMany( () => BotUsers,{
-    sourceKey: "user_type_id",
-    foreignKey: "user_type_id",
-  } )
+  @HasMany(() => BotUsers, botUsersRelation)
   botUsers: BotUsers 
 }
 

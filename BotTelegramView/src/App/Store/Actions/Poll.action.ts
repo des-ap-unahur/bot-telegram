@@ -13,6 +13,6 @@ const syncActionCreators = {
 }
 
 export default {
-    actionsTypes: Object.assign(actionsTypes, syncActions),
-    actionCreators: Object.assign(actionCreators, syncActionCreators)
-  }
+  actionsTypes: Object.assign(actionsTypes, syncActions),
+  actionCreators: Object.assign(actionCreators, syncActionCreators)
+}
