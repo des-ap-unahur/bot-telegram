@@ -1,6 +1,5 @@
 import RolesRepository from "../Entities/Repositories/Roles.repository";
 import Roles from "../Entities/Models/Roles.model";
-import { HttpStatus } from '../Config/Server/HTTPStatus.config';
 import notFoundValidator from "../Utils/NotFoundValidator.utils";
 import execDelete from "../Utils/ExecDelete.utils";
 
