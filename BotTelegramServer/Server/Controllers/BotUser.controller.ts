@@ -1,6 +1,7 @@
 import BotUserRepository from '../Entities/Repositories/BotUser.repository';
 import BotUser from '../Entities/Models/BotUsers.model';
-import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+import notFoundValidator from '../Utils/NotFoundValidator.utils';
+import execDelete from '../Utils/ExecDelete.utils';
 
 
 class BotUserController {
@@ -13,7 +14,7 @@ class BotUserController {
     const { id } = req.params;
     
     const botUser: BotUser = await BotUserRepository.get(id);
-    res.send(botUser);
+    notFoundValidator(res, botUser);
   };
 
   postUser = async (req: any, res: any): Promise<void> => {
@@ -34,8 +35,9 @@ class BotUserController {
   deleteUser = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    await BotUserRepository.delete(id);
-    res.sendStatus(HttpStatus.OK);
+    await execDelete(res, async () => {
+      await BotUserRepository.delete(id);
+    })
   };
 }
 

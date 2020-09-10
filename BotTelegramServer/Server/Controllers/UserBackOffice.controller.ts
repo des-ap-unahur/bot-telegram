@@ -1,6 +1,7 @@
 import UserBackOfficeRepository from '../Entities/Repositories/UserBackOffice.repository';
 import UserBackOffice from '../Entities/Models/UserBackOffice.model';
-import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+import notFoundValidator from '../Utils/NotFoundValidator.utils';
+import execDelete from '../Utils/ExecDelete.utils';
 
 
 class UserBackOfficeController {
@@ -13,7 +14,7 @@ class UserBackOfficeController {
     const { id } = req.params;
 
     const user: UserBackOffice = await UserBackOfficeRepository.get(id);
-    res.send(user);
+    notFoundValidator(res, user);
   };
 
   postUser = async (req: any, res: any): Promise<void> => {
@@ -33,9 +34,10 @@ class UserBackOfficeController {
 
   deleteUser = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
-    
-    await UserBackOfficeRepository.delete(id);
-    res.sendStatus(HttpStatus.OK);
+
+    await execDelete(res, async () => {
+      await UserBackOfficeRepository.delete(id);
+    })
   };
 }
 

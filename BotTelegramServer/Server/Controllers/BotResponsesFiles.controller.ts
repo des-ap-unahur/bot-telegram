@@ -1,6 +1,7 @@
 import BotResponsesFilesRepository from '../Entities/Repositories/BotResponsesFiles.repository';
 import BotResponseFiles from '../Entities/Models/BotResponseFiles.model';
-import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+import notFoundValidator from '../Utils/NotFoundValidator.utils';
+import execDelete from '../Utils/ExecDelete.utils';
 
 
 class BotResponsesFilesController {
@@ -13,7 +14,7 @@ class BotResponsesFilesController {
     const { id } = req.params;
     
     const botResponse: BotResponseFiles = await BotResponsesFilesRepository.get(id);
-    res.send(botResponse);
+    notFoundValidator(res, botResponse);
   };
 
   postResponse = async (req: any, res: any): Promise<void> => {
@@ -34,8 +35,9 @@ class BotResponsesFilesController {
   deleteResponse = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    await BotResponsesFilesRepository.delete(id);
-    res.sendStatus(HttpStatus.OK);
+    await execDelete(res, async () => {
+      await BotResponsesFilesRepository.delete(id);
+    })
   };
 }
 

@@ -1,6 +1,7 @@
 import BotsubsUsersRepository from '../Entities/Repositories/BotSubsUsers.repository';
 import BotSubsUsers from '../Entities/Models/BotSubsUsers.model';
-import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+import notFoundValidator from '../Utils/NotFoundValidator.utils';
+import execDelete from '../Utils/ExecDelete.utils';
 
 
 class BotSubsUsersController {
@@ -13,7 +14,7 @@ class BotSubsUsersController {
     const { id } = req.params;
 
     const botSubsUser: BotSubsUsers = await BotsubsUsersRepository.get(id);
-    res.send(botSubsUser);
+    notFoundValidator(res, botSubsUser);
   };
 
   postBotSubsUser = async (req: any, res: any): Promise<void> => {
@@ -34,8 +35,9 @@ class BotSubsUsersController {
   deleteBotSubsUser = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    await BotsubsUsersRepository.delete(id);
-    res.sendStatus(HttpStatus.OK);
+    await execDelete(res, async () => {
+      await BotsubsUsersRepository.delete(id);
+    })
   };
 }
 

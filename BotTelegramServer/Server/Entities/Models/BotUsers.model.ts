@@ -13,12 +13,12 @@ import PollResponses from "./PollResponses.model";
 class BotUsers extends Model<BotUsers> implements BotUsersInterface {
   @AutoIncrement
   @PrimaryKey
-  @ForeignKey( ()=> PollResponses)
+  @ForeignKey(() => PollResponses)
   @Column(DataTypes.NUMBER)
   bot_user_id?: number;
 
-  @ForeignKey( ()=> UserTypes)
-  @ForeignKey( ()=> BotSubsUsers)
+  @ForeignKey(() => UserTypes)
+  @ForeignKey(() => BotSubsUsers)
   @Column(DataTypes.NUMBER)
   user_type_id!: number;
 
@@ -29,7 +29,7 @@ class BotUsers extends Model<BotUsers> implements BotUsersInterface {
   tel_last_name!: string;
 
   @Column(DataTypes.STRING)
-  tel_lfirst_name!: string;
+  tel_first_name!: string;
 
   @Column(DataTypes.STRING)
   tel_username!: string;

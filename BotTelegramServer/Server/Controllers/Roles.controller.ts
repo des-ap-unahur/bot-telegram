@@ -1,6 +1,8 @@
 import RolesRepository from "../Entities/Repositories/Roles.repository";
 import Roles from "../Entities/Models/Roles.model";
 import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+import notFoundValidator from "../Utils/NotFoundValidator.utils";
+import execDelete from "../Utils/ExecDelete.utils";
 
 
 class RolesController {
@@ -13,7 +15,7 @@ class RolesController {
     const { id } = req.params;
 
     const rol: Roles = await RolesRepository.get(id);
-    res.send(rol);
+    notFoundValidator(res, rol);
   };
 
   postRol = async (req: any, res: any): Promise<void> => {
@@ -34,8 +36,9 @@ class RolesController {
   deleteRol = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
     
-    await RolesRepository.delete(id);
-    res.sendStatus(HttpStatus.OK);
+    await execDelete(res, async () => {
+      await RolesRepository.delete(id);
+    })
   };
 }
 

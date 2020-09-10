@@ -1,7 +1,8 @@
 import BotCommandRepository from '../Entities/Repositories/BotCommand.repository';
 import BotCommand from '../Entities/Models/BotCommands.model';
-import { HttpStatus } from '../Config/Server/HTTPStatus.config';
 import { botController } from '../Bot/Controller/Bot.controller';
+import execDelete from '../Utils/ExecDelete.utils';
+import notFoundValidator from '../Utils/NotFoundValidator.utils';
 
 
 class BotCommandController {
@@ -14,7 +15,7 @@ class BotCommandController {
     const { id } = req.params;
 
     const botCommands: BotCommand = await BotCommandRepository.get(id);
-    res.send(botCommands);
+    notFoundValidator(res, botCommands);
   };
 
   getCommandsTypes = async (req: any, res: any): Promise<void> => {
@@ -26,7 +27,7 @@ class BotCommandController {
     const { id } = req.params;
 
     const botCommandsTypes: BotCommand = await BotCommandRepository.getCommandsTypesById(id);
-    res.send(botCommandsTypes);
+    notFoundValidator(res, botCommandsTypes);
   };
 
   postCommand = async (req: any, res: any): Promise<void> => {
@@ -48,8 +49,9 @@ class BotCommandController {
   deleteCommand = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    await BotCommandRepository.delete(id);
-    res.sendStatus(HttpStatus.OK);
+    await execDelete(res, async () => {
+      await BotCommandRepository.delete(id);
+    })
   };
 
 }

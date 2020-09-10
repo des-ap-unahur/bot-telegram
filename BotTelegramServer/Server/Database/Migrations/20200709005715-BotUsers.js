@@ -23,7 +23,7 @@ module.exports = {
       tel_last_name: {
         type: Sequelize.STRING,
       },
-      tel_lfirst_name: {
+      tel_first_name: {
         type: Sequelize.STRING,
       },
       tel_username: {

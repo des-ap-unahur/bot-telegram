@@ -1,6 +1,7 @@
 import UserTypesRepository from '../Entities/Repositories/UserTypes.repository';
 import UserTypes from "../Entities/Models/UserTypes.model";
-import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+import notFoundValidator from '../Utils/NotFoundValidator.utils';
+import execDelete from '../Utils/ExecDelete.utils';
 
 
 class UserTypesController {
@@ -13,7 +14,7 @@ class UserTypesController {
     const { id } = req.params;
 
     const userType: UserTypes = await UserTypesRepository.get(id);
-    res.send(userType);
+    notFoundValidator(res, userType);
   };
 
   postUserType = async (req: any, res: any): Promise<void> => {
@@ -34,8 +35,9 @@ class UserTypesController {
   deleteUserType = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    await UserTypesRepository.delete(id);
-    res.sendStatus(HttpStatus.OK);
+    await execDelete(res, async () => {
+      await UserTypesRepository.delete(id);
+    })
   };
 }
 

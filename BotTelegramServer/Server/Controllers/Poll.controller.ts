@@ -1,6 +1,7 @@
 import PollRepository from "../Entities/Repositories/Poll.repository";
 import Poll from "../Entities/Models/Poll.model";
-import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+import notFoundValidator from "../Utils/NotFoundValidator.utils";
+import execDelete from "../Utils/ExecDelete.utils";
 
 
 class PollController {
@@ -13,7 +14,7 @@ class PollController {
     const { id } = req.params;
 
     const poll: Poll = await PollRepository.get(id);
-    res.send(poll);
+    notFoundValidator(res, poll);
   }
 
   postPoll = async (req:any, res:any): Promise<void>=>{
@@ -34,8 +35,9 @@ class PollController {
   deletePoll = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    await PollRepository.delete(id);
-    res.sendStatus(HttpStatus.OK);
+    await execDelete(res, async () => {
+      await PollRepository.delete(id);
+    })
   };
 }
 
