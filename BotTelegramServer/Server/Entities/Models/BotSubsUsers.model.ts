@@ -20,10 +20,10 @@ class BotSubsUsers extends Model<BotSubsUsers>
   dni!: number;
 
   @Column(DataTypes.STRING)
-  fname!: string;
+  first_name!: string;
 
   @Column(DataTypes.STRING)
-  lname!: string;
+  last_name!: string;
 
   @Column(DataTypes.DATE)
   date_suscribe!: Date;

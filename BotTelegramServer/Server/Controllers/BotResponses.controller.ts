@@ -1,76 +1,43 @@
 import BotResponsesRepository from '../Entities/Repositories/BotResponses.repository';
 import BotResponse from '../Entities/Models/BotResponses.model';
-import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+import notFoundValidator from '../Utils/NotFoundValidator.utils';
+import execDelete from '../Utils/ExecDelete.utils';
 
 
 class BotResponsesController {
   getResponses = async (req: any, res: any): Promise<void> => {
-    try {
-      const botResponses: BotResponse[] = await BotResponsesRepository.getAll();
-      res.send(botResponses);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const botResponses: BotResponse[] = await BotResponsesRepository.getAll();
+    res.send(botResponses);
   };
 
   getResponseById = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
     
-    try {
-      const botResponse: BotResponse = await BotResponsesRepository.get(id);
-      res.send(botResponse);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const botResponse: BotResponse = await BotResponsesRepository.get(id);
+    notFoundValidator(res, botResponse);
   };
 
   postResponse = async (req: any, res: any): Promise<void> => {
     const { body } = req;
 
-    try {
-      const botResponse: BotResponse = await BotResponsesRepository.post(body);
-      res.send(botResponse);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const botResponse: BotResponse = await BotResponsesRepository.post(body);
+    res.send(botResponse);
   };
 
   updateResponse = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     const { id } = req.params;
 
-    try {
-      const botResponse: BotResponse = await BotResponsesRepository.update(id, body);
-      res.send(botResponse);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const botResponse: BotResponse = await BotResponsesRepository.update(id, body);
+    res.send(botResponse);
   };
 
   deleteResponse = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    try {
+    await execDelete(res, async () => {
       await BotResponsesRepository.delete(id);
-      res.sendStatus(HttpStatus.OK);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    })
   };
 }
 

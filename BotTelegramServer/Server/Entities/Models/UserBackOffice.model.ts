@@ -16,15 +16,15 @@ class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInte
   @Column(DataTypes.NUMBER)
   back_user_id?: number
 
-  @ForeignKey( ()=> Roles)
+  @ForeignKey(() => Roles)
   @Column(DataTypes.NUMBER)
   user_role_id?: number
 
   @Column(DataTypes.STRING)
-  fname!: string;
+  first_name!: string;
 
   @Column(DataTypes.STRING)
-  lname!: string;
+  last_name!: string;
 
   @Column(DataTypes.STRING)
   email!: string;
@@ -37,7 +37,7 @@ class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInte
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasMany( ()=> Roles)
+  @HasMany(() => Roles)
   roles: Roles[]
 }
 

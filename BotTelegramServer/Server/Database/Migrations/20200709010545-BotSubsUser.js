@@ -14,10 +14,10 @@ module.exports = {
       dni: {
         type: Sequelize.INTEGER,
       },
-      fname: {
+      first_name: {
         type: Sequelize.STRING,
       },
-      lname: {
+      last_name: {
         type: Sequelize.STRING,
       },
       date_suscribe: {

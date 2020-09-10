@@ -1,12 +1,14 @@
 import { Router } from 'express';
 import PollQuestionsController from '../Controllers/PollQuestions.controllers';
+import validateRequest from '../Middlewares/RequestValidator.middleware';
+import PollQuestionSchema from '../Entities/Schemas/PollQuestions.schema';
 
 const PollRoute = Router();
 
 PollRoute.get('/polls/questions', PollQuestionsController.getPollsQuestions);
 PollRoute.get('/poll/:id/questions/', PollQuestionsController.getPollQuestionsById);
-PollRoute.post('/poll/questions', PollQuestionsController.postPollQuestions);
+PollRoute.post('/poll/questions', validateRequest(PollQuestionSchema), PollQuestionsController.postPollQuestions);
 PollRoute.delete('/poll/questions/:id', PollQuestionsController.deletePollQuestions);
-PollRoute.put('/poll/questions/:id', PollQuestionsController.updatePollQuestions);
+PollRoute.put('/poll/questions/:id', validateRequest(PollQuestionSchema), PollQuestionsController.updatePollQuestions);
 
 export default PollRoute;

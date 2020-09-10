@@ -16,16 +16,24 @@ import CommandsTypes from "./CommandsTypes.model";
 import BotNestedCommands from "./BotNestedCommands.model";
 import UserTypes from "./UserTypes.model";
 import BotResponses from "./BotResponses.model";
+import { 
+  botNestedCommandFatherRelation,
+  botNestedChildrenCommandRelation,
+  commandTypeRelation,
+  userTypeRelation,
+  botResponsesRelation
+} from "../Relations/BotCommands.relation";
 
 @Table({
   tableName: "Bot_commands",
   timestamps: true,
 })
+
 class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @AutoIncrement
   @PrimaryKey
   @ForeignKey(()  => BotNestedCommands)
-  @ForeignKey( () => BotResponses)
+  @ForeignKey(() => BotResponses)
   @Column(DataTypes.NUMBER)
   bot_command_id?: number;
 
@@ -60,34 +68,19 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasOne(() => CommandsTypes, {
-    sourceKey: "command_type_id",
-    foreignKey: "command_type_id",
-  })
+  @HasOne(() => CommandsTypes, commandTypeRelation)
   commandsTypes: CommandsTypes;
 
-  @HasOne(()  =>  BotNestedCommands,{
-    sourceKey: "bot_command_id",
-    foreignKey: "bot_child_id",
-  })
+  @HasOne(() => BotNestedCommands, botNestedChildrenCommandRelation)
   botNestedCommands: BotNestedCommands;
 
-  @HasOne(()  =>  BotNestedCommands,{
-    sourceKey: "bot_command_id",
-    foreignKey: "bot_father_id",
-  })
+  @HasOne(() => BotNestedCommands, botNestedCommandFatherRelation)
   botNestedCommand: BotNestedCommands;
   
-  @HasOne(()  =>  UserTypes,{
-    sourceKey: "user_type_id",
-    foreignKey: "user_type_id",
-  })
+  @HasOne(() => UserTypes, userTypeRelation)
   userTypes: UserTypes;
 
-  @HasOne(()  =>  BotResponses,{
-    sourceKey: "bot_command_id",
-    foreignKey: "bot_id",
-  })
+  @HasOne(() => BotResponses, botResponsesRelation)
   botResponses: BotResponses;
 
 }

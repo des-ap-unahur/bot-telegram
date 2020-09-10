@@ -3,6 +3,7 @@ import { DataTypes } from "sequelize";
 import PollQuestionInterface from "../../Interfaces/PollQuestion.interface";
 import Poll from "./Poll.model";
 import PollResponses from './PollResponses.model';
+import { pollRelation } from "../Relations/PollQuestions.relation";
 
 @Table({
   tableName: "Poll_questions",
@@ -40,10 +41,7 @@ class PollQuestion extends Model<PollQuestion>
   @HasMany(()=>PollResponses)
   responses: PollResponses[]
 
-  @HasOne( ()=> Poll,{
-    sourceKey:"poll_id",
-    foreignKey:"poll_id",
-  })
+  @HasOne(()=> Poll, pollRelation)
   poll: Poll
 }
 

@@ -80,8 +80,8 @@ class BotController {
   }
 
   runCommands = () => {
-    this.bot.on("contact", this.contactCommand)
-  
+    this.bot.on("contact", this.contactCommand);
+
     this.bot.on("message", (ctx:any) => {
       const { text } = ctx.message
   
@@ -96,8 +96,8 @@ class BotController {
 
         this.execCallMailHear(text, ctx);
       }
-    })
-  
+    });
+
     this.bot.launch();
   }
 

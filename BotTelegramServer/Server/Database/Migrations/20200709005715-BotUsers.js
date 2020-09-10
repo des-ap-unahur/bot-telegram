@@ -20,10 +20,10 @@ module.exports = {
       tel_user_id: {
         type: Sequelize.INTEGER,
       },
-      tel_lname: {
+      tel_last_name: {
         type: Sequelize.STRING,
       },
-      tel_lfname: {
+      tel_first_name: {
         type: Sequelize.STRING,
       },
       tel_username: {

@@ -1,76 +1,43 @@
 import GuaraniUsersRepository from '../Entities/Repositories/GuaraniUsers.repository';
 import GuaraniUsers from '../Entities/Models/GuaraniUsers.models';
-import { HttpStatus } from '../Config/Server/HTTPStatus.config';
+import notFoundValidator from '../Utils/NotFoundValidator.utils';
+import execDelete from '../Utils/ExecDelete.utils';
 
 
 class GuaraniUsersController {
   getGuaraniUsers = async (req: any, res: any): Promise<void> => {
-    try {
-      const GuaraniUsers: GuaraniUsers[] = await GuaraniUsersRepository.getAll();
-      res.send(GuaraniUsers);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const guaraniUsers: GuaraniUsers[] = await GuaraniUsersRepository.getAll();
+    res.send(guaraniUsers);
   };
 
   getGuaraniUserById = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
-    
-    try {
-      const GuaraniUsers: GuaraniUsers = await GuaraniUsersRepository.get(id);
-      res.send(GuaraniUsers);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+
+    const guaraniUsers: GuaraniUsers = await GuaraniUsersRepository.get(id);
+    notFoundValidator(res, guaraniUsers);
   };
 
   postGuaraniUser = async (req: any, res: any): Promise<void> => {
     const { body } = req;
 
-    try {
-      const GuaraniUsers: GuaraniUsers = await GuaraniUsersRepository.post(body);
-      res.send(GuaraniUsers);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const guaraniUsers: GuaraniUsers = await GuaraniUsersRepository.post(body);
+    res.send(guaraniUsers);
   };
 
   updateGuaraniUser = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     const { id } = req.params;
 
-    try {
-      const GuaraniUsers: GuaraniUsers = await GuaraniUsersRepository.update(id, body);
-      res.send(GuaraniUsers);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    const guaraniUsers: GuaraniUsers = await GuaraniUsersRepository.update(id, body);
+    res.send(guaraniUsers);
   };
 
   deleteGuaraniUser = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 
-    try {
+    await execDelete(res, async () => {
       await GuaraniUsersRepository.delete(id);
-      res.sendStatus(HttpStatus.OK);
-    } catch (e) {
-      res.send({
-        errorCodes: e, 
-        codeStatus: HttpStatus.INTERNAL_SERVER_ERROR
-      });
-    }
+    })
   };
 }
 
