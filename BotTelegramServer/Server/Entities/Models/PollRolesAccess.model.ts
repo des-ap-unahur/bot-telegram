@@ -3,6 +3,7 @@ import { DataTypes } from 'sequelize';
 import PollRolesAccessInterface from '../../Interfaces/PollRolesAccess.interface';
 import Roles from "./Roles.model";
 import Poll from "./Poll.model";
+import { roleRelation, pollRelation } from "../Relations/PollRolesAccess.relation";
 
 @Table(
   {
@@ -13,11 +14,11 @@ import Poll from "./Poll.model";
 
 class PollRolesAccess extends Model<PollRolesAccess> implements PollRolesAccessInterface {
 
-  @ForeignKey( ()=> Roles)
+  @ForeignKey(()=> Roles)
   @Column(DataTypes.NUMBER)
   role_id?: number
 
-  @ForeignKey( ()=> Poll)
+  @ForeignKey(()=> Poll)
   @Column(DataTypes.NUMBER)
   poll_id?: number
 
@@ -29,17 +30,11 @@ class PollRolesAccess extends Model<PollRolesAccess> implements PollRolesAccessI
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasOne( ()=> Roles,{
-  sourceKey:"role_id",
-  foreignKey:"role_id",
-  })
+  @HasOne(() => Roles, roleRelation)
   roles: Roles
 
-  @HasOne( ()=> Poll,{
-    sourceKey:"poll_id",
-    foreignKey:"poll_id",
-    })
-    poles: Poll
+  @HasOne(() => Poll, pollRelation)
+  poles: Poll
 }
 
 export default PollRolesAccess;

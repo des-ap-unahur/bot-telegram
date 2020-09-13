@@ -3,16 +3,18 @@ import { DataTypes } from "sequelize";
 import RolesInterface from "../../Interfaces/Roles.interface";
 import PollRolesAccess from "./PollRolesAccess.model";
 import UserBackOffice from "./UserBackOffice.model";
+import { pollRolesAccessRelation, userBackOfficeRelation } from "../Relations/Roles.relation";
 
 @Table({
   tableName: "Roles",
   timestamps: true,
 })
+
 class Roles extends Model<Roles> implements RolesInterface {
   @AutoIncrement
   @PrimaryKey
-  @ForeignKey( ()=> PollRolesAccess)
-  @ForeignKey( ()=> UserBackOffice)
+  @ForeignKey(()=> PollRolesAccess)
+  @ForeignKey(()=> UserBackOffice)
   @Column(DataTypes.NUMBER)
   role_id?: number;
 
@@ -27,16 +29,10 @@ class Roles extends Model<Roles> implements RolesInterface {
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasMany( ()=> PollRolesAccess,{
-    sourceKey:"role_id",
-    foreignKey:"role_id",
-  })
+  @HasMany(() => PollRolesAccess, pollRolesAccessRelation)
   pollRolesAccess: PollRolesAccess
 
-  @HasOne( ()=> UserBackOffice,{
-    sourceKey:"role_id",
-    foreignKey:"user_role_id",
-  })
+  @HasOne(() => UserBackOffice, userBackOfficeRelation)
   userBackOffice: UserBackOffice
 }
 

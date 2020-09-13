@@ -7,21 +7,19 @@ import {
   AutoIncrement,
   PrimaryKey,
   ForeignKey,
-  HasOne,
-  BelongsTo,
   HasMany,
 } from "sequelize-typescript";
-
 import { DataTypes } from "sequelize";
 import CommandTypesInterface from "../../Interfaces/CommandTypes.interface";
 import BotCommands from "./BotCommands.model";
+import { botCommandRelation } from "../Relations/CommandTypes.relation";
 
 @Table({
   tableName: "Command_types",
   timestamps: true,
 })
-class CommandTypes extends Model<CommandTypes>
-  implements CommandTypesInterface {
+
+class CommandTypes extends Model<CommandTypes> implements CommandTypesInterface {
   @AutoIncrement
   @PrimaryKey
   @ForeignKey(() => BotCommands)
@@ -42,10 +40,7 @@ class CommandTypes extends Model<CommandTypes>
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasMany(() => BotCommands, {
-    sourceKey: "command_type_id",
-    foreignKey: "command_type_id",
-  })
+  @HasMany(() => BotCommands, botCommandRelation)
   botCommand: BotCommands;
 }
 

@@ -12,7 +12,7 @@ import CommandInterface from "../../Interfaces/Command.interface";
 import bot from "../../Entities/Services/Bot.service";
 import  PollQuestion  from "../Utils/PollQuestion.utils";
 import Poll from "../../Entities/Models/Poll.model";
-import PollRepository from "../../Entities/Repositories/Poll.repository";
+
 
 class BotController {
   private commands: CommandInterface[];

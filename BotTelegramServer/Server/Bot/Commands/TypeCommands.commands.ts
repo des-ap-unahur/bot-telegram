@@ -9,7 +9,7 @@ import { MailTextType } from "./MailTextType.command";
 import { TextType } from "./TextType.command";
 import { MailDocumentType } from "./MailDocumentType.command";
 import { PollType } from "./PollType.Command";
-import { QuestionType } from "./QuestionType.command";
+
 
 export const typeCommands = [
   PollType,

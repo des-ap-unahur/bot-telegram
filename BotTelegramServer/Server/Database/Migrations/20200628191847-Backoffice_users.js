@@ -16,10 +16,10 @@ module.exports = {
           key: 'role_id'
         }
       },
-      fname: {
+      first_name: {
         type: Sequelize.STRING,
       },
-      lname: {
+      last_name: {
         type: Sequelize.STRING,
       },
       email: {

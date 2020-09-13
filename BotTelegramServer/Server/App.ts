@@ -1,6 +1,5 @@
 import express, { Application } from 'express';
 import AppConfig from './Interfaces/AppConfig.interface';
-import bot from './Entities/Services/Bot.service';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';

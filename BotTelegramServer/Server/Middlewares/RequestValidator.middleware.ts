@@ -1,46 +1,42 @@
 import { transformAndValidate } from "class-transformer-validator";
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response, NextFunction } from 'express';
+import { HttpStatus } from "../Config/Server/HTTPStatus.config";
 
-const isProd = process.env.NODE_ENV === 'production'
-
-function makeValidateBody<T>(c: T, whitelist = true, errorHandler?: (err: any, req: Request, res: Response, next: NextFunction) => void) {
-    return function ExpressClassValidate(req: Request, res: Response, next: NextFunction) {
-        const toValidate = req.body
-        if (!toValidate) {
-            if (errorHandler) {
-                errorHandler({ type: 'no-body' }, req, res, next)
-            } else {
-                res.status(400).json({
-                    error: true,
-                    message: 'Validation failed',
-                    ...(isProd
-                        ? {}
-                        : { originalError: { message: 'No request body found' } }
-                    )
-                })
-            }
-        } else {
-            transformAndValidate(c as any, toValidate, { validator: { whitelist } })
-                .then(transformed => {
-                    req.body = transformed
-                    next()
-                })
-                .catch(err => {
-                    if (errorHandler) {
-                        errorHandler(err, req, res, next)
-                    } else {
-                        res.status(400).json({
-                            error: true,
-                            message: 'Validation failed',
-                            ...(isProd
-                                ? {}
-                                : { originalError: err }
-                            )
-                        })
-                    }
-                })
-        }
+const validateRequest = <T>(classValidator: T, whitelist = true) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    const toValidate = req.body
+    if (!toValidate) {
+      res.status(HttpStatus.BAD_REQUEST)
+        .json({
+          error: true,
+          message: 'Validation failed',
+          originalError: { message: 'No request body found' }          
+        })
+    } else {
+      transformAndValidate(
+        classValidator as any,
+        toValidate, 
+        { validator: { whitelist } }
+      )
+        .then(
+          transformed => {
+            req.body = transformed
+            next()
+          }
+        )
+        .catch(
+          err => 
+          {
+            res.status(HttpStatus.BAD_REQUEST)
+              .json({
+                error: true,
+                message: 'Validation failed',
+                originalError: err
+              })
+          }
+        )
     }
+  }
 }
 
-export { makeValidateBody }
+export default validateRequest; 

@@ -1,9 +1,9 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasMany, HasOne } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasOne } from "sequelize-typescript";
 import { DataTypes } from 'sequelize';
 import PollResponsesInterface from '../../Interfaces/PollResponses.interface'
 import PollQuestions from './PollQuestions.model'
 import BotUsers from "./BotUsers.model";
-
+import { botUserRelation } from "../Relations/PollResponses.relation";
 
 @Table(
   {
@@ -18,7 +18,7 @@ class PollResponses extends Model<PollResponses> implements PollResponsesInterfa
   @Column(DataTypes.NUMBER)
   poll_response_id?: number
 
-  @ForeignKey( ()=> BotUsers)
+  @ForeignKey(() => BotUsers)
   @Column(DataTypes.NUMBER)
   user_id!: number
 
@@ -37,10 +37,7 @@ class PollResponses extends Model<PollResponses> implements PollResponsesInterfa
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasOne( ()=> BotUsers,{
-    sourceKey:"user_id",
-    foreignKey:"bot_user_id",
-  })
+  @HasOne(() => BotUsers, botUserRelation)
   botUsers: BotUsers[]
 }
 
