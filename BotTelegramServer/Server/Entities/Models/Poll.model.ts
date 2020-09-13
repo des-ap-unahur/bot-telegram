@@ -1,7 +1,8 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, HasMany } from 'sequelize-typescript';
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, HasMany, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 import PollInterface from '../../Interfaces/Poll.interface';
 import PollQuestion  from './PollQuestions.model';
+import PollRolesAccess from './PollRolesAccess.model';
 
 @Table(
   {
@@ -13,6 +14,7 @@ import PollQuestion  from './PollQuestions.model';
 class Poll extends Model<Poll> implements PollInterface {
   @AutoIncrement
   @PrimaryKey
+  @ForeignKey( ()=> PollRolesAccess)
   @Column(DataTypes.NUMBER)
   poll_id?: number
 
@@ -32,6 +34,9 @@ class Poll extends Model<Poll> implements PollInterface {
 
   @HasMany(()=>PollQuestion)
   questions: PollQuestion[]
+
+  @HasMany(()=>PollRolesAccess)
+  pollRolesAccess: PollRolesAccess[]
 }
 
 export default Poll;

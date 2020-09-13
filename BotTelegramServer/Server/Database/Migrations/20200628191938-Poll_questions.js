@@ -20,6 +20,9 @@ module.exports = {
       question: {
         type: Sequelize.STRING,
       },
+      type_question: {
+        type: Sequelize.STRING
+      },
       description: {
         type: Sequelize.STRING,
       },
