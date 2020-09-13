@@ -63,7 +63,7 @@ class PollQuestion {
       console.log(e);
     }
   };
-  
+
   callPoll = (text: any, ctx: any, commands: any, pollCommand: any) => {
     if (!pollCommand) {
       const command = commands.find(
