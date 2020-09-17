@@ -1,19 +1,16 @@
 import BotCommand from '../../Entities/Models/BotCommands.model';
-import GuaraniUsersRepository from '../../Entities/Repositories/GuaraniUsers.repository';
-import BotUserRepository from '../../Entities/Repositories/BotUser.repository';
 import { TelegrafContext } from 'telegraf/typings/context';
-import GuaraniUsersInterface from '../../Interfaces/GuaraniUsers.interface';
-import BotUsersInterface from '../../Interfaces/BotUsers.interface';
-import { botUserTypes } from '../Constants/Bot.constans';
 import { registrationUser } from '../Utils/RegistrationUser.utils';
+import BotUsers from '../../Entities/Models/BotUsers.model';
 
 export const ContactType = {
   type: "Contact",
   generateCommand: (command: BotCommand) => {
     const { description } = command;
-    return async (ctx: TelegrafContext) => 
+    return async (ctx: TelegrafContext, fetchUser: (ctx) => void) => 
       {
         const botUser = await registrationUser(ctx);
+        await fetchUser(ctx);
         
         const botParams = {
           ':name': botUser.tel_first_name,

@@ -9,6 +9,7 @@ import { pollCommandText, exitCommand } from "../Constants/Bot.constans"
 import { botWording } from "../Constants/Wording/Bot.wording";
 import { removeSensitiveCase } from "../Utils/RemoveSensitiveCase.utils";
 import PollQuestion from "../../Entities/Models/PollQuestions.model";
+import BotUsers from "../../Entities/Models/BotUsers.model";
 
 
 class BotPollController {
@@ -18,6 +19,7 @@ class BotPollController {
   private responses: PollResponses[];
   private currentQuestionId: number;
   private pollCallback: (command: CommandInterface | null) => void;
+  private botUser: BotUsers | null; 
 
   constructor() {
     this.questions = [];
@@ -25,6 +27,7 @@ class BotPollController {
     this.polls = [];
     this.responses = [];
     this.currentQuestionId = 0;
+    this.botUser = null;
   }
 
   setCallback = (callback): void => {
@@ -38,8 +41,8 @@ class BotPollController {
 
   showAvailablePolls = (ctx: TelegrafContext): void => {
     const { theAvailableSurveysAre } = botWording;
-
-    const pollList: string = this.polls.map(
+    const availablePolls: Poll[] = this.polls.filter(poll => poll.user_type_id === this.botUser.user_type_id);
+    const pollList: string = availablePolls.map(
       (poll, index) => `${index + 1}. ${poll.name} \n`
     ).join("");
 
@@ -50,11 +53,11 @@ class BotPollController {
     const pollQuestion: PollQuestion = this.questions.shift();
 
     if(pollQuestion){
-      const { id, question } = pollQuestion;
-      this.currentQuestionId = id;
+      const { poll_question_id, question } = pollQuestion;
+      this.currentQuestionId = poll_question_id;
       ctx.reply(question);
     } else {
-      this.clearPollStatus();
+      this.polls = [];
     }
   }
 
@@ -90,9 +93,12 @@ class BotPollController {
   };
 
   responsePoll = async (text: string, ctx: TelegrafContext): Promise<void> => {
+    const id = this.botUser && this.botUser.bot_user_id
+
     await this.setUserResponse({
       response_id: this.currentQuestionId,
       response: text,
+      user_id: id
     });
 
     await this.responseQuestion(ctx);
@@ -107,12 +113,8 @@ class BotPollController {
   }
 
   endPoll = async (text: string): Promise<void> => {
-    this.setUserResponse({
-      id_response: this.currentQuestionId,
-      response: text,
-    });
-
     await PollResponsesRepository.post(this.responses);
+    await this.clearPollStatus();
   };
 
   finishPoll = async (text: string, ctx: TelegrafContext): Promise<void> => {
@@ -131,7 +133,7 @@ class BotPollController {
     await this.finishPoll(text,ctx);
   }
 
-  callPoll = (text: string, ctx: TelegrafContext, commands: CommandInterface[], pollCommand: CommandInterface | null): void => {
+  callPoll = (text: string, ctx: TelegrafContext, commands: CommandInterface[], pollCommand: CommandInterface | null, botUser: BotUsers): void => {
     
     if(pollCommand){
       this.runPoll(text, ctx);
@@ -142,8 +144,7 @@ class BotPollController {
       );
 
       if (command) {
-        command;
-
+        this.botUser = botUser;
         this.getPolls().then(
           () => this.showAvailablePolls(ctx)
         );
@@ -158,6 +159,7 @@ class BotPollController {
     this.polls = [];
     this.responses = [];
     this.currentQuestionId = null;
+    this.botUser = null;
     this.pollCallback(null);
   };
 }

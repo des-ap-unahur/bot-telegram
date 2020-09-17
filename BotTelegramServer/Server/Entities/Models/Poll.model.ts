@@ -24,6 +24,9 @@ class Poll extends Model<Poll> implements PollInterface {
   @Column(DataTypes.STRING)
   description!: string;
 
+  @Column(DataTypes.NUMBER)
+  user_type_id: number;
+  
   @CreatedAt
   @Column(DataTypes.DATE)
   createdAt: Date;
