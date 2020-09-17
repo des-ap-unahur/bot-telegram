@@ -5,14 +5,16 @@ import { toCommand } from '../Utils/ToCommand.utils';
 export const NestedCommandsButtonType = {
   type: "NestedCommandsButtons",
   generateCommand: (command: BotCommand) => {
-    const { tel_command, name, description, parameter } = command;
+    //Lo cambie para que no rompa todo.
+    const { tel_command, name, botResponses} = command;
+    const { response, parameter } = botResponses;
     const list = parameter.split(',');
     return {
       command: toCommand(tel_command),
       message: name, 
       response: (ctx:any) => 
       {
-        ctx.reply(description, Keyboard(list));
+        ctx.reply(response, Keyboard(list));
       }
     }
   }

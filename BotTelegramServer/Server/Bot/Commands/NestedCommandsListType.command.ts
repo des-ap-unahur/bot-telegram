@@ -4,7 +4,8 @@ import { toCommand } from '../Utils/ToCommand.utils';
 export const NestedCommandsListType = {
   type: "NestedCommandsList",
   generateCommand: (command: BotCommand, externalParameter?:Array<string>) => {
-    const { tel_command, name, description, parameter } = command;
+    const { tel_command, name, botResponses } = command;
+    const { response, parameter } = botResponses;
     const list = parameter.split(',');
 
     const buildMessage = (list:Array<string>) => {
@@ -20,7 +21,7 @@ export const NestedCommandsListType = {
       message: name, 
       response: async (ctx:any) => 
       {
-        await ctx.reply(description);
+        await ctx.reply(response);
         externalParameter ? 
           ctx.reply(buildMessage(externalParameter))
         :

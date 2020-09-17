@@ -3,7 +3,8 @@ import BotCommand from '../../Entities/Models/BotCommands.model';
 export const ContactType = {
   type: "Contact",
   generateCommand: (command: BotCommand) => {
-    const { description } = command;
+    const { botResponses } = command;
+    const { response } = botResponses;
     return (ctx:any) => 
       {
         const botParams = {
@@ -14,7 +15,7 @@ export const ContactType = {
         }
         
         const buildMessage = () => {
-          let message = description;
+          let message = response;
           const params = Object.keys(botParams);
 
           params.forEach(param => message = message.replace(param, botParams[param]));

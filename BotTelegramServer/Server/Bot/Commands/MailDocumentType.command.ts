@@ -6,13 +6,14 @@ import BotCommand from '../../Entities/Models/BotCommands.model';
 export const MailDocumentType = {  
   type: "MailDocument",
   generateCommand: (command: BotCommand) => {
-    const { tel_command, name, description, parameter } = command;
+    const { tel_command, name,botResponses } = command;
+    const { response, parameter } = botResponses;
     return {
       command: toCommand(tel_command),
       message: name, 
       response: (ctx:any, mail?:boolean) => 
       {
-        !mail && ctx.reply(description)
+        !mail && ctx.reply(response)
 
         mail && 
           MailTransporter.sendMail({
