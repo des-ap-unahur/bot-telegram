@@ -15,7 +15,6 @@ class PollRepository {
   };
 
   post = async (data: PollQuestionInterface[]): Promise<PollQuestion[]> => {
-  
     const pollQuestions = await PollQuestion.bulkCreate(data);
     return pollQuestions;
   };

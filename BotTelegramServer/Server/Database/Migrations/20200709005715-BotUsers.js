@@ -3,7 +3,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Bot_users', {
-      
       bot_user_id: {
         allowNull: false,
         autoIncrement: true,
@@ -15,6 +14,13 @@ module.exports = {
         references: {
           model: 'User_types',
           key: 'user_type_id'
+        }
+      },
+      guarani_user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Guarani_users',
+          key: 'guarani_user_id'
         }
       },
       tel_user_id: {
@@ -39,7 +45,6 @@ module.exports = {
       }
     });
   },
-
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Bot_users');
   }

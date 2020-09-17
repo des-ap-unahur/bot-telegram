@@ -3,11 +3,14 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Guarani_users', {
-      
-      dni: {
+      guarani_user_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      dni: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       email: {

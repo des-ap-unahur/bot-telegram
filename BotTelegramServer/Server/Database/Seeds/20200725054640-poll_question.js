@@ -50,6 +50,30 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        poll_id: 3,
+        question: "del 1 al 10,¿Que puntuacion le pondrias a la cursada de la materias en general?",
+        type_question:"Abierta",
+        description: "el alumno debera elegir una puntuacion",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        poll_id: 3,
+        question: "¿Cual fue la materia mas interesante?",
+        type_question:"Abierta",
+        description: "el alumno debera elegir una materia de la cursada",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        poll_id: 3,
+        question: "¿Cual fue la materia menos interesante?",
+        type_question:"Abierta",
+        description: "el alumno debera elegir una materia de la cursada",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
   down: (queryInterface, Sequelize) => {

@@ -13,6 +13,16 @@ class GuaraniUsersRepository {
     return guaraniUsers;
   };
   
+  getByPhoneNumber = async (phoneNumber: number): Promise<GuaraniUsers> => {
+    const guaraniUser: GuaraniUsers = await GuaraniUsers.findOne({
+      where: {
+        phone_number: phoneNumber
+      }
+    });
+
+    return guaraniUser
+  }
+
   post = async (data: GuaraniUsersInterface): Promise<GuaraniUsers> => {
     const guaraniUsers: GuaraniUsers = await GuaraniUsers.create(data);
     return guaraniUsers;

@@ -5,7 +5,7 @@ module.exports = {
    
     return queryInterface.bulkInsert('Bot_commands',[
       {
-        user_type_id: 1,
+        user_type_id: 3,
         command_type_id:8,
         tel_command: "Ayuda",
         name: "Ayuda",
@@ -27,7 +27,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        user_type_id: 2,
+        user_type_id: 1,
         command_type_id:2,
         tel_command: "Ubicacion",
         name: "Ubicacion",
@@ -38,7 +38,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        user_type_id: 1,
+        user_type_id: 3,
         command_type_id:6,
         tel_command: "Start",
         name: "Start",
@@ -64,7 +64,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        user_type_id: 1,
+        user_type_id: 3,
         command_type_id:5,
         tel_command: "Registrarme",
         name: "Registrarme",
@@ -75,7 +75,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        user_type_id: 1,
+        user_type_id: 3,
         command_type_id:10,
         tel_command: "Contacto",
         name: "Contacto",
@@ -94,7 +94,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        user_type_id: 2,
+        user_type_id: 1,
         command_type_id:4,
         tel_command: "Mail_de_bienvenida",
         name: "Mail de bienvenida",
@@ -105,7 +105,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        user_type_id: 2,
+        user_type_id: 3,
         command_type_id:3,
         tel_command: "Carreras",
         name: "Carreras",
@@ -116,7 +116,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        user_type_id: 2,
+        user_type_id: 3,
         command_type_id:7,
         tel_command: "Informatica",
         name: "Informatica",
@@ -127,7 +127,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        user_type_id: 2,
+        user_type_id: 3,
         command_type_id:7,
         tel_command: "Fisica",
         name: "Fisica",
@@ -138,7 +138,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        user_type_id: 2,
+        user_type_id: 3,
         command_type_id:7,
         tel_command: "Quimica",
         name: "Quimica",
@@ -149,13 +149,24 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        user_type_id: 2,
+        user_type_id: 1,
         command_type_id:11,
         tel_command: "Mail_de_plan_de_estudio",
         name: "Mail de plan de estudio",
         status: true,
         description:"Ingrese mail",
         parameter:"http://www.unahur.edu.ar/sites/default/files/2017-10/Tecnicatura%20Universitaria%20en%20Inform%C3%A1tica.pdf",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        user_type_id: 1,
+        command_type_id:12,
+        tel_command: "Encuestas",
+        name: "Encuestas",
+        status: true,
+        description:"",
+        parameter:"",
         createdAt: new Date(),
         updatedAt: new Date(),
       },

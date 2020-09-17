@@ -8,8 +8,11 @@ import { RegistrationType } from "./RegistrationType.command";
 import { MailTextType } from "./MailTextType.command";
 import { TextType } from "./TextType.command";
 import { MailDocumentType } from "./MailDocumentType.command";
+import { PollType } from "./PollType.Command";
+
 
 export const typeCommands = [
+  PollType,
   ButtonType,
   DocumentType,
   LocationType,
