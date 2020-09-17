@@ -30,7 +30,7 @@ class BotController {
   }
 
   fetchCommands = async () => {
-    this.botCommands = await BotCommandRepository.getCommandsTypes();
+    this.botCommands = await BotCommandRepository.getCommandWhitAllRelation();
     this.commandsWithoutContact = this.botCommands.filter(command => command.commandsTypes.type !== "Contact")
   }
 
