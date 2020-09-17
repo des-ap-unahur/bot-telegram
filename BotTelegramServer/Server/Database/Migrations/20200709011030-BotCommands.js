@@ -33,12 +33,6 @@ module.exports = {
       status: {
         type: Sequelize.BOOLEAN,
       },
-      description: {
-        type: Sequelize.TEXT('medium'),
-      },
-      parameter: {
-        type: Sequelize.STRING,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
