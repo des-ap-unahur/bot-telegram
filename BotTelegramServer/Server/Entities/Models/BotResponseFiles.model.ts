@@ -10,6 +10,7 @@ import BotResponses from "./BotResponses.model";
 class BotResponseFiles extends Model<BotResponseFiles> implements BotResponseFilesInterface {
   @AutoIncrement
   @PrimaryKey
+  @ForeignKey( () => BotResponses)
   @Column(DataTypes.NUMBER)
   bot_respose_files_id?: number;
 
@@ -35,9 +36,11 @@ class BotResponseFiles extends Model<BotResponseFiles> implements BotResponseFil
   updatedAt: Date;
 
   @BelongsTo( () => BotResponses,{
+     
     foreignKey:"bot_response_id"
   })
   botResponses: BotResponses
+
 }
 
 export default BotResponseFiles;

@@ -12,11 +12,16 @@ class BotNestedCommands extends Model<BotNestedCommands> implements BotNestedCom
   @AutoIncrement
   @PrimaryKey
   @Column(DataTypes.NUMBER)
-  bot_father_id?: number;
+  bot_nested_command_id?: number
 
   @ForeignKey(()  => BotCommands)
   @Column(DataTypes.NUMBER)
-  bot_child_id!: number;
+  bot_father_id?: number;
+
+  //comentado hasta aclararsu funcion
+  // @ForeignKey(()  => BotCommands)
+  // @Column(DataTypes.NUMBER)
+  // bot_child_id!: number;
 
   @CreatedAt
   @Column(DataTypes.DATE)
@@ -26,11 +31,12 @@ class BotNestedCommands extends Model<BotNestedCommands> implements BotNestedCom
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasOne(() => BotCommands, {
-    sourceKey: "bot_child_id",
-    foreignKey: "bot_command_id",
-  })
-  botCommand: BotCommands;
+//comentado hasta aclararsu funcion
+  // @HasOne(() => BotCommands, {
+  //   sourceKey: "bot_child_id",
+  //   foreignKey: "bot_command_id",
+  // })
+  // botCommandst: BotCommands;
 
   @HasOne(() => BotCommands, {
     sourceKey: "bot_father_id",

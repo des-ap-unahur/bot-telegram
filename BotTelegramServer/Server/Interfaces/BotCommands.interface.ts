@@ -5,8 +5,6 @@ interface BotCommandsInterface{
   tel_command?: string | null;
   name: string | null;
   status: boolean | null;
-  description: string | null;
-  parameter: string | null;
 }
 
 export default BotCommandsInterface;

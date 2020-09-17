@@ -46,12 +46,6 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @Column(DataTypes.BOOLEAN)
   status!: boolean;
 
-  @Column(DataTypes.STRING)
-  description!: string;
-
-  @Column(DataTypes.STRING)
-  parameter!: string;
-
   @CreatedAt
   @Column(DataTypes.DATE)
   createdAt: Date;
@@ -66,17 +60,24 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   })
   commandsTypes: CommandsTypes;
 
-  @HasOne(()  =>  BotNestedCommands,{
+  @HasOne(()  =>  BotResponses,{
     sourceKey: "bot_command_id",
-    foreignKey: "bot_child_id",
+    foreignKey: "bot_id",
   })
-  botNestedCommands: BotNestedCommands;
+  botResponses: BotResponses;
+
+  //comentado hasta aclararsu funcion
+  // @HasOne(()  =>  BotNestedCommands,{
+  //   sourceKey: "bot_command_id",
+  //   foreignKey: "bot_child_id",
+  // })
+  // botNestedCommands: BotNestedCommands;
 
   @HasOne(()  =>  BotNestedCommands,{
     sourceKey: "bot_command_id",
     foreignKey: "bot_father_id",
   })
-  botNestedCommand: BotNestedCommands;
+  botNestedCommands: BotNestedCommands;
   
   @HasOne(()  =>  UserTypes,{
     sourceKey: "user_type_id",
@@ -84,11 +85,7 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   })
   userTypes: UserTypes;
 
-  @HasOne(()  =>  BotResponses,{
-    sourceKey: "bot_command_id",
-    foreignKey: "bot_id",
-  })
-  botResponses: BotResponses;
+
 
 }
 

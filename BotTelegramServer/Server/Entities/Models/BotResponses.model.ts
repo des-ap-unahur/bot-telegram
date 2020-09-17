@@ -1,4 +1,4 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasOne } from "sequelize-typescript";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasOne, HasMany } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
 import BotResponsesInterface from "../../Interfaces/BotResponses.interface";
 import BotNestedCommands from "./BotNestedCommands.model";
@@ -28,6 +28,9 @@ class BotResponses extends Model<BotResponses>
   @Column(DataTypes.STRING)
   description!: string;
 
+  @Column(DataTypes.STRING)
+  parameter!: string;
+
   @CreatedAt
   @Column(DataTypes.DATE)
   createdAt: Date;
@@ -36,11 +39,11 @@ class BotResponses extends Model<BotResponses>
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasOne( () => BotCommands, {
+  @HasMany( () => BotCommands, {
     sourceKey: "bot_id",
     foreignKey: "bot_command_id",
   })
-  botCommand: BotCommands
+  botCommand: BotCommands[]
 
   @HasOne( () => BotResponseFiles,{
     sourceKey:"bot_response_id",
