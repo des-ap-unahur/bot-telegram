@@ -1,6 +1,8 @@
 import { removeSensitiveCase } from "./RemoveSensitiveCase.utils"
+import { TelegrafContext } from "telegraf/typings/context";
+import CommandInterface from "../Interfaces/Command.interface";
 
-export const callMail = (callMail:any, text: string, commands: any[], ctx: any, isAnCommand?: boolean) => {
+export const callMail = (callMail:any, text: string, commands: CommandInterface[], ctx: TelegrafContext, isAnCommand?: boolean) => {
   const isAnEmail = text.includes('@');
   const sendMail = (mailCommand, ctx) => {
     mailCommand && mailCommand.response(ctx, Boolean(text))

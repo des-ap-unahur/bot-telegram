@@ -2,8 +2,8 @@ import { transformAndValidate } from "class-transformer-validator";
 import { Request, Response, NextFunction } from 'express';
 import { HttpStatus } from "../Config/Server/HTTPStatus.config";
 
-const validateRequest = <T>(classValidator: T, whitelist = true) => {
-  return (req: Request, res: Response, next: NextFunction) => {
+const validateRequest = <T>(classValidator: T, whitelist = true) => 
+  (req: Request, res: Response, next: NextFunction) => {
     const toValidate = req.body
     if (!toValidate) {
       res.status(HttpStatus.BAD_REQUEST)
@@ -37,6 +37,6 @@ const validateRequest = <T>(classValidator: T, whitelist = true) => {
         )
     }
   }
-}
+
 
 export default validateRequest; 
