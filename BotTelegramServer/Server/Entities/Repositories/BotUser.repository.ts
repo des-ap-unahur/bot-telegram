@@ -1,5 +1,6 @@
 import BotUsers from "../Models/BotUsers.model";
 import BotUsersInterface from "../../Interfaces/BotUsers.interface";
+import GuaraniUsers from "../Models/GuaraniUsers.models";
 
 
 class BotUsersRepository {
@@ -13,6 +14,15 @@ class BotUsersRepository {
     return botUser;
   };
   
+  getByTelegramIdWithGuaraniUser = async (telegram_id:number): Promise<BotUsers> => {
+    const botUser: BotUsers = await BotUsers.findOne({
+      where: { tel_user_id: telegram_id },
+      include: [GuaraniUsers]
+    });
+
+    return botUser;
+  }
+
   post = async (data: BotUsersInterface): Promise<BotUsers> => {
     const botUser: BotUsers = await BotUsers.create(data);
     return botUser;

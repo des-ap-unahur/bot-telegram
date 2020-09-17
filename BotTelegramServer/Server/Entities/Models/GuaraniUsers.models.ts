@@ -11,6 +11,9 @@ class GuaraniUsers extends Model<GuaraniUsers> implements GuaraniUsersInterface 
   @AutoIncrement
   @PrimaryKey
   @Column(DataTypes.NUMBER)
+  guarani_user_id!: number;
+
+  @Column(DataTypes.NUMBER)
   dni?: number;
 
   @Column(DataTypes.STRING)

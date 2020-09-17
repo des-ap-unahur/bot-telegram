@@ -27,27 +27,27 @@ class BotPollController {
     this.currentQuestionId = 0;
   }
 
-  setCallback = (callback) => {
+  setCallback = (callback): void => {
     this.pollCallback = callback;
   }
 
   getPolls = async (): Promise<void> => {
-    const polls = await PollRepository.getAll();
+    const polls: Poll[] = await PollRepository.getAll();
     this.polls = polls ? polls : [];
   };
 
-  showAvailablePolls = (ctx: TelegrafContext) => {
+  showAvailablePolls = (ctx: TelegrafContext): void => {
     const { theAvailableSurveysAre } = botWording;
 
-    const pollList = this.polls.map(
+    const pollList: string = this.polls.map(
       (poll, index) => `${index + 1}. ${poll.name} \n`
     ).join("");
 
     ctx.reply(theAvailableSurveysAre + "\n" + pollList);
   }
 
-  responseQuestion = (ctx: TelegrafContext) => {
-    const pollQuestion = this.questions.shift();
+  responseQuestion = (ctx: TelegrafContext): void => {
+    const pollQuestion: PollQuestion = this.questions.shift();
 
     if(pollQuestion){
       const { id, question } = pollQuestion;
@@ -80,8 +80,8 @@ class BotPollController {
   };
 
   selectPoll = async (text: string, ctx: TelegrafContext): Promise<void> => {
-    const index = Number(text);
-    const pollToSelect = this.polls[index - 1];
+    const index:number = Number(text);
+    const pollToSelect: Poll = this.polls[index - 1];
 
     if (!this.poll && index && pollToSelect) {
       this.poll = pollToSelect;
@@ -106,7 +106,7 @@ class BotPollController {
     }
   }
 
-  endPoll = async (text: string, ctx: TelegrafContext): Promise<void> => {
+  endPoll = async (text: string): Promise<void> => {
     this.setUserResponse({
       id_response: this.currentQuestionId,
       response: text,
@@ -119,7 +119,7 @@ class BotPollController {
     const { thankYouForAnsweringTheSurvey } = botWording;
 
     if (!this.polls.length) {
-      await this.endPoll(text, ctx);
+      await this.endPoll(text);
       await ctx.reply(thankYouForAnsweringTheSurvey);
     } else if(removeSensitiveCase(text) === removeSensitiveCase(exitCommand)){
       await this.clearPollStatus();

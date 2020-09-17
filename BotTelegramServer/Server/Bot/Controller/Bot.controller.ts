@@ -33,19 +33,23 @@ class BotController {
     this.callPollCommand = null;
   }
 
-  fetchCommands = async () => {
-    this.botCommands = await BotCommandRepository.getCommandsTypes();
+  fetchCommands = async (): Promise<void> => {
+    this.botCommands = await BotCommandRepository.getCommandWithAllRelation();
     this.commandsWithoutContact = this.botCommands.filter(
       (command) => command.commandsTypes.type !== "Contact"
     );
   };
 
-  buildCommands = () => {
+  buildCommands = (): void => {
     this.commands = assambleCommands(this.commandsWithoutContact, typeCommands);
     this.contactCommand = buildContactCommand(this.botCommands);
   };
 
-  execCommand = (text: string, ctx: TelegrafContext) => {
+  setCallPoll = (command: CommandInterface | null): void => {
+    this.callPollCommand = command;
+  }
+  
+  execCommand = (text: string, ctx: TelegrafContext): void => {
     this.commands.map(
       (command) =>
         removeSensitiveCase(command.command) === removeSensitiveCase(text) &&
@@ -53,7 +57,7 @@ class BotController {
     );
   };
 
-  execHear = (text: string, ctx: TelegrafContext) => {
+  execHear = (text: string, ctx: TelegrafContext): void => {
     this.commands.map(
       (command) =>
         removeSensitiveCase(command.message) === removeSensitiveCase(text) &&
@@ -61,7 +65,7 @@ class BotController {
     );
   };
 
-  notUnderstandMessage = (text: string, ctx: TelegrafContext) => {
+  notUnderstandMessage = (text: string, ctx: TelegrafContext): void => {
     !this.commands.some(
       (command) =>
         removeSensitiveCase(command.command) === removeSensitiveCase(text) ||
@@ -71,7 +75,7 @@ class BotController {
     ) && invalidMessageCommand(ctx);
   };
 
-  execCallMailCommand = (text: string, ctx: TelegrafContext) => {
+  execCallMailCommand = (text: string, ctx: TelegrafContext): void => {
     this.callMailCommand = callMail(
       this.callMailCommand,
       text,
@@ -81,20 +85,16 @@ class BotController {
     );
   };
 
-  execCallMailHear = (text: string, ctx: TelegrafContext) => {
+  execCallMailHear = (text: string, ctx: TelegrafContext): void => {
     this.callMailHear = callMail(this.callMailHear, text, this.commands, ctx);
   };
 
-  setCallPoll = (command: CommandInterface | null) => {
-    this.callPollCommand = command;
-  }
-
-  execCallPoll = async (text: string, ctx: TelegrafContext) => {
+  execCallPoll = async (text: string, ctx: TelegrafContext): Promise<void> => {
     await botPollController.setCallback(this.setCallPoll);
     await botPollController.callPoll(text,ctx,this.commands, this.callPollCommand);
   }
 
-  runCommands = () => {
+  runCommands = ():void => {
     this.bot.on("contact", this.contactCommand);
 
     this.bot.on("message",(ctx: TelegrafContext) => {
@@ -120,7 +120,7 @@ class BotController {
     this.bot.launch();
   };
 
-  refreshCommands = async () => {
+  refreshCommands = async (): Promise<void> => {
     await this.fetchCommands();
     await this.buildCommands();
   };

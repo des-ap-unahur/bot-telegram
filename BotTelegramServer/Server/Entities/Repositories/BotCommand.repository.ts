@@ -1,6 +1,9 @@
 import BotCommand from "../Models/BotCommands.model";
 import BotCommandInterface from "../../Interfaces/BotCommands.interface";
 import CommandTypes from '../Models/CommandsTypes.model';
+import BotResponses from "../Models/BotResponses.model";
+import BotResponseFiles from "../Models/BotResponseFiles.model";
+import BotNestedCommands from "../Models/BotNestedCommands.model";
 
 
 class BotCommandRepository {
@@ -16,6 +19,12 @@ class BotCommandRepository {
 
   getCommandsTypesById = async (id:number): Promise<BotCommand> => {
     const commands: BotCommand = await BotCommand.findByPk(id,{include:[CommandTypes]});
+    return commands;
+  }
+
+  getCommandWithAllRelation = async (): Promise<BotCommand[]> => {
+    const commands: BotCommand [] = await BotCommand.findAll({ 
+      include: [CommandTypes,{ model:BotResponses,include:[BotResponseFiles]}]});
     return commands;
   }
 
