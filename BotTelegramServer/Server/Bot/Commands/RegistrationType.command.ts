@@ -1,3 +1,4 @@
+import { TelegrafContext } from 'telegraf/typings/context';
 import BotCommand from '../../Entities/Models/BotCommands.model';
 import ContactButton from '../Markups/ContactButton.markup';
 import { toCommand } from '../Utils/ToCommand.utils';
@@ -10,7 +11,7 @@ export const RegistrationType = {
     return {
       command: toCommand(tel_command),
       message: name, 
-      response: (ctx:any) => 
+      response: (ctx:TelegrafContext) => 
       {
         ctx.reply(response, ContactButton(parameter));
       }

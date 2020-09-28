@@ -1,3 +1,4 @@
+import { TelegrafContext } from 'telegraf/typings/context';
 import BotCommand from '../../Entities/Models/BotCommands.model';
 import { toCommand } from '../Utils/ToCommand.utils';
 
@@ -21,7 +22,7 @@ export const NestedCommandsListType = {
     return {
       command: toCommand(tel_command),
       message: name, 
-      response: async (ctx:any) => 
+      response: async (ctx:TelegrafContext) => 
       {
         await ctx.reply(response);
         await ctx.reply(buildMessage(list));  
