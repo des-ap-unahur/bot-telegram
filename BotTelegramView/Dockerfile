@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:14
 
 # Set up environment
 ENV TERM=xterm-256color
