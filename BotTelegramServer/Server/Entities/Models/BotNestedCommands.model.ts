@@ -2,7 +2,7 @@ import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, 
 import { DataTypes } from "sequelize";
 import BotNestedCommandsInterface from "../../Interfaces/BotNestedCommands.interface";
 import BotCommands from "./BotCommands.model";
-import { botCommandChildRelation, botCommandFatherRelation } from "../Relations/BotNestedCommands.relation";
+import { botCommandChildRelation } from "../Relations/BotNestedCommands.relation";
 
 @Table({
   tableName: "Bot_nested_commands",
@@ -12,6 +12,10 @@ import { botCommandChildRelation, botCommandFatherRelation } from "../Relations/
 class BotNestedCommands extends Model<BotNestedCommands> implements BotNestedCommandsInterface {
   @AutoIncrement
   @PrimaryKey
+  @Column(DataTypes.NUMBER)
+  bot_nested_command_id?: number;
+
+  @ForeignKey(() => BotCommands)
   @Column(DataTypes.NUMBER)
   bot_father_id?: number;
 
@@ -29,9 +33,6 @@ class BotNestedCommands extends Model<BotNestedCommands> implements BotNestedCom
 
   @HasOne(() => BotCommands, botCommandChildRelation)
   botCommand: BotCommands;
-
-  @HasOne(() => BotCommands, botCommandFatherRelation)
-  botCommands: BotCommands;
 }
 
 export default BotNestedCommands;

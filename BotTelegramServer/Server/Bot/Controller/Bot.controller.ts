@@ -98,7 +98,7 @@ class BotController {
     await botPollController.callPoll(text,ctx,this.commands, this.callPollCommand, user);
   }
 
-  runCommands = ():void => {
+  runCommands = (): void => {
     this.bot.on("contact", (ctx) => this.contactCommand(ctx, this.fetchUser));
 
     this.bot.on("message", (ctx: TelegrafContext) => {

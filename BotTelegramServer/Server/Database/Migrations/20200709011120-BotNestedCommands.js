@@ -3,7 +3,12 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Bot_nested_commands', {
-      
+      bot_nested_command_id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
       bot_father_id: {
         type: Sequelize.INTEGER,
         references: {
@@ -12,8 +17,8 @@ module.exports = {
         }
       },
       bot_child_id: {
-        type: Sequelize.INTEGER,
-        references: {
+         type: Sequelize.INTEGER,
+         references: {
           model: 'Bot_commands',
           key: 'bot_command_id'
         }

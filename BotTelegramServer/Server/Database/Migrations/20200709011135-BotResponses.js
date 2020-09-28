@@ -3,24 +3,26 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Bot_responses', {
-      
       bot_response_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Bot_users',
-          key: 'bot_user_id'
-        }
       },
       bot_id: {
         type: Sequelize.INTEGER,
+        references: {
+          model: 'Bot_commands',
+          key: 'bot_command_id'
+        }
       },
       response: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT('medium'),
       },
       description: {
+        type: Sequelize.STRING,
+      },
+      parameter: {
         type: Sequelize.STRING,
       },
       createdAt: {

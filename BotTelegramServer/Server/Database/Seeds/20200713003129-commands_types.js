@@ -76,6 +76,12 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        type: "Help",
+        Description: "Comando de ayuda",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
     ]);
   },
   down: (queryInterface, Sequelize) => {
