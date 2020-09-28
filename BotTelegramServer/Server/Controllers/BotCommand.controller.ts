@@ -11,6 +11,11 @@ class BotCommandController {
     res.send(botCommands);
   };
 
+  getCommandsWithAllRelations = async (req: any, res: any): Promise<void> => {
+    const botCommands: BotCommand[] = await BotCommandRepository.getCommandWithAllRelation();
+    res.send(botCommands);
+  };
+
   getCommandById = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
 

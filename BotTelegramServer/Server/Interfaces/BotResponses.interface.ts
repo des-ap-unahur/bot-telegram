@@ -3,6 +3,7 @@ interface BotResponses {
   bot_id?: number | null;
   response?: string | null;
   description?: string | null;
+  parameter?: string | null;
 }
 
 export default BotResponses;

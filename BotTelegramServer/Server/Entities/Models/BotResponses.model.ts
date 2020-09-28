@@ -14,11 +14,11 @@ class BotResponses extends Model<BotResponses>
   implements BotResponsesInterface {
   @AutoIncrement 
   @PrimaryKey
-  @ForeignKey( () => BotResponseFiles)
+  @ForeignKey(() => BotResponseFiles)
   @Column(DataTypes.NUMBER)
   bot_response_id?: number;
 
-  @ForeignKey( () => BotCommands)
+  @ForeignKey(() => BotCommands)
   @Column(DataTypes.NUMBER)
   bot_id?: number;
 
@@ -27,6 +27,9 @@ class BotResponses extends Model<BotResponses>
 
   @Column(DataTypes.STRING)
   description!: string;
+
+  @Column(DataTypes.STRING)
+  parameter!: string;
 
   @CreatedAt
   @Column(DataTypes.DATE)
