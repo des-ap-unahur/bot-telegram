@@ -4,7 +4,7 @@ export const assambleCommands = (commands: BotCommands[], typeCommands: any[]) =
   commands.map(command => 
   { 
     const type = typeCommands.find(typeCommand => typeCommand.type === command.commandsTypes.type);
-    const hasExternalParameter = command.commandsTypes.type === "NestedCommandsList";
+    const hasExternalParameter = command.commandsTypes.type === "Help";
     const genericType = !type && typeCommands.find(typeCommands => typeCommands.type === 'Text');
     
     if(type){

@@ -6,7 +6,7 @@ module.exports = {
     return queryInterface.bulkInsert('Bot_commands',[
       {
         user_type_id: 3,
-        command_type_id:8,
+        command_type_id:13,
         tel_command: "Ayuda",
         name: "Ayuda",
         description:"",
@@ -131,6 +131,16 @@ module.exports = {
         name: "Encuestas",
         status: true,
         description:"",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        user_type_id: 3,
+        command_type_id:8,
+        tel_command: "Lista_de_carreras",
+        name: "Lista de carreras",
+        description:"",
+        status: true,
         createdAt: new Date(),
         updatedAt: new Date(),
       },

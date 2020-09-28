@@ -10,7 +10,8 @@ export const MailDocumentType = {
   type: "MailDocument",
   generateCommand: (command: BotCommand) => {
     const { tel_command, name, botResponses } = command;
-    const { response, parameter } = botResponses;
+    const { response, botResponseFiles } = botResponses;
+    const { url, filename } = botResponseFiles
 
     return {
       command: toCommand(tel_command),
@@ -26,7 +27,7 @@ export const MailDocumentType = {
             to: user.guaraniUser.email,
             subject: name,
             text: response,
-            attachments: [{ filename: name + '.pdf', path: parameter, contentType: 'application/pdf' }]
+            attachments: [{ filename: name + '.pdf', path: url, contentType: 'application/pdf' }]
           })
         }
       }

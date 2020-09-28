@@ -120,6 +120,14 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        bot_id: 14,
+        response:"Las carreras disponibles son: ",
+        description: "botones con las carreras",
+        parameter: "",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
   down: (queryInterface, Sequelize) => {

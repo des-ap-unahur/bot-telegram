@@ -9,6 +9,7 @@ import { MailTextType } from "./MailTextType.command";
 import { TextType } from "./TextType.command";
 import { MailDocumentType } from "./MailDocumentType.command";
 import { PollType } from "./PollType.Command";
+import { HelpType } from "./HelpType.command";
 
 
 export const typeCommands = [
@@ -22,5 +23,6 @@ export const typeCommands = [
   RegistrationType,
   MailTextType,
   TextType,
-  MailDocumentType
+  MailDocumentType,
+  HelpType
 ]
