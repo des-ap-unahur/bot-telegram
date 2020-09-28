@@ -8,10 +8,10 @@ export const NestedCommandsButtonType = {
   generateCommand: (command: BotCommand) => {
     const { tel_command, name, botResponses, botNestedCommands } = command;
     const { response } = botResponses;
-    const buttons = botNestedCommands.map(
+    const buttons: string[] = botNestedCommands.map(
       nestedCommand => nestedCommand.botCommand.name
     );
-    const buttonsLimited = buttons.slice(0, 8);
+    const buttonsLimited: string[] = buttons.slice(0, 8);
 
     return {
       command: toCommand(tel_command),

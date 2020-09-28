@@ -7,7 +7,7 @@ export const LocationType = {
   generateCommand: (command: BotCommand) => {
     const { tel_command, name, botResponses } = command;
     const { parameter } = botResponses;
-    const coordinates = parameter.split(',')
+    const coordinates: string[] = parameter.split(',')
     
     return {
       command: toCommand(tel_command),

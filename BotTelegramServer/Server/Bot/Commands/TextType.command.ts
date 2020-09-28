@@ -1,3 +1,4 @@
+import { TelegrafContext } from 'telegraf/typings/context';
 import BotCommand from '../../Entities/Models/BotCommands.model';
 import { toCommand } from '../Utils/ToCommand.utils';
 
@@ -9,7 +10,7 @@ export const TextType = {
     return {
       command: toCommand(tel_command),
       message: name, 
-      response: (ctx:any) => 
+      response: (ctx:TelegrafContext) => 
       {
         ctx.reply(response);
       }

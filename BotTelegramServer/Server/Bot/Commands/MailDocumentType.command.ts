@@ -27,7 +27,7 @@ export const MailDocumentType = {
             to: user.guaraniUser.email,
             subject: name,
             text: response,
-            attachments: [{ filename: name + '.pdf', path: url, contentType: 'application/pdf' }]
+            attachments: [{ filename: filename + '.pdf', path: url, contentType: 'application/pdf' }]
           })
         }
       }

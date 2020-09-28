@@ -8,14 +8,14 @@ export const ButtonType = {
   generateCommand: (command: BotCommand) => {
     const { tel_command, name,botResponses } = command;
     const { response, parameter } = botResponses;
-    const list = parameter.split(',');
+    const buttons: string[] = parameter.split(',');
 
     return {
       command: toCommand(tel_command),
       message: name, 
       response: (ctx:TelegrafContext) => 
       {
-        ctx.reply(response, Keyboard(list));
+        ctx.reply(response, Keyboard(buttons));
       }
     }
   }

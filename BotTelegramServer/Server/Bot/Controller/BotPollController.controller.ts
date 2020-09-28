@@ -83,7 +83,7 @@ class BotPollController {
   };
 
   selectPoll = async (text: string, ctx: TelegrafContext): Promise<void> => {
-    const index:number = Number(text);
+    const index: number = Number(text);
     const pollToSelect: Poll = this.polls[index - 1];
 
     if (!this.poll && index && pollToSelect) {
@@ -120,15 +120,20 @@ class BotPollController {
   finishPoll = async (text: string, ctx: TelegrafContext): Promise<void> => {
     const { thankYouForAnsweringTheSurvey } = botWording;
 
-    if (!this.polls.length) {
+    if (!this.polls.length && removeSensitiveCase(text) !== removeSensitiveCase(exitCommand)) {
       await this.endPoll(text);
       await ctx.reply(thankYouForAnsweringTheSurvey);
-    } else if(removeSensitiveCase(text) === removeSensitiveCase(exitCommand)){
+    }
+  }
+
+  forceFinishPoll = async (text) => {
+    if(removeSensitiveCase(text) === removeSensitiveCase(exitCommand)){
       await this.clearPollStatus();
     }
   }
 
   runPoll = async (text: string, ctx: TelegrafContext): Promise<void>  => {
+    await this.forceFinishPoll(text);
     await this.selectPollOrResponse(text, ctx);
     await this.finishPoll(text,ctx);
   }
