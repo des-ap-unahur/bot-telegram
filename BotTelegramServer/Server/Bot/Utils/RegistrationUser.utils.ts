@@ -17,7 +17,7 @@ export const registrationUser = async (ctx: TelegrafContext) => {
 
   const botUser: BotUsersInterface = {
     user_type_id: userType ? userType.id : genericUserType.id,
-    guarani_user_id: guaraniUser.guarani_user_id,
+    guarani_user_id: guaraniUser && guaraniUser.guarani_user_id,
     tel_user_id: ctx.update.message.contact.user_id,
     tel_last_name: ctx.update.message.contact.last_name,
     tel_first_name: ctx.update.message.contact.first_name,
