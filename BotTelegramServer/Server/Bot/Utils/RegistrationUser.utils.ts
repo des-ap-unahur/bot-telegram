@@ -27,8 +27,8 @@ export const registrationUser = async (ctx: TelegrafContext) => {
   if(!hasRegistered){
     const registeredUser: BotUsersInterface = await BotUserRepository.post(botUser);
 
-    return Object.assign(registeredUser, {phoneNumber, profile: guaraniUser.profile })
+    return Object.assign(registeredUser, {phoneNumber, profile: guaraniUser ? guaraniUser.profile : genericUserType.name })
   }
   
-  return Object.assign(botUser, {phoneNumber, profile: guaraniUser.profile })
+  return Object.assign(botUser, {phoneNumber, profile: guaraniUser ? guaraniUser.profile : genericUserType.name })
 }
