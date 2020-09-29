@@ -3,7 +3,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Bot_commands', {
-      
       bot_command_id: {
         allowNull: false,
         autoIncrement: true,
@@ -30,14 +29,11 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
+      description: {
+        type: Sequelize.STRING,
+      },
       status: {
         type: Sequelize.BOOLEAN,
-      },
-      description: {
-        type: Sequelize.TEXT('medium'),
-      },
-      parameter: {
-        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -49,7 +45,6 @@ module.exports = {
       }
     });
   },
-
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Bot_commands');
   }

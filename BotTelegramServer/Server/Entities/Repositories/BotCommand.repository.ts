@@ -4,16 +4,23 @@ import CommandTypes from '../Models/CommandsTypes.model';
 import BotResponses from "../Models/BotResponses.model";
 import BotResponseFiles from "../Models/BotResponseFiles.model";
 import BotNestedCommands from "../Models/BotNestedCommands.model";
+import UserTypes from "../Models/UserTypes.model";
 
 
 class BotCommandRepository {
   getAll = async (): Promise<BotCommand[]> => {
-    const commands: BotCommand[] = await BotCommand.findAll();
+    const commands: BotCommand[] = await BotCommand.findAll({ include: [CommandTypes,UserTypes,BotNestedCommands,{ model:BotResponses,include:[BotResponseFiles] }] });
     return commands;
-  };
+  }
 
+  getCommandWithAllRelation = async (): Promise<BotCommand[]> => {
+    const commands: BotCommand [] = await BotCommand.findAll({ 
+      include: [CommandTypes,UserTypes, {model: BotNestedCommands, include: [BotCommand]},{ model:BotResponses,include:[BotResponseFiles]}]});
+    return commands;
+  }
+  
   getCommandsTypes = async (): Promise<BotCommand[]> => {
-    const commands: BotCommand[] = await BotCommand.findAll({include:[CommandTypes]});
+    const commands: BotCommand[] = await BotCommand.findAll( { include:[CommandTypes]} );
     return commands;
   }
 
@@ -22,16 +29,10 @@ class BotCommandRepository {
     return commands;
   }
 
-  getCommandWithAllRelation = async (): Promise<BotCommand[]> => {
-    const commands: BotCommand [] = await BotCommand.findAll({ 
-      include: [CommandTypes,{ model:BotResponses,include:[BotResponseFiles]}]});
-    return commands;
-  }
-
   get = async (id: number): Promise<BotCommand> => {
     const command: BotCommand = await BotCommand.findByPk(id);
     return command;
-  };
+  }
   
   post = async (data: BotCommandInterface): Promise<BotCommand> => {
     const command: BotCommand = await BotCommand.create(data);

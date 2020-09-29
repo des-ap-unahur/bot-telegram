@@ -32,7 +32,7 @@ import {
 class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @AutoIncrement
   @PrimaryKey
-  @ForeignKey(()  => BotNestedCommands)
+  @ForeignKey(() => BotNestedCommands)
   @ForeignKey(() => BotResponses)
   @Column(DataTypes.NUMBER)
   bot_command_id?: number;
@@ -44,6 +44,9 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @Column(DataTypes.STRING)
   tel_command!: string;
 
+  @Column(DataTypes.STRING)
+  description!: string;
+
   @ForeignKey(() => CommandsTypes)
   @Column(DataTypes.NUMBER)
   command_type_id!: number;
@@ -53,12 +56,6 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
 
   @Column(DataTypes.BOOLEAN)
   status!: boolean;
-
-  @Column(DataTypes.STRING)
-  description!: string;
-
-  @Column(DataTypes.STRING)
-  parameter!: string;
 
   @CreatedAt
   @Column(DataTypes.DATE)
@@ -71,18 +68,14 @@ class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @HasOne(() => CommandsTypes, commandTypeRelation)
   commandsTypes: CommandsTypes;
 
-  @HasOne(() => BotNestedCommands, botNestedChildrenCommandRelation)
-  botNestedCommands: BotNestedCommands;
-
-  @HasOne(() => BotNestedCommands, botNestedCommandFatherRelation)
-  botNestedCommand: BotNestedCommands;
+  @HasMany(() => BotNestedCommands, botNestedCommandFatherRelation)
+  botNestedCommands: BotNestedCommands[];
   
   @HasOne(() => UserTypes, userTypeRelation)
   userTypes: UserTypes;
 
   @HasOne(() => BotResponses, botResponsesRelation)
   botResponses: BotResponses;
-
 }
 
 export default BotCommands;

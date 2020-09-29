@@ -1,10 +1,11 @@
 import BotResponses from "../Models/BotResponses.model";
 import BotResponsesInterface from "../../Interfaces/BotResponses.interface";
+import BotCommands from "../Models/BotCommands.model";
 
 
 class BotResponsesRepository {
   getAll = async (): Promise<BotResponses[]> => {
-    const responses: BotResponses[] = await BotResponses.findAll();
+    const responses: BotResponses[] = await BotResponses.findAll({include:[BotCommands]});
     return responses;
   };
   

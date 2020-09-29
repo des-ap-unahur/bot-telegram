@@ -5,12 +5,12 @@ export const commandTypeRelation = {
 
 export const botNestedCommandFatherRelation = {
   sourceKey: "bot_command_id",
-  foreignKey: "bot_child_id",
+  foreignKey: "bot_father_id",
 }
 
 export const botNestedChildrenCommandRelation = {
   sourceKey: "bot_command_id",
-  foreignKey: "bot_father_id",
+  foreignKey: "bot_children_id",
 }
 
 export const userTypeRelation = {

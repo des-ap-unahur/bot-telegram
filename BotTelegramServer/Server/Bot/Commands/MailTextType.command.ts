@@ -9,7 +9,9 @@ import BotUsers from '../../Entities/Models/BotUsers.model';
 export const MailTextType = {  
   type: "MailText",
   generateCommand: (command: BotCommand) => {
-    const { tel_command, name, parameter } = command;
+    const { tel_command, name, botResponses } = command;
+    const { response } = botResponses;
+    
     return {
       command: toCommand(tel_command),
       message: name, 
@@ -22,8 +24,8 @@ export const MailTextType = {
           MailTransporter.sendMail({
             from: configServer.get('NODEMAILER_FROM'),
             to: user.guaraniUser.email,
-            subject: parameter,
-            text: parameter
+            subject: name,
+            text: response
           })
         }
       }

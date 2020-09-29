@@ -9,7 +9,10 @@ import { TelegrafContext } from 'telegraf/typings/context';
 export const MailDocumentType = {  
   type: "MailDocument",
   generateCommand: (command: BotCommand) => {
-    const { tel_command, name, parameter } = command;
+    const { tel_command, name, botResponses } = command;
+    const { response, botResponseFiles } = botResponses;
+    const { url, filename } = botResponseFiles
+
     return {
       command: toCommand(tel_command),
       message: name, 
@@ -23,8 +26,8 @@ export const MailDocumentType = {
             from: configServer.get('NODEMAILER_FROM'),
             to: user.guaraniUser.email,
             subject: name,
-            text: name,
-            attachments: [{ filename: name + '.pdf', path: parameter, contentType: 'application/pdf' }]
+            text: response,
+            attachments: [{ filename: filename + '.pdf', path: url, contentType: 'application/pdf' }]
           })
         }
       }

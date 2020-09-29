@@ -1,12 +1,14 @@
 import BotCommand from '../../Entities/Models/BotCommands.model';
 import { TelegrafContext } from 'telegraf/typings/context';
 import { registrationUser } from '../Utils/RegistrationUser.utils';
-import BotUsers from '../../Entities/Models/BotUsers.model';
+
 
 export const ContactType = {
   type: "Contact",
   generateCommand: (command: BotCommand) => {
-    const { description } = command;
+    const { botResponses } = command;
+    const { response } = botResponses;
+    
     return async (ctx: TelegrafContext, fetchUser: (ctx) => void) => 
       {
         const botUser = await registrationUser(ctx);
@@ -20,7 +22,7 @@ export const ContactType = {
         }
 
         const buildMessage = () => {
-          let message = description;
+          let message = response;
           const params = Object.keys(botParams);
 
           params.forEach(param => message = message.replace(param, botParams[param]));
