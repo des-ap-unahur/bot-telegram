@@ -2,7 +2,7 @@ import BotUserRepository from "../Entities/Repositories/BotUser.repository";
 import BotUser from "../Entities/Models/BotUsers.model";
 import notFoundValidator from "../Utils/NotFoundValidator.utils";
 import execDelete from "../Utils/ExecDelete.utils";
-import BotUserWithPagination from "../Interfaces/BoutUsersWithPagination.interface";
+import BotUserWithPagination from "../Interfaces/BotUsersWithPagination.interface";
 
 class BotUserController {
   getUsers = async (req: any, res: any): Promise<void> => {

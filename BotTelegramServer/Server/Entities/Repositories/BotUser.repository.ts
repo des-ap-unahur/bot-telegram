@@ -2,7 +2,7 @@ import BotUsers from "../Models/BotUsers.model";
 import BotUsersInterface from "../../Interfaces/BotUsers.interface";
 import GuaraniUsers from "../Models/GuaraniUsers.models";
 import Paginate from "../../Utils/Paginate.utils";
-import BotUsersWithPagination from "../../Interfaces/BoutUsersWithPagination.interface";
+import BotUsersWithPagination from "../../Interfaces/BotUsersWithPagination.interface";
 class BotUsersRepository {
   getAllWithPagination = async (paginationData: any): Promise<BotUsersWithPagination> => {
 
@@ -10,7 +10,7 @@ class BotUsersRepository {
     const { count, rows: botUsers } = await BotUsers.findAndCountAll({
       ...Paginate(paginationData),
     });
-    const total = Math.round(count / pageSize);
+    const total = Math.ceil(count / pageSize);
     return { total, botUsers };
   };
 

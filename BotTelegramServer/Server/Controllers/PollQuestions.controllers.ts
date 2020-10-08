@@ -3,13 +3,12 @@ import Poll from "../Entities/Models/Poll.model";
 import PollQuestion from "../Entities/Models/PollQuestions.model";
 import notFoundValidator from "../Utils/NotFoundValidator.utils";
 import execDelete from "../Utils/ExecDelete.utils";
-import PaginationInterface from "../Interfaces/Pagination.interface";
+
 import PollWithPagination from "../Interfaces/PollWithPagination.interface";
 
 class PollQuestionsController {
   getPollsQuestions = async (req: any, res: any): Promise<void> => {
     const paginationData = req.query;
-    
     if (paginationData.page) {
       const poll: PollWithPagination = await PollQuestionsRepository.getAllWithPagination(paginationData);
       res.send(poll);

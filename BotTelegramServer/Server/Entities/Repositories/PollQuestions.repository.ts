@@ -5,13 +5,15 @@ import Paginate from "../../Utils/Paginate.utils";
 import PollWithPagination from '../../Interfaces/PollWithPagination.interface';
 class PollRepository {
   getAllWithPagination = async (paginationData: any): Promise<PollWithPagination> => {
+    console.log(Paginate(paginationData))
     const { pageSize } = paginationData;
-    const { count, rows: pollQuestion } = await Poll.findAndCountAll({
+    const { count, rows: poll } = await Poll.findAndCountAll({
       include: [PollQuestion],
       ...Paginate(paginationData),
     });
-    const total = Math.round(count / pageSize);
-    return { total, pollQuestion };
+    console
+    const total = Math.ceil(count / pageSize);
+    return { total, poll };
   };
 
   getAll = async ():Promise<Poll[]> =>{
