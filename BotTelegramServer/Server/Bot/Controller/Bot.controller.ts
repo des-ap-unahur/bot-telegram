@@ -103,7 +103,6 @@ class BotController {
 
     this.bot.on("message", (ctx: TelegrafContext) => {
       const { text } = ctx.message;
-
       if (text && this.commands.length && !this.callPollCommand) {
         this.fetchUser(ctx);
 

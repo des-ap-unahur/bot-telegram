@@ -1,18 +1,26 @@
-import BotUserRepository from '../Entities/Repositories/BotUser.repository';
-import BotUser from '../Entities/Models/BotUsers.model';
-import notFoundValidator from '../Utils/NotFoundValidator.utils';
-import execDelete from '../Utils/ExecDelete.utils';
-
+import BotUserRepository from "../Entities/Repositories/BotUser.repository";
+import BotUser from "../Entities/Models/BotUsers.model";
+import notFoundValidator from "../Utils/NotFoundValidator.utils";
+import execDelete from "../Utils/ExecDelete.utils";
+import BotUserWithPagination from "../Interfaces/BotUsersWithPagination.interface";
 
 class BotUserController {
   getUsers = async (req: any, res: any): Promise<void> => {
-    const botUsers: BotUser[] = await BotUserRepository.getAll();
-    res.send(botUsers);
+    const paginationData = req.query;
+    if (paginationData.pageSize) {
+      const botUsers: BotUserWithPagination = await BotUserRepository.getAllWithPagination(
+        paginationData
+      );
+      res.send(botUsers);
+    } else {
+      const botUsers: BotUser[] = await BotUserRepository.getAll();
+      res.send(botUsers);
+    }
   };
 
   getUserById = async (req: any, res: any): Promise<void> => {
     const { id } = req.params;
-    
+
     const botUser: BotUser = await BotUserRepository.get(id);
     notFoundValidator(res, botUser);
   };
@@ -37,7 +45,7 @@ class BotUserController {
 
     await execDelete(res, async () => {
       await BotUserRepository.delete(id);
-    })
+    });
   };
 }
 
