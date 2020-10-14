@@ -1,10 +1,13 @@
 import Dashboard from '../Components/Dashboard/Dashboard.component';
+import GetPolls from '../Components/Polls/GetPolls/GetPolls.component';
 import Route from '../Interfaces/Routes.interface';
 
-const publicRoutes:Array<Route> = [
-  {path:'/dashboard', component:Dashboard, exact:true},
+const publicRoutes:Route[] = [
+  {path: '/dashboard', component:Dashboard, exact:true},
+  {path: '/dashboard/polls', component: GetPolls}
 ];
 
-const privateRoutes:Array<any> = [];
+const privateRoutes:Route[] = [
+];
 
 export default { publicRoutes, privateRoutes }
