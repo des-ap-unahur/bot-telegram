@@ -9,7 +9,6 @@ export const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     width: '100%',
     minHeight: '100vh',
-    backgroundColor: WHITE
   },
   container: {
     marginTop: theme.spacing(12),

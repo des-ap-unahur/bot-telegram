@@ -1,11 +1,11 @@
 import React, { useState, useContext, useMemo } from 'react';
 import HeaderContent from './Header.content';
-import { useHistory } from 'react-router';
 import { ModalControllerContext } from '../../../HOC/ModalController.hoc'
 import { HeaderProps } from './Header.interfaces';
+import { history } from '../../../Utils/History.utils';
+
 
 const Header = ({ user, auth }:HeaderProps) => {
-  const history = useHistory()
   const [ anchorEl, setAnchorEl ] = useState<Element | null>(null);
   const { isOpenDrawer, setOpenState } = useContext(ModalControllerContext)
 
@@ -37,7 +37,7 @@ const Header = ({ user, auth }:HeaderProps) => {
   }
 
   const handleChangeRoute = (route: string | undefined):void => {
-    if (route){
+    if (route && history){
       history.push(route)
     }
   }

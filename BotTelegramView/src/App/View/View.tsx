@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/core';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Router } from 'react-router-dom';
 import Routes from '../Routes/Router.routes';
 import PrivateRoutes from '../HOC/PrivateRoute.hoc';
 import RedirectWithAuth from '../HOC/RedirectWithAuth.hoc';
@@ -9,6 +9,7 @@ import '../Styles/Base.style.css';
 import { theme } from '../Config/Theme/Theme.config'
 import LanguageProvider from '../HOC/LangProvider.hoc';
 import Header from '../Components/Layout/Header/Header.container';
+import { history } from '../Utils/History.utils';
 
 const App = () => {
   const { publicRoutes, privateRoutes } = Routes
@@ -19,7 +20,7 @@ const App = () => {
         <LanguageProvider>
           <Header/>
           <BrowserRouter>
-            <Switch>
+            <Router history={history}>
               {
                 publicRoutes.map((route, index) =>
                   <Route key={index} {...route} />
@@ -32,7 +33,7 @@ const App = () => {
                 )
               }
             <RedirectWithAuth/>
-            </Switch>
+            </Router>
           </BrowserRouter>
         </LanguageProvider>
       </ModalController>
