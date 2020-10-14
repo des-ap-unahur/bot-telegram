@@ -1,18 +1,20 @@
+import { PollStateInterface } from '../../Interfaces/PollStates.interface'
 import PollActions from '../Actions/Poll.action'
 
 const { actionsTypes }: any = PollActions
 
-const initialState = {
+const initialState: PollStateInterface = {
   fetchingStatus: false,
   failed: false,
   sucess: false,
   polls: null,
+  total: 0,
   statusCode: '',
   errorsCodes: '',
   errorMessage: '',
 }
 
-const AuthReducer = (state = initialState, action: any) => {
+const PollReducer = (state = initialState, action: any) => {
   switch (action.type) {
     //getPolls
     case actionsTypes.getPollsAttempt:
@@ -30,7 +32,8 @@ const AuthReducer = (state = initialState, action: any) => {
         fetchingStatus: false,
         failed: false,
         sucess: true,
-        polls: action.payload.data,
+        polls: action.payload.data.poll,
+        total: action.payload.data.total,
         statusCode: action.payload.status,
       }
     case actionsTypes.getPollsFailure:
@@ -51,6 +54,7 @@ const AuthReducer = (state = initialState, action: any) => {
         failed: false,
         sucess: false,
         polls: null,
+        total: 0,
         statusCode: '',
         errorsCodes: '',
         errorMessage: '',
@@ -60,4 +64,4 @@ const AuthReducer = (state = initialState, action: any) => {
   }
 }
 
-export default AuthReducer;
+export default PollReducer;

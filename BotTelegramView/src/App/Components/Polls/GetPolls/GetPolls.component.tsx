@@ -1,44 +1,36 @@
-import React, { useContext } from 'react';
-import clsx from 'clsx';
-import { Grid, Typography, Box } from '@material-ui/core';
-import { useStyles } from './GetPolls.style';
-import { ModalControllerContext } from '../../../HOC/ModalController.hoc';
+import React, { useContext, useEffect } from 'react';
+import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
+import GetPollsContent from './GetPolls.content';
+import { GetPollProps } from './GetPolls.interface';
 
-const GetPolls = () => {
-  const { 
-    root,
-    container,
-    containerShift,
-    title
-  } = useStyles();
-  const { isOpenDrawer } = useContext(ModalControllerContext);
+
+const GetPolls = ({ polls, total, sucess, fetching, getPollsRequest, clearPollStates}: GetPollProps) => {
+  const { language } = useContext(LanguageContext);
+  
+  useEffect(()=>{
+    const requestOptions = {
+      params: { page: 0, pageSize: 10 }
+    };
+
+    getPollsRequest(requestOptions);
+  },[])
+
+  const handleChangePage = async (page:number, pageSize:number) => {
+    const requestOptions = {
+      params: { page, pageSize }
+    };
+
+    await getPollsRequest(requestOptions)
+  }
 
   return (
-    <div>
-      <div className={root}>
-        <Grid 
-          container 
-          className={clsx(container, {
-            [containerShift]: isOpenDrawer,
-          })} 
-          justify='center'
-        >
-          <Typography 
-            variant="h4"
-            component='div'
-            gutterBottom
-          >
-            <Box 
-              fontWeight={700} 
-              m={1} 
-              className={title}
-            >
-              polls
-            </Box>
-          </Typography>
-        </Grid>
-      </div>
-    </div>
+    <GetPollsContent
+      language={language}
+      handleChangePage={handleChangePage}
+      polls={polls}
+      total={total}
+      fetching={fetching}
+    />
   )
 }
 

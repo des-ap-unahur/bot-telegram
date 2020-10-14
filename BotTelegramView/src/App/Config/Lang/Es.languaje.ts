@@ -11,6 +11,12 @@ const ES = {
   userTypes: 'Tipos de usuario',
   subscribers: 'Suscriptores',
   activities: 'Actividades',
+  noResultFound: 'No se han encontrado resultados',
+  rowsPerPage: 'Filas por página: ',
+  name: 'Nombre',
+  description: 'Descripcion',
+  userType: 'Tipo de usuario',
+  actions: 'Acciones'
 }
 
 export default ES

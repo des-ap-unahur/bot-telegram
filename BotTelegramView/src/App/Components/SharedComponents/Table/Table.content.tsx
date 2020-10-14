@@ -16,10 +16,24 @@ import TableSkeleton from './Content/TableSkeleton/TableSkeleton.component';
 import TableVoidCells from './Content/TableVoidCells/TableVoidCells.component';
 import { LanguageContext } from '../../../Config/Lang/Lang.languaje'
 import { useStyles } from './Table.style';
+import { TableContentProps } from './Table.interface';
 
-const TableContent = ({isOpenDrawer, config, dataset, loader, emptyRows, rowsPerPage, page, handleChangePage, handleChangeRowsPerPage, rowsPerPageOptions, totalRows}) => {
+const TableContent = (props: TableContentProps) => {
   const { table, tableWithModalOpen, fetchingLoader, loaderContainer, noDocumentsFound, withModalOpen } = useStyles();
   const { language } = useContext(LanguageContext);
+  const {
+    isOpenDrawer, 
+    config, 
+    dataset, 
+    loader, 
+    emptyRows, 
+    rowsPerPage, 
+    page, 
+    handleChangePage, 
+    handleChangeRowsPerPage,
+    rowsPerPageOptions, 
+    totalRows
+  } = props;
 
   return (
     <TableContainer 
@@ -44,7 +58,7 @@ const TableContent = ({isOpenDrawer, config, dataset, loader, emptyRows, rowsPer
             variant='h4'
           >
             <Box fontWeight={700}>
-              {language.noDocumentsFound}
+              {language.noResultFound}
             </Box>
           </Typography>
       }
@@ -54,7 +68,7 @@ const TableContent = ({isOpenDrawer, config, dataset, loader, emptyRows, rowsPer
         />
         <TableBody>
           { !loader ?
-              dataset.map( (document, i) =>
+              dataset.map( (document:any, i: number) =>
                 <TableBodyRow
                   key={`row ${i}`}
                   config={config}

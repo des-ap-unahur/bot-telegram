@@ -5,11 +5,12 @@ import {
   TableRow,
   Box
 } from '@material-ui/core';
+import { TableHeaderProps } from '../../Table.interface';
 
-const TableHeaderComponent = ({config}) => (
+const TableHeaderComponent = ({config}:TableHeaderProps) => (
   <TableHead>
     <TableRow>
-      {config.map( (header, i) =>
+      {config.map( (header:any, i:number) =>
         <TableCell key={`header cell ${i}`} align={'' || header.align}>
           <Box fontWeight={700}>
             { header.name && header.name.toUpperCase()}

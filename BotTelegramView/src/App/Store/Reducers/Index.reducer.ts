@@ -1,9 +1,11 @@
 import { combineReducers } from "redux";
-import AuthReducer from './Auth.reducer';
+import auth from './Auth.reducer';
+import poll from './Poll.reducer'
 
 const appReducer = combineReducers(
   {
-    AuthReducer
+    auth,
+    poll
   }
 )
 

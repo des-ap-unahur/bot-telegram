@@ -1,8 +1,8 @@
 import Dashboard from '../Components/Dashboard/Dashboard.component';
-import GetPolls from '../Components/Polls/GetPolls/GetPolls.component';
+import GetPolls from '../Components/Polls/GetPolls/GetPolls.container';
 import Route from '../Interfaces/Routes.interface';
 
-const publicRoutes:Route[] = [
+const publicRoutes: any[] = [
   {path: '/dashboard', component:Dashboard, exact:true},
   {path: '/dashboard/polls', component: GetPolls}
 ];

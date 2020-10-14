@@ -6,8 +6,14 @@ import execDelete from "../Utils/ExecDelete.utils";
 
 class PollController {
   getPolls = async (req: any, res: any): Promise<void> => {
-    const polls: Poll[] = await PollRepository.getAll();
-    res.send(polls);
+    const paginationData = req.query;
+    if (paginationData.page) {
+      const poll = await PollRepository.getAllWithPagination(paginationData);
+      res.send(poll);
+    } else {
+      const poll:Poll[] = await PollRepository.getAll();
+      res.send(poll);
+    }
   };
 
   getPollById = async (req: any, res: any): Promise<void>=>{

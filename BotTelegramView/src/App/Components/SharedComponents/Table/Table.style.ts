@@ -1,7 +1,7 @@
 import {
   makeStyles
 } from '@material-ui/core';
-import { ORANGE_GM2, LIGHT_GRAY, WHITE } from '../../../Styles/Colors.index'
+import { BLUE, WHITE } from '../../../Styles/Colors.index'
 
 export const useStyles = makeStyles(theme => ({
   table: {
@@ -10,12 +10,12 @@ export const useStyles = makeStyles(theme => ({
     width: '100%',
     maxWidth: '1265px',
     minHeight: '500px',
-    background: LIGHT_GRAY,
+    background: WHITE,
     marginLeft: theme.spacing(15),
     marginRight: theme.spacing(7),
     marginTop: theme.spacing(7),
     marginBottom: theme.spacing(7),
-    border: '1px solid '+ ORANGE_GM2,
+    border: '1px solid '+ BLUE,
     fontSize: '16px',
     transition: theme.transitions.create(['margin'], {
       easing: theme.transitions.easing.sharp,

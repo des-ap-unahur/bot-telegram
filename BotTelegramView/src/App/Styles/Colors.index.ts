@@ -2,17 +2,19 @@ export const BLACK: string = '#000'
 
 export const WHITE: string = '#FFF'
 
-export const LIGHT_YELLOW_GM2: string = '#fecd75'
+export const LIGHT_YELLOW: string = '#fecd75'
 
-export const YELLOW_GM2: string = '#fec153'
+export const YELLOW: string = '#fec153'
 
-export const DARK_YELLOW_GM2: string = '#b1873a'
+export const DARK_YELLOW: string = '#b1873a'
 
 export const GOOGLE_BLUE: string = '#4885ed'
 
 export const BLUE: string = '#367BF5';
 
 export const LIGHT_BLUE: string = '#80afff';
+
+export const GRAY: string = '#ececec';
 
 export const DARK_GRAY: string = '#333'
 

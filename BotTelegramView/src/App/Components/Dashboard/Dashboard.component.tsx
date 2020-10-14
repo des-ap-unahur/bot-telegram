@@ -33,7 +33,7 @@ const Dashboard = () => {
               m={1} 
               className={title}
             >
-              test
+              Bienvenido al BackOffice del Bot
             </Box>
           </Typography>
         </Grid>

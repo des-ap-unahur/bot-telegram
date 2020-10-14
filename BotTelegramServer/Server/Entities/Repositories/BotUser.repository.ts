@@ -3,6 +3,7 @@ import BotUsersInterface from "../../Interfaces/BotUsers.interface";
 import GuaraniUsers from "../Models/GuaraniUsers.models";
 import Paginate from "../../Utils/Paginate.utils";
 import BotUsersWithPagination from "../../Interfaces/BotUsersWithPagination.interface";
+
 class BotUsersRepository {
   getAllWithPagination = async (paginationData: any): Promise<BotUsersWithPagination> => {
 

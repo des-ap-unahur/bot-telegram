@@ -7,9 +7,10 @@ import {
 import { capitalizeStrings } from '../../../../../Utils/FormatStrings.utils';
 import CheckAction from '../../../CheckAction.component';
 import ActionButton from '../../../ActionButtons/ActionButton.component';
+import { TableBodyProps } from '../../Table.interface';
 
-const TableBodyRow = ({config, dataset}) => {
-  const renderCell = cell => {
+const TableBodyRow = ({config, dataset}: TableBodyProps) => {
+  const renderCell = (cell: any) => {
     if(!cell.nestedTable){
       return dataset[cell.property] 
     }
@@ -18,7 +19,7 @@ const TableBodyRow = ({config, dataset}) => {
 
   return (
     <TableRow>
-      {config && config.map((cell, i) =>
+      {config && config.map((cell:any, i:number) =>
         <TableCell key={`body cell ${i}`} align={''|| cell.align}>
           {
             (!cell.isCheck && !cell.isActions) ?
@@ -28,13 +29,13 @@ const TableBodyRow = ({config, dataset}) => {
             :
               cell.isCheck ?
                 <CheckAction
-                  id={dataset.id}
+                  id={dataset && dataset.id}
                   check={Boolean(dataset[cell.property])}
                   onChange={cell.onClick}
                 />
               :
                 <ActionButton
-                  id={dataset.id}
+                  id={dataset && dataset.id}
                   actions={cell.actions}
                 />
           }
