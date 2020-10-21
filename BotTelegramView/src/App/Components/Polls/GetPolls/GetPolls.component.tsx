@@ -4,7 +4,7 @@ import GetPollsContent from './GetPolls.content';
 import { GetPollProps } from './GetPolls.interface';
 
 
-const GetPolls = ({ polls, total, sucess, fetching, getPollsRequest, clearPollStates}: GetPollProps) => {
+const GetPolls = ({ polls, total, sucess, fetching, getPollsRequest, clearPollStates, deletePollRequest}: GetPollProps) => {
   const { language } = useContext(LanguageContext);
   
   useEffect(()=>{
@@ -23,6 +23,16 @@ const GetPolls = ({ polls, total, sucess, fetching, getPollsRequest, clearPollSt
     await getPollsRequest(requestOptions)
   }
 
+  const handleDeletePoll = async (id: number) => {
+    const requestOptions = {
+      param_1: id
+    }
+
+    clearPollStates()
+    await deletePollRequest(requestOptions)
+    await handleChangePage(0, 10);
+  }
+
   return (
     <GetPollsContent
       language={language}
@@ -30,6 +40,7 @@ const GetPolls = ({ polls, total, sucess, fetching, getPollsRequest, clearPollSt
       polls={polls}
       total={total}
       fetching={fetching}
+      handleDeletePoll={handleDeletePoll}
     />
   )
 }

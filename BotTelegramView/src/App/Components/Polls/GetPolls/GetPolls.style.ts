@@ -3,12 +3,11 @@ import { WHITE, GOOGLE_BLUE, BLACK, BLUE } from '../../../Styles/Colors.index'
 
 export const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     flexGrow: 1,
-    width: '100%',
-    minHeight: '100%'
+    width: '100vw',
+    height: '100vh',
+    display: 'flex',
+    justifyContent: 'center'
   },
   rootContainer: {
     border: GOOGLE_BLUE + ' solid 1px',
@@ -16,6 +15,14 @@ export const useStyles = makeStyles(theme => ({
     overflowY: 'hidden',
     overflowX: 'hidden',
     borderRadius: '10px'
+  },
+  container: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    height: "100vh",
+    width: "95vw"
   },
   rootPaper: {
     borderRadius: '10px'

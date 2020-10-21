@@ -6,12 +6,15 @@ import {
   Box,
   IconButton 
 } from '@material-ui/core';
+import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
 import { ModalControllerContext } from '../../../HOC/ModalController.hoc';
 import AddIcon from '@material-ui/icons/Add';
 import { SectionTitleInterface } from './SectionTitle.interface';
 
-const SectionTitle = ({titleLabel, correctionLabel, action}: SectionTitleInterface) => {
+
+const SectionTitle = ({titleLabel, correctionLabel, action}:SectionTitleInterface) => {
   const { isOpenDrawer } = useContext(ModalControllerContext);
+  const { language } = useContext(LanguageContext);
 
   const { 
     subtitle, 
@@ -33,6 +36,15 @@ const SectionTitle = ({titleLabel, correctionLabel, action}: SectionTitleInterfa
       [containerWithModalOpen]: isOpenDrawer
     })}
     >
+      <Typography 
+        variant="h5" 
+        gutterBottom 
+        className={subtitle}
+      >
+        <Box fontWeight={700} m={1}>
+          {language.sectionFrom}
+        </Box>
+      </Typography>
       <div className={titleAndUnderlineContainer}>
         <Typography 
           variant="h4" 

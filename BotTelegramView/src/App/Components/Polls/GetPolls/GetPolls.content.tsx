@@ -12,23 +12,23 @@ const GetPollsContent = (props:GetPollContentProps) => {
     language, 
     total, 
     handleChangePage, 
-    fetching
+    fetching,
+    handleDeletePoll
   } = props;
 
   const { 
     root, 
+    container,
   } = useStyles();
 
-  const configParams = { language };
+  const configParams = { language, handleDeletePoll };
   
   return (
-    <>
-      <div className={root}>
+    <div className={root}>
+      <div className={container}>
         <SectionTitle
           titleLabel={language.polls}
         />
-      </div>
-      <div className={root}>
         <TableComponent
           config={generateConfigWithLang(configParams) || []}
           dataset={polls || []}
@@ -37,7 +37,7 @@ const GetPollsContent = (props:GetPollContentProps) => {
           changePage={handleChangePage}
         />
       </div>
-    </>
+    </div>
   )
 }
 

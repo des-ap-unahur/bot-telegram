@@ -46,6 +46,7 @@ export const useStyles = makeStyles(theme => ({
     }
   },
   actionContainer: {
-    paddingLeft: '30px'
+    paddingLeft: '30px',
+    display: 'inline-flex'
   }
 }))

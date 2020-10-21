@@ -4,6 +4,7 @@ export interface PollStateInterface {
   fetchingStatus: boolean;
   failed: boolean;
   sucess: boolean;
+  pollSelected: null | PollInterface;
   polls: null | PollInterface[];
   total: number;
   statusCode: string | number;

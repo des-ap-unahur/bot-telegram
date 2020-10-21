@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { BLUE, GRAY, WHITE } from '../../Styles/Colors.index';
+import { BLUE, GRAY, WHITE, DARK_GRAY, LIGHT_GRAY } from '../../Styles/Colors.index';
 
 export const theme = createMuiTheme({
   typography: {},
@@ -8,7 +8,7 @@ export const theme = createMuiTheme({
       root: {
         backgroundColor: WHITE,
         '&:nth-of-type(odd)': {
-          backgroundColor: GRAY
+          backgroundColor: GRAY,
         },
       },
     },
@@ -27,5 +27,19 @@ export const theme = createMuiTheme({
         borderBottom: '1px solid '+ BLUE,
       },
     },
+    MuiTooltip: {
+      arrow: {
+        '&::before':{
+          backgroundColor: DARK_GRAY,
+        }
+      },
+      popper: {
+        marginTop: '-13px',
+      },
+      tooltip: {
+        color: WHITE,
+        backgroundColor: DARK_GRAY
+      }
+    }
   },
 })

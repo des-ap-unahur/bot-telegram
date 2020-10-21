@@ -35,7 +35,7 @@ const TableBodyRow = ({config, dataset}: TableBodyProps) => {
                 />
               :
                 <ActionButton
-                  id={dataset && dataset.id}
+                  dataset={dataset}
                   actions={cell.actions}
                 />
           }

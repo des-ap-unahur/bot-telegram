@@ -5,6 +5,16 @@ const { actionsTypes, actionCreators } = builderAsyncActions([
     name: 'getPolls',
     endpoint: '/polls',
     method: 'GET'
+  },
+  {
+    name: 'deletePoll',
+    endpoint: '/polls/:param_1',
+    method: 'DELETE'
+  },
+  {
+    name: 'getPoll',
+    endpoint: '/poll/:param_1',
+    method: 'PUT'
   }
 ])
 

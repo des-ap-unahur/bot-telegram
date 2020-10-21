@@ -16,7 +16,9 @@ const ES = {
   name: 'Nombre',
   description: 'Descripcion',
   userType: 'Tipo de usuario',
-  actions: 'Acciones'
+  actions: 'Acciones',
+  sectionFrom: 'Sección de',
+  delete: 'Borrar'
 }
 
 export default ES

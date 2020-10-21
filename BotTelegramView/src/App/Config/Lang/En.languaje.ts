@@ -16,7 +16,9 @@ const EN = {
   name: 'Name',
   description: 'Description',
   userType: 'User type',
-  actions: 'Actions'
+  actions: 'Actions',
+  sectionFrom: 'Section from',
+  delete: 'Delete'
 }
 
 export default EN

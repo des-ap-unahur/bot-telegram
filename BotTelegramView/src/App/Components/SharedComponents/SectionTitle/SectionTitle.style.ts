@@ -1,13 +1,14 @@
 import { makeStyles } from '@material-ui/core';
-import { BLACK, BLUE, GOOGLE_BLUE } from '../../../Styles/Colors.index'
+import { BLACK, BLUE, GOOGLE_BLUE, ORANGE } from '../../../Styles/Colors.index';
 
 export const useStyles = makeStyles(theme => ({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    marginTop: theme.spacing(15),
-    width: '100%',
     maxWidth: '1265px',
+    minWidth: '500px',
+    width: '100vw',
+    marginTop: theme.spacing(15),
     marginLeft: theme.spacing(15),
     marginRight: theme.spacing(7),
     transition: theme.transitions.create(['margin'], {
@@ -23,10 +24,7 @@ export const useStyles = makeStyles(theme => ({
     }),
   },
   title: {
-    display: 'flex',
-    color: BLACK,
-    marginRight: '40px',
-    width: '700px'
+    minWidth: "400px"
   },
   correction: {
     width: '415px'
@@ -37,10 +35,11 @@ export const useStyles = makeStyles(theme => ({
     paddingLeft: '2px'
   },
   underline: {
-    display: 'flex',
-    borderBottom: '1px ' + GOOGLE_BLUE + ' solid',
-    marginBottom: '30px',
-    width: '110%',
+    display: "flex",
+    position: 'relative',
+    borderBottom: '1px ' + ORANGE + ' solid',
+    width: '200vh',
+    bottom: '25px',
     transition: theme.transitions.create(['width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -51,14 +50,16 @@ export const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    width: '100%',
+    width: '112vh',
   },
   titleAndUnderlineContainer: {
     display: 'flex',
-    flex: 'wrap',
-    width: 'auto',
-    maxWidth: '1265px',
-    minHeight: '100%',
+    width: "100%",
+    "&& div": {
+      display: "flex",
+      flexWrap: "inherit",
+      flexDirection: "row"
+    }
   },
   underlineWithAction: {
     transition: theme.transitions.create(['width'], {

@@ -5,7 +5,8 @@ export interface GetPollProps {
 	polls: null | PollInterface[]
   total: number;
 	sucess: boolean;
-	clearPollStates: () => void;
+  clearPollStates: () => void;
+  deletePollRequest: (requestOptions: any) => void;
 	getPollsRequest: (requestOptions: any) => void;
 }
 
@@ -14,5 +15,6 @@ export interface GetPollContentProps {
   language: any;
   total: number
   handleChangePage: (page: number, pageSize: number) => Promise<void>;
+  handleDeletePoll: (id:number) => Promise<void>;
   fetching: boolean;
 }
