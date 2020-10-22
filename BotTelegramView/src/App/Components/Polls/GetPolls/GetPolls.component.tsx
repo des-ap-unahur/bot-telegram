@@ -1,10 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
 import GetPollsContent from './GetPolls.content';
 import { GetPollProps } from './GetPolls.interface';
 
 
-const GetPolls = ({ polls, total, sucess, fetching, getPollsRequest, clearPollStates, deletePollRequest}: GetPollProps) => {
+const GetPolls = ({ polls, total, fetching, getPollsRequest, clearPollStates, deletePollRequest}: GetPollProps) => {
+  const [ openDeletePopUp, setOpenDeletePopUp ] = useState<boolean>(false);
+  const [ pollId, selectPollId ] = useState<number | null>(null);
   const { language } = useContext(LanguageContext);
   
   useEffect(()=>{
@@ -23,14 +25,28 @@ const GetPolls = ({ polls, total, sucess, fetching, getPollsRequest, clearPollSt
     await getPollsRequest(requestOptions)
   }
 
-  const handleDeletePoll = async (id: number) => {
+  const handleDeletePoll = async () => {
     const requestOptions = {
-      param_1: id
+      param_1: pollId
     }
 
     clearPollStates()
+    setOpenDeletePopUp(false)
     await deletePollRequest(requestOptions)
     await handleChangePage(0, 10);
+  }
+
+  const handleOpenDeletePopUp = (id: number) => {
+    selectPollId(id);
+    setOpenDeletePopUp(true);
+  }
+
+  const handleCloseDeletePopUp = () => {
+    setOpenDeletePopUp(false);
+  }
+
+  const handleOpenPollPopUp = () => {
+
   }
 
   return (
@@ -41,6 +57,10 @@ const GetPolls = ({ polls, total, sucess, fetching, getPollsRequest, clearPollSt
       total={total}
       fetching={fetching}
       handleDeletePoll={handleDeletePoll}
+      handleOpenDeletePopUp={handleOpenDeletePopUp}
+      handleCloseDeletePopUp={handleCloseDeletePopUp}
+      handleOpenPollPopUp={handleOpenPollPopUp}
+      openDeletePopUp={openDeletePopUp}
     />
   )
 }

@@ -20,7 +20,10 @@ const ES = {
   sectionFrom: 'Sección de',
   delete: 'Borrar',
   userTypeId: 'ID de tipo de usuario',
-  type: 'Tipo'
+  type: 'Tipo',
+  edit: 'Editar',
+  deleteRegistry: 'Eliminar Registro',
+  areYouSureYouWantToDeleteThisRegistry: '¿Esta seguro de que quiere eliminar este registro?'
 }
 
 export default ES

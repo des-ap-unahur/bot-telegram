@@ -20,7 +20,10 @@ const EN = {
   sectionFrom: 'Section from',
   delete: 'Delete',
   userTypeId: 'User type id',
-  type: 'Type'
+  type: 'Type',
+  edit: 'Edit',
+  deleteRegistry: 'Delete registry',
+  areYouSureYouWantToDeleteThisRegistry: 'Are you sure you want to delete this registry'
 }
 
 export default EN

@@ -1,8 +1,8 @@
-import fileSearchIcon from '../../../Assets/Images/file-search.svg';
+import editIcon from '../../../Assets/Images/pencil.svg';
 import trashIcon from '../../../Assets/Images/delete.svg';
 
 export const generateConfigWithLang = (configParams:any) => {
-  const { language, handleDeletePoll } = configParams
+  const { language, handleOpenDeletePopUp } = configParams
 
   return [
     {
@@ -24,18 +24,17 @@ export const generateConfigWithLang = (configParams:any) => {
       actions: [
         {
           type: 'view',
-          id: 'button-documents-view',
-          title: language.view,
-          icon: fileSearchIcon,
-          disabled: true,
+          id: 'button-poll-edit',
+          title: language.edit,
+          icon: editIcon,
           onClick: (poll_id:number) => console.log(poll_id)
         },
         {
           type: 'delete',
-          id: 'button-documents-delete',
+          id: 'button-poll-delete',
           title: language.delete,
           icon: trashIcon,
-          onClick: (dataset:any) => { handleDeletePoll(dataset.poll_id) }
+          onClick: (dataset:any) => { handleOpenDeletePopUp(dataset.poll_id) }
         },
       ]
     }

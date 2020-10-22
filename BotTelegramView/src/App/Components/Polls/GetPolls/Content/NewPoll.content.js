@@ -10,13 +10,10 @@ import { LanguageContext } from '../../../../Config/Lang/Lang.languaje';
 import PopUpHeader from '../../../SharedComponents/PopUpComponents/PopUpHeader.component';
 import PopUpActions from '../../../SharedComponents/PopUpComponents/PopUpActions.component';
 import PopUpContent from '../../../SharedComponents/PopUpComponents/PopUpContent.component';
-import DatePicker from '../../../SharedComponents/DatePicker/DatePicker.component';
 import CustomSelect from '../../../SharedComponents/CustomSelect/CustomSelect.component';
-import ImportFile from '../../../SharedComponents/ImportFile/ImportFile.component';
-import { maxSize } from '../GetPolls.config';
-import { useStyles } from '../ImportReceipt.style';
+import { useStyles } from '../GetPolls.style';
 
-const NewReceipt = props => {
+const NewPoll = (props) => {
   const { 
     handleClose, 
     isOpenDrawer, 
@@ -137,4 +134,4 @@ const NewReceipt = props => {
   );
 }
 
-export default NewReceipt;
+export default NewPoll;

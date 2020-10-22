@@ -9,12 +9,13 @@ import { useStyles } from './ActionButton.styles';
 import { ActionButtonProps, ActionInterface } from './ActionButton.interfaces';
 
 const ActionButton = ({actions, dataset}:ActionButtonProps) => {
-  const { iconButton, iconColorRed, iconColorYellow, iconDisabled, actionContainer } = useStyles();
+  const { iconButton, iconColorRed, iconColorYellow, iconColorOrange, iconDisabled, actionContainer } = useStyles();
   const [ click, setClick ] = useState<boolean>(false);
   const actionTypes = {
     delete: 'delete',
     view: 'view',
-    download: 'download'
+    download: 'download',
+    edit: 'edit'
   };
 
   const handleClick = (action:any) => {
@@ -36,6 +37,7 @@ const ActionButton = ({actions, dataset}:ActionButtonProps) => {
             className={clsx(iconButton,{
               [iconColorRed]: action.type === actionTypes.delete,
               [iconColorYellow]: action.type === actionTypes.view || action.type === actionTypes.download,
+              [iconColorOrange]: action.type === actionTypes.edit,
               [iconDisabled]: action.disabled
             })}
             id={action.id}
