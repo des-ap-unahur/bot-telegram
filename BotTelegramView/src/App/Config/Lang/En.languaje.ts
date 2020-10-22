@@ -23,7 +23,11 @@ const EN = {
   type: 'Type',
   edit: 'Edit',
   deleteRegistry: 'Delete registry',
-  areYouSureYouWantToDeleteThisRegistry: 'Are you sure you want to delete this registry'
+  areYouSureYouWantToDeleteThisRegistry: 'Are you sure you want to delete this registry',
+  createPoll: 'Create poll',
+  save: 'Save',
+  close: 'Close',
+  thisFieldIsRequired: 'This field is required'
 }
 
 export default EN

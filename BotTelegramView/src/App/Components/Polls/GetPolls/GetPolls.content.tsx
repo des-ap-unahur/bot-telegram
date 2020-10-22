@@ -5,6 +5,7 @@ import { generateConfigWithLang } from './GetPolls.config'
 import SectionTitle from '../../SharedComponents/SectionTitle/SectionTitle.component';
 import { GetPollContentProps } from './GetPolls.interface';
 import DeletePopUp from '../../SharedComponents/DeletePopUp/DeletePopUp.component';
+import NewPoll from './Content/NewPoll.content';
 
 
 const GetPollsContent = (props:GetPollContentProps) => {
@@ -18,7 +19,10 @@ const GetPollsContent = (props:GetPollContentProps) => {
     handleOpenPollPopUp,
     openDeletePopUp,
     handleCloseDeletePopUp,
-    handleOpenDeletePopUp
+    handleOpenDeletePopUp,
+    openPollPopUp,
+    handleSavePoll,
+    handleClosePollPopUp
   } = props;
 
   const { 
@@ -26,7 +30,7 @@ const GetPollsContent = (props:GetPollContentProps) => {
     container,
   } = useStyles();
 
-  const configParams = { language, handleOpenDeletePopUp };
+  const configParams = { language, handleOpenDeletePopUp, handleOpenPollPopUp };
   
   return (
     <div className={root}>
@@ -43,6 +47,12 @@ const GetPollsContent = (props:GetPollContentProps) => {
           changePage={handleChangePage}
         />
       </div>
+      <NewPoll
+        handleClose={handleClosePollPopUp}
+        handleSave={handleSavePoll}
+        open={openPollPopUp}
+        fetching={fetching}
+      />
       <DeletePopUp
         open={openDeletePopUp}
         handleClose={handleCloseDeletePopUp}

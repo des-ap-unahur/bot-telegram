@@ -15,7 +15,8 @@ export const generateConfigWithLang = (configParams:any) => {
     },
     {
       name: language.userType,
-      property: 'user_type_id'
+      property: 'description',
+      nestedTable: 'userType'
     },
     {
       name: language.actions,
@@ -27,7 +28,7 @@ export const generateConfigWithLang = (configParams:any) => {
           id: 'button-poll-edit',
           title: language.edit,
           icon: editIcon,
-          onClick: (poll_id:number) => console.log(poll_id)
+          onClick: (dataset:any) => console.log(dataset)
         },
         {
           type: 'delete',

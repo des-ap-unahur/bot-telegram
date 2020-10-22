@@ -44,7 +44,7 @@ export const useStyles = makeStyles(theme => ({
     minHeight: '100%',
     minWidth: '100%'
   },
-  buttonImportSubmit:{
+  buttonSubmit:{
     marginRight: '28px',
     padding: '8px 18px',
     background: GOOGLE_BLUE,
@@ -53,10 +53,10 @@ export const useStyles = makeStyles(theme => ({
       background: BLUE
     }
   },
-  buttonImportClose: {
+  buttonClose: {
     marginRight: theme.spacing(4),
     padding: '8px 18px',
-    color: WHITE,
+    color: BLACK,
     boxShadow: 'none',
   },
   newReceiptInputContainers: {

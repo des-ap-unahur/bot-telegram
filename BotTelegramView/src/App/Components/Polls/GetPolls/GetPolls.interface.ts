@@ -1,13 +1,21 @@
 import PollInterface from "../../../Interfaces/Poll.interface";
+import UserTypes from "../../../Interfaces/UserTypes.interface";
 
 export interface GetPollProps {
 	fetching: boolean;
-	polls: null | PollInterface[]
+  polls: null | PollInterface[]
+  pollSelected: null | PollInterface;
+  userTypes: null | UserTypes[];
+  fetchingUserTypes: boolean;
   total: number;
-	sucess: boolean;
+  sucess: boolean;
+  selectPoll: (poll: null | PollInterface) => void;
   clearPollStates: () => void;
+  getPollsRequest: (requestOptions: any) => void;
   deletePollRequest: (requestOptions: any) => void;
-	getPollsRequest: (requestOptions: any) => void;
+  updatePollRequest: (requestOptions: any) => void;
+  postPollRequest: (requestOptions: any) => void;
+  getUserTypesRequest: (requestOptions:any) => void;
 }
 
 export interface GetPollContentProps {
@@ -20,5 +28,8 @@ export interface GetPollContentProps {
   handleOpenDeletePopUp: (id:number) => void;
   handleCloseDeletePopUp: () => void;
   fetching: boolean;
-  handleOpenPollPopUp: () => void
+  handleOpenPollPopUp: (poll?: PollInterface) => void;
+  handleClosePollPopUp: () => void;
+  handleSavePoll: () => Promise<void>;
+  openPollPopUp: boolean;
 }

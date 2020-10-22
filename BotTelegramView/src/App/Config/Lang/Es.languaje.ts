@@ -23,7 +23,11 @@ const ES = {
   type: 'Tipo',
   edit: 'Editar',
   deleteRegistry: 'Eliminar Registro',
-  areYouSureYouWantToDeleteThisRegistry: '¿Esta seguro de que quiere eliminar este registro?'
+  areYouSureYouWantToDeleteThisRegistry: '¿Esta seguro de que quiere eliminar este registro?',
+  createPoll: 'Crear encuesta',
+  save: 'Guardar',
+  close: 'Cerrar',
+  thisFieldIsRequired: 'Este campo es requerido'
 }
 
 export default ES

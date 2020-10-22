@@ -79,12 +79,14 @@ const TableContent = (props: TableContentProps) => {
             : 
               <TableSkeleton
                 config={config}
-                rowsPerPage={rowsPerPage}
+                rowsPerPage={withPagination ? rowsPerPage : dataset.length}
               />
           }
-          <TableVoidCells
-            emptyRows={emptyRows}
-          />
+          {withPagination &&
+            <TableVoidCells
+              emptyRows={emptyRows}
+            />
+          }
         </TableBody>
       </Table>
       {withPagination &&

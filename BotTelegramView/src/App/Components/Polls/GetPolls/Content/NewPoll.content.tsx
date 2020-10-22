@@ -10,26 +10,16 @@ import { LanguageContext } from '../../../../Config/Lang/Lang.languaje';
 import PopUpHeader from '../../../SharedComponents/PopUpComponents/PopUpHeader.component';
 import PopUpActions from '../../../SharedComponents/PopUpComponents/PopUpActions.component';
 import PopUpContent from '../../../SharedComponents/PopUpComponents/PopUpContent.component';
-import CustomSelect from '../../../SharedComponents/CustomSelect/CustomSelect.component';
 import { useStyles } from '../GetPolls.style';
+import { ModalControllerContext } from '../../../../HOC/ModalController.hoc';
 
-const NewPoll = (props) => {
+
+const NewPoll = (props:any) => {
+  const { isOpenDrawer } = useContext(ModalControllerContext);
   const { 
     handleClose, 
-    isOpenDrawer, 
-    handleLoad,
+    handleSave,
     open,
-    setPeriod,
-    period,
-    documentType,
-    handleChangeDocumentType,
-    emptyFields,
-    documentTypes,
-    setDocument,
-    setFileType,
-    document,
-    maxSizeExceeded,
-    setMaxSizeExceeded,
     fetching
   } = props;
 
@@ -38,11 +28,9 @@ const NewPoll = (props) => {
     popUpMargin, 
     popUpMarginWithOpenModal, 
     contentSize,
-    buttonImportClose,
-    buttonImportSubmit,
-    newReceiptInputContainers,
+    buttonClose,
+    buttonSubmit,
     rootPaper,
-    importInputContainer,
     newReceiptHeader,
     loaderContainer,
     loader
@@ -66,46 +54,22 @@ const NewPoll = (props) => {
       >
         <div className={rootContainer}>
           <PopUpHeader 
-            id="new-receipt-header" 
+            id="new-poll-header" 
             onClose={handleClose}
           >
             <Box 
               fontWeight={600}
               className={newReceiptHeader}
             >
-              {language.importDocuments}
+              {language.createPoll}
             </Box>
           </PopUpHeader>
           <PopUpContent className={contentSize}>
-            <div className={newReceiptInputContainers}>
-              <DatePicker
-                setDate={setPeriod}
-                date={period}
-                format={"MM/yyyy"}
-              />
-              <CustomSelect
-                value={documentType}
-                handleChange={handleChangeDocumentType}
-                emptyFields={emptyFields}
-                documentTypes={documentTypes}
-              />
-            </div>
-            <div className={importInputContainer}>
-              <ImportFile
-                setDocument={setDocument}
-                documentType={documentType}
-                setFileType={setFileType}
-                document={document}
-                emptyFields={emptyFields}
-                maxSize={maxSize}
-                maxSizeExceeded={maxSizeExceeded}
-                setMaxSizeExceeded={setMaxSizeExceeded}
-              />
-            </div>
+            
           </PopUpContent>
           <PopUpActions>
              <Button
-              className={buttonImportClose}
+              className={buttonClose}
               onClick={handleClose}
             >
               <Box fontWeight={600}>
@@ -114,12 +78,12 @@ const NewPoll = (props) => {
             </Button>
             <Button
               variant='contained'
-              className={buttonImportSubmit}
+              className={buttonSubmit}
               disabled={fetching}
-              onClick={handleLoad}
+              onClick={handleSave}
             >
               <Box fontWeight={600}>
-                {language.import}
+                {language.save}
               </Box>
             </Button>
             {fetching && 
