@@ -3,7 +3,7 @@ export interface TableProps {
   dataset: any;
   loader: boolean;
   totalRows: number;
-  changePage: (page: number, pageSize: number) => Promise<void>;
+  changePage?: (page: number, pageSize: number) => Promise<void>;
 }
 
 export interface TableContentProps {
@@ -18,6 +18,7 @@ export interface TableContentProps {
   isOpenDrawer: boolean;
   rowsPerPageOptions: number[];
   totalRows: number;
+  withPagination: boolean;
 }
 
 export interface TableVoidCellsProps {

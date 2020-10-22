@@ -18,7 +18,9 @@ const EN = {
   userType: 'User type',
   actions: 'Actions',
   sectionFrom: 'Section from',
-  delete: 'Delete'
+  delete: 'Delete',
+  userTypeId: 'User type id',
+  type: 'Type'
 }
 
 export default EN

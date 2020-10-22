@@ -4,39 +4,20 @@ import GetUserTypesContent from './GetUserTypes.content';
 import { GetUserTypesProps } from './GetUserTypes.interface';
 
 
-const GetUserTypes = ({ userTypes, total, sucess, fetching, getUserTypesRequest, clearUserTypesStates, deleteUserTypesRequest}: GetUserTypesProps) => {
+const GetUserTypes = ({ userTypes, fetching, getUserTypesRequest }: GetUserTypesProps) => {
   const { language } = useContext(LanguageContext);
   
   useEffect(()=>{
-    getUserTypesRequest();
-  },[])
-
-  const handleChangePage = async (page:number, pageSize:number) => {
-    const requestOptions = {
-      params: { page, pageSize }
-    };
-
-    await getUserTypesRequest()
-  }
-
-  const handleDeleteUserType = async (id: number) => {
-    const requestOptions = {
-      param_1: id
+    if(!userTypes){
+      getUserTypesRequest({});
     }
-
-    clearUserTypesStates()
-    await deleteUserTypesRequest(requestOptions)
-  
-  }
+  },[userTypes])
 
   return (
     <GetUserTypesContent
       language={language}
-      handleChangePage={handleChangePage}
       userTypes={userTypes}
-      total={total}
       fetching={fetching}
-      handleDeleteUserType={handleDeleteUserType}
     />
   )
 }

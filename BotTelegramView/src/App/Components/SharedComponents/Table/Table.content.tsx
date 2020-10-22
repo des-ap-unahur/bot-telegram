@@ -32,7 +32,8 @@ const TableContent = (props: TableContentProps) => {
     handleChangePage, 
     handleChangeRowsPerPage,
     rowsPerPageOptions, 
-    totalRows
+    totalRows,
+    withPagination
   } = props;
 
   return (
@@ -86,17 +87,19 @@ const TableContent = (props: TableContentProps) => {
           />
         </TableBody>
       </Table>
-      <TablePagination
-        rowsPerPageOptions={rowsPerPageOptions}
-        component="div"
-        count={totalRows}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        backIconButtonProps={{disabled: Boolean(page<=0)}}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-        labelRowsPerPage={language.rowsPerPage}
-      />
+      {withPagination &&
+        <TablePagination
+          rowsPerPageOptions={rowsPerPageOptions}
+          component="div"
+          count={totalRows}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          backIconButtonProps={{disabled: Boolean(page<=0)}}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+          labelRowsPerPage={language.rowsPerPage}
+        />
+      }
     </TableContainer>
   )
 }

@@ -18,7 +18,9 @@ const ES = {
   userType: 'Tipo de usuario',
   actions: 'Acciones',
   sectionFrom: 'Sección de',
-  delete: 'Borrar'
+  delete: 'Borrar',
+  userTypeId: 'ID de tipo de usuario',
+  type: 'Tipo'
 }
 
 export default ES

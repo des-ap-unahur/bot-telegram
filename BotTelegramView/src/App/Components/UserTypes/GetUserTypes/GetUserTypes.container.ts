@@ -7,10 +7,8 @@ import GetUserTypes from './GetUserTypes.component';
 const actionCreators = Object.assign({}, UserTypesAction.actionCreators);
 
 const mapStateToProps = (state: GlobalStateInterface) => ({
-  fetching: state.usertypes.fetchingStatus,
-  usertypes: state.usertypes.userTypes,
-  total: state.usertypes.total,
-  sucess: state.usertypes.sucess
+  fetching: state.userTypes.fetchingStatus,
+  userTypes: state.userTypes.userTypes
 });
 
 const mapDispatchToProps = (dispatch: any) =>

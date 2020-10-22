@@ -10,10 +10,7 @@ const GetUserTypesContent = (props:GetUserTypesContentProps) => {
   const {
     userTypes, 
     language, 
-    total, 
-    handleChangePage, 
     fetching,
-    handleDeleteUserType
   } = props;
 
   const { 
@@ -21,7 +18,7 @@ const GetUserTypesContent = (props:GetUserTypesContentProps) => {
     container,
   } = useStyles();
 
-  const configParams = { language, handleDeleteUserType };
+  const configParams = { language };
   
   return (
     <div className={root}>
@@ -33,8 +30,7 @@ const GetUserTypesContent = (props:GetUserTypesContentProps) => {
           config={generateConfigWithLang(configParams) || []}
           dataset={userTypes || []}
           loader={fetching}
-          totalRows={total}
-          changePage={handleChangePage}
+          totalRows={Number(null)}
         />
       </div>
     </div>

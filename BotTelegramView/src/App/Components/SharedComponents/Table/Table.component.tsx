@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useMemo, useEffect } from 'react';
 import TableContent from './Table.content'
 import { ModalControllerContext } from '../../../HOC/ModalController.hoc';
 import { TableProps } from './Table.interface';
@@ -9,15 +9,19 @@ const TableComponent = ({ config, dataset, loader, totalRows, changePage}: Table
   const rowsPerPageOptions = [10, 15, 25, 50, 100];
   const { isOpenDrawer } = useContext(ModalControllerContext)
 
+  const withPagination = useMemo(()=>{
+    return Boolean(changePage)
+  }, [changePage]);
+
   const emptyRows = !loader ? rowsPerPage - dataset.length : 0;
   
   const handleChangePage = (event: any, newPage: number) => {
     setPage(newPage);
-    changePage(newPage+1, rowsPerPage)
+    changePage && changePage(newPage+1, rowsPerPage)
   };
 
   const handleChangeRowsPerPage = (event: any) => {
-    changePage(1, event.target.value)
+    changePage && changePage(1, event.target.value)
     setRowsPerPage(event.target.value);
     setPage(0);
   };
@@ -35,6 +39,7 @@ const TableComponent = ({ config, dataset, loader, totalRows, changePage}: Table
       isOpenDrawer={isOpenDrawer}
       rowsPerPageOptions={rowsPerPageOptions}
       totalRows={totalRows || 0}
+      withPagination={withPagination}
     />
   )
 }
