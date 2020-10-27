@@ -1,14 +1,18 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
 import PollInterface from '../../../Interfaces/Poll.interface';
+import { inputNames } from './GetPolls.config';
 import GetPollsContent from './GetPolls.content';
-import { GetPollProps } from './GetPolls.interface';
+import { GetPollProps, OptionInterface } from './GetPolls.interface';
 
 
 const GetPolls = (props: GetPollProps) => {
   const [ openDeletePopUp, setOpenDeletePopUp ] = useState<boolean>(false);
   const [ openPollPopUp, setOpenPollPopUp ] = useState<boolean>(false);
   const [ pollId, selectPollId ] = useState<number | null>(null);
+  const [ name, setName ] = useState<string>('');
+  const [ description, setDescription ] = useState<string>('');
+  const [ userTypeId, setUserTypeId ] = useState<number | string>('');
   const { language } = useContext(LanguageContext);
   const { 
     polls, 
@@ -25,6 +29,19 @@ const GetPolls = (props: GetPollProps) => {
     userTypes
   } = props;
   
+  const userTypesList = useMemo<OptionInterface[] | null>(()=>{
+    return userTypes && userTypes.map(
+      userType => ({
+        id: userType.user_type_id,
+        name: userType.description
+      })
+    )
+  },[userTypes])
+
+  const emptyFields = useMemo<boolean>(()=>{
+    return !(name && description && userTypeId)
+  }, [name, description, userTypeId])
+
   const getPolls = useCallback(()=>{
     const requestOptions = {
       params: { page: 0, pageSize: 10 }
@@ -107,6 +124,19 @@ const GetPolls = (props: GetPollProps) => {
     }
   }
 
+  const handleChangeInputs = (e:any)=>{
+    const name = e.target.name;
+    const value = e.target.value;
+
+    if(name === inputNames.name){
+      setName(value);
+    } else if (name === inputNames.description){
+      setDescription(value);
+    } else if (name === inputNames.userType){
+      setUserTypeId(value);
+    }
+  } 
+
   return (
     <GetPollsContent
       language={language}
@@ -122,6 +152,13 @@ const GetPolls = (props: GetPollProps) => {
       openPollPopUp={openPollPopUp}
       handleClosePollPopUp={handleClosePollPopUp}
       handleSavePoll={handleSavePoll}
+      userTypes={userTypes}
+      handleChangeInputs={handleChangeInputs}
+      name={name}
+      description={description}
+      userTypeId={userTypeId}
+      emptyFields={emptyFields}
+      userTypesList={userTypesList}
     />
   )
 }

@@ -22,7 +22,14 @@ const GetPollsContent = (props:GetPollContentProps) => {
     handleOpenDeletePopUp,
     openPollPopUp,
     handleSavePoll,
-    handleClosePollPopUp
+    handleClosePollPopUp,
+    userTypes,
+    handleChangeInputs,
+    name,
+    description,
+    userTypeId,
+    emptyFields,
+    userTypesList
   } = props;
 
   const { 
@@ -52,6 +59,13 @@ const GetPollsContent = (props:GetPollContentProps) => {
         handleSave={handleSavePoll}
         open={openPollPopUp}
         fetching={fetching}
+        userTypes={userTypes}
+        handleChangeInputs={handleChangeInputs}
+        name={name}
+        description={description}
+        userTypeId={userTypeId}
+        emptyFields={emptyFields}
+        userTypesList={userTypesList}
       />
       <DeletePopUp
         open={openDeletePopUp}

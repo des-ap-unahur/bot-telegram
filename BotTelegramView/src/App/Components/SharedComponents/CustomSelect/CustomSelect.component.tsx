@@ -5,17 +5,19 @@ import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
 import { capitalize } from '../../../Utils/FormatStrings.utils';
 import { CustomSelectProps } from './CustomSelect.interface';
 
-const CustomSelect = ({title, handleChange, value, emptyFields, list}:CustomSelectProps) => {
+const CustomSelect = ({title, handleChange, value, emptyFields, list, name, correction}:CustomSelectProps) => {
   const { language } = useContext(LanguageContext)
   const {
     selectFormControl,
     selectLabel,
     selectLabelAlert,
-    selectLoader
+    selectLoader,
+    widthAndMarginCorrection,
+    standarWidth
   } = useStyles();
 
   return(
-    <div>
+    <div className={correction ? widthAndMarginCorrection : standarWidth }>
       <FormControl className={selectFormControl}>
         <Typography className={selectLabel} variant="subtitle1">
           {title}
@@ -23,6 +25,7 @@ const CustomSelect = ({title, handleChange, value, emptyFields, list}:CustomSele
         <Select
           onChange={handleChange}
           value={value}
+          name={name}
         >
           {list ?
             list.map(option => 

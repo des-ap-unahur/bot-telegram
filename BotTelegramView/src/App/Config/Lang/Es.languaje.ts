@@ -27,7 +27,9 @@ const ES = {
   createPoll: 'Crear encuesta',
   save: 'Guardar',
   close: 'Cerrar',
-  thisFieldIsRequired: 'Este campo es requerido'
+  thisFieldIsRequired: 'Este campo es requerido',
+  newPoll: 'Nueva encuesta',
+  editPoll: 'Editar encuesta'
 }
 
 export default ES

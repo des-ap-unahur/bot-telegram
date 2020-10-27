@@ -3,12 +3,11 @@ export interface OptionInterface {
   name: string;
 }
 
-export interface CustomSelectProps {
+export interface CustomInputProps {
   title: string;
   handleChange: (e: any) => void;
-  value: string | number | null;
+  value: string | null;
   name: string;
   emptyFields?: null | string | number | boolean
-  list?: OptionInterface[] | null;
   correction?: boolean;
 }

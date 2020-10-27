@@ -2,25 +2,21 @@ import { makeStyles } from "@material-ui/core/styles";
 import { BLACK, RED_ALERT } from '../../../Styles/Colors.index'
 
 export const useStyles = makeStyles(theme => ({
-  selectFormControl: {
+  inputFormControl: {
     width: '100%',
   },
-  selectLabel:{
+  inputLabel:{
     display: 'flex',
     flexDirection: 'column',
     color: BLACK,
   },
-  selectLabelAlert:{
+  inputLabelAlert:{
     fontSize: '15px',
     color: RED_ALERT
   },
-  selectLoader: {
-    display: 'flex',
-    justifyContent: 'center'
-  },
   widthAndMarginCorrection: {
     marginTop: '20px',
-    width: '95%'
+    width: '92%'
   },
   standarWidth: {
     width: '255px'

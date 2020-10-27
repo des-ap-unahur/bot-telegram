@@ -1,100 +1,58 @@
-import React, { useContext } from 'react';
-import clsx from 'clsx'
-import { 
-  Button,
-  Dialog,
-  Box,
-  CircularProgress
-} from '@material-ui/core';
+import React, { useContext, useMemo } from 'react';
 import { LanguageContext } from '../../../../Config/Lang/Lang.languaje';
-import PopUpHeader from '../../../SharedComponents/PopUpComponents/PopUpHeader.component';
-import PopUpActions from '../../../SharedComponents/PopUpComponents/PopUpActions.component';
-import PopUpContent from '../../../SharedComponents/PopUpComponents/PopUpContent.component';
 import { useStyles } from '../GetPolls.style';
-import { ModalControllerContext } from '../../../../HOC/ModalController.hoc';
+import { NewPollProps } from '../GetPolls.interface';
+import { generateInputConfig } from '../GetPolls.config'
+import RightModal from '../../../SharedComponents/RightModalComponents/RightModal.component';
+import BuildInputs from '../../../SharedComponents/BuildInputs/BuildInputs.component';
 
 
-const NewPoll = (props:any) => {
-  const { isOpenDrawer } = useContext(ModalControllerContext);
+const NewPoll = (props:NewPollProps) => {
+  const { language } = useContext(LanguageContext);
+
   const { 
     handleClose, 
     handleSave,
     open,
-    fetching
+    fetching,
+    userTypesList,
+    handleChangeInputs,
+    name,
+    description,
+    userTypeId,
+    emptyFields
   } = props;
 
   const { 
-    rootContainer, 
-    popUpMargin, 
-    popUpMarginWithOpenModal, 
     contentSize,
-    buttonClose,
-    buttonSubmit,
-    rootPaper,
-    newReceiptHeader,
-    loaderContainer,
-    loader
   } = useStyles();
 
-  const { language } = useContext(LanguageContext);
+  const inputParams = {
+    language,
+    handleChangeInputs,
+    name,
+    description,
+    userTypeId,
+    emptyFields,
+    userTypesList
+  }
+
+  const inputs = generateInputConfig(inputParams)
 
   return (
-    <>
-      <Dialog 
-        onClose={handleClose} 
-        aria-labelledby="new-receipt-view"
-        fullWidth={true}
-        open={open}
-        className={clsx(popUpMargin, {
-          [popUpMarginWithOpenModal]: isOpenDrawer
-        })}
-        classes={{
-          paper: rootPaper
-        }}
-      >
-        <div className={rootContainer}>
-          <PopUpHeader 
-            id="new-poll-header" 
-            onClose={handleClose}
-          >
-            <Box 
-              fontWeight={600}
-              className={newReceiptHeader}
-            >
-              {language.createPoll}
-            </Box>
-          </PopUpHeader>
-          <PopUpContent className={contentSize}>
-            
-          </PopUpContent>
-          <PopUpActions>
-             <Button
-              className={buttonClose}
-              onClick={handleClose}
-            >
-              <Box fontWeight={600}>
-                {language.close}
-              </Box>
-            </Button>
-            <Button
-              variant='contained'
-              className={buttonSubmit}
-              disabled={fetching}
-              onClick={handleSave}
-            >
-              <Box fontWeight={600}>
-                {language.save}
-              </Box>
-            </Button>
-            {fetching && 
-              <div className={loaderContainer}>
-                <CircularProgress className={loader} size={35} />
-              </div>
-            }
-          </PopUpActions>
-        </div>
-      </Dialog>
-    </>
+    <RightModal
+      open={open}
+      handleClose={handleClose}
+      title={language.newPoll}
+      handleSave={handleSave}
+      fetching={fetching}
+    >
+      <div className={contentSize}>
+        {inputs.map(
+          input => <BuildInputs input={input}/>
+        )}
+      </div>
+    </RightModal>
   );
 }
 

@@ -3,6 +3,8 @@ import PollQuestion from "../Models/PollQuestions.model";
 import PollQuestionInterface from "../../Interfaces/PollQuestion.interface";
 import Paginate from "../../Utils/Paginate.utils";
 import PollWithPagination from '../../Interfaces/PollWithPagination.interface';
+
+
 class PollRepository {
   getAllWithPagination = async (paginationData: any): Promise<PollWithPagination> => {
     console.log(Paginate(paginationData))

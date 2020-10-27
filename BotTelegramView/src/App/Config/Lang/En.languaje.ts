@@ -27,7 +27,9 @@ const EN = {
   createPoll: 'Create poll',
   save: 'Save',
   close: 'Close',
-  thisFieldIsRequired: 'This field is required'
+  thisFieldIsRequired: 'This field is required',
+  newPoll: 'New poll',
+  editPoll: 'Edit poll'
 }
 
 export default EN

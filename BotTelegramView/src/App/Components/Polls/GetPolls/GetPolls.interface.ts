@@ -32,4 +32,30 @@ export interface GetPollContentProps {
   handleClosePollPopUp: () => void;
   handleSavePoll: () => Promise<void>;
   openPollPopUp: boolean;
+  userTypes: null | UserTypes[];
+  handleChangeInputs: (e: any) => void;
+  name: string;
+  description: string;
+  userTypeId: number | string;
+  emptyFields: boolean;
+  userTypesList: OptionInterface[] | null;
+}
+
+export interface NewPollProps {
+  handleClose: () => void;
+  handleSave: () => Promise<void>;
+  open: boolean;
+  fetching: boolean
+  userTypes: null | UserTypes[];
+  handleChangeInputs: (e: any) => void;
+  name: string;
+  description: string;
+  userTypeId: number | string;
+  emptyFields: boolean;
+  userTypesList: OptionInterface[] | null;
+}
+
+export interface OptionInterface {
+  id: number;
+  name: string;
 }

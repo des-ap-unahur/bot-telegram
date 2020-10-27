@@ -4,12 +4,12 @@ import { useStyles } from './Select.style'
 import { SelectProps } from './Select.interfaces';
 
 
-const SelectOptions = ({title, listOptions, handleChange, value, lang}: SelectProps) => {
+const SelectOptions = ({title, listOptions, handleChange, value}: SelectProps) => {
   const { select } = useStyles();
   
   return (
     <FormControl>
-      { lang &&
+      { title &&
         <InputLabel>{title}</InputLabel>
       }
       <Select
