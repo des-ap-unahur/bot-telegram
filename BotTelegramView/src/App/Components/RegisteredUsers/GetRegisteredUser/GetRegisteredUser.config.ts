@@ -30,7 +30,13 @@ export const generateConfigWithLang = (configParams: any) => {
             disabled: true,
             onClick: (user_id:number) => console.log(user_id)
           },
-        
+          {
+            type: 'delete',
+            id: 'button-documents-delete',
+            title: language.delete,
+            icon: trashIcon,
+            onClick: (dataset:any) => { handleDeleteRegisteredUser(dataset.user_id) }
+          },
         ]
       }
     ]
