@@ -7,14 +7,12 @@ import PollWithPagination from '../../Interfaces/PollWithPagination.interface';
 
 class PollRepository {
   getAllWithPagination = async (paginationData: any): Promise<PollWithPagination> => {
-    console.log(Paginate(paginationData))
-    const { pageSize } = paginationData;
     const { count, rows: poll } = await Poll.findAndCountAll({
       include: [PollQuestion],
       ...Paginate(paginationData),
     });
-    console
-    const total = Math.ceil(count / pageSize);
+    
+    const total = count;
     return { total, poll };
   };
 

@@ -5,7 +5,7 @@ import { TableProps } from './Table.interface';
 
 const TableComponent = ({ config, dataset, loader, totalRows, changePage}: TableProps) => {
   const [ page, setPage ] = useState(0);
-  const [ rowsPerPage, setRowsPerPage ] = useState(15);
+  const [ rowsPerPage, setRowsPerPage ] = useState(10);
   const rowsPerPageOptions = [10, 15, 25, 50, 100];
   const { isOpenDrawer } = useContext(ModalControllerContext)
 
@@ -17,11 +17,11 @@ const TableComponent = ({ config, dataset, loader, totalRows, changePage}: Table
   
   const handleChangePage = (event: any, newPage: number) => {
     setPage(newPage);
-    changePage && changePage(newPage+1, rowsPerPage)
+    changePage && changePage(newPage, rowsPerPage)
   };
 
   const handleChangeRowsPerPage = (event: any) => {
-    changePage && changePage(1, event.target.value)
+    changePage && changePage(0, event.target.value)
     setRowsPerPage(event.target.value);
     setPage(0);
   };

@@ -15,7 +15,8 @@ export interface GetPollProps {
   deletePollRequest: (requestOptions: any) => void;
   updatePollRequest: (requestOptions: any) => void;
   postPollRequest: (requestOptions: any) => void;
-  getUserTypesRequest: (requestOptions:any) => void;
+  getUserTypesRequest: (requestOptions?:any) => void;
+  postQuestionsRequest: (requestOptions:any) => void;
 }
 
 export interface GetPollContentProps {

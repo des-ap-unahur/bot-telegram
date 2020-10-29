@@ -15,7 +15,7 @@ const buildAsyncAction = ({name, endpoint: originEndpoint, method: defaultMethod
     [name + 'Failure']: pseudoDispatch(name, 'Failure', actionsTypes)
   }
   
-  const asyncActionRequest = (requestOptions:any) => {
+  const asyncActionRequest = (requestOptions?:any) => {
     return async (dispatch:any) => {
       const actionName = name + 'Attempt'
       dispatch(storeActions[actionName](requestOptions.data))

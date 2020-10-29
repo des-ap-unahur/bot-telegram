@@ -5,14 +5,15 @@ export const createArrayIterator = (num: number) => {
 }
 
 export const createInputQuestions = (params: any) => {
-  const { handleChangeInputQuestions, index, language, value } = params;
+  const { handleChangeInputQuestions, index, language, value, confirmation } = params;
   return {
     type: 'text',
     name:'question' + index,
     title:language.question + ' ' + (index+1),
     handleChange: (e: any) => handleChangeInputQuestions(e, index),
     value,
-    correction: true
+    correction: true,
+    emptyFields: !value && confirmation
   }
 }
 

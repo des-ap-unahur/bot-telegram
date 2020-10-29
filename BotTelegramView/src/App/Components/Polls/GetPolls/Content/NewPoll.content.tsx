@@ -54,7 +54,8 @@ const NewPoll = (props:NewPollProps) => {
             language, 
             index, 
             handleChangeInputQuestions, 
-            value: question.question
+            value: question.question,
+            confirmation
           }
         )
     )

@@ -17,6 +17,7 @@ const GetPolls = (props: GetPollProps) => {
   const [ numberOfQuestions, setNumberOfQuestions ] = useState<number | string>(1);
   const [ confirmation, setConfirmation ] = useState<boolean>(false);
   const [ questions, setQuestions ] = useState<QuestionInterface[]>([]);
+  const [ postAction, setPostAction ] = useState<boolean>(false);
   const { language } = useContext(LanguageContext);
   const { 
     polls, 
@@ -30,7 +31,8 @@ const GetPolls = (props: GetPollProps) => {
     updatePollRequest, 
     postPollRequest,
     getUserTypesRequest,
-    userTypes
+    userTypes,
+    postQuestionsRequest
   } = props;
 
   const userTypesList = useMemo<OptionInterface[] | null>(()=>{
@@ -43,8 +45,12 @@ const GetPolls = (props: GetPollProps) => {
   },[userTypes])
 
   const emptyFields = useMemo<boolean>(()=>{
-    return !(name && description && userTypeId)
-  }, [name, description, userTypeId])
+    const emptyQuestions = questions.some(
+      question => question.question === ''
+    )
+
+    return !(name && description && userTypeId) || !emptyQuestions
+  }, [name, description, userTypeId, questions])
 
   const getPolls = useCallback(()=>{
     const requestOptions = {
@@ -59,7 +65,7 @@ const GetPolls = (props: GetPollProps) => {
     const arrayIterator = createArrayIterator(toNumber)
 
     const buildQuestion: QuestionInterface[] = arrayIterator.map(
-      item => buildQuestions('', '', '')
+      () => buildQuestions('', '', '')
     )
     setQuestions(buildQuestion);
   }, [numberOfQuestions]);
@@ -69,6 +75,44 @@ const GetPolls = (props: GetPollProps) => {
       getUserTypesRequest({});
     }
   }, [userTypes, getUserTypesRequest])
+
+  const handleClosePollPopUp = () => {
+    setNumberOfQuestions('1');
+    selectPoll(null);
+    setOpenPollPopUp(false);
+    setName('');
+    setDescription('');
+    setUserTypeId('');
+    setQuestions([]);
+    selectPollId(null);
+    setConfirmation(false);
+    setPostAction(false);
+    getPolls();
+  }
+
+  const postQuestions = useCallback(()=>{
+    if(postAction && pollSelected){
+      const questionsToPost = questions.map(
+        (question)=> 
+          ({
+            poll_id: pollSelected.poll_id, 
+            question: question.question, 
+            description: question.description 
+          })
+      )
+
+      const requestOptions = {
+        data: questionsToPost
+      }
+      
+      postQuestionsRequest(requestOptions);
+      handleClosePollPopUp();
+    }
+  },[postAction, pollSelected, questions.length, postQuestionsRequest])
+
+  useEffect(()=>{
+    postQuestions();
+  }, [postQuestions])
 
   useEffect(()=>{
     getUserTypes();
@@ -112,9 +156,9 @@ const GetPolls = (props: GetPollProps) => {
       param_1: pollId
     }
 
-    clearPollStates()
-    setOpenDeletePopUp(false)
-    await deletePollRequest(requestOptions)
+    clearPollStates();
+    setOpenDeletePopUp(false);
+    await deletePollRequest(requestOptions);
     await handleChangePage(0, 10);
   }
 
@@ -134,18 +178,6 @@ const GetPolls = (props: GetPollProps) => {
     } else {
       setOpenPollPopUp(true);
     }
-  }
-
-  const handleClosePollPopUp = () => {
-    setNumberOfQuestions('1');
-    selectPoll(null);
-    setOpenPollPopUp(false);
-    setName('');
-    setDescription('');
-    setUserTypeId('');
-    setQuestions([]);
-    selectPollId(null);
-    setConfirmation(false)
   }
 
   const handleSavePoll = async () => {
@@ -170,6 +202,7 @@ const GetPolls = (props: GetPollProps) => {
       }
 
       await postPollRequest(requestOptions);
+      await setPostAction(true);
     }
   }
 
