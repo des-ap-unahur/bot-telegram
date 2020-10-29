@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import { WHITE, GOOGLE_BLUE, BLACK, BLUE } from '../../Styles/Colors.index'
+import { WHITE, GOOGLE_BLUE, BLACK, BLUE } from '../../../Styles/Colors.index'
 
 export const useStyles = makeStyles(theme => ({
   root: {
@@ -44,7 +44,7 @@ export const useStyles = makeStyles(theme => ({
     minHeight: '100%',
     minWidth: '100%'
   },
-  buttonImportSubmit:{
+  buttonImportSubmit: {
     marginRight: '28px',
     padding: '8px 18px',
     background: GOOGLE_BLUE,
@@ -69,7 +69,7 @@ export const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     paddingBottom: '60px',
   },
-  newReceiptHeader:{
+  newReceiptHeader: {
     padding: '3px 9px',
   },
   loader: {
