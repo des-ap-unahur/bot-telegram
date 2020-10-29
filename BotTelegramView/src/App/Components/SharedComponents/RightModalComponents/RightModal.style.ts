@@ -11,6 +11,10 @@ export const useStyles = makeStyles(theme => ({
     paddingLeft: theme.spacing(2),
     background: BLUE
   },
+  content: {
+    height: '83vh',
+    overflowY: "scroll"
+  },
   footer: {
     position: 'absolute',
     bottom: '0',

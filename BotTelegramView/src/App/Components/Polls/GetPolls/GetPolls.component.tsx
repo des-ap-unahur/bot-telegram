@@ -3,7 +3,8 @@ import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
 import PollInterface from '../../../Interfaces/Poll.interface';
 import { inputNames } from './GetPolls.config';
 import GetPollsContent from './GetPolls.content';
-import { GetPollProps, OptionInterface } from './GetPolls.interface';
+import { GetPollProps, OptionInterface, QuestionInterface } from './GetPolls.interface';
+import { createArrayIterator, buildQuestions } from './GetPolls.utils';
 
 
 const GetPolls = (props: GetPollProps) => {
@@ -13,6 +14,9 @@ const GetPolls = (props: GetPollProps) => {
   const [ name, setName ] = useState<string>('');
   const [ description, setDescription ] = useState<string>('');
   const [ userTypeId, setUserTypeId ] = useState<number | string>('');
+  const [ numberOfQuestions, setNumberOfQuestions ] = useState<number | string>(1);
+  const [ confirmation, setConfirmation ] = useState<boolean>(false);
+  const [ questions, setQuestions ] = useState<QuestionInterface[]>([]);
   const { language } = useContext(LanguageContext);
   const { 
     polls, 
@@ -28,7 +32,7 @@ const GetPolls = (props: GetPollProps) => {
     getUserTypesRequest,
     userTypes
   } = props;
-  
+
   const userTypesList = useMemo<OptionInterface[] | null>(()=>{
     return userTypes && userTypes.map(
       userType => ({
@@ -50,6 +54,16 @@ const GetPolls = (props: GetPollProps) => {
     getPollsRequest(requestOptions);
   }, [])
 
+  const generateQuestions = useCallback(()=>{
+    const toNumber = Number(numberOfQuestions)
+    const arrayIterator = createArrayIterator(toNumber)
+
+    const buildQuestion: QuestionInterface[] = arrayIterator.map(
+      item => buildQuestions('', '', '')
+    )
+    setQuestions(buildQuestion);
+  }, [numberOfQuestions]);
+
   const getUserTypes = useCallback(()=>{
     if(!userTypes){
       getUserTypesRequest({});
@@ -57,9 +71,33 @@ const GetPolls = (props: GetPollProps) => {
   }, [userTypes, getUserTypesRequest])
 
   useEffect(()=>{
-    getPolls();
     getUserTypes();
-  },[getPolls, getUserTypes])
+    generateQuestions();
+  },[getUserTypes, generateQuestions])
+
+  useEffect(()=>{
+    getPolls()
+  }, [getPolls])
+
+  const handleChangeInputQuestions = (e: any, questionIndex: number)=> {
+    const value = e.target.value;
+
+    const questionReplace = questions.map(
+      (question, index) => {
+        if(index === questionIndex){
+          question.question = value;
+          return {
+            poll_id: question.poll_id,
+            question: value,
+            description: question.description
+          }
+        }
+        return question;
+      }
+    )
+    
+    setQuestions(questionReplace);
+  }
 
   const handleChangePage = async (page:number, pageSize:number) => {
     const requestOptions = {
@@ -99,23 +137,34 @@ const GetPolls = (props: GetPollProps) => {
   }
 
   const handleClosePollPopUp = () => {
-    setOpenPollPopUp(false);
+    setNumberOfQuestions('1');
     selectPoll(null);
+    setOpenPollPopUp(false);
+    setName('');
+    setDescription('');
+    setUserTypeId('');
+    setQuestions([]);
+    selectPollId(null);
+    setConfirmation(false)
   }
 
   const handleSavePoll = async () => {
     const data = {
-      
+      user_type_id: userTypeId,
+      name: name,
+      description: description
     }
 
-    if(pollSelected && pollSelected.poll_id){
+    emptyFields ? setConfirmation(true) : setConfirmation(false);
+
+    if(pollSelected && pollSelected.poll_id && !emptyFields){
       const requestOptions = {
         param_1: pollSelected.poll_id,
         data
       }
 
       await updatePollRequest(requestOptions)
-    } else {
+    } else if(!emptyFields){
       const requestOptions = {
         data
       }
@@ -134,8 +183,10 @@ const GetPolls = (props: GetPollProps) => {
       setDescription(value);
     } else if (name === inputNames.userType){
       setUserTypeId(value);
+    } else if (name === inputNames.numberOfQuestions){
+      setNumberOfQuestions(value);
     }
-  } 
+  }
 
   return (
     <GetPollsContent
@@ -159,6 +210,10 @@ const GetPolls = (props: GetPollProps) => {
       userTypeId={userTypeId}
       emptyFields={emptyFields}
       userTypesList={userTypesList}
+      numberOfQuestions={numberOfQuestions}
+      questions={questions}
+      handleChangeInputQuestions={handleChangeInputQuestions}
+      confirmation={confirmation}
     />
   )
 }

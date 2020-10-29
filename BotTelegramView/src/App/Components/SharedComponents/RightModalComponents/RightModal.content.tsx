@@ -5,7 +5,7 @@ import { RightModalInterface } from './RightModal.interface';
 import { useStyles } from './RightModal.style';
 
 const RightModalContent = ({open, handleClose, children, fetching, title, handleSave }:RightModalInterface) => {
-  const { buttonClose, buttonSubmit, loaderContainer, loader, text, header, footer } = useStyles();
+  const { buttonClose, buttonSubmit, loaderContainer, loader, text, header, footer, content } = useStyles();
   const { language } = useContext(LanguageContext);
 
   return (
@@ -18,7 +18,7 @@ const RightModalContent = ({open, handleClose, children, fetching, title, handle
             </Box>
           </Typography>
         </div>
-        <div>
+        <div className={content}>
           {children}
         </div>
         <div className={footer}>

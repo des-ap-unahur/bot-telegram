@@ -29,7 +29,9 @@ const EN = {
   close: 'Close',
   thisFieldIsRequired: 'This field is required',
   newPoll: 'New poll',
-  editPoll: 'Edit poll'
+  editPoll: 'Edit poll',
+  numberOfQuestions: 'Number of questions',
+  question: 'Question'
 }
 
 export default EN

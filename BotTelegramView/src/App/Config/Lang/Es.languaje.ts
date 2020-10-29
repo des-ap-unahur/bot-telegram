@@ -29,7 +29,9 @@ const ES = {
   close: 'Cerrar',
   thisFieldIsRequired: 'Este campo es requerido',
   newPoll: 'Nueva encuesta',
-  editPoll: 'Editar encuesta'
+  editPoll: 'Editar encuesta',
+  numberOfQuestions: 'Cantidad de preguntas',
+  question: 'Pregunta'
 }
 
 export default ES

@@ -39,6 +39,10 @@ export interface GetPollContentProps {
   userTypeId: number | string;
   emptyFields: boolean;
   userTypesList: OptionInterface[] | null;
+  numberOfQuestions: string | number;
+  questions: QuestionInterface[];
+  handleChangeInputQuestions: (e: any, indexQuestion: number) => void;
+  confirmation: boolean;
 }
 
 export interface NewPollProps {
@@ -53,9 +57,34 @@ export interface NewPollProps {
   userTypeId: number | string;
   emptyFields: boolean;
   userTypesList: OptionInterface[] | null;
+  numberOfQuestions: string | number;
+  questions: QuestionInterface[];
+  handleChangeInputQuestions: (e: any, indexQuestion: number) => void;
+  confirmation: boolean;
 }
 
 export interface OptionInterface {
   id: number;
   name: string;
+}
+
+export interface PollQuestionInterface {
+  poll_id: null | number;
+  question: string;
+  description: string;
+}
+
+export interface QuestionInterface {
+  poll_id: number | string;
+	question: string; 
+	description: string;
+}
+
+export interface InputQuestionsInterface {
+  type: string;
+  name: string;
+  title: string;
+  handleChange: any;
+  value: string;
+  correction: boolean;
 }
