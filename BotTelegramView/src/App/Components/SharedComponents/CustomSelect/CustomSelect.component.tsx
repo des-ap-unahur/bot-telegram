@@ -3,28 +3,32 @@ import { useStyles } from './CustomSelect.style';
 import { Typography, FormControl, MenuItem, Select, CircularProgress } from '@material-ui/core';
 import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
 import { capitalize } from '../../../Utils/FormatStrings.utils';
+import { CustomSelectProps } from './CustomSelect.interface';
 
-const CustomSelect = ({handleChange, value, emptyFields, documentTypes}) => {
+const CustomSelect = ({title, handleChange, value, emptyFields, list, name, correction}:CustomSelectProps) => {
   const { language } = useContext(LanguageContext)
   const {
     selectFormControl,
     selectLabel,
     selectLabelAlert,
-    selectLoader
+    selectLoader,
+    widthAndMarginCorrection,
+    standarWidth
   } = useStyles();
 
   return(
-    <div>
+    <div className={correction ? widthAndMarginCorrection : standarWidth }>
       <FormControl className={selectFormControl}>
         <Typography className={selectLabel} variant="subtitle1">
-          {language.documentType}
+          {title}
         </Typography>
         <Select
           onChange={handleChange}
           value={value}
+          name={name}
         >
-          {documentTypes ?
-            documentTypes.map(option => 
+          {list ?
+            list.map(option => 
               <MenuItem value={option.id} key={option.id}>{capitalize(option.name)}</MenuItem>  
             )
             :

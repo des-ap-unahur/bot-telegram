@@ -3,13 +3,15 @@ import PollInterface from "../../Interfaces/Poll.interface";
 import PollQuestions from "../Models/PollQuestions.model";
 import paginate from "../../Utils/Paginate.utils";
 import PollWithPagination from "../../Interfaces/PollWithPagination.interface";
+import UserTypes from "../Models/UserTypes.model";
 
 
 class PollRepository {
   getAllWithPagination = async (paginationData: any): Promise<PollWithPagination> => {
     const { pageSize } = paginationData;
     const { count, rows: poll } = await Poll.findAndCountAll({
-      ...paginate(paginationData),
+      include:[UserTypes],
+      ...paginate(paginationData)
     });
     const total = Math.ceil(count / pageSize);
     return { total, poll };

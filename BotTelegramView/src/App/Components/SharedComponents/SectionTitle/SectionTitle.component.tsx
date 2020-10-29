@@ -22,13 +22,11 @@ const SectionTitle = ({titleLabel, correctionLabel, action}:SectionTitleInterfac
     underline, 
     container, 
     containerWithModalOpen, 
-    underlineWithModalOpen, 
     titleAndUnderlineContainer,
     correction,
     addIcon,
     buttonAction,
     underlineWithAction,
-    underlineWithActionAndModalOpen
   } = useStyles();
 
   return(
@@ -61,9 +59,7 @@ const SectionTitle = ({titleLabel, correctionLabel, action}:SectionTitleInterfac
           </Box>
         </Typography>
         <Box className={clsx(underline, {
-            [underlineWithModalOpen]: isOpenDrawer,
-            [underlineWithAction]: action,
-            [underlineWithActionAndModalOpen]: isOpenDrawer && action
+            [underlineWithAction]: action
           })}
         />
         { action && 

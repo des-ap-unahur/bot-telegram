@@ -8,5 +8,4 @@ export interface SelectProps {
   listOptions: OptionInterface[];
   handleChange: (e:any) => void; 
   value: string;
-  lang?: string | null;
 }

@@ -18,7 +18,18 @@ const EN = {
   userType: 'User type',
   actions: 'Actions',
   sectionFrom: 'Section from',
-  delete: 'Delete'
+  delete: 'Delete',
+  userTypeId: 'User type id',
+  type: 'Type',
+  edit: 'Edit',
+  deleteRegistry: 'Delete registry',
+  areYouSureYouWantToDeleteThisRegistry: 'Are you sure you want to delete this registry',
+  createPoll: 'Create poll',
+  save: 'Save',
+  close: 'Close',
+  thisFieldIsRequired: 'This field is required',
+  newPoll: 'New poll',
+  editPoll: 'Edit poll'
 }
 
 export default EN

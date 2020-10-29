@@ -40,6 +40,11 @@ export const theme = createMuiTheme({
         color: WHITE,
         backgroundColor: DARK_GRAY
       }
+    },
+    MuiBackdrop:{
+      root: {
+        backgroundColor: 'none'
+      }
     }
   },
 })

@@ -6,7 +6,7 @@ import {
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import { useStyles } from './PopUp.styles';
 
-const PopUpHeader = ({ children, onClose, ...other }) => {
+const PopUpHeader = ({ children, onClose, ...other }: any) => {
   const { header, text } = useStyles()
   return (
     <MuiDialogTitle disableTypography className={header} {...other}>

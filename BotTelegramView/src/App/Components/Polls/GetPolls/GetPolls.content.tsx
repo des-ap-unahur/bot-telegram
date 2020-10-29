@@ -4,6 +4,8 @@ import { useStyles } from './GetPolls.style';
 import { generateConfigWithLang } from './GetPolls.config'
 import SectionTitle from '../../SharedComponents/SectionTitle/SectionTitle.component';
 import { GetPollContentProps } from './GetPolls.interface';
+import DeletePopUp from '../../SharedComponents/DeletePopUp/DeletePopUp.component';
+import NewPoll from './Content/NewPoll.content';
 
 
 const GetPollsContent = (props:GetPollContentProps) => {
@@ -13,7 +15,21 @@ const GetPollsContent = (props:GetPollContentProps) => {
     total, 
     handleChangePage, 
     fetching,
-    handleDeletePoll
+    handleDeletePoll,
+    handleOpenPollPopUp,
+    openDeletePopUp,
+    handleCloseDeletePopUp,
+    handleOpenDeletePopUp,
+    openPollPopUp,
+    handleSavePoll,
+    handleClosePollPopUp,
+    userTypes,
+    handleChangeInputs,
+    name,
+    description,
+    userTypeId,
+    emptyFields,
+    userTypesList
   } = props;
 
   const { 
@@ -21,12 +37,13 @@ const GetPollsContent = (props:GetPollContentProps) => {
     container,
   } = useStyles();
 
-  const configParams = { language, handleDeletePoll };
+  const configParams = { language, handleOpenDeletePopUp, handleOpenPollPopUp };
   
   return (
     <div className={root}>
       <div className={container}>
         <SectionTitle
+          action={handleOpenPollPopUp}
           titleLabel={language.polls}
         />
         <TableComponent
@@ -37,6 +54,24 @@ const GetPollsContent = (props:GetPollContentProps) => {
           changePage={handleChangePage}
         />
       </div>
+      <NewPoll
+        handleClose={handleClosePollPopUp}
+        handleSave={handleSavePoll}
+        open={openPollPopUp}
+        fetching={fetching}
+        userTypes={userTypes}
+        handleChangeInputs={handleChangeInputs}
+        name={name}
+        description={description}
+        userTypeId={userTypeId}
+        emptyFields={emptyFields}
+        userTypesList={userTypesList}
+      />
+      <DeletePopUp
+        open={openDeletePopUp}
+        handleClose={handleCloseDeletePopUp}
+        handleDelete={handleDeletePoll}
+      />
     </div>
   )
 }

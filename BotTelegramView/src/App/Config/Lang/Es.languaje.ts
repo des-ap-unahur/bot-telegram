@@ -18,7 +18,18 @@ const ES = {
   userType: 'Tipo de usuario',
   actions: 'Acciones',
   sectionFrom: 'Sección de',
-  delete: 'Borrar'
+  delete: 'Borrar',
+  userTypeId: 'ID de tipo de usuario',
+  type: 'Tipo',
+  edit: 'Editar',
+  deleteRegistry: 'Eliminar Registro',
+  areYouSureYouWantToDeleteThisRegistry: '¿Esta seguro de que quiere eliminar este registro?',
+  createPoll: 'Crear encuesta',
+  save: 'Guardar',
+  close: 'Cerrar',
+  thisFieldIsRequired: 'Este campo es requerido',
+  newPoll: 'Nueva encuesta',
+  editPoll: 'Editar encuesta'
 }
 
 export default ES

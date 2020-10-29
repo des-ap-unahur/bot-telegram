@@ -63,10 +63,68 @@ const PollReducer = (state = initialState, action: any) => {
         fetchingStatus: false,
         failed: false,
         sucess: true,
-        pollSelected: action.payload.data.poll,
+        pollSelected: action.payload.data,
         statusCode: action.payload.status,
       }
     case actionsTypes.getPollFailure:
+      return {
+        ...state,
+        fetchingStatus: false,
+        failed: true,
+        sucess: false,
+        statusCode: action.payload.status,
+        errorsCodes: action.payload.data.errorsCodes,
+        errorMessage: action.payload.data.message
+      }
+    //updatePoll
+    case actionsTypes.updatePollAttempt:
+      return {
+        ...state,
+        fetchingStatus: true,
+        failed: false,
+        sucess: false,
+        errorsCodes: undefined,
+        errorMessage: undefined,
+      }
+    case actionsTypes.updatePollSuccess:
+      return {
+        ...state,
+        fetchingStatus: false,
+        failed: false,
+        sucess: true,
+        pollSelected: action.payload.data,
+        statusCode: action.payload.status,
+      }
+    case actionsTypes.updatePollFailure:
+      return {
+        ...state,
+        fetchingStatus: false,
+        failed: true,
+        sucess: false,
+        statusCode: action.payload.status,
+        errorsCodes: action.payload.data.errorsCodes,
+        errorMessage: action.payload.data.message
+      }
+    //postPoll
+    case actionsTypes.postPollAttempt:
+      return {
+        ...state,
+        fetchingStatus: true,
+        failed: false,
+        sucess: false,
+        errorsCodes: undefined,
+        errorMessage: undefined,
+      }
+    case actionsTypes.postPollSuccess:
+      return {
+        ...state,
+        fetchingStatus: false,
+        failed: false,
+        sucess: true,
+        pollSelected: action.payload.data,
+        statusCode: action.payload.status,
+      }
+    case actionsTypes.postPollFailure:
       return {
         ...state,
         fetchingStatus: false,
@@ -105,6 +163,11 @@ const PollReducer = (state = initialState, action: any) => {
         errorMessage: action.payload.data.message
       }
     //SyncActions
+    case actionsTypes.selectPoll: 
+      return {
+        ...state,
+        pollSelected: action.payload
+      }
     case actionsTypes.clearPollStates:
       return {
         ...state,

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import { BLACK, BLUE, GOOGLE_BLUE, ORANGE } from '../../../Styles/Colors.index';
+import { BLUE, GOOGLE_BLUE, ORANGE, WHITE } from '../../../Styles/Colors.index';
 
 export const useStyles = makeStyles(theme => ({
   container: {
@@ -45,13 +45,6 @@ export const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
-  underlineWithModalOpen: {
-    transition: theme.transitions.create(['width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: '112vh',
-  },
   titleAndUnderlineContainer: {
     display: 'flex',
     width: "100%",
@@ -66,18 +59,7 @@ export const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginBottom: '30px',
     marginRight: '50px',
-    width: '75%',
-  },
-  underlineWithActionAndModalOpen: {
-    transition: theme.transitions.create(['width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginBottom: '30px',
-    marginRight: '50px',
-    width: '50%',
   },
   buttonAction: {
     marginBottom: '20px',
@@ -88,6 +70,6 @@ export const useStyles = makeStyles(theme => ({
     }
   },
   addIcon: {
-    fill: BLACK
+    fill: WHITE
   }
 }))

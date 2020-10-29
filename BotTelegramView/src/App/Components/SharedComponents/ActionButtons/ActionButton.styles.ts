@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import { RED_ALERT, YELLOW, WHITE, SUTIL_GRAY} from '../../../Styles/Colors.index';
+import { RED_ALERT, YELLOW, WHITE, SUTIL_GRAY, ORANGE} from '../../../Styles/Colors.index';
 
 export const useStyles = makeStyles(theme => ({
   iconButton: {
@@ -35,6 +35,14 @@ export const useStyles = makeStyles(theme => ({
     '&:hover':{
       fill: WHITE,
       background: YELLOW,
+    }
+  },
+  iconColorOrange: {
+    fill: ORANGE,
+    border: '1px solid '+ ORANGE,
+    '&:hover':{
+      fill: WHITE,
+      background: ORANGE,
     }
   },
   iconDisabled: {

@@ -1,8 +1,8 @@
-import fileSearchIcon from '../../../Assets/Images/file-search.svg';
+import editIcon from '../../../Assets/Images/pencil.svg';
 import trashIcon from '../../../Assets/Images/delete.svg';
 
 export const generateConfigWithLang = (configParams:any) => {
-  const { language, handleDeletePoll } = configParams
+  const { language, handleOpenDeletePopUp, handleOpenPollPopUp } = configParams
 
   return [
     {
@@ -15,7 +15,8 @@ export const generateConfigWithLang = (configParams:any) => {
     },
     {
       name: language.userType,
-      property: 'user_type_id'
+      property: 'description',
+      nestedTable: 'userType'
     },
     {
       name: language.actions,
@@ -24,20 +25,66 @@ export const generateConfigWithLang = (configParams:any) => {
       actions: [
         {
           type: 'view',
-          id: 'button-documents-view',
-          title: language.view,
-          icon: fileSearchIcon,
-          disabled: true,
-          onClick: (poll_id:number) => console.log(poll_id)
+          id: 'button-poll-edit',
+          title: language.edit,
+          icon: editIcon,
+          onClick: (dataset:any) => { handleOpenPollPopUp(dataset) }
         },
         {
           type: 'delete',
-          id: 'button-documents-delete',
+          id: 'button-poll-delete',
           title: language.delete,
           icon: trashIcon,
-          onClick: (dataset:any) => { handleDeletePoll(dataset.poll_id) }
+          onClick: (dataset:any) => { handleOpenDeletePopUp(dataset.poll_id) }
         },
       ]
     }
   ]
+}
+
+export const generateInputConfig = (params:any) => {
+  const {
+    language,
+    handleChangeInputs,
+    name,
+    description,
+    userTypeId,
+    emptyFields,
+    userTypesList
+  } = params;
+  
+  return [
+    {
+      type: 'text',
+      name: inputNames.name,
+      title: language.name,
+      handleChange: handleChangeInputs,
+      value: name,
+      emptyFields: emptyFields
+    },
+    {
+      type: 'select',
+      name: inputNames.userType,
+      title: language.userType,
+      handleChange: handleChangeInputs,
+      value: userTypeId,
+      list: userTypesList,
+      emptyFields: emptyFields
+    },
+    {
+      type: 'text',
+      name:inputNames.description,
+      title:language.description,
+      handleChange:handleChangeInputs,
+      value:description,
+      emptyFields:emptyFields,
+      correction: true
+    }
+  ]
+}
+
+export const inputNames = {
+  name: 'name',
+  description: 'description',
+  userType: 'userType'
 }

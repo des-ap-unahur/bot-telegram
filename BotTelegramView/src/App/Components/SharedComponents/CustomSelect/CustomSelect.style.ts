@@ -1,14 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { SUTIL_GRAY, RED_ALERT } from '../../../Styles/Colors.index'
+import { BLACK, RED_ALERT } from '../../../Styles/Colors.index'
 
 export const useStyles = makeStyles(theme => ({
   selectFormControl: {
-    minWidth: '255px',
+    width: '100%',
   },
   selectLabel:{
     display: 'flex',
     flexDirection: 'column',
-    color: SUTIL_GRAY,
+    color: BLACK,
   },
   selectLabelAlert:{
     fontSize: '15px',
@@ -17,5 +17,12 @@ export const useStyles = makeStyles(theme => ({
   selectLoader: {
     display: 'flex',
     justifyContent: 'center'
-  }
+  },
+  widthAndMarginCorrection: {
+    marginTop: '20px',
+    width: '95%'
+  },
+  standarWidth: {
+    width: '255px'
+  },
 }))
