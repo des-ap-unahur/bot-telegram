@@ -8,12 +8,12 @@ import { GetRegisteredUserContentProps } from './GetRegisteredUser.interface';
 
 const GetRegisteredUserContent = (props:GetRegisteredUserContentProps) => {
     const {
-      users, 
+      registeredUser, 
       language, 
       total, 
       handleChangePage, 
       fetching,
-      handleDeleteRegisteredUser
+   
     } = props;
   
     const { 
@@ -21,17 +21,17 @@ const GetRegisteredUserContent = (props:GetRegisteredUserContentProps) => {
       container,
     } = useStyles();
   
-    const configParams = { language, handleDeleteRegisteredUser };
+    const configParams = { language };
     
     return (
       <div className={root}>
         <div className={container}>
           <SectionTitle
-            titleLabel={language.users}
+            titleLabel={language.registeredUser}
           />
           <TableComponent
             config={generateConfigWithLang(configParams) || []}
-            dataset={ users || []}
+            dataset={ registeredUser || []}
             loader={fetching}
             totalRows={total}
             changePage={handleChangePage}

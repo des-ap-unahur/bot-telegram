@@ -4,7 +4,7 @@ import GetRegisteredUserContent from './GetRegisteredUser.content';
 import { GetRegisteredUserProps } from './GetRegisteredUser.interface';
 
 
-const GetRegisteredUser = ({ usersSelected, total, sucess, fetching, getRegisteredUsersRequest, clearRegisteredUserStates, deleteRegisteredUserRequest}: GetRegisteredUserProps) => {
+const GetRegisteredUser = ({ registeredUser, total, fetching, getRegisteredUsersRequest}: GetRegisteredUserProps) => {
   const { language } = useContext(LanguageContext);
   
   useEffect(()=>{
@@ -13,7 +13,7 @@ const GetRegisteredUser = ({ usersSelected, total, sucess, fetching, getRegister
     };
 
     getRegisteredUsersRequest(requestOptions);
-  },[])
+  },[registeredUser])
 
   const handleChangePage = async (page:number, pageSize:number) => {
     const requestOptions = {
@@ -23,24 +23,15 @@ const GetRegisteredUser = ({ usersSelected, total, sucess, fetching, getRegister
     await getRegisteredUsersRequest(requestOptions)
   }
 
-  const handleDeleteRegisteredUser = async (id: number) => {
-    const requestOptions = {
-      param_1: id
-    }
-
-    clearRegisteredUserStates()
-    await deleteRegisteredUserRequest(requestOptions) 
-    await handleChangePage(0, 10);
-  }
 
   return (
     <GetRegisteredUserContent
       language={language}
       handleChangePage={handleChangePage}
-      users={usersSelected}
+      registeredUser={registeredUser}
       total={total}
       fetching={fetching}
-      handleDeleteRegisteredUser={handleDeleteRegisteredUser}
+  
     />
   )
 }

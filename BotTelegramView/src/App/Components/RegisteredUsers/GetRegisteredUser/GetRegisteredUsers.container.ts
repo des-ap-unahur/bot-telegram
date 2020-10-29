@@ -7,10 +7,9 @@ import GetRegisteredUser from './GetRegisteredUser.component';
 const actionCreators = Object.assign({}, RegisteredUserAction.actionCreators);
 
 const mapStateToProps = (state: GlobalStateInterface) => ({
-  fetching: state.user.fetchingStatus,
-  users: state.user.usersSelected,
-  total: state.user.total,
-  sucess: state.user.sucess
+  fetching: state.registeredUser.fetchingStatus,
+  registeredUser: state.registeredUser.registeredUser,
+  total: state.registeredUser.total,
 });
 
 const mapDispatchToProps = (dispatch: any) =>

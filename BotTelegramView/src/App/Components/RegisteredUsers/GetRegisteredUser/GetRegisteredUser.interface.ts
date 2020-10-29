@@ -2,19 +2,17 @@ import RegisteredUserInterface from "../../../Interfaces/RegisteredUser.interfac
 
 export interface GetRegisteredUserProps {
     fetching: boolean;
-    usersSelected: null | []
+    registeredUser: null | RegisteredUserInterface[]
     total: number;
     sucess: boolean;
-    clearRegisteredUserStates: () => void;
-    deleteRegisteredUserRequest: (requestOptions: any) => void;
     getRegisteredUsersRequest: (requestOptions: any) => void;
 }
 
 export interface GetRegisteredUserContentProps {
-    users: null | RegisteredUserInterface[];
+    registeredUser: null | RegisteredUserInterface[];
     language: any;
-    total: number
+    total:  number;
+ 
     handleChangePage: (page: number, pageSize: number) => Promise<void>;
-    handleDeleteRegisteredUser: (id: number) => Promise<void>;
     fetching: boolean;
-}
+} 
