@@ -8,5 +8,5 @@ export interface GlobalStateInterface {
   auth: AuthStateInterface;
   poll: PollStateInterface;
   userTypes: UserTypesStateInterface;
-  user: RegisteredUserStateInterface;
+  registeredUser: RegisteredUserStateInterface;
 }
