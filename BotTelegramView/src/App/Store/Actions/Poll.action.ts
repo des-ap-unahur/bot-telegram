@@ -31,6 +31,11 @@ const { actionsTypes, actionCreators } = builderAsyncActions([
     name: 'postQuestions',
     endpoint: '/poll/questions',
     method: 'POST'
+  },
+  {
+    name: 'updateQuestions',
+    endpoint: '/poll/questions/:param_1',
+    method: 'PUT'
   }
 ])
 

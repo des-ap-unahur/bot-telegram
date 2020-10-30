@@ -178,10 +178,37 @@ const PollReducer = (state = initialState, action: any) => {
         fetchingStatus: false,
         failed: false,
         sucess: true,
-        pollSelected: null,
         statusCode: action.payload.status,
       }
     case actionsTypes.postQuestionsFailure:
+      return {
+        ...state,
+        fetchingStatus: false,
+        failed: true,
+        sucess: false,
+        statusCode: action.payload.status,
+        errorsCodes: action.payload.data.errorsCodes,
+        errorMessage: action.payload.data.message
+      }
+    //updateQuestions
+    case actionsTypes.updateQuestionsAttempt:
+      return {
+        ...state,
+        fetchingStatus: true,
+        failed: false,
+        sucess: false,
+        errorsCodes: undefined,
+        errorMessage: undefined,
+      }
+    case actionsTypes.updateQuestionsSuccess:
+      return {
+        ...state,
+        fetchingStatus: false,
+        failed: false,
+        sucess: true,
+        statusCode: action.payload.status,
+      }
+    case actionsTypes.updateQuestionsFailure:
       return {
         ...state,
         fetchingStatus: false,

@@ -1,5 +1,6 @@
 import PollInterface from "../../../Interfaces/Poll.interface";
 import UserTypes from "../../../Interfaces/UserTypes.interface";
+import QuestionInterface from "../../../Interfaces/Question.interface";
 
 export interface GetPollProps {
 	fetching: boolean;
@@ -17,6 +18,7 @@ export interface GetPollProps {
   postPollRequest: (requestOptions: any) => void;
   getUserTypesRequest: (requestOptions?:any) => void;
   postQuestionsRequest: (requestOptions:any) => void;
+  updateQuestionsRequest: (requestOptions:any) => void;
 }
 
 export interface GetPollContentProps {
@@ -73,12 +75,6 @@ export interface PollQuestionInterface {
   poll_id: null | number;
   question: string;
   description: string;
-}
-
-export interface QuestionInterface {
-  poll_id: number | string;
-	question: string; 
-	description: string;
 }
 
 export interface InputQuestionsInterface {

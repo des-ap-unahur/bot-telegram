@@ -42,7 +42,7 @@ export const useStyles = makeStyles(theme => ({
   },
   loaderContainer: {
     position: 'absolute',
-    width: '18%',
-    marginTop: '3px'
+    top: '25%',
+    right:'25%'
   }
 }))

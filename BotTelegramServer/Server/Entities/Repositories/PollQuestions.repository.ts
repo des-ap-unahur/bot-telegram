@@ -36,6 +36,7 @@ class PollRepository {
     id: number,
     data: PollQuestionInterface
   ): Promise<PollQuestion> => {
+    console.log(id, data, '----------------------------')
     const pollQuestions: PollQuestion = await PollQuestion.findByPk(id);
     pollQuestions.update(data);
     return pollQuestions;

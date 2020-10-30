@@ -1,4 +1,4 @@
-import { QuestionInterface } from "./GetPolls.interface";
+import QuestionInterface from "../../../Interfaces/Question.interface";
 
 export const createArrayIterator = (num: number) => {
   return Array(num).fill(null);
