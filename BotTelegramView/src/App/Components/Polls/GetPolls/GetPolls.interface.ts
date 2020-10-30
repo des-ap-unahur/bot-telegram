@@ -26,6 +26,8 @@ export interface GetPollContentProps {
   language: any;
   total: number
   openDeletePopUp: boolean;
+  confirmation: boolean;
+  updateMode:boolean;
   handleChangePage: (page: number, pageSize: number) => Promise<void>;
   handleDeletePoll: () => Promise<void>;
   handleOpenDeletePopUp: (id:number) => void;
@@ -45,7 +47,6 @@ export interface GetPollContentProps {
   numberOfQuestions: string | number;
   questions: QuestionInterface[];
   handleChangeInputQuestions: (e: any, indexQuestion: number) => void;
-  confirmation: boolean;
 }
 
 export interface NewPollProps {
@@ -64,6 +65,7 @@ export interface NewPollProps {
   questions: QuestionInterface[];
   handleChangeInputQuestions: (e: any, indexQuestion: number) => void;
   confirmation: boolean;
+  updateMode:boolean;
 }
 
 export interface OptionInterface {

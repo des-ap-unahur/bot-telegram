@@ -31,7 +31,12 @@ const ES = {
   newPoll: 'Nueva encuesta',
   editPoll: 'Editar encuesta',
   numberOfQuestions: 'Cantidad de preguntas',
-  question: 'Pregunta'
+  question: 'Pregunta',
+  commandType: 'Tipo de comando',
+  status: 'Estado',
+  innactive: 'Inactivo',
+  active: 'Activo',
+  newCommand: 'Nuevo comando'
 }
 
 export default ES

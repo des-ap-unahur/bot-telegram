@@ -118,7 +118,6 @@ const GetPolls = (props: GetPollProps) => {
   },[postMode, pollSelected, questions.length, postQuestionsRequest])
 
   const pollSelectedLoad = useCallback(()=>{
-
     if(pollSelected && !postMode && !updateMode){
       const questionsToUpdate = pollSelected && pollSelected.questions;
       setName(pollSelected.name);
@@ -278,6 +277,7 @@ const GetPolls = (props: GetPollProps) => {
       questions={questions}
       handleChangeInputQuestions={handleChangeInputQuestions}
       confirmation={confirmation}
+      updateMode={updateMode}
     />
   )
 }

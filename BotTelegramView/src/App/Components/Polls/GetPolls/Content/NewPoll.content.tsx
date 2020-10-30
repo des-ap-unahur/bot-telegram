@@ -26,7 +26,8 @@ const NewPoll = (props:NewPollProps) => {
     numberOfQuestions,
     questions,
     handleChangeInputQuestions,
-    confirmation
+    confirmation,
+    updateMode
   } = props;
 
   const { 
@@ -46,6 +47,8 @@ const NewPoll = (props:NewPollProps) => {
   }
 
   const inputs = generateInputConfig(inputParams)
+
+  const title = updateMode ? language.editPoll:language.newPoll
 
   const generateInputQuestions = () => {
     const inputQuestions = questions.map(
@@ -69,7 +72,7 @@ const NewPoll = (props:NewPollProps) => {
     <RightModal
       open={open}
       handleClose={handleClose}
-      title={language.newPoll}
+      title={title}
       handleSave={handleSave}
       fetching={fetching}
     >

@@ -11,10 +11,18 @@ import { TableBodyProps } from '../../Table.interface';
 
 const TableBodyRow = ({config, dataset}: TableBodyProps) => {
   const renderCell = (cell: any) => {
-    if(!cell.nestedTable){
-      return dataset[cell.property] 
+    if(cell.nestedTable){
+      const relationFound = dataset && dataset[cell.nestedTable]
+      const property = relationFound && relationFound[cell.property]
+      const stringCell = String(property)
+
+      return capitalizeStrings(stringCell)
+    } else if (cell.custom){
+      const property = dataset.property;
+      
+      return cell.custom(property)
     }
-    return capitalizeStrings(dataset[cell.nestedTable][cell.property])
+    return dataset[cell.property] 
   }
 
   return (

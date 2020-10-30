@@ -12,8 +12,14 @@ class BotCommandController {
   };
 
   getCommandsWithAllRelations = async (req: any, res: any): Promise<void> => {
-    const botCommands: BotCommand[] = await BotCommandRepository.getCommandWithAllRelation();
-    res.send(botCommands);
+    const paginationData = req.query;
+    if(paginationData.page){
+      const botCommands: BotCommand[] = await BotCommandRepository.getCommandWithAllRelationPagination(paginationData);
+      res.send(botCommands);
+    } else {
+      const botCommands: BotCommand[] = await BotCommandRepository.getCommandWithAllRelation();
+      res.send(botCommands);
+    }
   };
 
   getCommandById = async (req: any, res: any): Promise<void> => {

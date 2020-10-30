@@ -33,7 +33,8 @@ const GetPollsContent = (props:GetPollContentProps) => {
     numberOfQuestions,
     questions,
     handleChangeInputQuestions,
-    confirmation
+    confirmation,
+    updateMode
   } = props;
 
   const { 
@@ -74,6 +75,7 @@ const GetPollsContent = (props:GetPollContentProps) => {
         questions={questions}
         handleChangeInputQuestions={handleChangeInputQuestions}
         confirmation={confirmation}
+        updateMode={updateMode}
       />
       <DeletePopUp
         open={openDeletePopUp}

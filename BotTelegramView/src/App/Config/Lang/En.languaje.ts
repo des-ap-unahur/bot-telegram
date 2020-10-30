@@ -31,7 +31,12 @@ const EN = {
   newPoll: 'New poll',
   editPoll: 'Edit poll',
   numberOfQuestions: 'Number of questions',
-  question: 'Question'
+  question: 'Question',
+  commandType: 'Command Type',
+  status: 'Status',
+  innactive: 'Innactive',
+  active: 'Active',
+  newCommand: 'New command'
 }
 
 export default EN
