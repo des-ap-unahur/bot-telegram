@@ -29,7 +29,8 @@ const EN = {
   close: 'Close',
   thisFieldIsRequired: 'This field is required',
   newPoll: 'New poll',
-  editPoll: 'Edit poll'
+  editPoll: 'Edit poll',
+  dni: 'DNI'
 }
 
 export default EN

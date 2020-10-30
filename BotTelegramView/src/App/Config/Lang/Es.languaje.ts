@@ -29,7 +29,8 @@ const ES = {
   close: 'Cerrar',
   thisFieldIsRequired: 'Este campo es requerido',
   newPoll: 'Nueva encuesta',
-  editPoll: 'Editar encuesta'
+  editPoll: 'Editar encuesta',
+  dni: 'DNI'
 }
 
 export default ES
