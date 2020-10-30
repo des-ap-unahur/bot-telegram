@@ -1,8 +1,19 @@
 import BotSubsUsers from "../Models/BotSubsUsers.model";
 import BotSubsUsersInterface from "../../Interfaces/BotSubsUsers.interface";
+import paginate from "../../Utils/Paginate.utils";
+import BotSubsUsersWithPagination from "../../Interfaces/BotSubsUsersWithPagination.interface"
 
-
+ 
 class BotSubsUsersRepository {
+  getAllWithPagination = async (paginationData: any): Promise<BotSubsUsersWithPagination> => {
+    const {count, rows: botSubsUsers} = await BotSubsUsers.findAndCountAll({
+      ...paginate(paginationData)
+    })
+    const total = count;
+    return { total, botSubsUsers};
+      
+  };
+
   getAll = async (): Promise<BotSubsUsers[]> => {
     const botSubsUsers: BotSubsUsers[] = await BotSubsUsers.findAll();
     return botSubsUsers;
