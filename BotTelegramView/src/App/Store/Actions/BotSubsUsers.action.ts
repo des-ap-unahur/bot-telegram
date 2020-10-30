@@ -2,13 +2,11 @@ import builderAsyncActions from "../../Utils/BuilderAsyncActions.utils";
 
 const { actionsTypes, actionCreators } = builderAsyncActions([
     {
-        name: 'getBot-subs-users',
+        name: 'getBotSubsUsers',
         endpoint: '/bot-subs-users',
         method: 'GET'
     }
 ])
-
-
 
 export default {
     actionsTypes: Object.assign(actionsTypes),
