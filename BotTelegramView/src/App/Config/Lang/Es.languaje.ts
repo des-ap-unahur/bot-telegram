@@ -36,7 +36,9 @@ const ES = {
   status: 'Estado',
   innactive: 'Inactivo',
   active: 'Activo',
-  newCommand: 'Nuevo comando'
+  newCommand: 'Nuevo comando',
+  dni: 'DNI',
+  lastName: 'Apellido'
 }
 
 export default ES

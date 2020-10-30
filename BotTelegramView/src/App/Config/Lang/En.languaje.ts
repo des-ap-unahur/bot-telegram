@@ -36,7 +36,9 @@ const EN = {
   status: 'Status',
   innactive: 'Innactive',
   active: 'Active',
-  newCommand: 'New command'
+  newCommand: 'New command',
+  dni: 'DNI',
+  lastName: 'Last name'
 }
 
 export default EN

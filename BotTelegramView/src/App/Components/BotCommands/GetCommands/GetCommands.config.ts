@@ -3,7 +3,7 @@ import trashIcon from '../../../Assets/Images/delete.svg';
 
 
 export const generateConfigWithLang = (configParams:any) => {
-  const { language, handleOpenDeletePopUp } = configParams
+  const { language, handleOpenDeletePopUp, handleOpenNewCommand } = configParams
 
   return [
     {
@@ -41,7 +41,7 @@ export const generateConfigWithLang = (configParams:any) => {
           id: 'button-poll-edit',
           title: language.edit,
           icon: editIcon,
-          onClick: (dataset:any) => { console.log(dataset) }
+          onClick: (dataset:any) => { handleOpenNewCommand(dataset) }
         },
         {
           type: 'delete',
