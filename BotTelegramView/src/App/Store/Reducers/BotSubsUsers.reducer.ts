@@ -1,23 +1,23 @@
-import {RegisteredUserStateInterface } from '../../Interfaces/RegisteredUserStates.interface'
-import RegisteredUserAction from '../Actions/RegisteredUser.action'
+import {BotSubsUsersStateInterface } from '../../Interfaces/BotSubsUsersStates.interface'
+import BotSubsUsersAction from '../Actions/BotSubsUsers.action'
 
-const { actionsTypes }: any = RegisteredUserAction;
+const { actionsTypes }: any = BotSubsUsersAction;
 
-const initialState: RegisteredUserStateInterface = {
+const initialState: BotSubsUsersStateInterface = {
   fetchingStatus: false,
   failed: false,
   sucess: false,
-  registeredUser: null,
+  botSubsUsers: null,
   total: 0,
   statusCode: '',
   errorsCodes: '',
   errorMessage: '',
 }
 
-const RegisteredUserReducer = (state = initialState, action: any) => {
+const BotSubsUsersReducer = (state = initialState, action: any) => {
   switch (action.type) {
     //getRegisteredUsers
-    case actionsTypes.getUserRegisteredUserAttempt:
+    case actionsTypes.getBotSubsUsersAttempt:
       return {
         ...state,
         fetchingStatus: true,
@@ -26,17 +26,17 @@ const RegisteredUserReducer = (state = initialState, action: any) => {
         errorsCodes: undefined,
         errorMessage: undefined,
       }
-    case actionsTypes.getUserRegisteredUserSuccess:
+    case actionsTypes.getBotSubsUsersSuccess:
       return {
         ...state,
         fetchingStatus: false,
         failed: false,
         sucess: true,
-        registeredUser: action.payload.data,
+        botSubsUsers: action.payload.data.botSubsUsers,
         total: action.payload.data.total,
         statusCode: action.payload.status,
       }
-    case actionsTypes.getUserRegisteredUserFailure:
+    case actionsTypes.getBotSubsUsersFailure:
       return {
         ...state,
         fetchingStatus: false,
@@ -52,4 +52,4 @@ const RegisteredUserReducer = (state = initialState, action: any) => {
   }
 }
 
-export default RegisteredUserReducer;
+export default BotSubsUsersReducer;
