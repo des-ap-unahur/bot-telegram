@@ -1,4 +1,4 @@
-interface RegisteredUserInterface {
+interface BotSubsUsers {
     user_id: number;
     dni: number;
     first_name: string;
@@ -7,4 +7,4 @@ interface RegisteredUserInterface {
     verified: boolean;
 }
 
-export default RegisteredUserInterface;
+export default BotSubsUsers;

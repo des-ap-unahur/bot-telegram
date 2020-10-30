@@ -1,13 +1,12 @@
-import RegisteredUserInterface from "./RegisteredUser.interface";
+import BotSubsUsersInterface from "./BotSubsUsers.interface";
 
-export interface RegisteredUserStateInterface {
+export interface BotSubsUsersStateInterface {
     fetchingStatus: boolean;
     failed: boolean;
     sucess: boolean;
-    registeredUser: null | RegisteredUserInterface[];
+    botSubsUsers: null | BotSubsUsersInterface[];
     total: number;
     statusCode: string | number;
     errorsCodes: string;
     errorMessage: string;
-
 }
