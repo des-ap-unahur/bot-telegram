@@ -6,12 +6,10 @@ import BotUsersWithPagination from "../../Interfaces/BotUsersWithPagination.inte
 
 class BotUsersRepository {
   getAllWithPagination = async (paginationData: any): Promise<BotUsersWithPagination> => {
-
-    const { pageSize } = paginationData;
     const { count, rows: botUsers } = await BotUsers.findAndCountAll({
       ...Paginate(paginationData),
     });
-    const total = Math.ceil(count / pageSize);
+    const total = count;
     return { total, botUsers };
   };
 

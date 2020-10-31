@@ -20,7 +20,7 @@ export const useStyles = makeStyles(theme => ({
   },
   widthAndMarginCorrection: {
     marginTop: '20px',
-    width: '95%'
+    width: '92%'
   },
   standarWidth: {
     width: '255px'

@@ -11,10 +11,13 @@ export const generateConfigWithLang = (configParams: any) => {
         name: language.dni,
         property: 'dni'
       },
-      {
-        name: language.user_id,
-        property: 'user_id'
-      },
 
+      {
+       
+            name: language.userType,
+            
+      }
+ 
+ 
     ]
 }

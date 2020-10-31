@@ -12,7 +12,8 @@ const mapStateToProps = (state: GlobalStateInterface) => ({
   polls: state.poll.polls,
   total: state.poll.total,
   sucess: state.poll.sucess,
-  userTypes: state.userTypes.userTypes
+  userTypes: state.userTypes.userTypes,
+  pollSelected: state.poll.pollSelected
 });
 
 const mapDispatchToProps = (dispatch: any) =>

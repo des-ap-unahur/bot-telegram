@@ -1,10 +1,12 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext } from 'react';
 import { LanguageContext } from '../../../../Config/Lang/Lang.languaje';
 import { useStyles } from '../GetPolls.style';
-import { NewPollProps } from '../GetPolls.interface';
-import { generateInputConfig } from '../GetPolls.config'
+import { InputQuestionsInterface, NewPollProps } from '../GetPolls.interface';
+import { generateInputConfig, inputNames, numberOfQuestionsConfig } from '../GetPolls.config'
 import RightModal from '../../../SharedComponents/RightModalComponents/RightModal.component';
 import BuildInputs from '../../../SharedComponents/BuildInputs/BuildInputs.component';
+import CustomSelect from '../../../SharedComponents/CustomSelect/CustomSelect.component';
+import { createInputQuestions } from '../GetPolls.utils';
 
 
 const NewPoll = (props:NewPollProps) => {
@@ -20,11 +22,16 @@ const NewPoll = (props:NewPollProps) => {
     name,
     description,
     userTypeId,
-    emptyFields
+    emptyFields,
+    numberOfQuestions,
+    questions,
+    handleChangeInputQuestions,
+    confirmation
   } = props;
 
   const { 
     contentSize,
+    selectQuestionsContainer
   } = useStyles();
 
   const inputParams = {
@@ -34,10 +41,29 @@ const NewPoll = (props:NewPollProps) => {
     description,
     userTypeId,
     emptyFields,
-    userTypesList
+    userTypesList,
+    confirmation
   }
 
   const inputs = generateInputConfig(inputParams)
+
+  const generateInputQuestions = () => {
+    const inputQuestions = questions.map(
+      (question, index) => createInputQuestions(
+          {
+            language, 
+            index, 
+            handleChangeInputQuestions, 
+            value: question.question,
+            confirmation
+          }
+        )
+    )
+
+    return inputQuestions.map(
+      (input:InputQuestionsInterface, index:number) => <BuildInputs key={index} input={input}/>
+    )
+  }
 
   return (
     <RightModal
@@ -49,8 +75,22 @@ const NewPoll = (props:NewPollProps) => {
     >
       <div className={contentSize}>
         {inputs.map(
-          input => <BuildInputs input={input}/>
+          (input, index) => <BuildInputs key={index} input={input}/>
         )}
+      </div>
+      <div className={selectQuestionsContainer}>
+        <CustomSelect
+          title={language.numberOfQuestions}
+          name={inputNames.numberOfQuestions}
+          value={numberOfQuestions}
+          list={numberOfQuestionsConfig}
+          handleChange={handleChangeInputs}
+        />
+      </div>
+      <div className={contentSize}>
+        {
+          generateInputQuestions()
+        }
       </div>
     </RightModal>
   );

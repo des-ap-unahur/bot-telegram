@@ -11,6 +11,8 @@ const GetBotSubsUsers = (props: GetBotSubsUsersProps) => {
   const { botSubsUsers, 
     total,
     fetching,
+    userTypes,
+    getUserTypesRequest,
     getBotSubsUsersRequest
   } =props;
   
@@ -22,9 +24,16 @@ const GetBotSubsUsers = (props: GetBotSubsUsersProps) => {
     getBotSubsUsersRequest(requestOptions);
   },[])
 
+  const getUserTypes = useCallback(()=>{
+    if(!userTypes){
+      getUserTypesRequest({});
+    }
+  }, [userTypes, getUserTypesRequest])
+
   useEffect(()=>{
     getBotSubsUsers();
-    },[getBotSubsUsers])
+    getUserTypes();
+    },[getBotSubsUsers,getUserTypes])
   
     const handleChangePage = async (page:number, pageSize:number) => {
       const requestOptions = {
@@ -42,6 +51,7 @@ const GetBotSubsUsers = (props: GetBotSubsUsersProps) => {
       botSubsUsers={botSubsUsers}
       total={total}
       fetching={fetching}
+      userTypes={userTypes}
     />
   )
 }

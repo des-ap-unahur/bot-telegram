@@ -50,7 +50,8 @@ export const generateInputConfig = (params:any) => {
     description,
     userTypeId,
     emptyFields,
-    userTypesList
+    userTypesList,
+    confirmation
   } = params;
   
   return [
@@ -60,7 +61,7 @@ export const generateInputConfig = (params:any) => {
       title: language.name,
       handleChange: handleChangeInputs,
       value: name,
-      emptyFields: emptyFields
+      emptyFields: emptyFields && confirmation
     },
     {
       type: 'select',
@@ -69,7 +70,7 @@ export const generateInputConfig = (params:any) => {
       handleChange: handleChangeInputs,
       value: userTypeId,
       list: userTypesList,
-      emptyFields: emptyFields
+      emptyFields: emptyFields && confirmation
     },
     {
       type: 'text',
@@ -77,7 +78,7 @@ export const generateInputConfig = (params:any) => {
       title:language.description,
       handleChange:handleChangeInputs,
       value:description,
-      emptyFields:emptyFields,
+      emptyFields: emptyFields && confirmation,
       correction: true
     }
   ]
@@ -86,5 +87,19 @@ export const generateInputConfig = (params:any) => {
 export const inputNames = {
   name: 'name',
   description: 'description',
-  userType: 'userType'
+  userType: 'userType',
+  numberOfQuestions: 'numberOfQuestions'
 }
+
+export const numberOfQuestionsConfig = [
+  {id: 1, name:'1'},
+  {id: 2, name:'2'},
+  {id: 3, name:'3'},
+  {id: 4, name:'4'},
+  {id: 5, name:'5'},
+  {id: 6, name:'6'},
+  {id: 7, name:'7'},
+  {id: 8, name:'8'},
+  {id: 9, name:'9'},
+  {id: 10, name:'10'}
+]

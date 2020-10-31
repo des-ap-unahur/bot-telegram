@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from '@material-ui/core';
-import { BrowserRouter, Route, Switch, Router } from 'react-router-dom';
+import { BrowserRouter, Route, Router } from 'react-router-dom';
 import Routes from '../Routes/Router.routes';
 import PrivateRoutes from '../HOC/PrivateRoute.hoc';
 import RedirectWithAuth from '../HOC/RedirectWithAuth.hoc';

@@ -25,4 +25,7 @@ export const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around'
   },
+  selectQuestionsContainer:{
+    padding: '14px 24px'
+  }
 }))

@@ -11,6 +11,10 @@ export const useStyles = makeStyles(theme => ({
     paddingLeft: theme.spacing(2),
     background: BLUE
   },
+  content: {
+    height: '83vh',
+    overflowY: "scroll"
+  },
   footer: {
     position: 'absolute',
     bottom: '0',
@@ -38,7 +42,7 @@ export const useStyles = makeStyles(theme => ({
   },
   loaderContainer: {
     position: 'absolute',
-    width: '18%',
-    marginTop: '3px'
+    top: '25%',
+    right:'25%'
   }
 }))

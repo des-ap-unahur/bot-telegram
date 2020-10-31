@@ -29,7 +29,11 @@ const GetPollsContent = (props:GetPollContentProps) => {
     description,
     userTypeId,
     emptyFields,
-    userTypesList
+    userTypesList,
+    numberOfQuestions,
+    questions,
+    handleChangeInputQuestions,
+    confirmation
   } = props;
 
   const { 
@@ -66,6 +70,10 @@ const GetPollsContent = (props:GetPollContentProps) => {
         userTypeId={userTypeId}
         emptyFields={emptyFields}
         userTypesList={userTypesList}
+        numberOfQuestions={numberOfQuestions}
+        questions={questions}
+        handleChangeInputQuestions={handleChangeInputQuestions}
+        confirmation={confirmation}
       />
       <DeletePopUp
         open={openDeletePopUp}
