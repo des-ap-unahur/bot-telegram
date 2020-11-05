@@ -14,7 +14,6 @@ import BotCommands from "../../Entities/Models/BotCommands.model";
 import BotUsers from "../../Entities/Models/BotUsers.model";
 import BotUserRepository from "../../Entities/Repositories/BotUser.repository";
 
-
 class BotController {
   private commands: CommandInterface[];
   private contactCommand: (ctx: TelegrafContext, callback: (ctx) => {}) => void;
@@ -34,19 +33,26 @@ class BotController {
 
   fetchUser = async (ctx: TelegrafContext) => {
     const telegram_user_id: number = ctx.message.chat.id;
-    const userLogued: boolean = this.botUsers.some(user => user.tel_user_id === telegram_user_id);
-    const user: BotUsers | null = await BotUserRepository.getByTelegramIdWithGuaraniUser(telegram_user_id);
-
-    if(!userLogued && user){
+    const userLogued: boolean = this.botUsers.some(
+      (user) => user.tel_user_id === telegram_user_id
+    );
+    const user: BotUsers | null = await BotUserRepository.getByTelegramIdWithGuaraniUser(
+      telegram_user_id
+    );
+    if (!userLogued && user) {
       const userAvailableCommands: BotCommand[] = await this.commandsWithoutContact.filter(
-        command => command.user_type_id === user.user_type_id || command.user_type_id === 3
+        (command) => command.user_type_id === user.user_type_id || command.user_type_id === 3
       );
 
-      this.commands = await assambleCommands(userAvailableCommands, typeCommands);
+      this.commands = await assambleCommands(
+        userAvailableCommands,
+        typeCommands,!userLogued
+      );
+
 
       this.botUsers.push(user);
     }
-  }
+  };
 
   fetchCommands = async (): Promise<void> => {
     this.botCommands = await BotCommandRepository.getCommandWithAllRelation();
@@ -57,14 +63,15 @@ class BotController {
 
   buildCommands = (): void => {
     const basicCommands = this.commandsWithoutContact.filter(
-      command => command.user_type_id === 3
+      (command) => command.user_type_id === 3
     );
 
     this.commands = assambleCommands(basicCommands, typeCommands);
     this.contactCommand = buildContactCommand(this.botCommands);
   };
-  
+
   execCommand = (text: string, ctx: TelegrafContext): void => {
+ 
     this.commands.map(
       (command) =>
         removeSensitiveCase(command.command) === removeSensitiveCase(text) &&
@@ -90,28 +97,38 @@ class BotController {
 
   setCallPoll = (command: CommandInterface | null): void => {
     this.callPollCommand = command;
-  }
+  };
 
   execCallPoll = async (text: string, ctx: TelegrafContext): Promise<void> => {
-    const user = this.botUsers.find(user => user.tel_user_id === ctx.message.chat.id);
+    const user = this.botUsers.find(
+      (user) => user.tel_user_id === ctx.message.chat.id
+    );
     await botPollController.setCallback(this.setCallPoll);
-    await botPollController.callPoll(text,ctx,this.commands, this.callPollCommand, user);
-  }
+    await botPollController.callPoll(
+      text,
+      ctx,
+      this.commands,
+      this.callPollCommand,
+      user
+    );
+  };
 
-  runCommands = (): void => {
+  runCommands = async (): Promise<void> => {
+    await botController.fetchCommands();
     this.bot.on("contact", (ctx) => this.contactCommand(ctx, this.fetchUser));
 
-    this.bot.on("message", (ctx: TelegrafContext) => {
+    this.bot.on("message", async (ctx: TelegrafContext) => {
+
       const { text } = ctx.message;
       if (text && this.commands.length && !this.callPollCommand) {
         this.fetchUser(ctx);
-
+     
         this.execCommand(text, ctx);
 
         this.execHear(text, ctx);
 
         this.notUnderstandMessage(text, ctx);
-        
+
         this.execCallPoll(text, ctx);
       } else {
         this.execCallPoll(text, ctx);
