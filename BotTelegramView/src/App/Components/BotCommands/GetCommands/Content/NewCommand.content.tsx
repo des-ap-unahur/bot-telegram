@@ -3,6 +3,7 @@ import RightModal from '../../../SharedComponents/RightModalComponents/RightModa
 import { useStyles } from '../GetCommands.style';
 import { NewCommandProps } from '../GetCommands.interface';
 import BuildInputs from '../../../SharedComponents/BuildInputs/BuildInputs.component';
+import { inputConfig } from '../GetCommands.config';
 
 
 const NewCommand = (props:NewCommandProps) => {
@@ -13,32 +14,8 @@ const NewCommand = (props:NewCommandProps) => {
   } = props;
 
   const { contentSize } = useStyles();
-  const select = {
-    type: 'select',
-    name: 'select',
-    title: 'algo',
-    handleChange: (e:any) => {console.log(e)},
-    value: 'algo',
-    list: [],
-    emptyFields: false
-  }
-  const input = {
-    type: 'text',
-    name: 'input',
-    title: 'algo',
-    handleChange: (e:any) => {console.log(e)},
-    value: 'algo',
-    emptyFields: false
-  }
+  const inputs = inputConfig();
 
-  const name = {
-    type: 'text',
-    name: 'input',
-    title: 'algo',
-    handleChange: (e:any) => {console.log(e)},
-    value: 'algo',
-    emptyFields: false
-  }
   return (
     <RightModal
       open={openNewCommand}
@@ -48,15 +25,11 @@ const NewCommand = (props:NewCommandProps) => {
       fetching={false}
     >
       <div className={contentSize}>
-        <BuildInputs input={input}/>
-        <BuildInputs input={input}/>
-        <BuildInputs input={input}/>
-        <BuildInputs input={input}/>
-        <BuildInputs input={select}/>
-        <BuildInputs input={select}/>
-        <BuildInputs input={select}/>
-        <BuildInputs input={select}/>
-        <BuildInputs input={select}/>
+        {
+          inputs.map(
+            (input, index) => <BuildInputs key={index} input={input}/>
+          )
+        }
       </div>
     </RightModal>
   );

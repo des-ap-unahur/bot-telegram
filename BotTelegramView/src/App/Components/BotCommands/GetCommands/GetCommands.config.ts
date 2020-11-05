@@ -54,3 +54,76 @@ export const generateConfigWithLang = (configParams:any) => {
     }
   ]
 }
+
+export const inputConfig = () => {
+  return [
+    {
+      type: 'text',
+      name: 'name',
+      title: 'Nombre',
+      handleChange: (e:any) => {console.log(e)},
+      value: '',
+      emptyFields: false
+    },
+    {
+      type: 'text',
+      name: 'command',
+      title: 'Comando',
+      handleChange: (e:any) => {console.log(e)},
+      value: '',
+      emptyFields: false
+    },
+    {
+      type: 'text',
+      name: 'description',
+      title: 'Descripcion',
+      handleChange: (e:any) => {console.log(e)},
+      value: '',
+      emptyFields: false,
+      correction: true
+    },
+    {
+      type: 'select',
+      name: 'user_type',
+      title: 'Tipo de usuario',
+      handleChange: (e:any) => {console.log(e)},
+      value: '',
+      list: [],
+      emptyFields: false
+    },
+    {
+      type: 'select',
+      name: 'command_type',
+      title: 'Tipo de usuario',
+      handleChange: (e:any) => {console.log(e)},
+      value: '',
+      list: [],
+      emptyFields: false
+    },
+    {
+      type: 'text',
+      name: 'response',
+      title: 'Respuesta',
+      handleChange: (e:any) => {console.log(e)},
+      value: '',
+      emptyFields: false,
+      correction: true
+    },
+    {
+      type: 'text',
+      name: 'file_name',
+      title: 'Nombre de archivo',
+      handleChange: (e:any) => {console.log(e)},
+      value: '',
+      emptyFields: false
+    },
+    {
+      type: 'text',
+      name: 'url',
+      title: 'Url',
+      handleChange: (e:any) => {console.log(e)},
+      value: '',
+      emptyFields: false
+    },
+  ]
+}

@@ -4,6 +4,7 @@ import { BLACK, RED_ALERT } from '../../../Styles/Colors.index'
 export const useStyles = makeStyles(theme => ({
   selectFormControl: {
     width: '100%',
+    marginTop: '20px',
   },
   selectLabel:{
     display: 'flex',
@@ -19,7 +20,6 @@ export const useStyles = makeStyles(theme => ({
     justifyContent: 'center'
   },
   widthAndMarginCorrection: {
-    marginTop: '20px',
     width: '92%'
   },
   standarWidth: {
