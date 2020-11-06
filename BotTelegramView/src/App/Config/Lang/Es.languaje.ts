@@ -30,12 +30,12 @@ const ES = {
   thisFieldIsRequired: 'Este campo es requerido',
   newPoll: 'Nueva encuesta',
   editPoll: 'Editar encuesta',
-<<<<<<< HEAD
-  dni: 'DNI'
-=======
+  dni: 'DNI',
+
+  
   numberOfQuestions: 'Cantidad de preguntas',
   question: 'Pregunta'
->>>>>>> 26c62b8eb268a74955c3f9a55d79c2010e5c9550
+
 }
 
 export default ES
