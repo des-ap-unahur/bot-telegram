@@ -13,6 +13,13 @@ class BotCommandRepository {
     return commands;
   }
 
+  getCommandWithAllRelationsFilteredByStatus = async (): Promise<BotCommand[]> => {
+    const commands: BotCommand [] = await BotCommand.findAll({ 
+      include: [CommandTypes,UserTypes, {model: BotNestedCommands, include: [BotCommand]},{ model:BotResponses,include:[BotResponseFiles]}],where:{status:true}});
+      console.log(commands)
+    return commands;
+  }
+
   getCommandWithAllRelation = async (): Promise<BotCommand[]> => {
     const commands: BotCommand [] = await BotCommand.findAll({ 
       include: [CommandTypes,UserTypes, {model: BotNestedCommands, include: [BotCommand]},{ model:BotResponses,include:[BotResponseFiles]}]});
