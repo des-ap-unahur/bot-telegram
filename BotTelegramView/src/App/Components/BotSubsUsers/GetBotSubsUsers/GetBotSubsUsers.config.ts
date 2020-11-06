@@ -1,4 +1,6 @@
 
+
+
 export const generateConfigWithLang = (configParams: any) => {
     const { language } = configParams
 
@@ -11,13 +13,13 @@ export const generateConfigWithLang = (configParams: any) => {
         name: language.dni,
         property: 'dni'
       },
-
       {
-       
-            name: language.userType,
-            
-      }
- 
+        // name: language.userType,
+        // property: 'botUsers',
+        // custom: (property: any) => property && property.userTypes.description,
+        // nestedtable:'userTypes',
+      },
+      
  
     ]
 }
