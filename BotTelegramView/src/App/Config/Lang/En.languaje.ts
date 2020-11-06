@@ -30,12 +30,12 @@ const EN = {
   thisFieldIsRequired: 'This field is required',
   newPoll: 'New poll',
   editPoll: 'Edit poll',
-<<<<<<< HEAD
-  dni: 'DNI'
-=======
+  dni: 'DNI',
+
+  
   numberOfQuestions: 'Number of questions',
   question: 'Question'
->>>>>>> 26c62b8eb268a74955c3f9a55d79c2010e5c9550
+
 }
 
 export default EN
