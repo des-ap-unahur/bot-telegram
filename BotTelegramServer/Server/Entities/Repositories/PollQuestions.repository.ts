@@ -26,7 +26,10 @@ class PollRepository {
     });
     return pollsQuestions;
   };
-
+  getQuestionsByPollId = async (id: number): Promise<any> => {
+    const pollsQuestions: PollQuestion[] = await PollQuestion.findAll({where:{poll_id:id}});
+    return pollsQuestions;
+  };
   post = async (data: PollQuestionInterface[]): Promise<PollQuestion[]> => {
     const pollQuestions = await PollQuestion.bulkCreate(data);
     return pollQuestions;

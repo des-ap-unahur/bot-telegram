@@ -3,7 +3,7 @@ import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 class PollResponseSchema {
   @IsNotEmpty()
   @IsNumber()
-  poll_response_id: number;
+  response_id: number;
   @IsNotEmpty()
   @IsNumber()
   user_id: number;

@@ -4,13 +4,18 @@ import PollQuestions from "../Models/PollQuestions.model";
 import paginate from "../../Utils/Paginate.utils";
 import PollWithPagination from "../../Interfaces/PollWithPagination.interface";
 import UserTypes from "../Models/UserTypes.model";
-
+import PollResponses from "../Models/PollResponses.model";
+import PollQuestionsRepository from "./PollQuestions.repository";
+import PollResponsesRepository from "./PollResponses.repository";
+import PollRolesAccess from "../Models/PollRolesAccess.model";
 
 class PollRepository {
-  getAllWithPagination = async (paginationData: any): Promise<PollWithPagination> => {
+  getAllWithPagination = async (
+    paginationData: any
+  ): Promise<PollWithPagination> => {
     const { count, rows: poll } = await Poll.findAndCountAll({
-      include:[UserTypes, PollQuestions],
-      ...paginate(paginationData)
+      include: [UserTypes, PollQuestions],
+      ...paginate(paginationData),
     });
     const total = count;
     return { total, poll };
@@ -37,10 +42,25 @@ class PollRepository {
     return poll;
   };
 
-  delete = async (id: number): Promise<void> => {
-    PollQuestions.destroy({ where: { poll_id: id } });
-    Poll.destroy({ where: { poll_id: id } });
+  delete = async (id: number): Promise<any> => {
+    try {
+      const questions = await PollQuestionsRepository.getQuestionsByPollId(id);
+      if (questions) {
+        const questionsIds = await questions.map(
+          (question) => question.poll_question_id
+        );
+
+        await PollResponses.destroy({
+          where: { response_id: questionsIds },
+        });
+        await PollQuestions.destroy({ where: { poll_id: id } });
+        await PollRolesAccess.destroy({ where: { poll_id: id } });
+        await Poll.destroy({ where: { poll_id: id } });
+      }
+      return { message: "ok" };
+    } catch (e) {
+      console.log(e);
+    }
   };
 }
-
 export default new PollRepository();
