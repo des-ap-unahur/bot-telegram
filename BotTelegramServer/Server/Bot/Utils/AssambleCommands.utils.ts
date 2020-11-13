@@ -1,8 +1,7 @@
 import BotCommands from "../../Entities/Models/BotCommands.model";
 
-export const assambleCommands = (_commands: BotCommands[], typeCommands: any[], userLogued?) => {
-let commands = _commands;
-if(userLogued){commands = commands.filter(e=>e.name !== "Registrarme")}
+export const assambleCommands = (commands: BotCommands[], typeCommands: any[]) => {
+
 return  commands.map(command => 
   { 
     const type = typeCommands.find(typeCommand => typeCommand.type === command.commandsTypes.type);

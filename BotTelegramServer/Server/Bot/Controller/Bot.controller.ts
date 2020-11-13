@@ -39,16 +39,18 @@ class BotController {
     const user: BotUsers | null = await BotUserRepository.getByTelegramIdWithGuaraniUser(
       telegram_user_id
     );
+  
     if (!userLogued && user) {
       const userAvailableCommands: BotCommand[] = await this.commandsWithoutContact.filter(
-        (command) => command.user_type_id === user.user_type_id || command.user_type_id === 3
+        (command) =>
+          command.user_type_id === user.user_type_id ||
+          command.user_type_id === 3
       );
 
       this.commands = await assambleCommands(
         userAvailableCommands,
-        typeCommands,!userLogued
+        typeCommands
       );
-
 
       this.botUsers.push(user);
     }
@@ -71,7 +73,6 @@ class BotController {
   };
 
   execCommand = (text: string, ctx: TelegrafContext): void => {
- 
     this.commands.map(
       (command) =>
         removeSensitiveCase(command.command) === removeSensitiveCase(text) &&
@@ -118,11 +119,10 @@ class BotController {
     this.bot.on("contact", (ctx) => this.contactCommand(ctx, this.fetchUser));
 
     this.bot.on("message", async (ctx: TelegrafContext) => {
-
       const { text } = ctx.message;
       if (text && this.commands.length && !this.callPollCommand) {
         this.fetchUser(ctx);
-     
+
         this.execCommand(text, ctx);
 
         this.execHear(text, ctx);
