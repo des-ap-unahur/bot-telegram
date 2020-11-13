@@ -12,8 +12,8 @@ export const generateConfigWithLang = (configParams:any) => {
     },
     {
       name: language.description,
-      property: 'description',
-      nestedTable: 'botResponses'
+      property: 'botResponses',
+      custom: (property: any) => property && property.description
     },
     {
       name: language.status,
@@ -55,75 +55,144 @@ export const generateConfigWithLang = (configParams:any) => {
   ]
 }
 
-export const inputConfig = () => {
+export const inputNames = {
+  name: 'name',
+  command: 'command',
+  description: 'description',
+  userType: 'userType',
+  commandType: 'commandType',
+  response: 'response',
+  fileName: 'fileName',
+  url: 'url'
+}
+
+export const inputFirstConfig = (inputParams: any) => {
+  const { 
+    language, 
+    handleChangeInputs,
+    name,
+    command,
+    description,
+    userType,
+    commandType,
+    response,
+    userTypesOptions,
+    commandTypesOptions,
+    emptyFirstFields,
+    confirmation
+  } = inputParams;
+
   return [
     {
       type: 'text',
-      name: 'name',
-      title: 'Nombre',
-      handleChange: (e:any) => {console.log(e)},
-      value: '',
-      emptyFields: false
+      name: inputNames.name,
+      title: language.name,
+      handleChange: handleChangeInputs,
+      value: name,
+      emptyFields: confirmation && emptyFirstFields && !name
     },
     {
       type: 'text',
-      name: 'command',
-      title: 'Comando',
-      handleChange: (e:any) => {console.log(e)},
-      value: '',
-      emptyFields: false
+      name: inputNames.command,
+      title: language.command,
+      handleChange: handleChangeInputs,
+      value: command,
+      emptyFields: confirmation && emptyFirstFields && !command
     },
     {
       type: 'text',
-      name: 'description',
-      title: 'Descripcion',
-      handleChange: (e:any) => {console.log(e)},
-      value: '',
-      emptyFields: false,
+      name: inputNames.description,
+      title: language.description,
+      handleChange: handleChangeInputs,
+      value: description,
+      emptyFields: confirmation && emptyFirstFields && !description,
       correction: true
     },
     {
       type: 'select',
-      name: 'user_type',
-      title: 'Tipo de usuario',
-      handleChange: (e:any) => {console.log(e)},
-      value: '',
-      list: [],
-      emptyFields: false
+      name: inputNames.userType,
+      title: language.userType,
+      handleChange: handleChangeInputs,
+      value: userType,
+      list: userTypesOptions,
+      emptyFields: confirmation && emptyFirstFields && userType
     },
     {
       type: 'select',
-      name: 'command_type',
-      title: 'Tipo de usuario',
-      handleChange: (e:any) => {console.log(e)},
-      value: '',
-      list: [],
-      emptyFields: false
+      name: inputNames.commandType,
+      title: language.commandType,
+      handleChange: handleChangeInputs,
+      value: commandType,
+      list: commandTypesOptions,
+      emptyFields: confirmation && emptyFirstFields && !commandType
     },
     {
       type: 'text',
-      name: 'response',
-      title: 'Respuesta',
-      handleChange: (e:any) => {console.log(e)},
-      value: '',
-      emptyFields: false,
+      name: inputNames.response,
+      title: language.response,
+      handleChange: handleChangeInputs,
+      value: response,
+      emptyFields: confirmation && emptyFirstFields && !response,
       correction: true
+    }
+  ]
+}
+
+export const inputSecondaryConfig = (inputParams: any) => {
+  const { 
+    language, 
+    handleChangeInputs,
+    fileName,
+    url,
+    emptySecondFields,
+    confirmation
+  } = inputParams;
+
+  return [
+    {
+      type: 'text',
+      name: inputNames.fileName,
+      title: language.filename,
+      handleChange: handleChangeInputs,
+      value: fileName,
+      emptyFields: confirmation && emptySecondFields && !fileName
     },
     {
       type: 'text',
-      name: 'file_name',
-      title: 'Nombre de archivo',
-      handleChange: (e:any) => {console.log(e)},
-      value: '',
-      emptyFields: false
+      name: inputNames.url,
+      title: language.url,
+      handleChange: handleChangeInputs,
+      value: url,
+      emptyFields: confirmation && emptySecondFields && !url
+    },
+  ]
+}
+
+export const NestedCommandTableConfig = (configParams:any) => {
+  const { language } = configParams
+  return [
+    {
+      name: language.name,
+      property: 'name'
     },
     {
-      type: 'text',
-      name: 'url',
-      title: 'Url',
-      handleChange: (e:any) => {console.log(e)},
-      value: '',
-      emptyFields: false
+      name: language.description,
+      nestedTable: 'BotCommand',
+      property: 'description'
     },
+    {
+      name: language.actions,
+      align: 'center',
+      isActions: true,
+      actions: [
+        {
+          type: 'delete',
+          id: 'button-poll-delete',
+          title: language.delete,
+          icon: trashIcon,
+          onClick: (dataset:any) => { console.log(dataset.bot_command_id) }
+        },
+      ]
+    }
   ]
 }

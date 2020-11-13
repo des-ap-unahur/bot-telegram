@@ -4,7 +4,7 @@ import { useStyles } from './GetCommands.style';
 import { generateConfigWithLang } from './GetCommands.config'
 import SectionTitle from '../../SharedComponents/SectionTitle/SectionTitle.component';
 import DeletePopUp from '../../SharedComponents/DeletePopUp/DeletePopUp.component';
-import NewCommand from './Content/NewCommand.content';
+import NewCommand from './Content/NewCommand/NewCommand.container';
 import { GetCommandsContentProps } from './GetCommands.interface';
 
 
@@ -21,7 +21,9 @@ const GetCommandsContent = (props:GetCommandsContentProps) => {
     handleOpenDeletePopUp,
     openNewCommand,
     handleCloseNewCommand,
-    handleOpenNewCommand
+    handleOpenNewCommand,
+    userTypesOptions,
+    commandTypesOptions
   } = props;
 
   const { 
@@ -50,6 +52,8 @@ const GetCommandsContent = (props:GetCommandsContentProps) => {
         openNewCommand={openNewCommand}
         handleCloseNewCommand={handleCloseNewCommand}
         language={language}
+        userTypesOptions={userTypesOptions}
+        commandTypesOptions={commandTypesOptions}
       />
       <DeletePopUp
         open={openDeletePopUp}

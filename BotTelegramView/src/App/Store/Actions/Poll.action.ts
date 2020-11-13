@@ -36,6 +36,11 @@ const { actionsTypes, actionCreators } = builderAsyncActions([
     name: 'updateQuestions',
     endpoint: '/poll/questions/:param_1',
     method: 'PUT'
+  },
+  {
+    name: 'deleteQuestions',
+    endpoint: '/poll/questions/:param_1',
+    method: 'DELETE'
   }
 ])
 

@@ -5,6 +5,7 @@ export interface BotCommandStatesInterface {
   failed: boolean;
   sucess: boolean;
   botCommands: null | BotCommands[];
+  botCommandList: null | BotCommands[];
   botCommandSelected: null | BotCommands;
   total: number;
   statusCode: string | number;

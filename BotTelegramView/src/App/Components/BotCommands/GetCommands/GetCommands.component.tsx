@@ -1,8 +1,8 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState, useMemo } from 'react';
 import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
 import BotCommands from '../../../Interfaces/BotComands.interface';
 import GetCommandsContent from './GetCommands.content';
-import { GetCommandsProps } from './GetCommands.interface';
+import { GetCommandsProps, OptionInterface } from './GetCommands.interface';
 
 
 const GetCommands = (props: GetCommandsProps) => {
@@ -19,8 +19,24 @@ const GetCommands = (props: GetCommandsProps) => {
     fetching,
     clearBotCommandsStates,
     deleteBotCommand,
-    selectBotCommand
+    selectBotCommand,
+    getCommandTypesRequest,
+    commandTypes
   } = props;
+
+  const userTypesOptions = useMemo<OptionInterface[] | null>(()=>{
+    return userTypes && userTypes.map(
+      userType => ({id: userType.user_type_id, name: userType.description})
+    )
+  }, [userTypes])
+
+  const commandTypesOptions = useMemo<OptionInterface[] | null>(
+    ()=>{
+      return commandTypes && commandTypes.map(
+        commandType => ({id: commandType.command_type_id, name: commandType.description})
+      )
+    }, [commandTypes]
+  )
 
   const getBotCommands = useCallback(()=>{
     const requestOptions = {
@@ -36,9 +52,16 @@ const GetCommands = (props: GetCommandsProps) => {
     }
   }, [userTypes, getUserTypesRequest])
 
+  const getCommandTypes = useCallback(()=>{
+    if(!commandTypes){
+      getCommandTypesRequest({});
+    }
+  },[commandTypes, getCommandTypesRequest])
+
   useEffect(()=>{
     getUserTypes();
     getBotCommands();
+    getCommandTypes();
   },[getUserTypes, getBotCommands])
 
   const handleChangePage = async (page:number, pageSize:number) => {
@@ -96,6 +119,8 @@ const GetCommands = (props: GetCommandsProps) => {
       openNewCommand={openNewCommand}
       handleOpenNewCommand={handleOpenNewCommand}
       handleCloseNewCommand={handleCloseNewCommand}
+      userTypesOptions={userTypesOptions}
+      commandTypesOptions={commandTypesOptions}
     />
   )
 }

@@ -8,6 +8,21 @@ const { actionsTypes, actionCreators } = builderAsyncActions([
     method: 'GET'
   },
   {
+    name: 'getBotCommandList',
+    endpoint: '/bot-commands',
+    method: 'GET'
+  },
+  {
+    name: 'postBotCommand',
+    endpoint: '/bot-commands',
+    method: 'POST'
+  },
+  {
+    name: 'updateBotCommand',
+    endpoint: '/bot-commands',
+    method: 'PUT'
+  },
+  {
     name: 'deleteBotCommand',
     endpoint: '/bot-commands/:param_1',
     method: 'DELETE'

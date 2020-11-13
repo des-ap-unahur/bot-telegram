@@ -4,6 +4,8 @@ import poll from './Poll.reducer';
 import userTypes from './UserTypes.reducer';
 import botCommands from './BotCommands.reducer';
 import botSubsUsers from './BotSubsUsers.reducer';
+import commandTypes from './CommandTypes.reducer';
+import response from './Response.reducer';
 
 const appReducer = combineReducers(
   {
@@ -12,6 +14,8 @@ const appReducer = combineReducers(
     userTypes,
     botCommands,
     botSubsUsers,
+    commandTypes,
+    response
   }
 )
 

@@ -7,9 +7,9 @@ import {
 import { capitalizeStrings } from '../../../../../Utils/FormatStrings.utils';
 import CheckAction from '../../../CheckAction.component';
 import ActionButton from '../../../ActionButtons/ActionButton.component';
-import { TableBodyProps } from '../../Table.interface';
+import { SimpleTableBodyProps } from '../../SimpleTable.interface';
 
-const TableBodyRow = ({config, dataset}: TableBodyProps) => {
+const TableBodyRow = ({config, dataset}: SimpleTableBodyProps) => {
   const renderCell = (cell: any) => {
     if(cell.nestedTable){
       const relationFound = dataset && dataset[cell.nestedTable]
@@ -18,7 +18,8 @@ const TableBodyRow = ({config, dataset}: TableBodyProps) => {
 
       return capitalizeStrings(stringCell)
     } else if (cell.custom){
-      const property = dataset[cell.property];
+      const property = dataset.property;
+      
       return cell.custom(property)
     }
     return dataset[cell.property] 

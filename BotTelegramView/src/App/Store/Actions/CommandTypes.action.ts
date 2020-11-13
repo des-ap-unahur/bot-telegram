@@ -2,8 +2,8 @@ import builderAsyncActions from "../../Utils/BuilderAsyncActions.utils";
 
 const { actionsTypes, actionCreators } = builderAsyncActions([
   {
-    name: 'getBotSubsUsers',
-    endpoint: '/bot-subs-users',
+    name: 'getCommandTypes',
+    endpoint: '/command-types',
     method: 'GET'
   }
 ])

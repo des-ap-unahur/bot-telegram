@@ -9,6 +9,6 @@ const { actionsTypes, actionCreators } = builderAsyncActions([
 ])
 
 export default {
-  actionsTypes: Object.assign(actionsTypes),
-  actionCreators: Object.assign(actionCreators)
+  actionsTypes: actionsTypes,
+  actionCreators: actionCreators
 }

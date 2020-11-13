@@ -38,7 +38,12 @@ const EN = {
   active: 'Active',
   newCommand: 'New command',
   dni: 'DNI',
-  lastName: 'Last name'
+  lastName: 'Last name',
+  response: 'Response',
+  filename: 'Filename',
+  url: 'Url',
+  nestedCommands: 'Nested commands',
+  command: 'Command'
 }
 
 export default EN

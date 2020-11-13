@@ -38,7 +38,12 @@ const ES = {
   active: 'Activo',
   newCommand: 'Nuevo comando',
   dni: 'DNI',
-  lastName: 'Apellido'
+  lastName: 'Apellido',
+  response: 'Respuesta',
+  filename: 'Nombre del archivo',
+  url: 'Url',
+  nestedCommands: 'Commandos anidados',
+  command: 'Comando'
 }
 
 export default ES

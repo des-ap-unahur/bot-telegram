@@ -1,5 +1,6 @@
 import UserTypes from "../../../Interfaces/UserTypes.interface";
 import BotCommands from "../../../Interfaces/BotComands.interface";
+import { CommandTypeInterface } from "../../../Interfaces/CommandTypes.interface";
 
 export interface GetCommandsProps {
 	fetching: boolean;
@@ -9,10 +10,12 @@ export interface GetCommandsProps {
   fetchingUserTypes: boolean;
   total: number;
   sucess: boolean;
+  commandTypes: null | CommandTypeInterface[];
   selectBotCommand: (poll: null | BotCommands) => void;
   clearBotCommandsStates: () => void;
   getBotCommandsRequest: (requestOptions: any) => void;
   getUserTypesRequest: (requestOptions: any) => void;
+  getCommandTypesRequest: (requestOptions: any) => void;
   deleteBotCommand: (requestOptions: any) => void;
 }
 
@@ -29,12 +32,16 @@ export interface GetCommandsContentProps {
   openNewCommand: boolean;
   handleOpenNewCommand: (botCommands?: BotCommands | null) => void;
   handleCloseNewCommand: () => void;
+  userTypesOptions: null | OptionInterface[]; 
+  commandTypesOptions: null | OptionInterface[];
 }
 
 export interface NewCommandProps {
   openNewCommand: boolean;
   handleCloseNewCommand: () => void;
   language: any;
+  userTypesOptions: null | OptionInterface[]; 
+  commandTypesOptions: null | OptionInterface[];
 }
 
 export interface OptionInterface {
