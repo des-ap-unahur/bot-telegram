@@ -21,8 +21,8 @@ const GetBotSubsUsers = (props: GetBotSubsUsersProps) => {
   },[])
 
   useEffect(()=>{
-    getBotSubsUsers();  
-  },[getBotSubsUsers])
+    getBotSubsUsers();
+  },[getBotSubsUsers]);
   
   const handleChangePage = async (page:number, pageSize:number) => {
     const requestOptions = {

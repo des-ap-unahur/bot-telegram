@@ -31,6 +31,7 @@ const GetBotSubsUsersContent = (props:GetBotSubsUsersContentProps) => {
           <TableComponent
             config={generateConfigWithLang(configParams) || []}
             dataset={ botSubsUsers || []}
+           
             loader={fetching}
             totalRows={total}
             changePage={handleChangePage}

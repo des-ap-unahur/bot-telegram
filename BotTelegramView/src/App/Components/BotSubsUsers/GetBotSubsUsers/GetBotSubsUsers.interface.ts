@@ -1,4 +1,5 @@
 import BotSubsUsersInterface from "../../../Interfaces/BotSubsUsers.interface";
+import UserTypes from "../../../Interfaces/UserTypes.interface";
 
 export interface GetBotSubsUsersProps {
     fetching: boolean;
