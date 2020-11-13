@@ -43,7 +43,8 @@ const EN = {
   filename: 'Filename',
   url: 'Url',
   nestedCommands: 'Nested commands',
-  command: 'Command'
+  command: 'Command',
+  addCommand: 'Add command'
 }
 
 export default EN

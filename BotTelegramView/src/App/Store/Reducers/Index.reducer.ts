@@ -6,6 +6,7 @@ import botCommands from './BotCommands.reducer';
 import botSubsUsers from './BotSubsUsers.reducer';
 import commandTypes from './CommandTypes.reducer';
 import response from './Response.reducer';
+import nestedCommands from './NestedCommands.reducer';
 
 const appReducer = combineReducers(
   {
@@ -15,7 +16,8 @@ const appReducer = combineReducers(
     botCommands,
     botSubsUsers,
     commandTypes,
-    response
+    response,
+    nestedCommands
   }
 )
 

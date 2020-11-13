@@ -43,7 +43,8 @@ const ES = {
   filename: 'Nombre del archivo',
   url: 'Url',
   nestedCommands: 'Commandos anidados',
-  command: 'Comando'
+  command: 'Comando',
+  addCommand: 'Añadir comando'
 }
 
 export default ES

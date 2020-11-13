@@ -1,6 +1,8 @@
 import UserTypes from "../../../Interfaces/UserTypes.interface";
 import BotCommands from "../../../Interfaces/BotComands.interface";
 import { CommandTypeInterface } from "../../../Interfaces/CommandTypes.interface";
+import { ResponseInterface } from "../../../Interfaces/Response.interface";
+import { ResponseFilesInterface } from "../../../Interfaces/ResponseFiles.interface";
 
 export interface GetCommandsProps {
 	fetching: boolean;
@@ -40,8 +42,22 @@ export interface NewCommandProps {
   openNewCommand: boolean;
   handleCloseNewCommand: () => void;
   language: any;
+  fetching?: boolean;
+  botCommandList?: BotCommands[] | null;
   userTypesOptions: null | OptionInterface[]; 
   commandTypesOptions: null | OptionInterface[];
+  postBotCommandRequest?: (requestOptions: any) => void;
+  updateBotCommandRequest?: (requestOptions: any) => void;
+  postResponseRequest?: (requestOptions: any) => void;
+  updateResponseRequest?: (requestOptions: any) => void;
+  postResponsesFilesRequest?: (requestOptions: any) => void;
+  updateResponsesFilesRequest?: (requestOptions: any) => void;
+  selectResponse?: (payload: null | ResponseInterface) => void;
+  selectResponseFiles?: (payload: null | ResponseFilesInterface) => void;
+  selectBotCommand?: (payload: null | BotCommands) => void;
+  postBotNestedCommandRequest?: (requestOptions: any) => void;
+  updateBotNestedCommandRequest?: (requestOptions: any) => void;
+  getBotCommandListRequest?: (requestOptions: any) => void;
 }
 
 export interface OptionInterface {

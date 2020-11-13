@@ -63,7 +63,8 @@ export const inputNames = {
   commandType: 'commandType',
   response: 'response',
   fileName: 'fileName',
-  url: 'url'
+  url: 'url',
+  tableSelect: "simpleTableSelect"
 }
 
 export const inputFirstConfig = (inputParams: any) => {
@@ -177,7 +178,6 @@ export const NestedCommandTableConfig = (configParams:any) => {
     },
     {
       name: language.description,
-      nestedTable: 'BotCommand',
       property: 'description'
     },
     {

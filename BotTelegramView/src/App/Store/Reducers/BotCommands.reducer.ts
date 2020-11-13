@@ -64,8 +64,7 @@ const BotCommandsReducer = (state = initialState, action: any) => {
         fetchingStatus: false,
         failed: false,
         sucess: true,
-        botCommandList: action.payload.data.botCommands,
-        total: action.payload.data.total,
+        botCommandList: action.payload.data,
         statusCode: action.payload.status,
       }
     case actionsTypes.getBotCommandListFailure:
