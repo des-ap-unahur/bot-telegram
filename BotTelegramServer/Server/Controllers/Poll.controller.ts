@@ -38,11 +38,12 @@ class PollController {
     res.send(poll);
   };
 
-  deletePoll = async (req: any, res: any): Promise<void> => {
+  deletePoll = async (req: any, res: any): Promise<any> => {
     const { id } = req.params;
 
     await execDelete(res, async () => {
-      await PollRepository.delete(id);
+     const result=await PollRepository.delete(id);
+     res.send(result);
     })
   };
 }
