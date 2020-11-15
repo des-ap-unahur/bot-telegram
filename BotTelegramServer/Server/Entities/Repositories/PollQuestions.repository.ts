@@ -3,6 +3,7 @@ import PollQuestion from "../Models/PollQuestions.model";
 import PollQuestionInterface from "../../Interfaces/PollQuestion.interface";
 import Paginate from "../../Utils/Paginate.utils";
 import PollWithPagination from "../../Interfaces/PollWithPagination.interface";
+import PollResponses from "../Models/PollResponses.model";
 
 class PollRepository {
   getAllWithPagination = async (
@@ -89,9 +90,19 @@ class PollRepository {
 
   deleteQuestions = async (questions:PollQuestion[]): Promise<void> => {
     try{
-    const questionsData = await questions.map(e=>PollQuestion.findByPk(e.poll_question_id));
-    const questionsResult = await  Promise.all(questionsData);
-    await questionsResult.forEach(e=>e.destroy());
+    if(questions.length){
+ 
+      const questionsData = await questions.map(e=>PollQuestion.findByPk(e.poll_question_id));
+      const questionsResult = await  Promise.all(questionsData);
+      
+      if(questionsResult.length){
+
+        await questionsResult.forEach(e=> PollResponses.destroy({where:{response_id:e.poll_question_id}}));
+        await questionsResult.forEach(e=>e.destroy());
+
+      }
+
+    }
     }catch(e){
       console.log(e)
     }
