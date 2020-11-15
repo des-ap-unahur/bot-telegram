@@ -39,7 +39,7 @@ class BotController {
     const user: BotUsers | null = await BotUserRepository.getByTelegramIdWithGuaraniUser(
       telegram_user_id
     );
-  
+      
     if (!userLogued && user) {
       const userAvailableCommands: BotCommand[] = await this.commandsWithoutContact.filter(
         (command) =>

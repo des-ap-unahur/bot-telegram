@@ -7,24 +7,28 @@ import PollWithPagination from "../../Interfaces/PollWithPagination.interface";
 class PollRepository {
   getAllWithPagination = async (
     paginationData: any
-  ): Promise<PollWithPagination> => {
-    const { count, rows: poll } = await Poll.findAndCountAll({
-      include: [PollQuestion],
-      ...Paginate(paginationData),
-    });
-
-    const total = count;
-    return { total, poll };
-  };
-
-  getAll = async (): Promise<Poll[]> => {
-    const poll: Poll[] = await Poll.findAll({
-      include: [PollQuestion],
-      limit: 10,
-    });
-    return poll;
-  };
-  get = async (id: number): Promise<Poll> => {
+    ): Promise<PollWithPagination> => {
+      const { count, rows: poll } = await Poll.findAndCountAll({
+        include: [PollQuestion],
+        ...Paginate(paginationData),
+      });
+      
+      const total = count;
+      return { total, poll };
+    };
+    
+    getAll = async (): Promise<Poll[]> => {
+      const poll: Poll[] = await Poll.findAll({
+        include: [PollQuestion],
+        limit: 10,
+      });
+      return poll;
+    };
+    getAllquestions =async(pollId)=>{
+      const result:PollQuestion[]=await PollQuestion.findAll({where:{poll_id: pollId}});
+      return result;
+    }
+    get = async (id: number): Promise<Poll> => {
     const pollsQuestions: Poll = await Poll.findByPk(id, {
       include: [PollQuestion],
     });
@@ -40,10 +44,24 @@ class PollRepository {
     const pollQuestions = await PollQuestion.bulkCreate(data);
     return pollQuestions;
   };
+  postQuestionByPollId= async (data: any[],id:number): Promise<any[]> => {
+    const _id = Number(id);
+
+    if(data.length>0){
+    const questions = data.map((e)=> {return {...e,...{poll_id:_id}}});
+    const result = await PollQuestion.bulkCreate(questions);
+
+    
+    return result;
+  
+      
+    }else{
+      return [];
+    }
+  };
 
   update = async (
-    data: PollQuestionInterface[],
-    id
+    data: PollQuestionInterface[]
   ): Promise<PollQuestion[]> => {
     if (data.length > 0) {
       const questions = data.map((e) =>
@@ -64,11 +82,23 @@ class PollRepository {
       return [];
     }
   };
-
   delete = async (id: number): Promise<void> => {
     const pollQuestions: PollQuestion = await PollQuestion.findByPk(id);
     pollQuestions.destroy();
   };
+
+  deleteQuestions = async (questions:PollQuestion[]): Promise<void> => {
+    try{
+    const questionsData = await questions.map(e=>PollQuestion.findByPk(e.poll_question_id));
+    const questionsResult = await  Promise.all(questionsData);
+    await questionsResult.forEach(e=>e.destroy());
+    }catch(e){
+      console.log(e)
+    }
+   
+  };
+
+
 }
 
 export default new PollRepository();

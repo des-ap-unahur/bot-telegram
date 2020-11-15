@@ -36,13 +36,15 @@ class PollQuestionsController {
   updatePollQuestions = async (req: any, res: any): Promise<any> => {
     const { body } = req;
     const { id } = req.params
-    console.log(id)
     const questionsUpdate = body.filter(e=>e.poll_question_id !==undefined);
     const questionsCreate = body.filter(e=>e.poll_question_id == undefined);
-
-  const resultUpdate: PollQuestion[] = await PollQuestionsRepository.update(questionsUpdate,id);
-  const resultCreate: PollQuestion[] =  await PollQuestionsRepository.post(questionsCreate);
-    res.send(resultUpdate.concat(resultCreate));
+    const resultUpdate: PollQuestion[] = await PollQuestionsRepository.update(questionsUpdate);
+    const allQuestions: PollQuestion[] = await PollQuestionsRepository.getAllquestions(id);
+    const deleteQuestions: PollQuestion[] = allQuestions.reduce((list,e)=>(resultUpdate.some(question=>question.poll_question_id===e.poll_question_id))?list:list.concat([e]),[]);
+    await PollQuestionsRepository.deleteQuestions(deleteQuestions); 
+    const resultCreate: PollQuestion[] =  await PollQuestionsRepository.postQuestionByPollId(questionsCreate, id);
+    const result: PollQuestion[]  = resultUpdate.concat(resultCreate)
+    res.send(result);
   };
 
   deletePollQuestions = async (req: any, res: any): Promise<void> => {
