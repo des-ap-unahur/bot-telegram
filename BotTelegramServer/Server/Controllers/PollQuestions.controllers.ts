@@ -33,15 +33,16 @@ class PollQuestionsController {
     notFoundValidator(res, pollQuestions);
   };
 
-  updatePollQuestions = async (req: any, res: any): Promise<void> => {
+  updatePollQuestions = async (req: any, res: any): Promise<any> => {
     const { body } = req;
-    const { id } = req.params;
+    const { id } = req.params
+    console.log(id)
+    const questionsUpdate = body.filter(e=>e.poll_question_id !==undefined);
+    const questionsCreate = body.filter(e=>e.poll_question_id == undefined);
 
-    const pollQuestion: PollQuestion = await PollQuestionsRepository.update(
-      id,
-      body
-    );
-    res.send(pollQuestion);
+  const resultUpdate: PollQuestion[] = await PollQuestionsRepository.update(questionsUpdate,id);
+  const resultCreate: PollQuestion[] =  await PollQuestionsRepository.post(questionsCreate);
+    res.send(resultUpdate.concat(resultCreate));
   };
 
   deletePollQuestions = async (req: any, res: any): Promise<void> => {

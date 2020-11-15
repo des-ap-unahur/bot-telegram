@@ -6,6 +6,7 @@ import execDelete from "../Utils/ExecDelete.utils";
 
 class PollController {
   getPolls = async (req: any, res: any): Promise<void> => {
+    console.log("Hola")
     const paginationData = req.query;
     if (paginationData.page) {
       const poll = await PollRepository.getAllWithPagination(paginationData);
