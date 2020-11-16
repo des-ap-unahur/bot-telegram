@@ -26,6 +26,7 @@ class UserBackOfficeRepository {
 
     return user;
   };
+  
   post = async (data: UserBackOfficeInterface): Promise<UserBackOfficeInterface> => {
     const user: UserBackOffice = await UserBackOffice.create(data);
     const {back_user_id, user_role_id, username, first_name, last_name,email} = user;

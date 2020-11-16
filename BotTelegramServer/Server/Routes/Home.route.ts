@@ -5,7 +5,7 @@ const HomeRoute = Router();
 HomeRoute.get('/', (req, res) => {
   res.send('bienvenido al servicio BotTelegramServer.');
 });
-HomeRoute.post("/register",Auth.register);
-HomeRoute.post("/login",Auth.login);
+HomeRoute.post("/api/register",Auth.register);
+HomeRoute.post("/api/login",Auth.login);
 
 export default HomeRoute;
