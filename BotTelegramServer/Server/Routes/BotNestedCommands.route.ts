@@ -10,5 +10,5 @@ BotNestedCommandRoute.get('/bot-nested-commands/:id', BotNestedCommandController
 BotNestedCommandRoute.post('/bot-nested-commands', validateRequest(BotNestedCommandsSchema), BotNestedCommandController.postCommand);
 BotNestedCommandRoute.delete('/bot-nested-commands/:id', BotNestedCommandController.deleteCommand);
 BotNestedCommandRoute.put('/bot-nested-commands/:id', validateRequest(BotNestedCommandsSchema), BotNestedCommandController.updateCommand);
-
+BotNestedCommandRoute.put("/bot-commands/nested-commands/",BotNestedCommandController.updateNestedCommand);
 export default BotNestedCommandRoute;
