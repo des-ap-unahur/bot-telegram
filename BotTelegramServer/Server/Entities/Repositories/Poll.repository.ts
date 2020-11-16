@@ -49,7 +49,6 @@ class PollRepository {
         const questionsIds = await questions.map(
           (question) => question.poll_question_id
         );
-
         await PollResponses.destroy({
           where: { response_id: questionsIds },
         });

@@ -42,8 +42,8 @@ class PollController {
     const { id } = req.params;
 
     await execDelete(res, async () => {
-     const result=await PollRepository.delete(id);
-     res.send(result);
+      const result=await PollRepository.delete(id);
+      res.send(result);
     })
   };
 }

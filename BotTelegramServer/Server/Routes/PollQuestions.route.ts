@@ -9,6 +9,6 @@ PollRoute.get('/polls/questions', PollQuestionsController.getPollsQuestions);
 PollRoute.get('/poll/:id/questions/', PollQuestionsController.getPollQuestionsById);
 PollRoute.post('/poll/questions', validateRequest(PollQuestionSchema), PollQuestionsController.postPollQuestions);
 PollRoute.delete('/poll/questions/:id', PollQuestionsController.deletePollQuestions);
-PollRoute.put('/poll/questions/:id', validateRequest(PollQuestionSchema), PollQuestionsController.updatePollQuestions);
+PollRoute.put('/questions/:id', PollQuestionsController.updatePollQuestions);
 
 export default PollRoute;
