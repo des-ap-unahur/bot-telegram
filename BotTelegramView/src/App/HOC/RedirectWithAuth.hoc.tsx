@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { useHistory } from 'react-router';
+import { GlobalStateInterface } from '../Interfaces/GlobalState.interface';
 
 
 const RedirectWithLogin = ({auth}:any) => {
@@ -13,8 +14,8 @@ const RedirectWithLogin = ({auth}:any) => {
   return <></>  
 }
 
-const mapStateToProps = (state:any) => ({
-  auth: true
+const mapStateToProps = (state:GlobalStateInterface) => ({
+  auth: Boolean(state.auth.user && state.auth.token)
 });
 
 export default connect(mapStateToProps)(RedirectWithLogin)

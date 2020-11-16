@@ -44,7 +44,10 @@ const EN = {
   url: 'Url',
   nestedCommands: 'Nested commands',
   command: 'Command',
-  addCommand: 'Add command'
+  addCommand: 'Add command',
+  username: 'Username',
+  password: 'Password',
+  signIn: 'Sign in'
 }
 
 export default EN

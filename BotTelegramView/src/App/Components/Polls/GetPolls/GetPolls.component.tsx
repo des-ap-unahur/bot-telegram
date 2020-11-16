@@ -143,10 +143,10 @@ const GetPolls = (props: GetPollProps) => {
     getPolls()
   }, [getPolls])
 
-  const updateQuestion = async (index: number, question_id?: number | string) => {
+  const updateQuestion = async (id: number) => {
     const requestOptions = {
-      param_1: question_id,
-      data: questions[index]
+      param_1: id,
+      data: questions
     }
     await updateQuestionsRequest(requestOptions);
   }
@@ -224,7 +224,7 @@ const GetPolls = (props: GetPollProps) => {
       }
 
       await updatePollRequest(requestOptions);
-      await pollSelected.questions.map(async (question, index) => await updateQuestion(index, question.poll_question_id));
+      await updateQuestion(pollSelected.poll_id);
       await handleClosePollPopUp();
     } else if(!emptyFields){
       const requestOptions = {

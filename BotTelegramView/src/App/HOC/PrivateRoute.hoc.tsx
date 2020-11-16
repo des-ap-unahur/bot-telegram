@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
+import { GlobalStateInterface } from '../Interfaces/GlobalState.interface';
 
 const PrivateRoute = ({auth, path, component, exact, userPermissions, permissions}:any) => {
   const hasRequiredPermissions = useMemo(() => {
@@ -19,8 +20,8 @@ const PrivateRoute = ({auth, path, component, exact, userPermissions, permission
   )
 }
 
-const mapStateToProps = (state:any) => ({
-  auth: true,
+const mapStateToProps = (state:GlobalStateInterface) => ({
+  auth: Boolean(state.auth.user && state.auth.token),
   userPermissions: []
 });
 

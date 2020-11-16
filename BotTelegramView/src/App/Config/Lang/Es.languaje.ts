@@ -44,7 +44,10 @@ const ES = {
   url: 'Url',
   nestedCommands: 'Commandos anidados',
   command: 'Comando',
-  addCommand: 'Añadir comando'
+  addCommand: 'Añadir comando',
+  username: 'Nombre de usuario',
+  password: 'Contraseña',
+  signIn: 'Iniciar sesión'
 }
 
 export default ES

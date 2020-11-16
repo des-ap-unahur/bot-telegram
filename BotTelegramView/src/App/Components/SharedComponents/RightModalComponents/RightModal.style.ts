@@ -1,4 +1,4 @@
-import { Hidden, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import { GOOGLE_BLUE, WHITE, BLACK, BLUE } from '../../../Styles/Colors.index'
 
 export const useStyles = makeStyles(theme => ({

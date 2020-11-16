@@ -1,11 +1,12 @@
 export interface UserInterface {
   image: string;
-  username: string;
+  username: string | null;
 }
 
 export interface HeaderProps {
   auth: boolean;
   user: UserInterface;
+  clearAuthStates: () => void;
 }
 
 export interface HeaderContentProps {

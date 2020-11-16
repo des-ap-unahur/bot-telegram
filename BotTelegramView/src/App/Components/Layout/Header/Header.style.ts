@@ -8,20 +8,12 @@ export const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     display: 'flex'
   },
-  appBarInclined: {
-    background: LIGHT_BLUE,
-    WebkitTransform: 'rotate(-1deg)',
-    transform: 'rotate(-1deg)',
-    width: '250%',
-    paddingTop: '5px',
-    boxShadow: 'none',
-    zIndex: theme.zIndex.drawer + 1
-  },
   appBar: {
     background: LIGHT_BLUE,
     boxShadow: 'none',
+    minHeight: '48px',
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin', 'transform'], {
+    transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),

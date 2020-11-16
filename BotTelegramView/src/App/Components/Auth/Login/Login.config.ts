@@ -1,1 +1,4 @@
-export const uno = 1;
+export const inputNames = {
+  username: "username",
+  password: "password"
+}

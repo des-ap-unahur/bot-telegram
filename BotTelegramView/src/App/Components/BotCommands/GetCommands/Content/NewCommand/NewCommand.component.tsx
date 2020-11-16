@@ -9,6 +9,7 @@ import SectionAddToTable from '../../../../SharedComponents/SectionAddToTable/Se
 
 
 const NewCommand = (props:NewCommandProps) => {
+  const [ editMode, setEditMode ] = useState<boolean>(false);
   const [ name, setName ] = useState<string>('');
   const [ command, setCommand ] = useState<string>('');
   const [ description, setDescription ] = useState<string>('');
@@ -67,10 +68,10 @@ const NewCommand = (props:NewCommandProps) => {
   }, [botCommandList])
 
   const postResponse = useCallback(()=>{
-    if(selectBotCommand){
+    if(selectBotCommand && editMode){
 
     }
-  }, [selectBotCommand])
+  }, [selectBotCommand, editMode])
 
   const getBotCommandList = useCallback(()=>{
     if(!botCommandList){
@@ -187,20 +188,3 @@ const NewCommand = (props:NewCommandProps) => {
 }
 
 export default NewCommand;
-
-{
-  bot_command_id: 1,
-  command: 'name',
-  nestedCommand: [
-    {
-      bot_father_id: 1,
-      bot_child_id: 2,
-      command: 'name',
-    },
-    {
-      bot_father_id: 1,
-      bot_child_id: 3,
-      command: 'name',
-    }
-  ]
-}

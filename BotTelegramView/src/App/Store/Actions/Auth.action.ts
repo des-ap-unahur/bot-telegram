@@ -2,7 +2,11 @@ import buildAsyncActions from "../../Utils/BuilderAsyncActions.utils";
 
 
 const { actionsTypes, actionCreators } = buildAsyncActions([
-  
+  {
+    name:'login',
+    endpoint:'/login',
+    method: 'POST'
+  }
 ])
 
 const syncActions = {

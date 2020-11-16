@@ -15,7 +15,6 @@ const HeaderContent = (props: HeaderContentProps) => {
     root,
     appBar,
     appBarShift,
-    appBarInclined
   } = useStyles();
 
   const {
@@ -34,12 +33,13 @@ const HeaderContent = (props: HeaderContentProps) => {
       
   return(
     <div className={root}>
-      <AppBar position="fixed" className={auth ?
+      <AppBar position="fixed" className={
         clsx(appBar, {
           [appBarShift]: isOpenDrawer,
-        }) : appBarInclined}>
-        <Toolbar>
-          {auth && 
+        })}
+      >
+        {auth && 
+          <Toolbar>
             <HeaderAppBar
               user={user}
               handleMenu={handleMenu}
@@ -50,8 +50,8 @@ const HeaderContent = (props: HeaderContentProps) => {
               handleDrawerOpen={handleDrawerOpen}
               handleSignoutClickMenu={handleSignoutClickMenu}
             />
-          }
-        </Toolbar>
+          </Toolbar>
+        }
       </AppBar>
       {auth &&
         <HeaderMenuModal
