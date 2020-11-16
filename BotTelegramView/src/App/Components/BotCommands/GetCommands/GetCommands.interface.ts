@@ -43,6 +43,8 @@ export interface NewCommandProps {
   handleCloseNewCommand: () => void;
   language: any;
   fetching?: boolean;
+  responseSelected: ResponseInterface | null;
+  botCommandSelected?: BotCommands | null;
   botCommandList?: BotCommands[] | null;
   userTypesOptions: null | OptionInterface[]; 
   commandTypesOptions: null | OptionInterface[];
@@ -58,6 +60,9 @@ export interface NewCommandProps {
   postBotNestedCommandRequest?: (requestOptions: any) => void;
   updateBotNestedCommandRequest?: (requestOptions: any) => void;
   getBotCommandListRequest?: (requestOptions: any) => void;
+  clearBotCommandsStates: () => void;
+  clearNestedCommandsStates: () => void;
+  clearResponseStates: () => void;
 }
 
 export interface OptionInterface {

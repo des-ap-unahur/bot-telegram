@@ -3,6 +3,7 @@ import BotCommand from '../Entities/Models/BotCommands.model';
 import { botController } from '../Bot/Controller/Bot.controller';
 import execDelete from '../Utils/ExecDelete.utils';
 import notFoundValidator from '../Utils/NotFoundValidator.utils';
+import { HttpStatus } from '../Config/Server/HTTPStatus.config';
 
 
 class BotCommandController {
@@ -41,11 +42,15 @@ class BotCommandController {
     notFoundValidator(res, botCommandsTypes);
   };
 
+  refreshCommand = async (req: any, res: any): Promise<void> => {
+    await botController.refreshCommands();
+    res.send(HttpStatus.OK);
+  }
+
   postCommand = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     
     const botCommands: BotCommand = await BotCommandRepository.post(body)
-    await botController.refreshCommands();
     res.send(botCommands);
   };
 

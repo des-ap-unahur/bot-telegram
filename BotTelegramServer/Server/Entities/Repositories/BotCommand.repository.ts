@@ -10,14 +10,15 @@ import paginate from "../../Utils/Paginate.utils";
 
 class BotCommandRepository {
   getAll = async (): Promise<BotCommand[]> => {
-    const commands: BotCommand[] = await BotCommand.findAll({ include: [CommandTypes,UserTypes,BotNestedCommands,{ model:BotResponses,include:[BotResponseFiles] }] });
+    const commands: BotCommand[] = await BotCommand.findAll({ include: [CommandTypes,UserTypes,BotNestedCommands,{model:BotResponses,include:[BotResponseFiles]}]});
     return commands;
   }
 
   getCommandWithAllRelationsFilteredByStatus = async (): Promise<BotCommand[]> => {
     const commands: BotCommand [] = await BotCommand.findAll({ 
-      include: [CommandTypes,UserTypes, {model: BotNestedCommands, include: [BotCommand]},{ model:BotResponses,include:[BotResponseFiles]}],where:{status:true}});
-      console.log(commands)
+      include: [CommandTypes,UserTypes, {model: BotNestedCommands, include: [BotCommand]},{ model:BotResponses,include:[BotResponseFiles]}],where:{status:true}
+    });
+
     return commands;
   }
 

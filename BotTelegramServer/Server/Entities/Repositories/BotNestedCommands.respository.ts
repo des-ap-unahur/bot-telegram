@@ -13,9 +13,9 @@ class BotNestedCommandRepository {
     return command;
   };
   
-  post = async (data: BotNestedCommandInterface): Promise<BotNestedCommand> => {
-    const command: BotNestedCommand = await BotNestedCommand.create(data);
-    return command;
+  post = async (data: BotNestedCommandInterface[]): Promise<BotNestedCommand[]> => {
+    const commands: BotNestedCommand[] = await BotNestedCommand.bulkCreate(data);
+    return commands;
   }
 
   update = async (id: number, data: BotNestedCommandInterface): Promise<BotNestedCommand>=>{

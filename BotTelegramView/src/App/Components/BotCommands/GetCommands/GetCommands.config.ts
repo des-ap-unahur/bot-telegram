@@ -41,7 +41,7 @@ export const generateConfigWithLang = (configParams:any) => {
           id: 'button-poll-edit',
           title: language.edit,
           icon: editIcon,
-          onClick: (dataset:any) => { handleOpenNewCommand(dataset) }
+          onClick: (dataset:any) => { console.log(dataset) }
         },
         {
           type: 'delete',
@@ -170,7 +170,7 @@ export const inputSecondaryConfig = (inputParams: any) => {
 }
 
 export const NestedCommandTableConfig = (configParams:any) => {
-  const { language } = configParams
+  const { language, handleDeleteNestedCommand } = configParams
   return [
     {
       name: language.name,
@@ -190,7 +190,7 @@ export const NestedCommandTableConfig = (configParams:any) => {
           id: 'button-poll-delete',
           title: language.delete,
           icon: trashIcon,
-          onClick: (dataset:any) => { console.log(dataset.bot_command_id) }
+          onClick: (dataset:any) => { handleDeleteNestedCommand(dataset.bot_command_id) }
         },
       ]
     }

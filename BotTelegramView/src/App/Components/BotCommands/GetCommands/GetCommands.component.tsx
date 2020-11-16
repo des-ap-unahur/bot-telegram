@@ -93,7 +93,7 @@ const GetCommands = (props: GetCommandsProps) => {
   }
 
   const handleOpenNewCommand = (botCommands?: BotCommands | null) => {
-    if(botCommands){
+    if(botCommands && botCommands.bot_command_id){
       setOpenNewCommand(true);
       selectBotCommand(botCommands);
     } else {
@@ -103,6 +103,7 @@ const GetCommands = (props: GetCommandsProps) => {
 
   const handleCloseNewCommand = () => {
     setOpenNewCommand(false);
+    getBotCommands();
   }
 
   return (

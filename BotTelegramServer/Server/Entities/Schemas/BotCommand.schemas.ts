@@ -4,7 +4,9 @@ class BotCommandSchema {
   @IsNotEmpty()
   @IsNumber()
   command_type_id: number;
-  user_type_id: number | null;
+  @IsNotEmpty()
+  @IsNumber()
+  user_type_id: number;
   @IsNotEmpty()
   @IsString()
   tel_command: string;
@@ -14,8 +16,9 @@ class BotCommandSchema {
   @IsNotEmpty()
   @IsBoolean()
   status: boolean;
-  description: string | null;
-  parameter: string | null;
+  @IsString()
+  description: string;
+  parameter: string;
 }
 
 export default BotCommandSchema;

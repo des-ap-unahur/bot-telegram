@@ -22,6 +22,7 @@ class BotController {
   private bot: Telegraf<TelegrafContext>;
   private callPollCommand: CommandInterface | null;
   private botUsers: BotUsers[];
+  private refresh: boolean;
 
   constructor(bot) {
     this.bot = bot;
@@ -29,6 +30,7 @@ class BotController {
     this.commands = [];
     this.callPollCommand = null;
     this.botUsers = [];
+    this.refresh = false
   }
 
   fetchUser = async (ctx: TelegrafContext) => {
@@ -36,11 +38,12 @@ class BotController {
     const userLogued: boolean = this.botUsers.some(
       (user) => user.tel_user_id === telegram_user_id
     );
+    
     const user: BotUsers | null = await BotUserRepository.getByTelegramIdWithGuaraniUser(
       telegram_user_id
     );
-      
-    if (!userLogued && user) {
+
+    if ((!userLogued && user) || this.refresh) {
       const userAvailableCommands: BotCommand[] = await this.commandsWithoutContact.filter(
         (command) =>
           command.user_type_id === user.user_type_id ||
@@ -139,6 +142,7 @@ class BotController {
   };
 
   refreshCommands = async (): Promise<void> => {
+    this.refresh = true;
     await this.fetchCommands();
     await this.buildCommands();
   };

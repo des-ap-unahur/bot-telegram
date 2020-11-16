@@ -9,9 +9,10 @@ import NewCommand from './NewCommand.component';
 const actionCreators = Object.assign({}, BotCommands.actionCreators, ResponseAction.actionCreators, NestedCommandsAction.actionCreators);
 
 const mapStateToProps = (state: GlobalStateInterface) => ({
-  fetching: state.botCommands.fetchingStatus,
+  fetching: state.botCommands.fetchingStatus || state.response.fetchingStatus || state.nestedCommands.fetchingStatus,
   botCommandSelected: state.botCommands.botCommandSelected,
-  botCommandList: state.botCommands.botCommandList
+  botCommandList: state.botCommands.botCommandList,
+  responseSelected: state.response.response
 });
 
 const mapDispatchToProps = (dispatch: any) =>

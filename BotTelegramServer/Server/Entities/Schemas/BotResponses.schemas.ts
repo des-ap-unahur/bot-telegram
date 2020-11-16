@@ -1,8 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 class BotResponseSchema {
-  @IsNotEmpty()
-  @IsNumber()
   bot_response_id: number;
   @IsNotEmpty()
   @IsNumber()
