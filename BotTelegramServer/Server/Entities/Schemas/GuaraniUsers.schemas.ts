@@ -16,10 +16,3 @@ class GuaraniUserSchema {
 }
 
 export default GuaraniUserSchema;
-
-{
-  dni: 13232323,
-  phone_number: 13232323,
-  email: "algo",
-  profile: "Estudiante" | "Profesor"
-}

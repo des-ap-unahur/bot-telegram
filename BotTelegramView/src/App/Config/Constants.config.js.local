@@ -6,7 +6,7 @@ const criteria = {
 
 const constants = {
   endpoints: {
-    server: 'http://34.125.240.107:5000/api',
+    server: 'http://admin.ibot.ar:5000/api',
   },
 }
 
