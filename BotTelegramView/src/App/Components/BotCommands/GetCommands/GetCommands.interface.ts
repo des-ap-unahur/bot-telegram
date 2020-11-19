@@ -18,7 +18,7 @@ export interface GetCommandsProps {
   getBotCommandsRequest: (requestOptions: any) => void;
   getUserTypesRequest: (requestOptions: any) => void;
   getCommandTypesRequest: (requestOptions: any) => void;
-  deleteBotCommand: (requestOptions: any) => void;
+  deleteBotCommandRequest: (requestOptions: any) => void;
 }
 
 export interface GetCommandsContentProps {

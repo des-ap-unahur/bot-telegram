@@ -18,7 +18,7 @@ const GetCommands = (props: GetCommandsProps) => {
     total,
     fetching,
     clearBotCommandsStates,
-    deleteBotCommand,
+    deleteBotCommandRequest,
     selectBotCommand,
     getCommandTypesRequest,
     commandTypes
@@ -79,7 +79,7 @@ const GetCommands = (props: GetCommandsProps) => {
 
     clearBotCommandsStates();
     setOpenDeletePopUp(false);
-    await deleteBotCommand(requestOptions);
+    await deleteBotCommandRequest(requestOptions);
     await handleChangePage(0, 10);
   }
 
