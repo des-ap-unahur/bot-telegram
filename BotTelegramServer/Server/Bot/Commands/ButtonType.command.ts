@@ -8,7 +8,7 @@ export const ButtonType = {
   generateCommand: (command: BotCommand) => {
     const { tel_command, name,botResponses } = command;
     const { response, parameter } = botResponses;
-    const buttons: string[] = parameter.split(',');
+    const buttons: string[] = parameter ? parameter.split(',') : [];
 
     return {
       command: toCommand(tel_command),
