@@ -6,7 +6,7 @@ import { toCommand } from '../Utils/ToCommand.utils';
 export const ButtonType = {
   type: "Button",
   generateCommand: (command: BotCommand) => {
-    const { tel_command, name,botResponses } = command;
+    const { tel_command, name, botResponses } = command;
     const { response, parameter } = botResponses;
     const buttons: string[] = parameter ? parameter.split(',') : [];
 

@@ -9,11 +9,12 @@ import UserTypes from "../Models/UserTypes.model";
  
 class BotSubsUsersRepository {
   getAllWithPagination = async (paginationData: any): Promise<BotSubsUsersWithPagination> => {
-    const {count, rows: botSubsUsers} = await BotSubsUsers.findAndCountAll({
+    const total: number = await BotSubsUsers.count();
+    const botSubsUsers: BotSubsUsers[] = await BotSubsUsers.findAll({
       include:[{model: BotUsers, include:[UserTypes]}],
       ...paginate(paginationData)
     })
-    const total = count;
+
     return { total, botSubsUsers};
       
   };

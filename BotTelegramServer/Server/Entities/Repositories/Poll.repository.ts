@@ -6,18 +6,17 @@ import PollWithPagination from "../../Interfaces/PollWithPagination.interface";
 import UserTypes from "../Models/UserTypes.model";
 import PollResponses from "../Models/PollResponses.model";
 import PollQuestionsRepository from "./PollQuestions.repository";
-import PollResponsesRepository from "./PollResponses.repository";
 import PollRolesAccess from "../Models/PollRolesAccess.model";
 
 class PollRepository {
   getAllWithPagination = async (
     paginationData: any
   ): Promise<PollWithPagination> => {
-    const { count, rows: poll } = await Poll.findAndCountAll({
+    const total: number = await Poll.count();
+    const poll: Poll[] = await Poll.findAll({
       include: [UserTypes, PollQuestions],
       ...paginate(paginationData),
     });
-    const total = count;
     return { total, poll };
   };
 

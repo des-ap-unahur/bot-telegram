@@ -30,13 +30,13 @@ class BotCommandRepository {
   }
   
   getCommandWithAllRelationPagination = async (paginationData: any): Promise<any> => {
-    const { count, rows: botCommands } = await BotCommand.findAndCountAll({ 
+    const total: number = await BotCommand.count();
+    const botCommands: BotCommand[] = await BotCommand.findAll({ 
       include: [CommandTypes,UserTypes, {model: BotNestedCommands, include: [BotCommand]},{ model:BotResponses,include:[BotResponseFiles]}],
       ...paginate(paginationData)
     });
-    const total = count;
 
-    return { total , botCommands};
+    return { total , botCommands };
   }
 
   getCommandsTypes = async (): Promise<BotCommand[]> => {

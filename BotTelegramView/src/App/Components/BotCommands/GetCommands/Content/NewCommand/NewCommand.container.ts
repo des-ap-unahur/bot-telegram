@@ -12,7 +12,8 @@ const mapStateToProps = (state: GlobalStateInterface) => ({
   fetching: state.botCommands.fetchingStatus || state.response.fetchingStatus || state.nestedCommands.fetchingStatus,
   botCommandSelected: state.botCommands.botCommandSelected,
   botCommandList: state.botCommands.botCommandList,
-  responseSelected: state.response.response
+  responseSelected: state.response.response,
+  fetchingResponseFiles: state.response.fetchingStatus
 });
 
 const mapDispatchToProps = (dispatch: any) =>

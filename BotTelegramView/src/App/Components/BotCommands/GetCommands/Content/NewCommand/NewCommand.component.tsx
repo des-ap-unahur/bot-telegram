@@ -18,6 +18,8 @@ const NewCommand = (props:NewCommandProps) => {
   const [ commandType, setCommandType ] = useState<string | number>('');
   const [ response, setResponse ] = useState<string>('');
   const [ fileName, setFileName ] = useState<string>('');
+  const [ buttonList, setButtonList ] = useState<string>('');
+  const [ coordinates, setCoordinates ] = useState<string>('');
   const [ url, setUrl ] = useState<string>('');
   const [ commandToAdd, setCommandToAdd ] = useState<string | number>('');
   const [ confirmation, setConfirmation ] = useState<boolean>(false);
@@ -42,7 +44,8 @@ const NewCommand = (props:NewCommandProps) => {
     clearBotCommandsStates,
     clearResponseStates,
     clearNestedCommandsStates,
-    selectBotCommand
+    selectBotCommand,
+    fetchingResponseFiles
   } = props;
   const { contentSize } = useStyles();
 
@@ -84,6 +87,14 @@ const NewCommand = (props:NewCommandProps) => {
     return commandType == nestedCommandListId || nestedCommandButtonsId == commandType
   },[commandType])
 
+  const isAButtonCommand = useMemo<boolean>(()=>{
+    return false
+  }, [])
+
+  const isALocationCommand = useMemo<boolean>(()=>{
+    return false
+  }, [])
+
   const emptySecondFields = useMemo<boolean>(()=>{
     return !(fileName && url) && secondaryInputsActives
   }, [fileName, url, secondaryInputsActives])
@@ -104,7 +115,7 @@ const NewCommand = (props:NewCommandProps) => {
           bot_id: botCommandSelected.bot_command_id,
           description,
           response,
-          parameter: null
+          parameter: coordinates || buttonList
         }
       }
       postResponseRequest(requestParams);
@@ -140,10 +151,10 @@ const NewCommand = (props:NewCommandProps) => {
   useEffect(()=>{
     getBotCommandList();
     addNestedCommand();
-  },[getBotCommandList, addNestedCommand ])
+  },[getBotCommandList, addNestedCommand])
 
-  const postResponseFiles = useCallback(()=>{
-    if(responseSelected && !editMode && postResponsesFilesRequest && secondaryInputsActives){
+  const postResponseFiles = useCallback(async ()=>{
+    if(responseSelected && !editMode && postResponsesFilesRequest && secondaryInputsActives && fetchingResponseFiles){
       const requestParams = {
         data: {
           bot_response_id: responseSelected.bot_response_id,
@@ -153,12 +164,18 @@ const NewCommand = (props:NewCommandProps) => {
         }
       }
 
-      postResponsesFilesRequest(requestParams);
-      clearStatus();
+      await postResponsesFilesRequest(requestParams);
+      await clearStatus();
     }
-  }, [responseSelected, editMode, postResponsesFilesRequest, secondaryInputsActives, clearStatus])
+  }, [
+    responseSelected, 
+    editMode, 
+    postResponsesFilesRequest, 
+    secondaryInputsActives,
+    fetchingResponseFiles
+  ])
 
-  const postNestedCommands = useCallback(()=>{
+  const postNestedCommands = useCallback(async ()=>{
     if(commandsAdded.length && botCommandSelected && isANestedCommand && !editMode && postBotNestedCommandRequest){
       const data = commandsAdded.map(command => ({
         bot_child_id: command.bot_command_id,
@@ -167,8 +184,8 @@ const NewCommand = (props:NewCommandProps) => {
       const requestOptions = {
         data
       }
-      postBotNestedCommandRequest(requestOptions);
-      clearStatus()
+      await postBotNestedCommandRequest(requestOptions);
+      await clearStatus()
     }
   }, 
   [ 
@@ -182,8 +199,11 @@ const NewCommand = (props:NewCommandProps) => {
 
   useEffect(()=>{
     postResponseFiles();
+  }, [postResponseFiles])
+
+  useEffect(()=>{
     postNestedCommands();
-  }, [postResponseFiles]);
+  }, [postNestedCommands]);
 
   const handleChangeInputs = (e:any)=>{
     const name = e.target.name;
@@ -261,7 +281,10 @@ const NewCommand = (props:NewCommandProps) => {
   return (
     <RightModal
       open={openNewCommand}
-      handleClose={handleCloseNewCommand}
+      handleClose={() => {
+        handleCloseNewCommand();
+        clearStatus();
+      }}
       title={language.newCommand}
       handleSave={handleSave}
       fetching={Boolean(fetching)}

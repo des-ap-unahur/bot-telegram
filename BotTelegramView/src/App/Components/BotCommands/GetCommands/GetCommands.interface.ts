@@ -43,6 +43,7 @@ export interface NewCommandProps {
   handleCloseNewCommand: () => void;
   language: any;
   fetching?: boolean;
+  fetchingResponseFiles: boolean;
   responseSelected: ResponseInterface | null;
   botCommandSelected?: BotCommands | null;
   botCommandList?: BotCommands[] | null;

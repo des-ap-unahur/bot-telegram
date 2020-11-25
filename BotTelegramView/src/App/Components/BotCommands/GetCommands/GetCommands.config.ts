@@ -116,7 +116,7 @@ export const inputFirstConfig = (inputParams: any) => {
       handleChange: handleChangeInputs,
       value: userType,
       list: userTypesOptions,
-      emptyFields: confirmation && emptyFirstFields && userType
+      emptyFields: confirmation && emptyFirstFields && !userType
     },
     {
       type: 'select',
