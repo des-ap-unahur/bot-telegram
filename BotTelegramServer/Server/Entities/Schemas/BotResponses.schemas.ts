@@ -11,6 +11,9 @@ class BotResponseSchema {
   @IsNotEmpty()
   @IsString()
   description: string;
+  @IsNotEmpty()
+  @IsString()
+  parameter: string; 
 }
 
 export default BotResponseSchema;

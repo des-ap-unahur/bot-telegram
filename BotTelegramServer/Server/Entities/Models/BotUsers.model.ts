@@ -15,7 +15,6 @@ import { guaraniUserRelation } from "../Relations/BotUsers.relation";
 class BotUsers extends Model<BotUsers> implements BotUsersInterface {
   @AutoIncrement
   @PrimaryKey
-  @ForeignKey(() => PollResponses)
   @Column(DataTypes.NUMBER)
   bot_user_id?: number;
 
