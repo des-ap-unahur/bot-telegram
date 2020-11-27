@@ -64,6 +64,8 @@ export const inputNames = {
   response: 'response',
   fileName: 'fileName',
   url: 'url',
+  buttonList: 'buttonList',
+  coordinates: 'coordinates',
   tableSelect: "simpleTableSelect"
 }
 
@@ -167,6 +169,28 @@ export const inputSecondaryConfig = (inputParams: any) => {
       emptyFields: confirmation && emptySecondFields && !url
     },
   ]
+}
+
+export const coordinateOrButtonListInputConfig = (inputParams: any) => {
+  const { 
+    language, 
+    handleChangeInputs,
+    emptySecondFields,
+    confirmation,
+    isAButtonCommand,
+    coordinates,
+    buttonList
+  } = inputParams;
+
+  return {
+    type: 'text',
+    name: isAButtonCommand ? inputNames.buttonList : inputNames.coordinates , 
+    title: isAButtonCommand ? language.buttons : language.coordinates ,
+    handleChange: handleChangeInputs,
+    value: isAButtonCommand ? buttonList : coordinates,
+    emptyFields: confirmation && emptySecondFields && !(coordinates || buttonList),
+    correction: true
+  }
 }
 
 export const NestedCommandTableConfig = (configParams:any) => {

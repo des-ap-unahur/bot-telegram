@@ -12,7 +12,6 @@ import { botResponseRelation } from "../Relations/BotResponseFiles.relation";
 class BotResponseFiles extends Model<BotResponseFiles> implements BotResponseFilesInterface {
   @AutoIncrement
   @PrimaryKey
-  @ForeignKey( () => BotResponses)
   @Column(DataTypes.NUMBER)
   bot_respose_files_id?: number;
 

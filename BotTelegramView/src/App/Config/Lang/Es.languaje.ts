@@ -47,7 +47,9 @@ const ES = {
   addCommand: 'Añadir comando',
   username: 'Nombre de usuario',
   password: 'Contraseña',
-  signIn: 'Iniciar sesión'
+  signIn: 'Iniciar sesión',
+  coordinates: 'Coordenadas',
+  buttons: 'Botones'
 }
 
 export default ES

@@ -32,8 +32,6 @@ import {
 class BotCommands extends Model<BotCommands> implements BotCommandsInterface {
   @AutoIncrement
   @PrimaryKey
-  @ForeignKey(() => BotNestedCommands)
-  @ForeignKey(() => BotResponses)
   @Column(DataTypes.NUMBER)
   bot_command_id?: number;
 

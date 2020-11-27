@@ -55,7 +55,7 @@ export interface NewCommandProps {
   updateResponseRequest?: (requestOptions: any) => void;
   postResponsesFilesRequest?: (requestOptions: any) => void;
   updateResponsesFilesRequest?: (requestOptions: any) => void;
-  selectResponse?: (payload: null | ResponseInterface) => void;
+  selectResponse: (payload: null | ResponseInterface) => void;
   selectResponseFiles?: (payload: null | ResponseFilesInterface) => void;
   selectBotCommand?: (payload: null | BotCommands) => void;
   postBotNestedCommandRequest?: (requestOptions: any) => void;

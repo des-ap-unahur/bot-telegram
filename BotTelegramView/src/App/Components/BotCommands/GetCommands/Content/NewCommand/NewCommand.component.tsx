@@ -3,7 +3,7 @@ import RightModal from '../../../../SharedComponents/RightModalComponents/RightM
 import { useStyles } from '../../GetCommands.style';
 import { NewCommandProps, OptionInterface } from '../../GetCommands.interface';
 import BuildInputs from '../../../../SharedComponents/BuildInputs/BuildInputs.component';
-import { inputFirstConfig, inputNames, inputSecondaryConfig, NestedCommandTableConfig } from '../../GetCommands.config';
+import { inputFirstConfig, inputNames, inputSecondaryConfig, NestedCommandTableConfig, coordinateOrButtonListInputConfig } from '../../GetCommands.config';
 import SectionAddToTable from '../../../../SharedComponents/SectionAddToTable/SectionAddToTable.component';
 import { NestedCommandsInterface } from '../../../../../Interfaces/NestedCommands.interface';
 import BotCommands from '../../../../../Interfaces/BotComands.interface';
@@ -24,6 +24,7 @@ const NewCommand = (props:NewCommandProps) => {
   const [ commandToAdd, setCommandToAdd ] = useState<string | number>('');
   const [ confirmation, setConfirmation ] = useState<boolean>(false);
   const [ commandsAdded, setCommandsAdded ] = useState<BotCommands[]>([]);
+  const [ postFiles, setPostFiles ] = useState<boolean>(false);
   const [ nestedCommands, setNestedCommands ] = useState<NestedCommandsInterface[]>([]);
 
   const {
@@ -45,12 +46,14 @@ const NewCommand = (props:NewCommandProps) => {
     clearResponseStates,
     clearNestedCommandsStates,
     selectBotCommand,
-    fetchingResponseFiles
   } = props;
   const { contentSize } = useStyles();
 
   const clearStatus = async () => {
     selectBotCommand && selectBotCommand(null)
+    await clearBotCommandsStates();
+    await clearResponseStates();
+    await clearNestedCommandsStates();
     await setEditMode(false)
     await setName('')
     await setCommand('')
@@ -63,9 +66,6 @@ const NewCommand = (props:NewCommandProps) => {
     await setCommandToAdd('')
     await setConfirmation(false);
     await setCommandsAdded([]);
-    await clearBotCommandsStates();
-    await clearResponseStates();
-    await clearNestedCommandsStates();
     await handleCloseNewCommand();
   }
 
@@ -88,12 +88,14 @@ const NewCommand = (props:NewCommandProps) => {
   },[commandType])
 
   const isAButtonCommand = useMemo<boolean>(()=>{
-    return false
-  }, [])
+    const buttonCommandId = 3;
+    return commandType == buttonCommandId
+  }, [commandType])
 
   const isALocationCommand = useMemo<boolean>(()=>{
-    return false
-  }, [])
+    const locationCommandId = 2; 
+    return commandType == locationCommandId
+  }, [commandType])
 
   const emptySecondFields = useMemo<boolean>(()=>{
     return !(fileName && url) && secondaryInputsActives
@@ -108,8 +110,8 @@ const NewCommand = (props:NewCommandProps) => {
         []
   }, [botCommandList])
 
-  const postResponse = useCallback(()=>{
-    if(botCommandSelected && !editMode && postResponseRequest){
+  const postResponse = useCallback(async ()=>{
+    if(botCommandSelected && !editMode && postResponseRequest && !responseSelected && !fetching){
       const requestParams = {
         data: {
           bot_id: botCommandSelected.bot_command_id,
@@ -118,8 +120,12 @@ const NewCommand = (props:NewCommandProps) => {
           parameter: coordinates || buttonList
         }
       }
-      postResponseRequest(requestParams);
-      !secondaryInputsActives && clearStatus()
+
+      await postResponseRequest(requestParams);
+
+      if(!secondaryInputsActives && !isANestedCommand){
+        await clearStatus();
+      }
     }
   }, 
   [ 
@@ -127,7 +133,10 @@ const NewCommand = (props:NewCommandProps) => {
     editMode, 
     postResponseRequest, 
     secondaryInputsActives, 
-    clearStatus
+    clearStatus,
+    responseSelected,
+    fetching,
+    isANestedCommand
   ])
 
   const getBotCommandList = useCallback(()=>{
@@ -154,7 +163,7 @@ const NewCommand = (props:NewCommandProps) => {
   },[getBotCommandList, addNestedCommand])
 
   const postResponseFiles = useCallback(async ()=>{
-    if(responseSelected && !editMode && postResponsesFilesRequest && secondaryInputsActives && fetchingResponseFiles){
+    if(responseSelected && !editMode && postResponsesFilesRequest && secondaryInputsActives && !fetching && !postFiles){
       const requestParams = {
         data: {
           bot_response_id: responseSelected.bot_response_id,
@@ -163,20 +172,22 @@ const NewCommand = (props:NewCommandProps) => {
           url
         }
       }
-
+      await setPostFiles(true)
       await postResponsesFilesRequest(requestParams);
       await clearStatus();
+      await setPostFiles(false);
     }
   }, [
     responseSelected, 
     editMode, 
     postResponsesFilesRequest, 
     secondaryInputsActives,
-    fetchingResponseFiles
+    fetching,
+    postFiles
   ])
 
   const postNestedCommands = useCallback(async ()=>{
-    if(commandsAdded.length && botCommandSelected && isANestedCommand && !editMode && postBotNestedCommandRequest){
+    if(commandsAdded.length && botCommandSelected && isANestedCommand && !editMode && postBotNestedCommandRequest && !fetching){
       const data = commandsAdded.map(command => ({
         bot_child_id: command.bot_command_id,
         bot_father_id: botCommandSelected.bot_command_id
@@ -194,7 +205,8 @@ const NewCommand = (props:NewCommandProps) => {
     botCommandSelected, 
     commandsAdded, 
     postBotNestedCommandRequest,
-    clearStatus
+    clearStatus,
+    fetching
   ])
 
   useEffect(()=>{
@@ -227,6 +239,10 @@ const NewCommand = (props:NewCommandProps) => {
       setUrl(value);
     } else if (name === inputNames.tableSelect){
       setCommandToAdd(value);
+    } else if (name === inputNames.buttonList) {
+      setButtonList(value);
+    } else if (name === inputNames.coordinates) {
+      setCoordinates(value)
     }
   }
 
@@ -243,7 +259,7 @@ const NewCommand = (props:NewCommandProps) => {
       user_type_id: Number(userType),
       command_type_id: Number(commandType),
       status: true,
-      parameter: null
+      parameter: coordinates || buttonList
     }
 
     setConfirmation(true);
@@ -254,6 +270,11 @@ const NewCommand = (props:NewCommandProps) => {
       postBotCommandRequest && postBotCommandRequest(requestOptions)
       setConfirmation(false);
     }
+  }
+
+  const handleClose = () => {
+    handleCloseNewCommand();
+    clearStatus();
   }
 
   const inputParams = { 
@@ -271,20 +292,21 @@ const NewCommand = (props:NewCommandProps) => {
     commandTypesOptions,
     emptyFirstFields,
     emptySecondFields,
-    confirmation
+    confirmation,
+    isAButtonCommand, 
+    coordinates,
+    buttonList
   };
 
   const firstInputs = inputFirstConfig(inputParams);
   const secondaryInputs = inputSecondaryConfig(inputParams);
   const tableConfig = { language, handleDeleteNestedCommand };
+  const inputButtonOrCoordinate = coordinateOrButtonListInputConfig(inputParams);
   
   return (
     <RightModal
       open={openNewCommand}
-      handleClose={() => {
-        handleCloseNewCommand();
-        clearStatus();
-      }}
+      handleClose={handleClose}
       title={language.newCommand}
       handleSave={handleSave}
       fetching={Boolean(fetching)}
@@ -299,6 +321,10 @@ const NewCommand = (props:NewCommandProps) => {
           secondaryInputsActives && secondaryInputs.map(
             (input, index) => <BuildInputs key={'secondary' + index} input={input}/>
           )
+        }
+        {
+          (isAButtonCommand || isALocationCommand) && 
+            <BuildInputs input={inputButtonOrCoordinate}/>
         }
         {
           isANestedCommand && 

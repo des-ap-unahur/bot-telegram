@@ -47,7 +47,9 @@ const EN = {
   addCommand: 'Add command',
   username: 'Username',
   password: 'Password',
-  signIn: 'Sign in'
+  signIn: 'Sign in',
+  coordinates: 'Coordinates',
+  buttons: 'Buttons'
 }
 
 export default EN

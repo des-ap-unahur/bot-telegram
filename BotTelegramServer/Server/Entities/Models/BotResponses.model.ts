@@ -14,7 +14,6 @@ class BotResponses extends Model<BotResponses>
   implements BotResponsesInterface {
   @AutoIncrement 
   @PrimaryKey
-  @ForeignKey(() => BotResponseFiles)
   @Column(DataTypes.NUMBER)
   bot_response_id?: number;
 

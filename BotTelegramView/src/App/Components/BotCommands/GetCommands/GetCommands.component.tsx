@@ -59,10 +59,13 @@ const GetCommands = (props: GetCommandsProps) => {
   },[commandTypes, getCommandTypesRequest])
 
   useEffect(()=>{
-    getUserTypes();
     getBotCommands();
+  }, [getBotCommands])
+  
+  useEffect(()=>{
+    getUserTypes();
     getCommandTypes();
-  },[getUserTypes, getBotCommands])
+  },[getUserTypes, getCommandTypes])
 
   const handleChangePage = async (page:number, pageSize:number) => {
     const requestOptions = {
