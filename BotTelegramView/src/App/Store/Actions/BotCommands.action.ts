@@ -26,6 +26,11 @@ const { actionsTypes, actionCreators } = builderAsyncActions([
     name: 'deleteBotCommand',
     endpoint: '/bot-commands/:param_1',
     method: 'DELETE'
+  },
+  {
+    name: 'refreshCommands',
+    endpoint: '/bot-commands/refresh',
+    method: 'PUT'
   }
 ])
 

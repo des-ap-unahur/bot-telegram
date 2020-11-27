@@ -134,6 +134,34 @@ const BotCommandsReducer = (state = initialState, action: any) => {
         errorsCodes: action.payload.data.errorsCodes,
         errorMessage: action.payload.data.message
       }
+    //refreshCommands
+    case actionsTypes.refreshCommandsAttempt:
+      return {
+        ...state,
+        fetchingStatus: true,
+        failed: false,
+        sucess: false,
+        errorsCodes: undefined,
+        errorMessage: undefined,
+      }
+    case actionsTypes.refreshCommandsSuccess:
+      return {
+        ...state,
+        fetchingStatus: false,
+        failed: false,
+        sucess: true,
+        statusCode: action.payload.status,
+      }
+    case actionsTypes.refreshCommandsFailure:
+      return {
+        ...state,
+        fetchingStatus: false,
+        failed: true,
+        sucess: false,
+        statusCode: action.payload.status,
+        errorsCodes: action.payload.data.errorsCodes,
+        errorMessage: action.payload.data.message
+      }
     //SyncActions
     case actionsTypes.selectBotCommand: 
       return {

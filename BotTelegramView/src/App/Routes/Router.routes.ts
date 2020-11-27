@@ -1,5 +1,5 @@
 import GetCommandsContainer from '../Components/BotCommands/GetCommands/GetCommands.container';
-import Dashboard from '../Components/Dashboard/Dashboard.component';
+import Dashboard from '../Components/Dashboard/Dashboard.container';
 import GetPolls from '../Components/Polls/GetPolls/GetPolls.container';
 import GetUserTypes from '../Components/UserTypes/GetUserTypes/GetUserTypes.container';
 import GetBotSubsUsers from '../Components/BotSubsUsers/GetBotSubsUsers/GetBotSubsUsers.container';

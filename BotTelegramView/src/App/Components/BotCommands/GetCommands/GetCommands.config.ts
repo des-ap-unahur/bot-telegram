@@ -175,7 +175,7 @@ export const coordinateOrButtonListInputConfig = (inputParams: any) => {
   const { 
     language, 
     handleChangeInputs,
-    emptySecondFields,
+    emptyFirstFields,
     confirmation,
     isAButtonCommand,
     coordinates,
@@ -188,7 +188,7 @@ export const coordinateOrButtonListInputConfig = (inputParams: any) => {
     title: isAButtonCommand ? language.buttons : language.coordinates ,
     handleChange: handleChangeInputs,
     value: isAButtonCommand ? buttonList : coordinates,
-    emptyFields: confirmation && emptySecondFields && !(coordinates || buttonList),
+    emptyFields: confirmation && emptyFirstFields && !(coordinates || buttonList),
     correction: true
   }
 }
