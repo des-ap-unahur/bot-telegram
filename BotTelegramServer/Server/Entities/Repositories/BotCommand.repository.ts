@@ -120,6 +120,12 @@ class BotCommandRepository {
           bot_father_id: id,
         },
       });
+      const botNestedCommandsBotChild = await BotNestedCommands.findAll({
+        where: {
+          bot_child_id: id,
+        },
+      });
+      botNestedCommandsBotChild && await Promise.all(botNestedCommandsBotChild.map(e=>e.destroy()));
       botNestedCommandsBotFather && await Promise.all(botNestedCommandsBotFather.map(e=>e.destroy()));
       botResponsesFiles && await botResponsesFiles.destroy();
       botResponses &&  await botResponses.destroy();
