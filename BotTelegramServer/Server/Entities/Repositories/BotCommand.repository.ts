@@ -6,6 +6,7 @@ import BotResponseFiles from "../Models/BotResponseFiles.model";
 import BotNestedCommands from "../Models/BotNestedCommands.model";
 import UserTypes from "../Models/UserTypes.model";
 import paginate from "../../Utils/Paginate.utils";
+import { compareLogin } from "../../Utils/Auth.utils";
 
 class BotCommandRepository {
   getAll = async (): Promise<BotCommand[]> => {
@@ -110,20 +111,19 @@ class BotCommandRepository {
           include: [BotResponseFiles],
         }));
       const botResponsesFiles =
-        botResponses.botResponseFiles &&
+        botResponses && botResponses.botResponseFiles &&
         (await BotResponseFiles.findByPk(
           botResponses.botResponseFiles.bot_respose_files_id
         ));
-      const botNestedCommandsBotFather = await BotNestedCommands.findOne({
+       const botNestedCommandsBotFather = await BotNestedCommands.findAll({
         where: {
           bot_father_id: id,
         },
       });
-
-      if (botNestedCommandsBotFather) botNestedCommandsBotFather.destroy();
-      if (botResponsesFiles) await botResponsesFiles.destroy();
-      if (botResponses) await botResponses.destroy();
-      if (command) await command.destroy();
+      botNestedCommandsBotFather && await Promise.all(botNestedCommandsBotFather.map(e=>e.destroy()));
+      botResponsesFiles && await botResponsesFiles.destroy();
+      botResponses &&  await botResponses.destroy();
+      command && await command.destroy();
       return { message: "ok" };
     } catch (e) {
       console.log(e);
