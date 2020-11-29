@@ -8,7 +8,7 @@ import { GetBotSubsUsersContentProps } from './GetBotSubsUsers.interface';
 
 const GetBotSubsUsersContent = (props:GetBotSubsUsersContentProps) => {
     const {
-      botSubsUsers, 
+      botUsers, 
       language, 
       total, 
       handleChangePage, 
@@ -30,7 +30,7 @@ const GetBotSubsUsersContent = (props:GetBotSubsUsersContentProps) => {
           />
           <TableComponent
             config={generateConfigWithLang(configParams) || []}
-            dataset={ botSubsUsers || []}
+            dataset={botUsers || []}
            
             loader={fetching}
             totalRows={total}

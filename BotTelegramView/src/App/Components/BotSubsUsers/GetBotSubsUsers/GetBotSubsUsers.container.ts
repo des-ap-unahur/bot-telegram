@@ -8,7 +8,7 @@ const actionCreators = Object.assign({}, BotSubsUsersAction.actionCreators,);
 
 const mapStateToProps = (state: GlobalStateInterface) => ({
   fetching: state.botSubsUsers.fetchingStatus,
-  botSubsUsers: state.botSubsUsers.botSubsUsers,
+  botUsers: state.botSubsUsers.botUsers,
   sucess: state.botSubsUsers.sucess,
   total: state.botSubsUsers.total,
 });

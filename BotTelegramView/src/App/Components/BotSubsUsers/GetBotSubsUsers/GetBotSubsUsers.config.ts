@@ -1,26 +1,40 @@
 
 
-
 export const generateConfigWithLang = (configParams: any) => {
   const { language } = configParams;
   
   return [
     {
+      name: 'Nombre de usuario',
+      property: 'tel_username'
+    },
+    {
       name: language.name,
-      property: 'first_name'
+      property: 'tel_first_name'
     },
     {
       name: language.lastName,
-      property: 'last_name'
+      property: 'tel_last_name'
     },
     {
       name: language.dni,
-      property: 'dni'
+      property: 'guaraniUser',
+      custom: (guaraniUsers: any) => guaraniUsers && guaraniUsers.dni 
+    },
+    {
+      name: 'Email',
+      property: 'guaraniUser',
+      custom: (guaraniUsers: any) => guaraniUsers && guaraniUsers.email
+    },
+    {
+      name: 'Numero de telefono',
+      property: 'guaraniUser',
+      custom: (guaraniUsers: any) => guaraniUsers && guaraniUsers.phone_number
     },
     {
       name: language.userType,
-      property: 'botUsers',
-      custom: (property: any) => property && property.userTypes && property.userTypes.description,
+      property: 'userTypes',
+      custom: (userTypes: any) => userTypes && userTypes.description,
     },
   ]
 }

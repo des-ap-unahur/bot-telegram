@@ -5,7 +5,7 @@ import LoginContent from './Login.content';
 import { LoginProps } from './Login.interface';
 import { history } from '../../../Utils/History.utils';
 
-const Login = ({auth, loginRequest}:LoginProps) => {
+const Login = ({ auth, loginRequest, fetching, errorMsg }:LoginProps) => {
   const { language } = useContext(LanguageContext);
   const [ username, setUsername ] = useState<string>('');
   const [ password, setPassword ] = useState<string>('');
@@ -47,6 +47,8 @@ const Login = ({auth, loginRequest}:LoginProps) => {
       handleChange={handleChange}
       language={language}
       handleLogin={handleLogin}
+      fetching={fetching}
+      errorMsg={errorMsg}
     />
   );
 }

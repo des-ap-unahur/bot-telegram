@@ -103,7 +103,9 @@ class BotCommandRepository {
       const command: BotCommand = await BotCommand.findByPk(id, {
         include: [BotResponses],
       });
-      if (!command) return { message: "el comando no existe" };
+      if (!command) {
+        return { message: "el comando no existe" };
+      }
       const botResponses =
         command.botResponses &&
         (await BotResponses.findByPk(command.botResponses.bot_response_id, {
@@ -114,19 +116,20 @@ class BotCommandRepository {
         (await BotResponseFiles.findByPk(
           botResponses.botResponseFiles.bot_respose_files_id
         ));
+
       const botNestedCommandsBotFather = await BotNestedCommands.findOne({
         where: {
           bot_father_id: id,
         },
       });
 
-      if (botNestedCommandsBotFather) botNestedCommandsBotFather.destroy();
-      if (botResponsesFiles) await botResponsesFiles.destroy();
-      if (botResponses) await botResponses.destroy();
-      if (command) await command.destroy();
+      botNestedCommandsBotFather && await botNestedCommandsBotFather.destroy();
+      botResponsesFiles && await botResponsesFiles.destroy();
+      botResponses && await botResponses.destroy();
+      command && await command.destroy();
       return { message: "ok" };
     } catch (e) {
-      console.log(e);
+      return { message: "bad request" };
     }
   };
 }

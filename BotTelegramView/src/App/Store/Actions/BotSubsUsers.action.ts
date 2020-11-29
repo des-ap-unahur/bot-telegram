@@ -5,6 +5,11 @@ const { actionsTypes, actionCreators } = builderAsyncActions([
     name: 'getBotSubsUsers',
     endpoint: '/bot-subs-users',
     method: 'GET'
+  },
+  {
+    name: 'getBotUsers',
+    endpoint:'/bot-users',
+    method: 'GET'
   }
 ])
 

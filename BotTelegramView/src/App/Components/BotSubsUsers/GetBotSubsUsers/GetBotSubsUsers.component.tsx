@@ -6,37 +6,38 @@ import { GetBotSubsUsersProps } from './GetBotSubsUsers.interface';
 
 const GetBotSubsUsers = (props: GetBotSubsUsersProps) => {
   const { language } = useContext(LanguageContext);
-  const { botSubsUsers, 
+  const { 
+    botUsers, 
     total,
     fetching,
-    getBotSubsUsersRequest
+    getBotUsersRequest
   }= props;
   
-  const getBotSubsUsers = useCallback(()=>{
+  const getBotUsers = useCallback(()=>{
     const requestOptions = {
       params: { page: 0, pageSize: 10 }
     };
 
-    getBotSubsUsersRequest(requestOptions);
+    getBotUsersRequest(requestOptions);
   },[])
 
   useEffect(()=>{
-    getBotSubsUsers();
-  },[getBotSubsUsers]);
+    getBotUsers();
+  },[getBotUsers]);
   
   const handleChangePage = async (page:number, pageSize:number) => {
     const requestOptions = {
       params: { page, pageSize }
     };
 
-    await getBotSubsUsersRequest(requestOptions)
+    await getBotUsersRequest(requestOptions)
   }
     
   return (
     <GetBotSubsUsersContent
       language={language}
       handleChangePage={handleChangePage}
-      botSubsUsers={botSubsUsers}
+      botUsers={botUsers}
       total={total}
       fetching={fetching}
     />

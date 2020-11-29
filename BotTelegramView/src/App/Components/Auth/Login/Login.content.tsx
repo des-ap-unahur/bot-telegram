@@ -3,15 +3,18 @@ import {
   Button,
   TextField,
   Typography,
-  Container
+  Container,
+  CircularProgress
 } from '@material-ui/core';
 import { useStyles } from './Login.styles';
 import { inputNames } from './Login.config';
 import { LoginContentProps } from './Login.interface';
 
 
-const LoginContent = ({language, handleChange, username, password, handleLogin}: LoginContentProps) => {
-  const { paper, submit, form } = useStyles();
+const LoginContent = ({ language, handleChange, username, password, handleLogin, fetching, errorMsg }: LoginContentProps) => {
+  const { paper, submit, form, loader, loaderContainer, labelAlert } = useStyles();
+
+  const onEnter = (event:any, callback: () => void) => event.key === 'Enter' && callback()
 
   return (
     <Container component="main" maxWidth="xs">
@@ -44,15 +47,27 @@ const LoginContent = ({language, handleChange, username, password, handleLogin}:
             id={inputNames.password}
             autoComplete="current-password"
             onChange={handleChange}
+            onKeyDown={(e: any)=> onEnter(e, handleLogin)}
             value={password}
           />
+          {(errorMsg) &&
+            <Typography className={labelAlert} variant="subtitle1">
+              {errorMsg}
+            </Typography>
+          }
           <Button
             fullWidth
             variant="contained"
             className={submit}
+            disabled={fetching}
             onClick={handleLogin}
           >
             {language.signIn}
+            {fetching && 
+              <div className={loaderContainer}>
+                <CircularProgress className={loader} size={35} />
+              </div>
+            }
           </Button>
         </form>
       </div>

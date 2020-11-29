@@ -1,6 +1,8 @@
 export interface LoginProps {
   auth: boolean;
   loginRequest: (requestParams: any) => void;
+  fetching: boolean;
+  errorMsg: string;
 }
 
 export interface LoginContentProps {
@@ -9,4 +11,6 @@ export interface LoginContentProps {
   handleLogin: () => Promise<void>
   username: string;
   password: string;
+  fetching: boolean;
+  errorMsg: string;
 }

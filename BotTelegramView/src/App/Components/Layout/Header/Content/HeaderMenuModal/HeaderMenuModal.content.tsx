@@ -13,7 +13,7 @@ import {
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { useStyles } from '../../Header.style';
-import { menuConfig } from '../../Header.config'
+import { menuConfig, homePageConfig } from '../../Header.config'
 import { ReactSVG } from 'react-svg';
 import { LanguageContext } from '../../../../../Config/Lang/Lang.languaje';
 import WithRequiredPermission from '../../../../../HOC/WithRequiredPermission.hoc';
@@ -28,10 +28,12 @@ const HeaderMenuModal = ({ isOpenDrawer, handleDrawerClose, handleChangeRoute }:
     drawerOpen,
     toolbar,
     divider,
-    icon
+    icon,
+    homepageLocation
   } = useStyles();
   const theme = useTheme();
   const { language } = useContext(LanguageContext)
+  const homepage = homePageConfig(language);
 
   return (
     <div className={root}>
@@ -66,6 +68,15 @@ const HeaderMenuModal = ({ isOpenDrawer, handleDrawerClose, handleChangeRoute }:
               </ListItem>
             </WithRequiredPermission>
           ))}
+        </List>
+        <List className={homepageLocation}>
+          <ListItem 
+            button 
+            onClick={() => handleChangeRoute(homepage.route)}
+          >
+            <ListItemIcon><ReactSVG className={icon} src={homepage.icon}/></ListItemIcon>
+            <ListItemText primary={homepage.name} />
+          </ListItem>
         </List>
       </Drawer>
     </div>

@@ -1,18 +1,17 @@
-import BotSubsUsersInterface from "../../../Interfaces/BotSubsUsers.interface";
-import UserTypes from "../../../Interfaces/UserTypes.interface";
+import { BotUsersInterface } from "../../../Interfaces/BotSubsUsersStates.interface";
 
 export interface GetBotSubsUsersProps {
-    fetching: boolean;
-    botSubsUsers: null | BotSubsUsersInterface[]
-    total: number;
-    sucess: boolean;
-    getBotSubsUsersRequest: (requestOptions: any) => void;
+  fetching: boolean;
+  botUsers: null | BotUsersInterface[];
+  total: number;
+  sucess: boolean;
+  getBotUsersRequest: (requestOptions: any) => void;
 }
 
 export interface GetBotSubsUsersContentProps {
-    botSubsUsers: null | BotSubsUsersInterface[];
-    language: any;
-    total:  number;
-    handleChangePage: (page: number, pageSize: number) => Promise<void>;
-    fetching: boolean;
-} 
+  botUsers: null | BotUsersInterface[];
+  language: any;
+  total:  number;
+  handleChangePage: (page: number, pageSize: number) => Promise<void>;
+  fetching: boolean;
+}

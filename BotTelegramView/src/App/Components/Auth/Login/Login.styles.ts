@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { BLUE, GOOGLE_BLUE, WHITE } from '../../../Styles/Colors.index';
+import { BLUE, GOOGLE_BLUE, WHITE, RED_ALERT } from '../../../Styles/Colors.index';
 
 export const useStyles = makeStyles((theme) => ({
   paper: {
@@ -30,5 +30,16 @@ export const useStyles = makeStyles((theme) => ({
     '&:hover': {
       background: BLUE
     }
+  },
+  loader: {
+    zIndex: 1,
+  },
+  loaderContainer: {
+    position: 'absolute',
+    top: '7%',
+  },
+  labelAlert:{
+    fontSize: '15px',
+    color: RED_ALERT
   },
 }));

@@ -49,7 +49,8 @@ const EN = {
   password: 'Password',
   signIn: 'Sign in',
   coordinates: 'Coordinates',
-  buttons: 'Buttons'
+  buttons: 'Buttons',
+  homepage: 'Homepage'
 }
 
 export default EN

@@ -100,7 +100,7 @@ const Dashboard = (props:DashboardProps) => {
             <Button
               variant='contained'
               onClick={handleRedirectPoll}
-              className={buttonStyle}
+              className={buttonStyle} 
             >
               mas opciones
             </Button>

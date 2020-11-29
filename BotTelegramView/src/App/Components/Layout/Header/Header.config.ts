@@ -3,6 +3,7 @@ import Polls from '../../../Assets/Images/poll-box.svg';
 import UserTypes from '../../../Assets/Images/account-group.svg';
 import Subscribers from '../../../Assets/Images/account.svg';
 import Activities from '../../../Assets/Images/clipboard-text-multiple.svg';
+import Home from '../../../Assets/Images/home.svg';
 import { MenuConfigInterface } from './Header.interfaces';
 
 export const menuConfig = (language:any): MenuConfigInterface[] => ([
@@ -12,6 +13,11 @@ export const menuConfig = (language:any): MenuConfigInterface[] => ([
   { icon:Subscribers, name: language.subscribers, route: '/dashboard/subscribers' },
   { icon:Activities, name: language.activities, route: '/dashboard/activities' }
 ])
+
+
+export const homePageConfig = (language:any) => ({
+  icon:Home, name: language.homepage, route: '/dashboard'
+})
 
 export const langOptions = [
   {name: 'ES', value: 'ES'},

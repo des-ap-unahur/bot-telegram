@@ -7,7 +7,13 @@ const { actionsTypes }: any = AuthActions
 const initialState: AuthStateInterface = {
   lang: getLocalValue('lang') || 'ES',
   token: getLocalValue('token') || '',
-  user: getLocalValue('user') || null
+  user: getLocalValue('user') || null,
+  fetchingStatus: false,
+  failed: false,
+  sucess: false,
+  statusCode: '',
+  errorsCodes: '',
+  errorMessage: '',
 }
 
 const AuthReducer = (state = initialState, action: any) => {
@@ -56,7 +62,13 @@ const AuthReducer = (state = initialState, action: any) => {
         ...state,
         lang: getLocalValue('lang') || 'ES',
         token: '',
-        user: null
+        user: null,
+        fetchingStatus: false,
+        failed: false,
+        sucess: false,
+        statusCode: '',
+        errorsCodes: '',
+        errorMessage: '',
       }
     default:
       return state

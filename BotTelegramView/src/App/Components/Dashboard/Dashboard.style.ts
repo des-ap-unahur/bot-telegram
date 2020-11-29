@@ -21,9 +21,6 @@ export const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     flexDirection: "column",
-    "& div": {
-      marginBottom: "20px"
-    }
   },
   containerShift: {
     marginLeft: '300px',
@@ -36,18 +33,23 @@ export const useStyles = makeStyles(theme => ({
     color: BLACK
   },
   cardContainer: {
-    display: "flex"
+    display: "flex",
+    marginBottom: "20px",
+    "& div":{
+      marginBottom: "20px"
+    }
   },
   card: {
     marginRight: "30px"
   },
   buttonStyle:{
-    marginRight: '28px',
+    marginLeft: '28px',
     float: 'right',
     padding: '8px 18px',
     background: GOOGLE_BLUE,
     color: WHITE,
     boxShadow: 'none',
+    margin: "20px 0px",
     '&:hover': {
       background: BLUE
     }

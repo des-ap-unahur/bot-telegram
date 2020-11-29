@@ -18,7 +18,7 @@ import { SimpleTableContentProps } from './SimpleTable.interface';
 const TableContent = (props: SimpleTableContentProps) => {
   const { table, fetchingLoader, loaderContainer, noDocumentsFound } = useStyles();
   const { language } = useContext(LanguageContext);
-  const skeletonRows = 7;
+  const skeletonRows = 3;
   const {
     config, 
     dataset, 

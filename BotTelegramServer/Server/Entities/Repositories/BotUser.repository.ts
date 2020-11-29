@@ -3,18 +3,20 @@ import BotUsersInterface from "../../Interfaces/BotUsers.interface";
 import GuaraniUsers from "../Models/GuaraniUsers.models";
 import Paginate from "../../Utils/Paginate.utils";
 import BotUsersWithPagination from "../../Interfaces/BotUsersWithPagination.interface";
+import UserTypes from "../Models/UserTypes.model";
 
 class BotUsersRepository {
   getAllWithPagination = async (paginationData: any): Promise<BotUsersWithPagination> => {
-    const { count, rows: botUsers } = await BotUsers.findAndCountAll({
+    const total: number = await BotUsers.count();
+    const botUsers: BotUsers[]  = await BotUsers.findAll({
       ...Paginate(paginationData),
+      include: [UserTypes, GuaraniUsers]
     });
-    const total = count;
     return { total, botUsers };
   };
 
   getAll = async (): Promise<BotUsers[]> => {
-    const botUsers: BotUsers[] = await BotUsers.findAll();
+    const botUsers: BotUsers[] = await BotUsers.findAll({include: [UserTypes, GuaraniUsers]});
     return botUsers;
   };
 

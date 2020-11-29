@@ -49,7 +49,8 @@ const ES = {
   password: 'Contraseña',
   signIn: 'Iniciar sesión',
   coordinates: 'Coordenadas',
-  buttons: 'Botones'
+  buttons: 'Botones',
+  homepage: 'Pagina principal'
 }
 
 export default ES

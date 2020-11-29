@@ -30,7 +30,7 @@ class Auth {
     const userLogin: LoginUserInterface = req.body;
     const { username, password } = userLogin;
     const userFound = await UserBackOfficeRepository.getByUsername(username);
-    const passwordSucces = await this.passwordSucces(password, userFound, res);
+    const passwordSucces = await this.passwordSuccess(password, userFound, res);
     if (passwordSucces) {
       const { back_user_id, user_role_id, username, first_name, last_name, email } = userFound;
       res.send({
@@ -45,7 +45,7 @@ class Auth {
     const foundEmail = await UserBackOfficeRepository.getByEmail(email);
 
     if (foundUser) {
-      res.send({ message: UserIsInUse });
+      res.status(HttpStatus.OK).send({ message: UserIsInUse });
       return foundUser;
     }
 
@@ -56,20 +56,20 @@ class Auth {
     return (foundUser && foundEmail);
   }
 
-  passwordSucces = async (password: string, userFound: UserBackOfficeInterface, res: any) => {
+  passwordSuccess = async (password: string, userFound: UserBackOfficeInterface, res: any) => {
 
     if (!userFound) {
-      res.send({ message: ErrorWithUserNameOrPass });
+      res.status(HttpStatus.BAD_REQUEST).send({ message: ErrorWithUserNameOrPass });
       return null;
     }
 
-    const passwordSucces = await compareLogin(password, userFound);
+    const passwordSuccess = await compareLogin(password, userFound);
     
-    if (!passwordSucces) {
-      res.send({ message: ErrorWithUserNameOrPass });
+    if (!passwordSuccess) {
+      res.status(HttpStatus.BAD_REQUEST).send({ message: ErrorWithUserNameOrPass });
     }
 
-    return passwordSucces;
+    return passwordSuccess;
   }
 }
 
