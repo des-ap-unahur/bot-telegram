@@ -6,6 +6,7 @@ import BotResponseFiles from "../Models/BotResponseFiles.model";
 import BotNestedCommands from "../Models/BotNestedCommands.model";
 import UserTypes from "../Models/UserTypes.model";
 import paginate from "../../Utils/Paginate.utils";
+import { compareLogin } from "../../Utils/Auth.utils";
 
 class BotCommandRepository {
   getAll = async (): Promise<BotCommand[]> => {
@@ -106,26 +107,28 @@ class BotCommandRepository {
       if (!command) {
         return { message: "el comando no existe" };
       }
+
       const botResponses =
         command.botResponses &&
         (await BotResponses.findByPk(command.botResponses.bot_response_id, {
           include: [BotResponseFiles],
         }));
+      
       const botResponsesFiles =
-        botResponses.botResponseFiles &&
+        botResponses && botResponses.botResponseFiles &&
         (await BotResponseFiles.findByPk(
           botResponses.botResponseFiles.bot_respose_files_id
         ));
 
-      const botNestedCommandsBotFather = await BotNestedCommands.findOne({
+      const botNestedCommandsBotFather = await BotNestedCommands.findAll({
         where: {
           bot_father_id: id,
         },
       });
 
-      botNestedCommandsBotFather && await botNestedCommandsBotFather.destroy();
+      botNestedCommandsBotFather && await Promise.all(botNestedCommandsBotFather.map(e=>e.destroy()));
       botResponsesFiles && await botResponsesFiles.destroy();
-      botResponses && await botResponses.destroy();
+      botResponses &&  await botResponses.destroy();
       command && await command.destroy();
       return { message: "ok" };
     } catch (e) {

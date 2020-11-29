@@ -44,7 +44,7 @@ class BotCommandController {
 
   refreshCommand = async (req: any, res: any): Promise<void> => {
     await botController.refreshCommands();
-    res.send(HttpStatus.OK);
+    res.sendStatus(HttpStatus.OK);
   }
 
   postCommand = async (req: any, res: any): Promise<void> => {
