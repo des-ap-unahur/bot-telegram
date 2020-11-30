@@ -4,4 +4,4 @@ interface PollResponsesInterface{
   response?: string | null;
 }
    
- export default PollResponsesInterface;
+export default PollResponsesInterface;

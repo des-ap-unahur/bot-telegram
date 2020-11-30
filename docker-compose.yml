@@ -3,8 +3,7 @@ services:
   bot-telegram-view:
     build:
       context: ./BotTelegramView
-      args:
-        environment: local
+    stdin_open: true
     ports:
       - "3000:3000"
     volumes:
