@@ -199,7 +199,7 @@ const BotCommandsReducer = (state = initialState, action: any) => {
         ...state,
         botCommandSelected: action.payload
       }
-    case actionsTypes.clearPollStates:
+    case actionsTypes.clearBotCommandsStates:
       return {
         ...state,
         fetchingStatus: false,
@@ -208,6 +208,7 @@ const BotCommandsReducer = (state = initialState, action: any) => {
         botCommands: null,
         total: 0,
         botCommandSelected: null,
+        botCommandList: null,
         statusCode: '',
         errorsCodes: '',
         errorMessage: '',
