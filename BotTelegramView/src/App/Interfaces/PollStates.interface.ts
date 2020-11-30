@@ -7,6 +7,7 @@ export interface PollStateInterface {
   pollSelected: null | PollInterface;
   polls: null | PollInterface[];
   total: number;
+  totalPolls: number;
   statusCode: string | number;
   errorsCodes: string;
   errorMessage: string;

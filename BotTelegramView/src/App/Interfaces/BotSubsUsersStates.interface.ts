@@ -27,6 +27,8 @@ export interface BotSubsUsersStateInterface {
   botSubsUsers: null | BotSubsUsersInterface[];
   botUsers: null | BotUsersInterface[];
   total: number;
+  totalSubscribers: number;
+  newLastAdmission: number;
   statusCode: string | number;
   errorsCodes: string;
   errorMessage: string;

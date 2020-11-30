@@ -6,35 +6,40 @@ export const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyItems: 'center',
+    margin: '0 auto',
     flexGrow: 1,
-    width: '100%',
+    width: '93%',
     height: '100%',
     minHeight: '30vh',
+    marginLeft: '80px',
+    overflowX: 'hidden'
+  },
+  rootShift: {
+    marginLeft: '300px',
+    width: '78%',
+    transition: theme.transitions.create(['margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   container: {
     display: 'flex',
     justifyItems: 'center',
     justifyContent: 'center',
     marginTop: theme.spacing(12),
-    marginLeft: '80px',
+    width: '100%',
+    maxWidth: '1265px',
     transition: theme.transitions.create(['margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
     flexDirection: "column",
   },
-  containerShift: {
-    marginLeft: '300px',
-    transition: theme.transitions.create(['margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
   title: {
     color: BLACK
   },
   cardContainer: {
-    width: '85vw',
+    width: '100%',
     display: "flex",
     marginBottom: "20px",
     "& div":{
@@ -44,15 +49,14 @@ export const useStyles = makeStyles(theme => ({
       marginRight: '0px'
     }
   },
+  cardContainerShift: {
+  },
   card: {
     marginRight: "30px",
     width: '100%'
   },
-  table:{
-    width: '85vw'
-  },
-  tableCorrections: {
-    width: 'calc(96vw - 300px)'
+  subContainer:{
+    width: '100%'
   },
   buttonStyle:{
     float: 'right',
@@ -69,5 +73,12 @@ export const useStyles = makeStyles(theme => ({
     position: 'relative',
     top: '4px',
     right: '5px'
-  }
+  },
+  loader: {
+    zIndex: 1,
+  },
+  loaderContainer: {
+    position: 'absolute',
+    top: '22%',
+  },
 }))

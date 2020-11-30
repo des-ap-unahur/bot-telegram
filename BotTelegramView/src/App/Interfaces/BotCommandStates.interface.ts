@@ -8,6 +8,8 @@ export interface BotCommandStatesInterface {
   botCommandList: null | BotCommands[];
   botCommandSelected: null | BotCommands;
   total: number;
+  totalCommands: number;
+  fetchingRefreshStatus: boolean;
   statusCode: string | number;
   errorsCodes: string;
   errorMessage: string;

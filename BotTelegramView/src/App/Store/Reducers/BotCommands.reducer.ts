@@ -11,6 +11,8 @@ const initialState: BotCommandStatesInterface = {
   botCommandList: null,
   total: 0,
   botCommandSelected: null,
+  fetchingRefreshStatus: false,
+  totalCommands: 0,
   statusCode: '',
   errorsCodes: '',
   errorMessage: '',
@@ -138,7 +140,7 @@ const BotCommandsReducer = (state = initialState, action: any) => {
     case actionsTypes.refreshCommandsAttempt:
       return {
         ...state,
-        fetchingStatus: true,
+        fetchingRefreshStatus: true,
         failed: false,
         sucess: false,
         errorsCodes: undefined,
@@ -147,7 +149,7 @@ const BotCommandsReducer = (state = initialState, action: any) => {
     case actionsTypes.refreshCommandsSuccess:
       return {
         ...state,
-        fetchingStatus: false,
+        fetchingRefreshStatus: false,
         failed: false,
         sucess: true,
         statusCode: action.payload.status,
@@ -155,7 +157,36 @@ const BotCommandsReducer = (state = initialState, action: any) => {
     case actionsTypes.refreshCommandsFailure:
       return {
         ...state,
-        fetchingStatus: false,
+        fetchingRefreshStatus: false,
+        failed: true,
+        sucess: false,
+        statusCode: action.payload.status,
+        errorsCodes: action.payload.data.errorsCodes,
+        errorMessage: action.payload.data.message
+      }
+    //getTotalCommands
+    case actionsTypes.getTotalCommandsAttempt:
+      return {
+        ...state,
+        fetchingRefreshStatus: true,
+        failed: false,
+        sucess: false,
+        errorsCodes: undefined,
+        errorMessage: undefined,
+      }
+    case actionsTypes.getTotalCommandsSuccess:
+      return {
+        ...state,
+        fetchingRefreshStatus: false,
+        failed: false,
+        sucess: true,
+        totalCommands: action.payload.data.count,
+        statusCode: action.payload.status,
+      }
+    case actionsTypes.getTotalCommandsFailure:
+      return {
+        ...state,
+        fetchingRefreshStatus: false,
         failed: true,
         sucess: false,
         statusCode: action.payload.status,
@@ -180,6 +211,8 @@ const BotCommandsReducer = (state = initialState, action: any) => {
         statusCode: '',
         errorsCodes: '',
         errorMessage: '',
+        fetchingRefreshStatus: false,
+        totalCommands: 0,
       }
     default:
       return state

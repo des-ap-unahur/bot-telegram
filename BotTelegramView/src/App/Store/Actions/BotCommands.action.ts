@@ -28,6 +28,11 @@ const { actionsTypes, actionCreators } = builderAsyncActions([
     method: 'DELETE'
   },
   {
+    name: 'getTotalCommands',
+    endpoint: '/bot-commands/total-count',
+    method: 'GET'
+  },
+  {
     name: 'refreshCommands',
     endpoint: '/bot-commands/refresh',
     method: 'PUT'

@@ -3,7 +3,10 @@ import clsx from 'clsx';
 import { 
   Container,
   Card,
-  CardContent, Button, Box
+  CardContent, 
+  Button, 
+  Box,
+  CircularProgress
 } from '@material-ui/core';
 import { useStyles } from './Dashboard.style';
 import { ModalControllerContext } from '../../HOC/ModalController.hoc';
@@ -21,13 +24,14 @@ const Dashboard = (props:DashboardProps) => {
   const { 
     root,
     container,
-    containerShift,
+    rootShift,
     cardContainer,
     card,
     buttonStyle,
-    tableCorrections,
-    table,
-    spanIcon
+    subContainer,
+    spanIcon,
+    loader,
+    loaderContainer
   } = useStyles();
 
   const { language } = useContext(LanguageContext);
@@ -39,19 +43,42 @@ const Dashboard = (props:DashboardProps) => {
     botCommands,
     getPollsRequest,
     getBotCommandsRequest,
-    refreshCommandsRequest
+    refreshCommandsRequest,
+    fetchingRefresh,
+    totalCommands,
+    getTotalCommandsRequest,
+    newLastAdmission,
+    totalPolls,
+    totalSubscribers,
+    getNewLastAdmissionRequest,
+    getTotalCountSubscribersRequest,
+    getTotalPollsRequest
   } = props;
 
   const configParams = { 
     language,
-    totalSubscribers: 20,
-    newLastAdmission: 5,
-    totalPolls: 10,
-    totalCommands: 40
+    totalSubscribers,
+    newLastAdmission,
+    totalPolls,
+    totalCommands
   };
 
   const infoCards = generateCardInfo(configParams)
   
+  const getTotalCommands = useCallback(()=>{
+    getTotalCommandsRequest({})
+  }, [])
+
+  const getNewLastAdmission = useCallback(()=>{
+    getNewLastAdmissionRequest({})
+  }, [])
+  const getTotalCountSubscribers = useCallback(()=>{
+    getTotalCountSubscribersRequest({})
+  }, [])
+  const getTotalPolls = useCallback(()=>{
+    getTotalPollsRequest({})
+  }, [])
+
   const getPolls = useCallback(()=>{
     const requestOptions = {
       params: { page: 0, pageSize: 2 }
@@ -71,7 +98,19 @@ const Dashboard = (props:DashboardProps) => {
   useEffect(()=>{
     getPolls();
     getBotCommands();
-  }, [getPolls, getBotCommands])
+    getTotalCommands();
+    getNewLastAdmission();
+    getTotalCountSubscribers();
+    getTotalPolls();
+  }, 
+  [
+    getPolls, 
+    getBotCommands,
+    getTotalCommands,
+    getNewLastAdmission,
+    getTotalCountSubscribers,
+    getTotalPolls
+  ])
 
   const handleRefreshCommands = async() => {
     await refreshCommandsRequest({})
@@ -87,13 +126,14 @@ const Dashboard = (props:DashboardProps) => {
 
   return (
     <div>
-      <div className={root}>
+      <div className={clsx(root, {
+          [rootShift]: isOpenDrawer,
+        })}
+      >
         <Container  
-          className={clsx(container, {
-            [containerShift]: isOpenDrawer,
-          })} 
+          className={container} 
         >
-          <div className={isOpenDrawer ? tableCorrections : table}>
+          <div className={subContainer}>
             <SectionTitle 
               titleLabel={language.dataAndActions}
               hiddenSectionFrom={true}
@@ -126,16 +166,22 @@ const Dashboard = (props:DashboardProps) => {
                   variant='contained'
                   onClick={handleRefreshCommands}
                   className={buttonStyle}
+                  disabled={fetchingRefresh}
                 >
                   <span className={spanIcon}>
                     <AutorenewIcon/>
                   </span>
                   {language.refreshCommands}
+                  {fetchingRefresh && 
+                    <div className={loaderContainer}>
+                      <CircularProgress className={loader} size={35} />
+                    </div>
+                  }
                 </Button>
               </CardContent>
             </Card>
           </div>
-          <div className={isOpenDrawer ? tableCorrections : table}>
+          <div className={subContainer}>
             <SectionTitle 
               titleLabel={language.polls}
               hiddenSectionFrom={true}
@@ -157,7 +203,7 @@ const Dashboard = (props:DashboardProps) => {
               {language.moreOptions}
             </Button>
           </div>
-          <div className={isOpenDrawer ? tableCorrections : table}>
+          <div className={subContainer}>
             <SectionTitle 
               titleLabel={language.botActions}
               hiddenSectionFrom={true}

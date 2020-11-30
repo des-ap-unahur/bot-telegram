@@ -10,6 +10,7 @@ const initialState: PollStateInterface = {
   pollSelected: null,
   polls: null,
   total: 0,
+  totalPolls: 0,
   statusCode: '',
   errorsCodes: '',
   errorMessage: '',
@@ -209,6 +210,35 @@ const PollReducer = (state = initialState, action: any) => {
         statusCode: action.payload.status,
       }
     case actionsTypes.updateQuestionsFailure:
+      return {
+        ...state,
+        fetchingStatus: false,
+        failed: true,
+        sucess: false,
+        statusCode: action.payload.status,
+        errorsCodes: action.payload.data.errorsCodes,
+        errorMessage: action.payload.data.message
+      }
+    //getTotalPolls
+    case actionsTypes.getTotalPollsAttempt:
+      return {
+        ...state,
+        fetchingStatus: true,
+        failed: false,
+        sucess: false,
+        errorsCodes: undefined,
+        errorMessage: undefined,
+      }
+    case actionsTypes.getTotalPollsSuccess:
+      return {
+        ...state,
+        fetchingStatus: false,
+        failed: false,
+        sucess: true,
+        totalPolls: action.payload.data.count,
+        statusCode: action.payload.status,
+      }
+    case actionsTypes.getTotalPollsFailure:
       return {
         ...state,
         fetchingStatus: false,
