@@ -47,6 +47,8 @@ export interface GetPollContentProps {
   numberOfQuestions: string | number;
   questions: QuestionInterface[];
   handleChangeInputQuestions: (e: any, indexQuestion: number) => void;
+  setRefreshTable: (refresh: boolean) => void;
+  refreshTable: boolean;
 }
 
 export interface NewPollProps {

@@ -15,6 +15,8 @@ import { LanguageContext } from '../../../../../Config/Lang/Lang.languaje';
 import SelectOptions from '../../../../SharedComponents/SelectOptions/Select.component';
 import { langOptions } from '../../Header.config';
 import { HeaderAppBarProps } from '../../Header.interfaces';
+import { ReactSVG } from 'react-svg';
+import BotLogo from '../../../../../Assets/Images/logo-bot.svg';
 
 
 const HeaderAppBar = (props: HeaderAppBarProps) => {
@@ -30,7 +32,9 @@ const HeaderAppBar = (props: HeaderAppBarProps) => {
     userName,
     avatar,
     dropdownMenu,
-    selectOptions
+    selectOptions,
+    titleAndIcon,
+    botIcon
   } = useStyles();
 
   const {
@@ -57,7 +61,8 @@ const HeaderAppBar = (props: HeaderAppBarProps) => {
             <MenuIcon />
           </IconButton>
           <Typography className={subtitle} component='div'>
-            <Box fontWeight={800} fontSize={28}>
+            <Box className={titleAndIcon} fontWeight={800} fontSize={28}>
+              <ReactSVG className={botIcon} src={BotLogo}/>
               {language.botTelegramBackOffice.toUpperCase()}
             </Box>
           </Typography>

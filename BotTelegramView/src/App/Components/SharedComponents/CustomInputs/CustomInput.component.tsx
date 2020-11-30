@@ -4,7 +4,7 @@ import { Typography, FormControl, TextField} from '@material-ui/core';
 import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
 import { CustomInputProps } from './CustomInput.interface';
 
-const CustomInput = ({title, handleChange, value, emptyFields, name, correction }:CustomInputProps) => {
+const CustomInput = ({title, handleChange, value, emptyFields, name, correction, disabled }:CustomInputProps) => {
   const { language } = useContext(LanguageContext)
   const {
     inputFormControl,
@@ -24,6 +24,7 @@ const CustomInput = ({title, handleChange, value, emptyFields, name, correction 
           onChange={handleChange}
           name={name}
           value={value}
+          disabled={disabled}
         />
         {(!value && emptyFields) &&
           <Typography className={inputLabelAlert} variant="subtitle1">

@@ -5,7 +5,7 @@ import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
 import { capitalize } from '../../../Utils/FormatStrings.utils';
 import { CustomSelectProps } from './CustomSelect.interface';
 
-const CustomSelect = ({title, handleChange, value, emptyFields, list, name, correction}:CustomSelectProps) => {
+const CustomSelect = ({title, handleChange, value, emptyFields, list, name, correction, disabled}:CustomSelectProps) => {
   const { language } = useContext(LanguageContext)
   const {
     selectFormControl,
@@ -26,6 +26,7 @@ const CustomSelect = ({title, handleChange, value, emptyFields, list, name, corr
           onChange={handleChange}
           value={value}
           name={name}
+          disabled={disabled}
         >
           {list ?
             list.map(option => 

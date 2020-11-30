@@ -27,9 +27,8 @@ interface BotResponses {
   response?: string | null;
   description?: string | null;
   parameter?: string | null;
-  botResponsesFiles?: BotResponseFiles;
+  botResponseFiles?: BotResponseFiles;
 }
-
 
 interface BotCommands {
   bot_command_id?: number | null;

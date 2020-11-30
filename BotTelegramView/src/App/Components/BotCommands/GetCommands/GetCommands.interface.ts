@@ -36,6 +36,10 @@ export interface GetCommandsContentProps {
   handleCloseNewCommand: () => void;
   userTypesOptions: null | OptionInterface[]; 
   commandTypesOptions: null | OptionInterface[];
+  editMode: boolean;
+  setEditMode: (editMode: boolean) => void;
+  setRefreshTable: (refresh: boolean) => void;
+  refreshTable: boolean;
 }
 
 export interface NewCommandProps {
@@ -49,6 +53,8 @@ export interface NewCommandProps {
   botCommandList?: BotCommands[] | null;
   userTypesOptions: null | OptionInterface[]; 
   commandTypesOptions: null | OptionInterface[];
+  editMode: boolean;
+  setEditMode: (editMode: boolean) => void;
   postBotCommandRequest?: (requestOptions: any) => void;
   updateBotCommandRequest?: (requestOptions: any) => void;
   postResponseRequest?: (requestOptions: any) => void;

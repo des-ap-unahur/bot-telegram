@@ -10,4 +10,5 @@ export interface CustomInputProps {
   name: string;
   emptyFields?: null | string | number | boolean
   correction?: boolean;
+  disabled?: boolean;
 }

@@ -9,6 +9,8 @@ const GetCommands = (props: GetCommandsProps) => {
   const [ openDeletePopUp, setOpenDeletePopUp ] = useState<boolean>(false);
   const [ botCommandId, setBotCommandId ] = useState<number | string>('');
   const [ openNewCommand, setOpenNewCommand ] = useState<boolean>(false);
+  const [ editMode, setEditMode ] = useState<boolean>(false);
+  const [ refreshTable, setRefreshTable ] = useState<boolean>(false);
   const { language } = useContext(LanguageContext);
   const { 
     userTypes,
@@ -84,6 +86,7 @@ const GetCommands = (props: GetCommandsProps) => {
     setOpenDeletePopUp(false);
     await deleteBotCommandRequest(requestOptions);
     await handleChangePage(0, 10);
+    setRefreshTable(true);
   }
 
   const handleOpenDeletePopUp = (id: number) => {
@@ -98,6 +101,7 @@ const GetCommands = (props: GetCommandsProps) => {
   const handleOpenNewCommand = (botCommands?: BotCommands | null) => {
     if(botCommands && botCommands.bot_command_id){
       setOpenNewCommand(true);
+      setEditMode(true);
       selectBotCommand(botCommands);
     } else {
       setOpenNewCommand(true);
@@ -106,6 +110,7 @@ const GetCommands = (props: GetCommandsProps) => {
 
   const handleCloseNewCommand = () => {
     setOpenNewCommand(false);
+    setRefreshTable(true);
     getBotCommands();
   }
 
@@ -125,6 +130,10 @@ const GetCommands = (props: GetCommandsProps) => {
       handleCloseNewCommand={handleCloseNewCommand}
       userTypesOptions={userTypesOptions}
       commandTypesOptions={commandTypesOptions}
+      editMode={editMode}
+      setEditMode={setEditMode}
+      setRefreshTable={setRefreshTable}
+      refreshTable={refreshTable}
     />
   )
 }

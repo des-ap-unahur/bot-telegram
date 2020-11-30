@@ -14,6 +14,7 @@ export const findTypeAndBuild = (input:InputsInterface): JSX.Element => {
       value={input.value}
       emptyFields={input.emptyFields}
       correction={input.correction}
+      disabled={input.disabled}
     />
   :
     <findType.input 
@@ -24,5 +25,6 @@ export const findTypeAndBuild = (input:InputsInterface): JSX.Element => {
       list={input && input.list}
       emptyFields={input.emptyFields}
       correction={input.correction}
+      disabled={input.disabled}
     />
 }

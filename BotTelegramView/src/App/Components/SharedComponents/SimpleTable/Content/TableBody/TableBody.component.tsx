@@ -18,7 +18,7 @@ const TableBodyRow = ({config, dataset}: SimpleTableBodyProps) => {
 
       return capitalizeStrings(stringCell)
     } else if (cell.custom){
-      const property = dataset.property;
+      const property = dataset[cell.property];
       
       return cell.custom(property)
     }

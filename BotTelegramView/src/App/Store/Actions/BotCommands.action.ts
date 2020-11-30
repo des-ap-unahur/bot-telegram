@@ -19,7 +19,7 @@ const { actionsTypes, actionCreators } = builderAsyncActions([
   },
   {
     name: 'updateBotCommand',
-    endpoint: '/bot-commands',
+    endpoint: '/bot-commands/:param_1',
     method: 'PUT'
   },
   {

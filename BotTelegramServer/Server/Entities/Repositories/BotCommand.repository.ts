@@ -6,7 +6,8 @@ import BotResponseFiles from "../Models/BotResponseFiles.model";
 import BotNestedCommands from "../Models/BotNestedCommands.model";
 import UserTypes from "../Models/UserTypes.model";
 import paginate from "../../Utils/Paginate.utils";
-import { compareLogin } from "../../Utils/Auth.utils";
+import { Op } from "sequelize";
+
 
 class BotCommandRepository {
   getAll = async (): Promise<BotCommand[]> => {
@@ -17,6 +18,11 @@ class BotCommandRepository {
         BotNestedCommands,
         { model: BotResponses, include: [BotResponseFiles] },
       ],
+      where: {
+        command_type_id: {
+          [Op.notIn]: [5, 6, 12, 13, 10]
+        }
+      }
     });
     return commands;
   };

@@ -1,9 +1,9 @@
-import React, { useState, useContext, useMemo } from 'react';
+import React, { useState, useContext, useMemo, useCallback, useEffect } from 'react';
 import TableContent from './Table.content'
 import { ModalControllerContext } from '../../../HOC/ModalController.hoc';
 import { TableProps } from './Table.interface';
 
-const TableComponent = ({ config, dataset, loader, totalRows, changePage}: TableProps) => {
+const TableComponent = ({ config, dataset, loader, totalRows, changePage, refreshTable, setRefreshTable}: TableProps) => {
   const [ page, setPage ] = useState(0);
   const [ rowsPerPage, setRowsPerPage ] = useState(10);
   const rowsPerPageOptions = [10, 15, 25, 50, 100];
@@ -14,6 +14,17 @@ const TableComponent = ({ config, dataset, loader, totalRows, changePage}: Table
   }, [changePage]);
 
   const emptyRows = !loader ? rowsPerPage - dataset.length : 0;
+
+  const refreshPage = useCallback(()=>{
+    if(refreshTable && setRefreshTable){
+      setPage(0);
+      setRefreshTable(false);
+    }
+  },[refreshTable, setRefreshTable])
+
+  useEffect(()=> {
+    refreshPage();
+  }, [refreshPage])
   
   const handleChangePage = (event: any, newPage: number) => {
     setPage(newPage);

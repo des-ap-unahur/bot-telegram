@@ -23,7 +23,11 @@ const GetCommandsContent = (props:GetCommandsContentProps) => {
     handleCloseNewCommand,
     handleOpenNewCommand,
     userTypesOptions,
-    commandTypesOptions
+    commandTypesOptions,
+    editMode,
+    setEditMode,
+    setRefreshTable,
+    refreshTable
   } = props;
 
   const { 
@@ -46,6 +50,8 @@ const GetCommandsContent = (props:GetCommandsContentProps) => {
           loader={fetching}
           totalRows={total}
           changePage={handleChangePage}
+          setRefreshTable={setRefreshTable}
+          refreshTable={refreshTable}
         />
       </div>
       <NewCommand
@@ -54,6 +60,8 @@ const GetCommandsContent = (props:GetCommandsContentProps) => {
         language={language}
         userTypesOptions={userTypesOptions}
         commandTypesOptions={commandTypesOptions}
+        editMode={editMode}
+        setEditMode={setEditMode}
       />
       <DeletePopUp
         open={openDeletePopUp}

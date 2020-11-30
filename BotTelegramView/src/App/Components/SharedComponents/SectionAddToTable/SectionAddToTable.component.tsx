@@ -26,6 +26,7 @@ interface SectionAddToTableProps {
   handleChange: (e: any) => void;
   value: string | number | null;
   list: OptionInterface[] | null;
+  disabled?: boolean;
 }
 
 const SectionAddToTable = (props:SectionAddToTableProps) => {
@@ -36,7 +37,8 @@ const SectionAddToTable = (props:SectionAddToTableProps) => {
     list,
     title,
     value,
-    handleChange
+    handleChange,
+    disabled
   } = props;
   const { root, selectSpacing } = useStyles();
 
@@ -49,6 +51,7 @@ const SectionAddToTable = (props:SectionAddToTableProps) => {
           list={list}
           value={value}
           handleChange={handleChange}
+          disabled={disabled}
         />
       </div>
       <SimpleTable

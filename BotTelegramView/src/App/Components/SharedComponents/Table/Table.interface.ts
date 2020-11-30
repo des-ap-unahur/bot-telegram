@@ -4,6 +4,8 @@ export interface TableProps {
   loader: boolean;
   totalRows: number;
   changePage?: (page: number, pageSize: number) => Promise<void>;
+  setRefreshTable?: (refresh: boolean) => void;
+  refreshTable?: boolean;
 }
 
 export interface TableContentProps {

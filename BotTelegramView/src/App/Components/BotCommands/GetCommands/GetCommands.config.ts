@@ -1,6 +1,7 @@
 import editIcon from '../../../Assets/Images/pencil.svg';
 import trashIcon from '../../../Assets/Images/delete.svg';
 
+export const commandNotEditable = [5, 6, 12, 13, 10]
 
 export const generateConfigWithLang = (configParams:any) => {
   const { language, handleOpenDeletePopUp, handleOpenNewCommand } = configParams
@@ -41,13 +42,15 @@ export const generateConfigWithLang = (configParams:any) => {
           id: 'button-poll-edit',
           title: language.edit,
           icon: editIcon,
-          onClick: (dataset:any) => { console.log(dataset) }
+          disabled: (dataset: any) => Boolean(commandNotEditable.includes(dataset.command_type_id)),
+          onClick: (dataset:any) => { handleOpenNewCommand(dataset) }
         },
         {
           type: 'delete',
           id: 'button-poll-delete',
           title: language.delete,
           icon: trashIcon,
+          disabled: (dataset: any) => Boolean(commandNotEditable.includes(dataset.command_type_id)),
           onClick: (dataset:any) => { handleOpenDeletePopUp(dataset.bot_command_id) }
         },
       ]
@@ -82,7 +85,8 @@ export const inputFirstConfig = (inputParams: any) => {
     userTypesOptions,
     commandTypesOptions,
     emptyFirstFields,
-    confirmation
+    confirmation,
+    editMode
   } = inputParams;
 
   return [
@@ -118,7 +122,8 @@ export const inputFirstConfig = (inputParams: any) => {
       handleChange: handleChangeInputs,
       value: userType,
       list: userTypesOptions,
-      emptyFields: confirmation && emptyFirstFields && !userType
+      emptyFields: confirmation && emptyFirstFields && !userType,
+      disabled: editMode
     },
     {
       type: 'select',
@@ -127,7 +132,8 @@ export const inputFirstConfig = (inputParams: any) => {
       handleChange: handleChangeInputs,
       value: commandType,
       list: commandTypesOptions,
-      emptyFields: confirmation && emptyFirstFields && !commandType
+      emptyFields: confirmation && emptyFirstFields && !commandType,
+      disabled: editMode
     },
     {
       type: 'text',
@@ -148,7 +154,8 @@ export const inputSecondaryConfig = (inputParams: any) => {
     fileName,
     url,
     emptySecondFields,
-    confirmation
+    confirmation,
+    editMode
   } = inputParams;
 
   return [
@@ -158,7 +165,8 @@ export const inputSecondaryConfig = (inputParams: any) => {
       title: language.filename,
       handleChange: handleChangeInputs,
       value: fileName,
-      emptyFields: confirmation && emptySecondFields && !fileName
+      emptyFields: confirmation && emptySecondFields && !fileName,
+      disabled: editMode
     },
     {
       type: 'text',
@@ -166,7 +174,8 @@ export const inputSecondaryConfig = (inputParams: any) => {
       title: language.url,
       handleChange: handleChangeInputs,
       value: url,
-      emptyFields: confirmation && emptySecondFields && !url
+      emptyFields: confirmation && emptySecondFields && !url,
+      disabled: editMode
     },
   ]
 }
@@ -179,7 +188,8 @@ export const coordinateOrButtonListInputConfig = (inputParams: any) => {
     confirmation,
     isAButtonCommand,
     coordinates,
-    buttonList
+    buttonList,
+    editMode
   } = inputParams;
 
   return {
@@ -189,12 +199,13 @@ export const coordinateOrButtonListInputConfig = (inputParams: any) => {
     handleChange: handleChangeInputs,
     value: isAButtonCommand ? buttonList : coordinates,
     emptyFields: confirmation && emptyFirstFields && !(coordinates || buttonList),
-    correction: true
+    correction: true,
+    disabled: editMode
   }
 }
 
 export const NestedCommandTableConfig = (configParams:any) => {
-  const { language, handleDeleteNestedCommand } = configParams
+  const { language, handleDeleteNestedCommand, editMode } = configParams
   return [
     {
       name: language.name,
@@ -214,6 +225,7 @@ export const NestedCommandTableConfig = (configParams:any) => {
           id: 'button-poll-delete',
           title: language.delete,
           icon: trashIcon,
+          disabled: editMode,
           onClick: (dataset:any) => { handleDeleteNestedCommand(dataset.bot_command_id) }
         },
       ]

@@ -12,6 +12,7 @@ export interface InputsInterface {
   list?: OptionInterface[] | null;  
   emptyFields?: null | string | number | boolean
   correction?: boolean;
+  disabled?: boolean;
 }
 
 export interface BuildInputsInterface {

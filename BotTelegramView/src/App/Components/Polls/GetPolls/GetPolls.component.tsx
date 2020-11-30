@@ -20,6 +20,7 @@ const GetPolls = (props: GetPollProps) => {
   const [ questions, setQuestions ] = useState<QuestionInterface[]>([]);
   const [ postMode, setPostMode ] = useState<boolean>(false);
   const [ updateMode, setUpdateMode ] = useState<boolean>(false);
+  const [ refreshTable, setRefreshTable ] = useState<boolean>(false);
   const { language } = useContext(LanguageContext);
   const { 
     polls, 
@@ -94,6 +95,7 @@ const GetPolls = (props: GetPollProps) => {
     setConfirmation(false);
     setPostMode(false);
     setUpdateMode(false);
+    setRefreshTable(true);
     getPolls();
   }
 
@@ -187,6 +189,7 @@ const GetPolls = (props: GetPollProps) => {
     clearPollStates();
     setOpenDeletePopUp(false);
     await deletePollRequest(requestOptions);
+    setRefreshTable(true);
     await handleChangePage(0, 10);
   }
 
@@ -278,6 +281,8 @@ const GetPolls = (props: GetPollProps) => {
       handleChangeInputQuestions={handleChangeInputQuestions}
       confirmation={confirmation}
       updateMode={updateMode}
+      setRefreshTable={setRefreshTable}
+      refreshTable={refreshTable}
     />
   )
 }

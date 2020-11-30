@@ -23,6 +23,12 @@ const ActionButton = ({actions, dataset}:ActionButtonProps) => {
     action.onClick(dataset)
   }
 
+  const disabled = (action: any): boolean => {
+    if(typeof action.disabled === "function"){
+      return action.disabled(dataset)
+    } 
+    return action.disabled
+  }
   return <div className={actionContainer}>
     {
       actions.map((action: ActionInterface, i: number) =>
@@ -38,10 +44,10 @@ const ActionButton = ({actions, dataset}:ActionButtonProps) => {
               [iconColorRed]: action.type === actionTypes.delete,
               [iconColorYellow]: action.type === actionTypes.view || action.type === actionTypes.download,
               [iconColorOrange]: action.type === actionTypes.edit,
-              [iconDisabled]: action.disabled
+              [iconDisabled]: disabled(action)
             })}
             id={action.id}
-            disabled={action.disabled}
+            disabled={disabled(action)}
             onClick={()=> handleClick(action)}
           >
             <ReactSVG src={action.icon}/>

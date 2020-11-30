@@ -11,4 +11,5 @@ export interface CustomSelectProps {
   emptyFields?: null | string | number | boolean
   list?: OptionInterface[] | null;
   correction?: boolean;
+  disabled?: boolean;
 }

@@ -34,7 +34,9 @@ const GetPollsContent = (props:GetPollContentProps) => {
     questions,
     handleChangeInputQuestions,
     confirmation,
-    updateMode
+    updateMode,
+    refreshTable,
+    setRefreshTable
   } = props;
 
   const { 
@@ -57,6 +59,8 @@ const GetPollsContent = (props:GetPollContentProps) => {
           loader={fetching}
           totalRows={total}
           changePage={handleChangePage}
+          setRefreshTable={setRefreshTable}
+          refreshTable={refreshTable}
         />
       </div>
       <NewPoll

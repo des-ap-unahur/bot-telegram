@@ -10,7 +10,6 @@ import BotCommands from '../../../../../Interfaces/BotComands.interface';
 
 
 const NewCommand = (props:NewCommandProps) => {
-  const [ editMode, setEditMode ] = useState<boolean>(false);
   const [ name, setName ] = useState<string>('');
   const [ command, setCommand ] = useState<string>('');
   const [ description, setDescription ] = useState<string>('');
@@ -25,7 +24,7 @@ const NewCommand = (props:NewCommandProps) => {
   const [ confirmation, setConfirmation ] = useState<boolean>(false);
   const [ commandsAdded, setCommandsAdded ] = useState<BotCommands[]>([]);
   const [ postFiles, setPostFiles ] = useState<boolean>(false);
-  const [ nestedCommands, setNestedCommands ] = useState<NestedCommandsInterface[]>([]);
+  const [ nestedCommandPost, setNestedCommandsPost ] = useState<boolean>(false);
 
   const {
     openNewCommand,
@@ -46,6 +45,10 @@ const NewCommand = (props:NewCommandProps) => {
     clearResponseStates,
     clearNestedCommandsStates,
     selectBotCommand,
+    editMode,
+    setEditMode,
+    updateBotCommandRequest,
+    updateResponseRequest
   } = props;
   const { contentSize } = useStyles();
 
@@ -64,8 +67,10 @@ const NewCommand = (props:NewCommandProps) => {
     await setFileName('')
     await setUrl('')
     await setCommandToAdd('')
-    await setConfirmation(false);
-    await setCommandsAdded([]);
+    await setNestedCommandsPost(false)
+    await setPostFiles(false)
+    await setConfirmation(false)
+    await setCommandsAdded([])
     await handleCloseNewCommand();
   }
 
@@ -187,7 +192,7 @@ const NewCommand = (props:NewCommandProps) => {
   ])
 
   const postNestedCommands = useCallback(async ()=>{
-    if(commandsAdded.length && botCommandSelected && isANestedCommand && !editMode && postBotNestedCommandRequest && !fetching){
+    if(commandsAdded.length && botCommandSelected && isANestedCommand && !editMode && postBotNestedCommandRequest && !fetching && !nestedCommandPost){
       const data = commandsAdded.map(command => ({
         bot_child_id: command.bot_command_id,
         bot_father_id: botCommandSelected.bot_command_id
@@ -195,6 +200,7 @@ const NewCommand = (props:NewCommandProps) => {
       const requestOptions = {
         data
       }
+      setNestedCommandsPost(true);
       await postBotNestedCommandRequest(requestOptions);
       await clearStatus()
     }
@@ -206,7 +212,8 @@ const NewCommand = (props:NewCommandProps) => {
     commandsAdded, 
     postBotNestedCommandRequest,
     clearStatus,
-    fetching
+    fetching,
+    nestedCommandPost
   ])
 
   useEffect(()=>{
@@ -216,6 +223,38 @@ const NewCommand = (props:NewCommandProps) => {
   useEffect(()=>{
     postNestedCommands();
   }, [postNestedCommands]);
+
+  const commandCharge = useCallback(()=>{
+    if(editMode && botCommandSelected){
+      const botResponses = botCommandSelected.botResponses;
+      const botResponsesFiles = botResponses && botResponses.botResponseFiles;
+      const botNestedCommands = botCommandSelected.botNestedCommands;
+      setName(botCommandSelected.name)
+      setCommand(botCommandSelected.tel_command);
+      botResponses && botResponses.description && setDescription(botResponses.description)
+      setUserType(botCommandSelected.user_type_id)
+      setCommandType(botCommandSelected.command_type_id)
+      botResponses && botResponses.response && setResponse(botResponses.response);
+      botResponsesFiles && botResponsesFiles.filename && setFileName(botResponsesFiles.filename)
+      botResponsesFiles && botResponsesFiles.url && setUrl(botResponsesFiles.url)
+      botResponses && botResponses.description && setButtonList(botResponses.description)
+      botResponses && botResponses.description && setCoordinates(botResponses.description)
+
+      if(botNestedCommands && botCommandList){ 
+        const nestedCommands = botNestedCommands.map(
+          (nestedCommand, index) => botCommandList.find(
+            command => command.bot_command_id === nestedCommand.bot_child_id
+          ) || botCommandList[index]
+        )
+
+        setCommandsAdded(nestedCommands);
+      }
+    }
+  }, [editMode, botCommandSelected, botCommandList])
+
+  useEffect(()=>{
+    commandCharge()
+  }, [commandCharge])
 
   const handleChangeInputs = (e:any)=>{
     const name = e.target.name;
@@ -251,6 +290,40 @@ const NewCommand = (props:NewCommandProps) => {
     setCommandsAdded(commandsWithoutNestedCommand);
   }
 
+  const updateBotCommand = async () => {
+    if(botCommandSelected && updateBotCommandRequest ){
+      const botResponses = botCommandSelected.botResponses
+      const requestParams = {
+        param_1: botCommandSelected.bot_command_id,
+        data: {
+          bot_command_id: botCommandSelected.bot_command_id,
+          name,
+          tel_command: command,
+          description,
+          user_type_id: Number(userType),
+          command_type_id: Number(commandType),
+          status: botCommandSelected.status,
+          parameter: coordinates || buttonList
+        }
+      }
+      await updateBotCommandRequest(requestParams)
+      if(botResponses && updateResponseRequest){
+        const requestParams = {
+          param_1: botResponses.bot_response_id,
+          data: {
+            bot_response_id: botResponses.bot_response_id,
+            bot_id: botResponses.bot_id,
+            description,
+            response,
+            parameter: botResponses.parameter,
+          }
+        }
+        await updateResponseRequest(requestParams);
+      }
+      handleClose();
+    }
+  }
+
   const handleSave = async () => {
     const data = {
       name,
@@ -263,12 +336,14 @@ const NewCommand = (props:NewCommandProps) => {
     }
 
     setConfirmation(true);
-    if(!emptyFirstFields){
+    if(!emptyFirstFields && !editMode && postBotCommandRequest){
       const requestOptions = {
         data
       }
-      postBotCommandRequest && postBotCommandRequest(requestOptions)
+      await postBotCommandRequest(requestOptions)
       setConfirmation(false);
+    } else if (!emptyFirstFields && editMode) {
+      await updateBotCommand()
     }
   }
 
@@ -295,12 +370,13 @@ const NewCommand = (props:NewCommandProps) => {
     confirmation,
     isAButtonCommand, 
     coordinates,
-    buttonList
+    buttonList,
+    editMode
   };
 
   const firstInputs = inputFirstConfig(inputParams);
   const secondaryInputs = inputSecondaryConfig(inputParams);
-  const tableConfig = { language, handleDeleteNestedCommand };
+  const tableConfig = { language, handleDeleteNestedCommand, editMode };
   const inputButtonOrCoordinate = coordinateOrButtonListInputConfig(inputParams);
   
   return (
@@ -336,6 +412,7 @@ const NewCommand = (props:NewCommandProps) => {
               list={commandListToOptions}
               handleChange={handleChangeInputs}
               loader={Boolean(fetching)}
+              disabled={editMode}
             />
         }
       </div>

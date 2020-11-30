@@ -14,7 +14,7 @@ const { actionsTypes, actionCreators } = builderAsyncActions([
   },
   {
     name: 'deletePoll',
-    endpoint: '/polls/:param_1',
+    endpoint: '/poll/:param_1',
     method: 'DELETE'
   },
   {

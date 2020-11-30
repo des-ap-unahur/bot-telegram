@@ -1,8 +1,11 @@
-import { IsNotEmpty, IsString, IsNumber, IsBoolean } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsBoolean, IsOptional } from 'class-validator';
 
 class BotCommandSchema {
-  @IsNotEmpty()
   @IsNumber()
+  @IsOptional()
+  bot_command_id: number;
+  @IsNumber()
+  @IsNotEmpty()
   command_type_id: number;
   @IsNotEmpty()
   @IsNumber()
@@ -17,7 +20,10 @@ class BotCommandSchema {
   @IsBoolean()
   status: boolean;
   @IsString()
+  @IsOptional()
   description: string;
+  @IsString()
+  @IsOptional()
   parameter: string;
 }
 

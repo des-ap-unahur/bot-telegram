@@ -2,7 +2,7 @@ export interface ActionInterface {
   type: string;
   id: string;
   title: string;
-  disabled?: boolean;
+  disabled?: (dataset:any) => boolean | boolean;
   icon: any;
   onClick: (dataset: any) => void;
 }

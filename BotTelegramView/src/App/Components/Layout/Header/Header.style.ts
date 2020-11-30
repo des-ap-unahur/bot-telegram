@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { BorderTop } from '@material-ui/icons';
 import { WHITE, LIGHT_BLUE, BLUE, BLACK } from '../../../Styles/Colors.index';
 
 const drawerWidth = 300;
@@ -139,5 +138,12 @@ export const useStyles = makeStyles(theme => ({
     width: '100%',
     paddingTop: '10px',
     borderTop: '1px solid ' + BLACK
+  },
+  titleAndIcon: {
+    display: "flex"
+  },
+  botIcon: {
+    position: 'relative',
+    top: '1px',
   }
 }))
