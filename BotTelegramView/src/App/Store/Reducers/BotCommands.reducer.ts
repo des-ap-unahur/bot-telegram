@@ -202,7 +202,6 @@ const BotCommandsReducer = (state = initialState, action: any) => {
     case actionsTypes.clearBotCommandsStates:
       return {
         ...state,
-        fetchingStatus: false,
         failed: false,
         sucess: false,
         botCommands: null,
