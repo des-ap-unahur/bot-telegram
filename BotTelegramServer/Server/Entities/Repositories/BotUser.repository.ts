@@ -3,6 +3,8 @@ import BotUsersInterface from "../../Interfaces/BotUsers.interface";
 import GuaraniUsers from "../Models/GuaraniUsers.models";
 import Paginate from "../../Utils/Paginate.utils";
 import BotUsersWithPagination from "../../Interfaces/BotUsersWithPagination.interface";
+import PollResponses from "../Models/PollResponses.model";
+import BotSubsUsers from "../Models/BotSubsUsers.model";
 
 class BotUsersRepository {
   getAllWithPagination = async (paginationData: any): Promise<BotUsersWithPagination> => {
@@ -45,9 +47,20 @@ class BotUsersRepository {
     return botUser;
   };
 
-  delete = async (id: number): Promise<void> => {
+  delete = async (id: number): Promise<any> => {
     const botUser: BotUsers = await BotUsers.findByPk(id);
-    botUser.destroy();
+    const botUserId = botUser.bot_user_id;
+    if(!botUser) return { messsage: "el usuario no existe" }
+     const pollResponses: PollResponses[]= await PollResponses.findAll({where:{
+      user_id: botUserId
+    }});
+
+    const botSubUser: BotSubsUsers = await BotSubsUsers.findByPk(botUserId);
+    botSubUser && botSubUser.destroy();
+    pollResponses.length && await Promise.all(pollResponses.map(e=>e.destroy()));
+    botUser && await botUser.destroy();
+    return { message: "ok" }
+  
   };
 }
 
