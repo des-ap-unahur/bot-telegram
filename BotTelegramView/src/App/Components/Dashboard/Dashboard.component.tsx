@@ -3,15 +3,19 @@ import clsx from 'clsx';
 import { 
   Container,
   Card,
-  CardContent, Button
+  CardContent, Button, Box
 } from '@material-ui/core';
 import { useStyles } from './Dashboard.style';
 import { ModalControllerContext } from '../../HOC/ModalController.hoc';
 import SimpleTableComponent from '../SharedComponents/SimpleTable/SimpleTable.component';
 import { LanguageContext } from '../../Config/Lang/Lang.languaje';
-import { generateCommandConfigWithLang, generatePollConfigWithLang } from './Dashboard.config';
+import { generateCardInfo, generateCommandConfigWithLang, generatePollConfigWithLang } from './Dashboard.config';
 import { DashboardProps } from './Dashboard.interface';
 import { history } from '../../Utils/History.utils';
+import SectionTitle from '../SharedComponents/SectionTitle/SectionTitle.component';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+
 
 const Dashboard = (props:DashboardProps) => {
   const { 
@@ -20,7 +24,10 @@ const Dashboard = (props:DashboardProps) => {
     containerShift,
     cardContainer,
     card,
-    buttonStyle
+    buttonStyle,
+    tableCorrections,
+    table,
+    spanIcon
   } = useStyles();
 
   const { language } = useContext(LanguageContext);
@@ -34,7 +41,16 @@ const Dashboard = (props:DashboardProps) => {
     getBotCommandsRequest,
     refreshCommandsRequest
   } = props;
-  const configParams = { language };
+
+  const configParams = { 
+    language,
+    totalSubscribers: 20,
+    newLastAdmission: 5,
+    totalPolls: 10,
+    totalCommands: 40
+  };
+
+  const infoCards = generateCardInfo(configParams)
   
   const getPolls = useCallback(()=>{
     const requestOptions = {
@@ -77,21 +93,54 @@ const Dashboard = (props:DashboardProps) => {
             [containerShift]: isOpenDrawer,
           })} 
         >
+          <div className={isOpenDrawer ? tableCorrections : table}>
+            <SectionTitle 
+              titleLabel={language.dataAndActions}
+              hiddenSectionFrom={true}
+              correctionTitle={true}
+            />
+          </div>
           <div className={cardContainer}>
+            {infoCards.map((infoCard, index) => 
+                <Card className={card} key={'info-card' + index}>
+                  <CardContent>
+                    <Box fontSize={18} fontWeight={300}>
+                      {infoCard.name}
+                    </Box>
+                    <Box
+                      fontSize={40}
+                      fontWeight={700}
+                    >
+                      {infoCard.value}
+                    </Box>
+                  </CardContent>
+                </Card>
+              )
+            }
             <Card className={card}>
               <CardContent>
-                <div>Total de suscriptores</div>
-                <div>1254</div>
-              </CardContent>
-            </Card>
-            <Card className={card}>
-              <CardContent>
-                <div>Nuevos ultimo ingreso</div>
-                <div>20</div>
+                <Box fontSize={18} fontWeight={300}>
+                  {language.actions}
+                </Box>
+                <Button
+                  variant='contained'
+                  onClick={handleRefreshCommands}
+                  className={buttonStyle}
+                >
+                  <span className={spanIcon}>
+                    <AutorenewIcon/>
+                  </span>
+                  {language.refreshCommands}
+                </Button>
               </CardContent>
             </Card>
           </div>
-          <div>
+          <div className={isOpenDrawer ? tableCorrections : table}>
+            <SectionTitle 
+              titleLabel={language.polls}
+              hiddenSectionFrom={true}
+              correctionTitle={true}
+            />
             <SimpleTableComponent
               config={generatePollConfigWithLang(configParams)}
               dataset={polls || []}
@@ -102,10 +151,18 @@ const Dashboard = (props:DashboardProps) => {
               onClick={handleRedirectPoll}
               className={buttonStyle} 
             >
-              mas opciones
+              <span className={spanIcon}>
+                <MoreHorizIcon/>
+              </span>
+              {language.moreOptions}
             </Button>
           </div>
-          <div>
+          <div className={isOpenDrawer ? tableCorrections : table}>
+            <SectionTitle 
+              titleLabel={language.botActions}
+              hiddenSectionFrom={true}
+              correctionTitle={true}
+            />
             <SimpleTableComponent
               config={generateCommandConfigWithLang(configParams)}
               dataset={botCommands || []}
@@ -116,14 +173,10 @@ const Dashboard = (props:DashboardProps) => {
               onClick={handleRedirectCommand}
               className={buttonStyle}
             >
-              mas opciones
-            </Button>
-            <Button
-              variant='contained'
-              onClick={handleRefreshCommands}
-              className={buttonStyle}
-            >
-              Refrescar comandos
+              <span className={spanIcon}>
+                <MoreHorizIcon/>
+              </span>
+              {language.moreOptions}
             </Button>
           </div>
         </Container>

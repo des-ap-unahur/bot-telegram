@@ -3,6 +3,7 @@ import BotUser from "../Entities/Models/BotUsers.model";
 import notFoundValidator from "../Utils/NotFoundValidator.utils";
 import execDelete from "../Utils/ExecDelete.utils";
 import BotUserWithPagination from "../Interfaces/BotUsersWithPagination.interface";
+import { HttpStatus } from "../Config/Server/HTTPStatus.config";
 
 class BotUserController {
   getUsers = async (req: any, res: any): Promise<void> => {
@@ -30,6 +31,16 @@ class BotUserController {
 
     const botUser: BotUser = await BotUserRepository.post(body);
     res.send(botUser);
+  };
+
+  getCount = async (req: any, res: any): Promise<void> => {
+    const count: number = await BotUserRepository.getCount();
+    res.send({count}).status(HttpStatus.OK);
+  };
+
+  getCountForWeek = async (req: any, res: any): Promise<void> => {
+    const count: number = await BotUserRepository.getCountForWeek();
+    res.send({count}).status(HttpStatus.OK);
   };
 
   updateUser = async (req: any, res: any): Promise<void> => {

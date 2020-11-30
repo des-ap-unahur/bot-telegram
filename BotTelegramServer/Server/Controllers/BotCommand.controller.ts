@@ -42,6 +42,11 @@ class BotCommandController {
     notFoundValidator(res, botCommandsTypes);
   };
 
+  getCount = async (req: any, res: any): Promise<void> => {
+    const count: number = await BotCommandRepository.getCount();
+    res.send({count}).status(HttpStatus.OK);
+  };
+
   refreshCommand = async (req: any, res: any): Promise<void> => {
     await botController.refreshCommands();
     res.sendStatus(HttpStatus.OK);

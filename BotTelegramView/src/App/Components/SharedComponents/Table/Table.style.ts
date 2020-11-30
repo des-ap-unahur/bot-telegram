@@ -9,7 +9,7 @@ export const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     width: '100%',
     maxWidth: '1265px',
-    minHeight: '435px',
+    minHeight: '400px',
     background: WHITE,
     marginLeft: theme.spacing(15),
     marginRight: theme.spacing(7),

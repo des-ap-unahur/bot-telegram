@@ -50,7 +50,16 @@ const EN = {
   signIn: 'Sign in',
   coordinates: 'Coordinates',
   buttons: 'Buttons',
-  homepage: 'Homepage'
+  homepage: 'Homepage',
+  email: 'Email',
+  phoneNumber: 'Phone number',
+  moreOptions: 'More options',
+  refreshCommands: 'Refresh commands',
+  totalSubscribers: 'Total subscribers',
+  newLastAdmission: 'New last admission',
+  totalPolls: 'Total polls',
+  totalCommands: 'Total Commands',
+  dataAndActions: 'Data and Actions'
 }
 
 export default EN

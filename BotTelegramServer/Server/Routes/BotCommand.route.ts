@@ -9,6 +9,7 @@ BotCommandRoute.get('/bot-commands/types', BotCommandController.getCommandsTypes
 BotCommandRoute.get('/bot-commands/:id/types', BotCommandController.getCommandsTypesById);
 BotCommandRoute.get('/bot-commands/all', BotCommandController.getCommandsWithAllRelations);
 BotCommandRoute.get('/bot-commands', BotCommandController.getCommands);
+BotCommandRoute.get('/bot-commands/total-count', BotCommandController.getCount);
 BotCommandRoute.get('/bot-commands/:id', BotCommandController.getCommandById);
 BotCommandRoute.post('/bot-commands', validateRequest(BotCommandSchema), BotCommandController.postCommand);
 BotCommandRoute.delete('/bot-commands/:id', BotCommandController.deleteCommand);

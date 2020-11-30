@@ -20,6 +20,11 @@ class PollRepository {
     return { total, poll };
   };
 
+  getCount = async (): Promise<number> => {
+    const count: number = await Poll.count();
+    return count;
+  }
+
   getAll = async (): Promise<Poll[]> => {
     const polls: Poll[] = await Poll.findAll();
     return polls;

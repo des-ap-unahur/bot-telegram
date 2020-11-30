@@ -49,3 +49,32 @@ export const generatePollConfigWithLang = (configParams:any) => {
     }
   ]
 }
+
+export const generateCardInfo = (configParams: any) => {
+  const { 
+    language,
+    totalSubscribers,
+    newLastAdmission,
+    totalPolls,
+    totalCommands
+  } = configParams;
+  
+  return [
+    {
+      name: language.totalSubscribers,
+      value: totalSubscribers
+    },
+    {
+      name: language.newLastAdmission,
+      value: newLastAdmission
+    },
+    {
+      name: language.totalPolls,
+      value: totalPolls
+    },
+    {
+      name: language.totalCommands,
+      value: totalCommands
+    }
+  ]
+}

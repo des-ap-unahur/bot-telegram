@@ -2,6 +2,7 @@ import PollRepository from "../Entities/Repositories/Poll.repository";
 import Poll from "../Entities/Models/Poll.model";
 import notFoundValidator from "../Utils/NotFoundValidator.utils";
 import execDelete from "../Utils/ExecDelete.utils";
+import { HttpStatus } from "../Config/Server/HTTPStatus.config";
 
 
 class PollController {
@@ -22,6 +23,11 @@ class PollController {
     const poll: Poll = await PollRepository.get(id);
     notFoundValidator(res, poll);
   }
+
+  getCount = async (req: any, res: any): Promise<void> => {
+    const count: number = await PollRepository.getCount();
+    res.send({count}).status(HttpStatus.OK);
+  };
 
   postPoll = async (req:any, res:any): Promise<void>=>{
     const { body } = req;

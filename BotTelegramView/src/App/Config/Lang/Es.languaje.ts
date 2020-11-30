@@ -50,7 +50,16 @@ const ES = {
   signIn: 'Iniciar sesión',
   coordinates: 'Coordenadas',
   buttons: 'Botones',
-  homepage: 'Pagina principal'
+  homepage: 'Pagina principal',
+  email: 'Correo electrónico',
+  phoneNumber: 'Número de teléfono',
+  moreOptions: 'Mas opciones',
+  refreshCommands: 'Refrescar comandos',
+  totalSubscribers: 'Total de suscriptores',
+  newLastAdmission: 'Nuevos último ingreso',
+  totalPolls: 'Encuestas totales',
+  totalCommands: 'Comandos totales',
+  dataAndActions: 'Datos y acciones'
 }
 
 export default ES

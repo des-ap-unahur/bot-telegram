@@ -21,6 +21,11 @@ class BotCommandRepository {
     return commands;
   };
 
+  getCount = async (): Promise<number> => {
+    const count: number = await BotCommand.count();
+    return count;
+  }
+
   getCommandWithAllRelationsFilteredByStatus = async (): Promise<
     BotCommand[]
   > => {

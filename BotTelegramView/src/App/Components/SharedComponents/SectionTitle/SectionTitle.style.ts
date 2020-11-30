@@ -23,6 +23,16 @@ export const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
   },
+  containerCorrection: {
+    width: '100%',
+    marginTop: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    transition: theme.transitions.create(['margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
   title: {
     minWidth: "400px"
   },

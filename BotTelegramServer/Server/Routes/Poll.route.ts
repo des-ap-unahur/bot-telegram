@@ -6,6 +6,7 @@ import PollSchema from '../Entities/Schemas/Poll.schemas';
 const PollRoute = Router();
 
 PollRoute.get('/polls', PollController.getPolls);
+PollRoute.get('/polls/total-count', PollController.getCount);
 PollRoute.get('/poll/:id', PollController.getPollById);
 PollRoute.post('/poll', validateRequest(PollSchema), PollController.postPoll);
 PollRoute.delete('/poll/:id', PollController.deletePoll);

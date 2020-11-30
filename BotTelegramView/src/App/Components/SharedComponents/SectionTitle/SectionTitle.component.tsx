@@ -12,7 +12,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { SectionTitleInterface } from './SectionTitle.interface';
 
 
-const SectionTitle = ({titleLabel, correctionLabel, action}:SectionTitleInterface) => {
+const SectionTitle = ({titleLabel, correctionLabel, action, hiddenSectionFrom, correctionTitle}:SectionTitleInterface) => {
   const { isOpenDrawer } = useContext(ModalControllerContext);
   const { language } = useContext(LanguageContext);
 
@@ -27,22 +27,26 @@ const SectionTitle = ({titleLabel, correctionLabel, action}:SectionTitleInterfac
     addIcon,
     buttonAction,
     underlineWithAction,
+    containerCorrection
   } = useStyles();
 
   return(
     <div className={clsx(container, {
-      [containerWithModalOpen]: isOpenDrawer
+      [containerWithModalOpen]: isOpenDrawer,
+      [containerCorrection]: correctionTitle
     })}
     >
-      <Typography 
-        variant="h5" 
-        gutterBottom 
-        className={subtitle}
-      >
-        <Box fontWeight={700} m={1}>
-          {language.sectionFrom}
-        </Box>
-      </Typography>
+      {!hiddenSectionFrom &&
+        <Typography 
+          variant="h5" 
+          gutterBottom 
+          className={subtitle}
+        >
+          <Box fontWeight={700} m={1}>
+            {language.sectionFrom}
+          </Box>
+        </Typography>
+      }
       <div className={titleAndUnderlineContainer}>
         <Typography 
           variant="h4" 

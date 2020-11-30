@@ -11,7 +11,7 @@ export const menuConfig = (language:any): MenuConfigInterface[] => ([
   { icon:Polls, name: language.polls, route: '/dashboard/polls' },
   { icon:UserTypes, name: language.userTypes, route: '/dashboard/user-types' },
   { icon:Subscribers, name: language.subscribers, route: '/dashboard/subscribers' },
-  { icon:Activities, name: language.activities, route: '/dashboard/activities' }
+  { icon:Activities, name: language.activities, route: '/dashboard/activities', permissions: ['Activities'] }
 ])
 
 

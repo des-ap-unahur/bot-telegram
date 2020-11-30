@@ -5,6 +5,7 @@ import BotCommand from '../../Entities/Models/BotCommands.model';
 import BotUsers from '../../Entities/Models/BotUsers.model';
 import BotUserRepository from '../../Entities/Repositories/BotUser.repository';
 import { TelegrafContext } from 'telegraf/typings/context';
+import { botWording } from '../Constants/Wording/Bot.wording';
 
 export const MailDocumentType = {  
   type: "MailDocument",
@@ -29,6 +30,7 @@ export const MailDocumentType = {
             text: response,
             attachments: [{ filename: filename + '.pdf', path: url, contentType: 'application/pdf' }]
           })
+          ctx.reply(botWording.theMailHasBeenDeliveredSuccessfully)
         }
       }
     }

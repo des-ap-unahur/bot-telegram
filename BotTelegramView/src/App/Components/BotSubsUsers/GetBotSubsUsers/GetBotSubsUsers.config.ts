@@ -5,7 +5,7 @@ export const generateConfigWithLang = (configParams: any) => {
   
   return [
     {
-      name: 'Nombre de usuario',
+      name: language.username,
       property: 'tel_username'
     },
     {
@@ -22,12 +22,12 @@ export const generateConfigWithLang = (configParams: any) => {
       custom: (guaraniUsers: any) => guaraniUsers && guaraniUsers.dni 
     },
     {
-      name: 'Email',
+      name: language.email,
       property: 'guaraniUser',
       custom: (guaraniUsers: any) => guaraniUsers && guaraniUsers.email
     },
     {
-      name: 'Numero de telefono',
+      name: language.phoneNumber,
       property: 'guaraniUser',
       custom: (guaraniUsers: any) => guaraniUsers && guaraniUsers.phone_number
     },

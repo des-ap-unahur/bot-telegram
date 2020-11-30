@@ -6,6 +6,8 @@ import BotUserSchema from '../Entities/Schemas/BotUsers.schema';
 const BotUserRoute = Router();
 
 BotUserRoute.get('/bot-users', BotUserController.getUsers);
+BotUserRoute.get('/bot-users/count-for-week', BotUserController.getCountForWeek);
+BotUserRoute.get('/bot-users/total-count', BotUserController.getCount);
 BotUserRoute.get('/bot-users/:id', BotUserController.getUserById);
 BotUserRoute.post('/bot-users', validateRequest(BotUserSchema), BotUserController.postUser);
 BotUserRoute.delete('/bot-users/:id', BotUserController.deleteUser);
