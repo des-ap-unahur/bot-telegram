@@ -55,7 +55,7 @@ class BotUserController {
     const { id } = req.params;
 
     await execDelete(res, async () => {
-      await BotUserRepository.delete(id);
+      res.send(await BotUserRepository.delete(id));
     });
   };
 }
