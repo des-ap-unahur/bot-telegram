@@ -1,14 +1,14 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 class BotResponseFilesSchema {
-  @IsNotEmpty()
   @IsNumber()
+  @IsOptional()
   bot_response_id: number;
   @IsNotEmpty()
   @IsString()
   filename: string;
-  @IsNotEmpty()
   @IsString()
+  @IsOptional()
   description: string;
   @IsNotEmpty()
   @IsString()

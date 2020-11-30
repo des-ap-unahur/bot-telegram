@@ -24,6 +24,11 @@ class PollResponsesRepository {
     const pollQuestionResponses: PollQuestions = await PollQuestions.findByPk(id,{include:[PollResponses]});
     return pollQuestionResponses;
   };
+
+  getResponsesByQuestionId = async(id:number)=>{
+    const responses:PollResponses []= await PollResponses.findAll({where:{response_id:id}});
+    return responses;
+  }
   
   post = async (data: PollResponsesInterface[]): Promise<PollResponses[]> => {
     const pollResponse: PollResponses [] = await PollResponses.bulkCreate(data);

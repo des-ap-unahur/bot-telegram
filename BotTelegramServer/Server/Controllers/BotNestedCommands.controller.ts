@@ -20,7 +20,7 @@ class BotNestedCommandController {
   postCommand = async (req: any, res: any): Promise<void> => {
     const { body } = req;
 
-    const botNestedCommand: BotNestedCommand = await BotNestedCommandsRepository.post(body);
+    const botNestedCommand: BotNestedCommand[] = await BotNestedCommandsRepository.post(body);
     res.send(botNestedCommand);
   };
 
@@ -39,6 +39,12 @@ class BotNestedCommandController {
       await BotNestedCommandsRepository.delete(id);
     })
   };
+
+  updateNestedCommand = async (req: any, res: any): Promise<void> => {
+    const result = await BotNestedCommandsRepository.updateNestedCommands(req.body);
+    res.send(result)
+  };
+
 }
 
 export default new BotNestedCommandController();

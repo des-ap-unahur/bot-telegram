@@ -1,10 +1,17 @@
 import CommandsTypes from "../Models/CommandsTypes.model";
 import CommandsTypesInterface from "../../Interfaces/CommandTypes.interface";
+import { Op } from "sequelize";
 
 
 class CommandsTypesRepository {
   getAll = async (): Promise<CommandsTypes[]> => {
-    const commandsTypes: CommandsTypes[] = await CommandsTypes.findAll();
+    const commandsTypes: CommandsTypes[] = await CommandsTypes.findAll({
+      where: {
+        command_type_id: {
+          [Op.notIn]: [5, 6, 12, 13, 10]
+        }
+      }
+    });
     return commandsTypes;
   };
   

@@ -7,7 +7,7 @@ import { roleRelation, pollRelation } from "../Relations/PollRolesAccess.relatio
 
 @Table(
   {
-    tableName: "Poll_roles_access",
+    tableName: "Polls_roles_access",
     timestamps: true,
   }
 )

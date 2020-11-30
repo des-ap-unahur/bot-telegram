@@ -21,6 +21,9 @@ class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInte
   user_role_id?: number
 
   @Column(DataTypes.STRING)
+  username!: string;
+
+  @Column(DataTypes.STRING)
   first_name!: string;
 
   @Column(DataTypes.STRING)
@@ -29,6 +32,9 @@ class UserBackOffice extends Model<UserBackOffice> implements UserBackOfficeInte
   @Column(DataTypes.STRING)
   email!: string;
 
+  @Column(DataTypes.STRING)
+  password!: string;
+  
   @CreatedAt
   @Column(DataTypes.DATE)
   createdAt: Date;

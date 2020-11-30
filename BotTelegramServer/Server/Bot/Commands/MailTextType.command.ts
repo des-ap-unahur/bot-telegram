@@ -5,6 +5,7 @@ import BotCommand from '../../Entities/Models/BotCommands.model';
 import BotUserRepository from '../../Entities/Repositories/BotUser.repository';
 import { TelegrafContext } from 'telegraf/typings/context';
 import BotUsers from '../../Entities/Models/BotUsers.model';
+import { botWording } from '../Constants/Wording/Bot.wording';
 
 export const MailTextType = {  
   type: "MailText",
@@ -27,6 +28,7 @@ export const MailTextType = {
             subject: name,
             text: response
           })
+          ctx.reply(botWording.theMailHasBeenDeliveredSuccessfully)
         }
       }
     }

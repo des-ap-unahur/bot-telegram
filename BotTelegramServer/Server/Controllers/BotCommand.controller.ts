@@ -3,6 +3,7 @@ import BotCommand from '../Entities/Models/BotCommands.model';
 import { botController } from '../Bot/Controller/Bot.controller';
 import execDelete from '../Utils/ExecDelete.utils';
 import notFoundValidator from '../Utils/NotFoundValidator.utils';
+import { HttpStatus } from '../Config/Server/HTTPStatus.config';
 
 
 class BotCommandController {
@@ -12,8 +13,14 @@ class BotCommandController {
   };
 
   getCommandsWithAllRelations = async (req: any, res: any): Promise<void> => {
-    const botCommands: BotCommand[] = await BotCommandRepository.getCommandWithAllRelation();
-    res.send(botCommands);
+    const paginationData = req.query;
+    if(paginationData.page){
+      const botCommands: BotCommand[] = await BotCommandRepository.getCommandWithAllRelationPagination(paginationData);
+      res.send(botCommands);
+    } else {
+      const botCommands: BotCommand[] = await BotCommandRepository.getCommandWithAllRelation();
+      res.send(botCommands);
+    }
   };
 
   getCommandById = async (req: any, res: any): Promise<void> => {
@@ -35,11 +42,20 @@ class BotCommandController {
     notFoundValidator(res, botCommandsTypes);
   };
 
+  getCount = async (req: any, res: any): Promise<void> => {
+    const count: number = await BotCommandRepository.getCount();
+    res.send({count}).status(HttpStatus.OK);
+  };
+
+  refreshCommand = async (req: any, res: any): Promise<void> => {
+    await botController.refreshCommands();
+    res.sendStatus(HttpStatus.OK);
+  }
+
   postCommand = async (req: any, res: any): Promise<void> => {
     const { body } = req;
     
     const botCommands: BotCommand = await BotCommandRepository.post(body)
-    await botController.refreshCommands();
     res.send(botCommands);
   };
 
@@ -55,7 +71,7 @@ class BotCommandController {
     const { id } = req.params;
 
     await execDelete(res, async () => {
-      await BotCommandRepository.delete(id);
+     res.send(await BotCommandRepository.delete(id));
     })
   };
 

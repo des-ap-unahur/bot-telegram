@@ -16,6 +16,12 @@ module.exports = {
           key: 'role_id'
         }
       },
+      username: {
+        type: Sequelize.STRING
+      },
+      password:{
+        type: Sequelize.STRING
+      },
       first_name: {
         type: Sequelize.STRING,
       },

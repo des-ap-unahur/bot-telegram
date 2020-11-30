@@ -5,8 +5,11 @@ class GuaraniUserSchema {
   @IsNumber()
   dni: number;
   @IsNotEmpty()
+  @IsNumber()
+  phone_number: number;
+  @IsNotEmpty()
   @IsString()
-  emai: string;
+  email: string;
   @IsNotEmpty()
   @IsString()
   profile: string;

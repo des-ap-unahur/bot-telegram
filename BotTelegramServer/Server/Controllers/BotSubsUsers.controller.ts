@@ -6,8 +6,14 @@ import execDelete from '../Utils/ExecDelete.utils';
 
 class BotSubsUsersController {
   getBotSubsUsers = async (req: any, res: any): Promise<void> => {
-    const botSubsUsers: BotSubsUsers[] = await BotsubsUsersRepository.getAll();
-    res.send(botSubsUsers);
+      const paginationData = req.query;
+      if(paginationData.page){
+      const botSubsUsers= await BotsubsUsersRepository.getAllWithPagination(paginationData);
+      res.send(botSubsUsers);
+    } else{
+      const botSubsUsers:BotSubsUsers[]= await BotsubsUsersRepository.getAll();
+      res.send(botSubsUsers);
+    }
   };
 
   getBotSubsUserById = async (req: any, res: any): Promise<void> => {

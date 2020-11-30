@@ -1,5 +1,5 @@
 export const removeSensitiveCase = (string:string):string => {
-  const stringToLowerCase = string.toLowerCase()
+  const stringToLowerCase = string.toLowerCase();
   const charReplace = {
     á: "a",
     é: "e",
@@ -11,7 +11,7 @@ export const removeSensitiveCase = (string:string):string => {
     ì: "i",
     ò: "o",
     ù: "u",
-    '_': ' '
+    _: ' '
   }
 
   const replaceAccents = (str) =>{

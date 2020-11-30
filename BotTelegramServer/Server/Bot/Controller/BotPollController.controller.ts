@@ -46,6 +46,7 @@ class BotPollController {
       (poll, index) => `${index + 1}. ${poll.name} \n`
     ).join("");
 
+    this.polls = availablePolls;
     ctx.reply(theAvailableSurveysAre + "\n" + pollList);
   }
 

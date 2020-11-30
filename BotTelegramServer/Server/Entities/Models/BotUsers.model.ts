@@ -1,11 +1,11 @@
-import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, HasOne, ForeignKey, HasMany, BelongsTo } from "sequelize-typescript";
-import { DataTypes, Association } from "sequelize";
+import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, HasOne, ForeignKey, HasMany } from "sequelize-typescript";
+import { DataTypes } from "sequelize";
 import BotUsersInterface from "../../Interfaces/BotUsers.interface";
 import BotSubsUsers from "./BotSubsUsers.model";
 import UserTypes from "./UserTypes.model";
 import PollResponses from "./PollResponses.model";
 import GuaraniUsers from "./GuaraniUsers.models";
-import { guaraniUserRelation } from "../Relations/BotUsers.relation";
+import { guaraniUserRelation, userTypesRelation } from "../Relations/BotUsers.relation";
 
 @Table({
   tableName: "Bot_users",
@@ -15,12 +15,10 @@ import { guaraniUserRelation } from "../Relations/BotUsers.relation";
 class BotUsers extends Model<BotUsers> implements BotUsersInterface {
   @AutoIncrement
   @PrimaryKey
-  @ForeignKey(() => PollResponses)
   @Column(DataTypes.NUMBER)
   bot_user_id?: number;
 
   @ForeignKey(() => UserTypes)
-  @ForeignKey(() => BotSubsUsers)
   @Column(DataTypes.NUMBER)
   user_type_id!: number;
 
@@ -48,7 +46,7 @@ class BotUsers extends Model<BotUsers> implements BotUsersInterface {
   @Column(DataTypes.DATE)
   updatedAt: Date;
 
-  @HasOne(() => UserTypes)
+  @HasOne(() => UserTypes, userTypesRelation)
   userTypes: UserTypes
 
   @HasOne(() => GuaraniUsers, guaraniUserRelation)

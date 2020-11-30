@@ -2,7 +2,7 @@ import UserBackOfficeRepository from '../Entities/Repositories/UserBackOffice.re
 import UserBackOffice from '../Entities/Models/UserBackOffice.model';
 import notFoundValidator from '../Utils/NotFoundValidator.utils';
 import execDelete from '../Utils/ExecDelete.utils';
-
+import UserBackOfficeInterface from "../Interfaces/UserBackOffice.interface";
 
 class UserBackOfficeController {
   getUsers = async (req: any, res: any): Promise<void> => {
@@ -20,7 +20,7 @@ class UserBackOfficeController {
   postUser = async (req: any, res: any): Promise<void> => {
     const { body } = req;
 
-    const User: UserBackOffice = await UserBackOfficeRepository.post(body);
+    const User: UserBackOfficeInterface = await UserBackOfficeRepository.post(body);
     res.send(User);
   };
 

@@ -1,4 +1,3 @@
-import { TelegrafContext } from 'telegraf/typings/context';
 import BotCommand from '../../Entities/Models/BotCommands.model';
 import { toCommand } from '../Utils/ToCommand.utils';
 
@@ -7,7 +6,7 @@ export const LocationType = {
   generateCommand: (command: BotCommand) => {
     const { tel_command, name, botResponses } = command;
     const { parameter } = botResponses;
-    const coordinates: string[] = parameter.split(',')
+    const coordinates: string[] = parameter ? parameter.split(',') : [];
     
     return {
       command: toCommand(tel_command),
