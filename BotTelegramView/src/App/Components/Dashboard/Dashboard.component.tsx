@@ -18,6 +18,7 @@ import { history } from '../../Utils/History.utils';
 import SectionTitle from '../SharedComponents/SectionTitle/SectionTitle.component';
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import { getCookie } from '../../Utils/Cookies.utils';
 
 
 const Dashboard = (props:DashboardProps) => {
@@ -72,9 +73,11 @@ const Dashboard = (props:DashboardProps) => {
   const getNewLastAdmission = useCallback(()=>{
     getNewLastAdmissionRequest({})
   }, [])
+
   const getTotalCountSubscribers = useCallback(()=>{
     getTotalCountSubscribersRequest({})
   }, [])
+
   const getTotalPolls = useCallback(()=>{
     getTotalPollsRequest({})
   }, [])

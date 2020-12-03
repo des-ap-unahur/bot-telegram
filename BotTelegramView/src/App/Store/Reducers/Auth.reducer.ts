@@ -1,12 +1,13 @@
 import AuthActions from '../Actions/Auth.action';
-import { getLocalValue, setLocalValue } from '../../Utils/LocalStorage.utils'
+import { getLocalValue, setLocalValue, removeLocalValue } from '../../Utils/LocalStorage.utils'
 import AuthStateInterface from '../../Interfaces/States/AuthStates.interface';
+import { getCookie, removeCookie, setCookie } from '../../Utils/Cookies.utils';
 
 const { actionsTypes }: any = AuthActions
 
 const initialState: AuthStateInterface = {
   lang: getLocalValue('lang') || 'ES',
-  token: getLocalValue('token') || '',
+  token: getCookie('token') || '',
   user: getLocalValue('user') || null,
   fetchingStatus: false,
   failed: false,
@@ -29,8 +30,8 @@ const AuthReducer = (state = initialState, action: any) => {
         errorMessage: undefined,
       }
     case actionsTypes.loginSuccess:
+      setCookie('token', action.payload.data.token, 1)
       setLocalValue('user', action.payload.data.user)
-      setLocalValue('token', action.payload.data.token)
       return {
         ...state,
         fetchingStatus: false,
@@ -58,6 +59,8 @@ const AuthReducer = (state = initialState, action: any) => {
         lang: action.payload
       }
     case actionsTypes.clearAuthStates:
+      removeCookie('token');
+      removeLocalValue('user');
       return {
         ...state,
         lang: getLocalValue('lang') || 'ES',

@@ -1,5 +1,6 @@
 import api from '../Services/Api.service';
 import AsyncActionsParams from '../Interfaces/Global/AsyncActionsParams.interface';
+import { getCookie } from './Cookies.utils';
 
 
 const buildAsyncAction = ({name, endpoint: originEndpoint, method: defaultMethod, response }:AsyncActionsParams) => {
@@ -25,7 +26,8 @@ const buildAsyncAction = ({name, endpoint: originEndpoint, method: defaultMethod
         headers: {
           'Cache-Control': '',
           'Content-Type': '',
-          'credentials': 'include'
+          'credentials': 'include',
+          'x-access-token': getCookie('token')
         }
       }
 
