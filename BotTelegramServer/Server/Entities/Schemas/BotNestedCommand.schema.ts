@@ -1,8 +1,8 @@
 import { IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
 
 class BotNestedCommandsSchema {
-  @IsNumber()
   @IsOptional()
+  @IsNumber()
   bot_nested_command_id: number;
   @IsNotEmpty()
   @IsNumber()

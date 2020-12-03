@@ -1,7 +1,7 @@
 import BotSubsUsers from "../Models/BotSubsUsers.model";
-import BotSubsUsersInterface from "../../Interfaces/BotSubsUsers.interface";
+import BotSubsUsersInterface from "../Interfaces/BotSubsUsers.interface";
 import paginate from "../../Utils/Paginate.utils";
-import BotSubsUsersWithPagination from "../../Interfaces/BotSubsUsersWithPagination.interface"
+import BotSubsUsersWithPagination from "../Interfaces/BotSubsUsersWithPagination.interface"
 import BotUsers from "../Models/BotUsers.model";
 import UserTypes from "../Models/UserTypes.model";
  

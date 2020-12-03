@@ -1,5 +1,5 @@
 import BotResponses from "../Models/BotResponses.model";
-import BotResponsesInterface from "../../Interfaces/BotResponses.interface";
+import BotResponsesInterface from "../Interfaces/BotResponses.interface";
 import BotCommands from "../Models/BotCommands.model";
 
 

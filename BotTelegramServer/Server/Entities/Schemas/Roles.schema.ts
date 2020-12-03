@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 class RoleSchema {
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   role_id: number;
   @IsNotEmpty()

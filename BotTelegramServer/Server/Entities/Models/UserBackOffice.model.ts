@@ -1,6 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, HasMany, ForeignKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import UserBackOfficeInterface from '../../Interfaces/UserBackOffice.interface';
+import UserBackOfficeInterface from '../Interfaces/UserBackOffice.interface';
 import Roles from './Roles.model';
 
 @Table(

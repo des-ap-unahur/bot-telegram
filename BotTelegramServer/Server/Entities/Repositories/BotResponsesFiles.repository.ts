@@ -1,5 +1,5 @@
 import BotResponseFiles from "../Models/BotResponseFiles.model";
-import BotResponseFilesInterface from "../../Interfaces/BotResponseFiles.interface";
+import BotResponseFilesInterface from "../Interfaces/BotResponseFiles.interface";
 
 
 class BotResponseFilesRepository {

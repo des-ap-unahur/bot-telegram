@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 class BotUserSchema{
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   bot_user_id: number;
   @IsNotEmpty()

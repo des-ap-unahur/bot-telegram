@@ -1,6 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasOne, HasMany } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
-import UserTypesInterface from "../../Interfaces/UserTypes.interface";
+import UserTypesInterface from "../Interfaces/UserTypes.interface";
 import BotCommands from "./BotCommands.model";
 import BotUsers from "./BotUsers.model";
 import { botCommandRelation, botUsersRelation } from "../Relations/UserTypes.relation";

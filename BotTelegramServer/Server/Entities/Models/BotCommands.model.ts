@@ -11,7 +11,7 @@ import {
   HasOne,
 } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
-import BotCommandsInterface from "../../Interfaces/BotCommands.interface";
+import BotCommandsInterface from "../Interfaces/BotCommands.interface";
 import CommandsTypes from "./CommandsTypes.model";
 import BotNestedCommands from "./BotNestedCommands.model";
 import UserTypes from "./UserTypes.model";

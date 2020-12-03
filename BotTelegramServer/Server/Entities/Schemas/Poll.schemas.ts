@@ -1,8 +1,8 @@
 import { IsNotEmpty, IsString, IsNumber, IsOptional } from 'class-validator';
 
 class PollSchema {
-  @IsNumber()
   @IsOptional()
+  @IsNumber()
   poll_id: number;
   @IsNotEmpty()
   @IsNumber()

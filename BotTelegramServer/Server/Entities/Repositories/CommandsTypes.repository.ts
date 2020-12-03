@@ -1,5 +1,5 @@
 import CommandsTypes from "../Models/CommandsTypes.model";
-import CommandsTypesInterface from "../../Interfaces/CommandTypes.interface";
+import CommandsTypesInterface from "../Interfaces/CommandTypes.interface";
 import { Op } from "sequelize";
 
 

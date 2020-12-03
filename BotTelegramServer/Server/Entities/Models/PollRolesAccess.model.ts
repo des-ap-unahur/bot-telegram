@@ -1,6 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, ForeignKey, HasMany, HasOne } from "sequelize-typescript";
 import { DataTypes } from 'sequelize';
-import PollRolesAccessInterface from '../../Interfaces/PollRolesAccess.interface';
+import PollRolesAccessInterface from '../Interfaces/PollRolesAccess.interface';
 import Roles from "./Roles.model";
 import Poll from "./Poll.model";
 import { roleRelation, pollRelation } from "../Relations/PollRolesAccess.relation";

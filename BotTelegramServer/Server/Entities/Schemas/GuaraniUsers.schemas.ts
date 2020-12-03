@@ -1,6 +1,9 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 class GuaraniUserSchema {
+  @IsOptional()
+  @IsNumber()
+  guarani_user_id: number;
   @IsNotEmpty()
   @IsNumber()
   dni: number;

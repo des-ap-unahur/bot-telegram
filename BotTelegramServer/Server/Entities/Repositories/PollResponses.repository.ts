@@ -1,5 +1,5 @@
 import PollResponses from "../Models/PollResponses.model";
-import PollResponsesInterface from "../../Interfaces/PollResponses.interface";
+import PollResponsesInterface from "../Interfaces/PollResponses.interface";
 import PollQuestions from '../Models/PollQuestions.model';
 import Poll  from '../Models/Poll.model';
 

@@ -1,8 +1,8 @@
 import { TelegrafContext } from "telegraf/typings/context";
-import GuaraniUsersInterface from "../../Interfaces/GuaraniUsers.interface";
+import GuaraniUsersInterface from "../../Entities/Interfaces/GuaraniUsers.interface";
 import GuaraniUsersRepository from "../../Entities/Repositories/GuaraniUsers.repository";
 import { botUserTypes } from "../Constants/Bot.constans";
-import BotUsersInterface from "../../Interfaces/BotUsers.interface";
+import BotUsersInterface from "../../Entities/Interfaces/BotUsers.interface";
 import BotUserRepository from "../../Entities/Repositories/BotUser.repository";
 import BotUserTypeInterface from "../Interfaces/BotUserType.interface";
 

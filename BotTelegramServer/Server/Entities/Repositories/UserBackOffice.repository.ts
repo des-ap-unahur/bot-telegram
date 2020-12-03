@@ -1,5 +1,5 @@
 import UserBackOffice from "../Models/UserBackOffice.model";
-import UserBackOfficeInterface from "../../Interfaces/UserBackOffice.interface";
+import UserBackOfficeInterface from "../Interfaces/UserBackOffice.interface";
 
 
 class UserBackOfficeRepository {

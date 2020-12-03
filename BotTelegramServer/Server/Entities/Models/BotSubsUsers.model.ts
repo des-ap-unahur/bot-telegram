@@ -1,6 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
-import BotSubsUsersInterface from "../../Interfaces/BotSubsUsers.interface";
+import BotSubsUsersInterface from "../Interfaces/BotSubsUsers.interface";
 import BotUsers from "./BotUsers.model";
 
 @Table({

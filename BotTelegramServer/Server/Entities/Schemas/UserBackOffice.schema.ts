@@ -1,10 +1,10 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 class UserBackOfficeSchema {
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   back_user_id: number;
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   user_role_id: number;
   @IsNotEmpty()

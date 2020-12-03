@@ -1,6 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasMany, HasOne } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
-import RolesInterface from "../../Interfaces/Roles.interface";
+import RolesInterface from "../Interfaces/Roles.interface";
 import PollRolesAccess from "./PollRolesAccess.model";
 import UserBackOffice from "./UserBackOffice.model";
 import { pollRolesAccessRelation, userBackOfficeRelation } from "../Relations/Roles.relation";

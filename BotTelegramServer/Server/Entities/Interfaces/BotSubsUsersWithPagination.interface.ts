@@ -1,4 +1,4 @@
-import BotSubsUsers from '../Entities/Models/BotSubsUsers.model';
+import BotSubsUsers from '../Models/BotSubsUsers.model';
 
 interface BotSubsUsersWithPagination{
   total: number;

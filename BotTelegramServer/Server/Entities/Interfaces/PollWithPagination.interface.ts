@@ -1,4 +1,4 @@
-import Poll from '../Entities/Models/Poll.model';
+import Poll from '../Models/Poll.model';
 
 interface PollWithPagination{
   total: number;

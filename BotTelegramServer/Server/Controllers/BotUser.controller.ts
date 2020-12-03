@@ -2,7 +2,7 @@ import BotUserRepository from "../Entities/Repositories/BotUser.repository";
 import BotUser from "../Entities/Models/BotUsers.model";
 import notFoundValidator from "../Utils/NotFoundValidator.utils";
 import execDelete from "../Utils/ExecDelete.utils";
-import BotUserWithPagination from "../Interfaces/BotUsersWithPagination.interface";
+import BotUserWithPagination from "../Entities/Interfaces/BotUsersWithPagination.interface";
 import { HttpStatus } from "../Config/Server/HTTPStatus.config";
 
 class BotUserController {

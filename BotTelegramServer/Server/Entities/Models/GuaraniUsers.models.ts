@@ -1,6 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
-import GuaraniUsersInterface from "../../Interfaces/GuaraniUsers.interface";
+import GuaraniUsersInterface from "../Interfaces/GuaraniUsers.interface";
 
 @Table({
   tableName: "Guarani_users",
@@ -14,7 +14,7 @@ class GuaraniUsers extends Model<GuaraniUsers> implements GuaraniUsersInterface 
   guarani_user_id!: number;
 
   @Column(DataTypes.NUMBER)
-  dni?: number;
+  dni!: number;
 
   @Column(DataTypes.STRING)
   email!: string;

@@ -1,8 +1,8 @@
 import BotUsers from "../Models/BotUsers.model";
-import BotUsersInterface from "../../Interfaces/BotUsers.interface";
+import BotUsersInterface from "../Interfaces/BotUsers.interface";
 import GuaraniUsers from "../Models/GuaraniUsers.models";
 import Paginate from "../../Utils/Paginate.utils";
-import BotUsersWithPagination from "../../Interfaces/BotUsersWithPagination.interface";
+import BotUsersWithPagination from "../Interfaces/BotUsersWithPagination.interface";
 import UserTypes from "../Models/UserTypes.model";
 import { Op } from "sequelize";
 import PollResponses from "../Models/PollResponses.model";

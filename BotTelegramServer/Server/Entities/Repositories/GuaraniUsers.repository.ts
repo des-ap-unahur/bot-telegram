@@ -1,5 +1,5 @@
 import GuaraniUsers from "../Models/GuaraniUsers.models";
-import GuaraniUsersInterface from "../../Interfaces/GuaraniUsers.interface";
+import GuaraniUsersInterface from "../Interfaces/GuaraniUsers.interface";
 
 
 class GuaraniUsersRepository {

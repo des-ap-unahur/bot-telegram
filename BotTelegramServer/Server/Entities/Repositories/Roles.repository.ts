@@ -1,5 +1,5 @@
 import Roles from "../Models/Roles.model";
-import RolesInterface from "../../Interfaces/Roles.interface";
+import RolesInterface from "../Interfaces/Roles.interface";
 
 
 class RolesRepository {

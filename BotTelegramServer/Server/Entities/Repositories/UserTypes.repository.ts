@@ -1,5 +1,5 @@
 import UserTypes from "../Models/UserTypes.model";
-import UserTypesInterface from "../../Interfaces/UserTypes.interface";
+import UserTypesInterface from "../Interfaces/UserTypes.interface";
 
 
 class UserTypesRepository {

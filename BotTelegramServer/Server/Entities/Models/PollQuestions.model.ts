@@ -1,6 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasMany, HasOne } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
-import PollQuestionInterface from "../../Interfaces/PollQuestion.interface";
+import PollQuestionInterface from "../Interfaces/PollQuestion.interface";
 import Poll from "./Poll.model";
 import PollResponses from './PollResponses.model';
 import { pollRelation } from "../Relations/PollQuestions.relation";

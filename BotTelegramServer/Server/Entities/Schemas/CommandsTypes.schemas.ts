@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 class CommandTypeSchema {
-  @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
   command_types_id: number;
   @IsNotEmpty()

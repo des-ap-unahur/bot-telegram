@@ -1,8 +1,8 @@
 import Poll from "../Models/Poll.model";
 import PollQuestion from "../Models/PollQuestions.model";
-import PollQuestionInterface from "../../Interfaces/PollQuestion.interface";
+import PollQuestionInterface from "../Interfaces/PollQuestion.interface";
 import Paginate from "../../Utils/Paginate.utils";
-import PollWithPagination from "../../Interfaces/PollWithPagination.interface";
+import PollWithPagination from "../Interfaces/PollWithPagination.interface";
 import PollResponses from "../Models/PollResponses.model";
 
 class PollRepository {

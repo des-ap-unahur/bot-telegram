@@ -1,5 +1,5 @@
 import BotNestedCommand from "../Models/BotNestedCommands.model";
-import BotNestedCommandInterface from "../../Interfaces/BotNestedCommands.interface";
+import BotNestedCommandInterface from "../Interfaces/BotNestedCommands.interface";
 
 
 class BotNestedCommandRepository {

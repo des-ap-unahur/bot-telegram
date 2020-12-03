@@ -1,6 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, HasOne } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
-import BotResponsesInterface from "../../Interfaces/BotResponses.interface";
+import BotResponsesInterface from "../Interfaces/BotResponses.interface";
 import BotCommands from "./BotCommands.model";
 import BotResponseFiles from "./BotResponseFiles.model";
 import { botCommandRelation, botResponseFileRelation } from "../Relations/BotResponses.relation";
@@ -19,7 +19,7 @@ class BotResponses extends Model<BotResponses>
 
   @ForeignKey(() => BotCommands)
   @Column(DataTypes.NUMBER)
-  bot_id?: number;
+  bot_id!: number;
 
   @Column(DataTypes.STRING)
   response!: string;

@@ -10,7 +10,7 @@ import {
   HasMany,
 } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
-import CommandTypesInterface from "../../Interfaces/CommandTypes.interface";
+import CommandTypesInterface from "../Interfaces/CommandTypes.interface";
 import BotCommands from "./BotCommands.model";
 import { botCommandRelation } from "../Relations/CommandTypes.relation";
 

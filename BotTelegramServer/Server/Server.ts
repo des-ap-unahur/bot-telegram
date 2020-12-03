@@ -1,5 +1,6 @@
 import App from './App';
 import { configServer } from './Config/Server/Server.config';
+import AuthRouter from './Routes/Auth.routes';
 import BotCommandRoute from './Routes/BotCommand.route';
 import BotNestedCommandsRoute from './Routes/BotNestedCommands.route';
 import BotResponsesRoute from './Routes/BotResponses.route';
@@ -22,6 +23,7 @@ const app = new App({
   routes: [
     {route: HomeRoute, path: '/'},
     {route: PollRoute, path: '/api'},
+    {route: AuthRouter, path: '/api'},
     {route: PollQuestionsRoute, path:'/api'},
     {route: BotNestedCommandsRoute, path:'/api'},
     {route: BotResponsesRoute, path: '/api'},

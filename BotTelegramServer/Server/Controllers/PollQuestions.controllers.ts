@@ -3,8 +3,8 @@ import Poll from "../Entities/Models/Poll.model";
 import PollQuestion from "../Entities/Models/PollQuestions.model";
 import notFoundValidator from "../Utils/NotFoundValidator.utils";
 import execDelete from "../Utils/ExecDelete.utils";
+import PollWithPagination from "../Entities/Interfaces/PollWithPagination.interface";
 
-import PollWithPagination from "../Interfaces/PollWithPagination.interface";
 
 class PollQuestionsController {
   getPollsQuestions = async (req: any, res: any): Promise<void> => {

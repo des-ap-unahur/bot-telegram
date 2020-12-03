@@ -1,6 +1,6 @@
 import { Model, Column, Table, CreatedAt, UpdatedAt, AutoIncrement, PrimaryKey, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { DataTypes } from "sequelize";
-import BotResponseFilesInterface from "../../Interfaces/BotResponseFiles.interface";
+import BotResponseFilesInterface from "../Interfaces/BotResponseFiles.interface";
 import BotResponses from "./BotResponses.model";
 import { botResponseRelation } from "../Relations/BotResponseFiles.relation";
 
@@ -17,7 +17,7 @@ class BotResponseFiles extends Model<BotResponseFiles> implements BotResponseFil
 
   @ForeignKey(() => BotResponses)
   @Column(DataTypes.NUMBER)
-  bot_response_id?: number;
+  bot_response_id!: number;
 
   @Column(DataTypes.STRING)
   filename!: string;
