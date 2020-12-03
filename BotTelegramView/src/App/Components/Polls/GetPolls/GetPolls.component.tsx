@@ -1,11 +1,11 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
-import PollInterface from '../../../Interfaces/Poll.interface';
+import PollInterface from '../../../Interfaces/Polls/Poll.interface';
 import { inputNames } from './GetPolls.config';
 import GetPollsContent from './GetPolls.content';
 import { GetPollProps, OptionInterface } from './GetPolls.interface';
 import { createArrayIterator, buildQuestions } from './GetPolls.utils';
-import QuestionInterface from "../../../Interfaces/Question.interface";
+import QuestionInterface from "../../../Interfaces/Polls/Question.interface";
 
 
 const GetPolls = (props: GetPollProps) => {

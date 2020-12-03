@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { GlobalStateInterface } from "../../../Interfaces/GlobalState.interface";
+import GlobalStateInterface from "../../../Interfaces/States/GlobalState.interface";
 import BotCommands from "../../../Store/Actions/BotCommands.action";
 import CommandTypesAction from "../../../Store/Actions/CommandTypes.action";
 import UserTypesAction from "../../../Store/Actions/UserTypes.action";

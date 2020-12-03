@@ -1,8 +1,8 @@
-import UserTypes from "../../../Interfaces/UserTypes.interface";
-import BotCommands from "../../../Interfaces/BotComands.interface";
-import { CommandTypeInterface } from "../../../Interfaces/CommandTypes.interface";
-import { ResponseInterface } from "../../../Interfaces/Response.interface";
-import { ResponseFilesInterface } from "../../../Interfaces/ResponseFiles.interface";
+import UserTypes from "../../../Interfaces/UserTypes/UserTypes.interface";
+import BotCommands from "../../../Interfaces/Commands/BotComands.interface";
+import CommandTypeInterface from "../../../Interfaces/CommandTypes/CommandTypes.interface";
+import ResponseInterface from "../../../Interfaces/Responses/Response.interface";
+import ResponseFilesInterface from "../../../Interfaces/Responses/ResponseFiles.interface";
 
 export interface GetCommandsProps {
 	fetching: boolean;

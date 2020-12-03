@@ -1,4 +1,4 @@
-import { PollStateInterface } from '../../Interfaces/PollStates.interface'
+import PollStateInterface from '../../Interfaces/States/PollStates.interface'
 import PollActions from '../Actions/Poll.action'
 
 const { actionsTypes }: any = PollActions

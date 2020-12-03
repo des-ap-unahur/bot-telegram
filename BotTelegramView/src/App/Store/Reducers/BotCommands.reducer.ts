@@ -1,5 +1,5 @@
 import BotCommandsAction from '../Actions/BotCommands.action';
-import {BotCommandStatesInterface} from '../../Interfaces/BotCommandStates.interface';
+import BotCommandStatesInterface from '../../Interfaces/States/BotCommandStates.interface';
 
 const { actionsTypes }: any = BotCommandsAction;
 

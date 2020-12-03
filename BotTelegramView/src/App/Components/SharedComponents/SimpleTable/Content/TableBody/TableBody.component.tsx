@@ -5,7 +5,7 @@ import {
   Box,
 } from '@material-ui/core';
 import { capitalizeStrings } from '../../../../../Utils/FormatStrings.utils';
-import CheckAction from '../../../CheckAction.component';
+import CheckAction from '../../../CheckAction/CheckAction.component';
 import ActionButton from '../../../ActionButtons/ActionButton.component';
 import { SimpleTableBodyProps } from '../../SimpleTable.interface';
 

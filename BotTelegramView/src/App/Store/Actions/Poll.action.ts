@@ -1,4 +1,4 @@
-import PollInterface from "../../Interfaces/Poll.interface";
+import PollInterface from "../../Interfaces/Polls/Poll.interface";
 import builderAsyncActions from "../../Utils/BuilderAsyncActions.utils";
 
 const { actionsTypes, actionCreators } = builderAsyncActions([

@@ -1,12 +1,12 @@
-import axios from 'axios';
+import axios, { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
 import constants from '../Config/Constants.config';
 
-const api = axios.create({
+const api: AxiosInstance = axios.create({
   baseURL: constants.get('/endpoints/server'),
   validateStatus: (status) => status < 404, // throw only error for statusCodes >= 404
 })
 
-const addErrorData = (error: any) => {
+const addErrorData = (error: AxiosError): void => {
   error.name = 'RequestError'
   error.message = error.message || error.name
   if (!error.message) {
@@ -20,7 +20,7 @@ const addErrorData = (error: any) => {
   throw error.response
 }
 
-const checkStatus = (response: any) => {
+const checkStatus = (response: AxiosResponse): AxiosResponse => {
   const { status } = response
   if (!status) {
     throw new Error('statusNotFound')

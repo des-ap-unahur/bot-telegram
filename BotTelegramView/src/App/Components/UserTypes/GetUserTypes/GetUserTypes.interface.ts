@@ -1,4 +1,4 @@
-import UserTypesInterface from "../../../Interfaces/UserTypes.interface";
+import UserTypesInterface from "../../../Interfaces/UserTypes/UserTypes.interface";
 
 export interface GetUserTypesProps {
   fetching: boolean;

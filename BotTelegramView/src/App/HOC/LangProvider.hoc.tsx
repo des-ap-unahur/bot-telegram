@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import authActions from "../Store/Actions/Auth.action";
 import { setLocalValue } from "../Utils/LocalStorage.utils"
-import { GlobalStateInterface } from '../Interfaces/GlobalState.interface';
-import { LangProviderInterface } from '../Interfaces/LangProvider.interface';
+import GlobalStateInterface from '../Interfaces/States/GlobalState.interface';
+import LangProviderInterface from '../Interfaces/Language/LangProvider.interface';
 
 const actionCreators = Object.assign({}, authActions.actionCreators);
 

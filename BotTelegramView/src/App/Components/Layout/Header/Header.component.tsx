@@ -1,4 +1,4 @@
-import React, { useState, useContext, useMemo, useEffect } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 import HeaderContent from './Header.content';
 import { ModalControllerContext } from '../../../HOC/ModalController.hoc'
 import { HeaderProps } from './Header.interfaces';

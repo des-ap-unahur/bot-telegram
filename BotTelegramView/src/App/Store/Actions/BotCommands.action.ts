@@ -1,4 +1,4 @@
-import BotCommands from "../../Interfaces/BotComands.interface";
+import BotCommands from "../../Interfaces/Commands/BotComands.interface";
 import builderAsyncActions from "../../Utils/BuilderAsyncActions.utils";
 
 const { actionsTypes, actionCreators } = builderAsyncActions([

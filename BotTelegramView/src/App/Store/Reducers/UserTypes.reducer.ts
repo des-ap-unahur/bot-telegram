@@ -1,4 +1,4 @@
-import { UserTypesStateInterface } from '../../Interfaces/UserTypesState.interface'
+import UserTypesStateInterface from '../../Interfaces/States/UserTypesState.interface'
 import UserTypesAction from '../Actions/UserTypes.action'
 
 const { actionsTypes }: any = UserTypesAction;

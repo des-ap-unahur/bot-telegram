@@ -1,6 +1,6 @@
-import PollInterface from "../../../Interfaces/Poll.interface";
-import UserTypes from "../../../Interfaces/UserTypes.interface";
-import QuestionInterface from "../../../Interfaces/Question.interface";
+import PollInterface from "../../../Interfaces/Polls/Poll.interface";
+import UserTypes from "../../../Interfaces/UserTypes/UserTypes.interface";
+import QuestionInterface from "../../../Interfaces/Polls/Question.interface";
 
 export interface GetPollProps {
 	fetching: boolean;

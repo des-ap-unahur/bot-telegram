@@ -1,6 +1,5 @@
 import buildAsyncActions from "../../Utils/BuilderAsyncActions.utils";
 
-
 const { actionsTypes, actionCreators } = buildAsyncActions([
   {
     name:'login',

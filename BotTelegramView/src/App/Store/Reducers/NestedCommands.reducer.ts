@@ -1,4 +1,4 @@
-import { NestedCommandStatesInterface } from '../../Interfaces/NestedCommandStates.interface';
+import NestedCommandStatesInterface from '../../Interfaces/States/NestedCommandStates.interface';
 import NestedCommandsActions from '../Actions/NestedCommands.action';
 
 const { actionsTypes }: any = NestedCommandsActions;

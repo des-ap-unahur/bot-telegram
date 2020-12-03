@@ -1,4 +1,4 @@
-import { ResponseStates } from '../../Interfaces/ResponseStates.interface';
+import ResponseStates from '../../Interfaces/States/ResponseStates.interface';
 import ResponseAction from '../Actions/Response.action';
 
 const { actionsTypes }: any = ResponseAction;

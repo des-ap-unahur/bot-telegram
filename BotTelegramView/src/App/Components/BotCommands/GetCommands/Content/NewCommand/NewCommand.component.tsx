@@ -5,8 +5,7 @@ import { NewCommandProps, OptionInterface } from '../../GetCommands.interface';
 import BuildInputs from '../../../../SharedComponents/BuildInputs/BuildInputs.component';
 import { inputFirstConfig, inputNames, inputSecondaryConfig, NestedCommandTableConfig, coordinateOrButtonListInputConfig } from '../../GetCommands.config';
 import SectionAddToTable from '../../../../SharedComponents/SectionAddToTable/SectionAddToTable.component';
-import { NestedCommandsInterface } from '../../../../../Interfaces/NestedCommands.interface';
-import BotCommands from '../../../../../Interfaces/BotComands.interface';
+import BotCommands from '../../../../../Interfaces/Commands/BotComands.interface';
 
 
 const NewCommand = (props:NewCommandProps) => {
@@ -74,6 +73,34 @@ const NewCommand = (props:NewCommandProps) => {
     await handleCloseNewCommand();
   }
 
+  const commandCharge = useCallback(()=>{
+    if(editMode && botCommandSelected){
+      const botResponses = botCommandSelected.botResponses;
+      const botResponsesFiles = botResponses && botResponses.botResponseFiles;
+      const botNestedCommands = botCommandSelected.botNestedCommands;
+      setName(botCommandSelected.name)
+      setCommand(botCommandSelected.tel_command);
+      botResponses && botResponses.description && setDescription(botResponses.description)
+      setUserType(botCommandSelected.user_type_id)
+      setCommandType(botCommandSelected.command_type_id)
+      botResponses && botResponses.response && setResponse(botResponses.response);
+      botResponsesFiles && botResponsesFiles.filename && setFileName(botResponsesFiles.filename)
+      botResponsesFiles && botResponsesFiles.url && setUrl(botResponsesFiles.url)
+      botResponses && botResponses.description && setButtonList(botResponses.description)
+      botResponses && botResponses.description && setCoordinates(botResponses.description)
+
+      if(botNestedCommands && botCommandList){ 
+        const nestedCommands = botNestedCommands.map(
+          (nestedCommand, index) => botCommandList.find(
+            command => command.bot_command_id === nestedCommand.bot_child_id
+          ) || botCommandList[index]
+        )
+
+        setCommandsAdded(nestedCommands);
+      }
+    }
+  }, [editMode, botCommandSelected, botCommandList])
+  
   const emptyFirstFields = useMemo<boolean>(()=>{
     return !(name && command && description && userType && commandType && response)
   }, [name, command, description, userType, commandType, response])
@@ -105,6 +132,20 @@ const NewCommand = (props:NewCommandProps) => {
   const emptySecondFields = useMemo<boolean>(()=>{
     return !(fileName && url) && secondaryInputsActives
   }, [fileName, url, secondaryInputsActives])
+
+  const getBotCommandList = useCallback(()=>{
+    if(!botCommandList){
+      getBotCommandListRequest && getBotCommandListRequest({});
+    }
+  }, [getBotCommandListRequest, botCommandList])
+
+  const addNestedCommand = useCallback(()=>{
+    if(commandToAdd && botCommandList){
+      const nestedCommand = botCommandList.find(command => command.bot_command_id === Number(commandToAdd))
+      nestedCommand && setCommandsAdded([...commandsAdded, nestedCommand])
+      setCommandToAdd('');
+    }
+  }, [commandToAdd, commandsAdded.length, botCommandList])
 
   const commandListToOptions = useMemo<OptionInterface[]>(()=>{
     return botCommandList ?
@@ -143,29 +184,6 @@ const NewCommand = (props:NewCommandProps) => {
     fetching,
     isANestedCommand
   ])
-
-  const getBotCommandList = useCallback(()=>{
-    if(!botCommandList){
-      getBotCommandListRequest && getBotCommandListRequest({});
-    }
-  }, [getBotCommandListRequest, botCommandList])
-
-  const addNestedCommand = useCallback(()=>{
-    if(commandToAdd && botCommandList){
-      const nestedCommand = botCommandList.find(command => command.bot_command_id === Number(commandToAdd))
-      nestedCommand && setCommandsAdded([...commandsAdded, nestedCommand])
-      setCommandToAdd('');
-    }
-  }, [commandToAdd, commandsAdded.length, botCommandList])
-
-  useEffect(()=>{
-    postResponse();
-  }, [postResponse])
-
-  useEffect(()=>{
-    getBotCommandList();
-    addNestedCommand();
-  },[getBotCommandList, addNestedCommand])
 
   const postResponseFiles = useCallback(async ()=>{
     if(responseSelected && !editMode && postResponsesFilesRequest && secondaryInputsActives && !fetching && !postFiles){
@@ -217,40 +235,21 @@ const NewCommand = (props:NewCommandProps) => {
   ])
 
   useEffect(()=>{
+    postResponse();
+  }, [postResponse])
+
+  useEffect(()=>{
+    getBotCommandList();
+    addNestedCommand();
+  },[getBotCommandList, addNestedCommand])
+
+  useEffect(()=>{
     postResponseFiles();
   }, [postResponseFiles])
 
   useEffect(()=>{
     postNestedCommands();
   }, [postNestedCommands]);
-
-  const commandCharge = useCallback(()=>{
-    if(editMode && botCommandSelected){
-      const botResponses = botCommandSelected.botResponses;
-      const botResponsesFiles = botResponses && botResponses.botResponseFiles;
-      const botNestedCommands = botCommandSelected.botNestedCommands;
-      setName(botCommandSelected.name)
-      setCommand(botCommandSelected.tel_command);
-      botResponses && botResponses.description && setDescription(botResponses.description)
-      setUserType(botCommandSelected.user_type_id)
-      setCommandType(botCommandSelected.command_type_id)
-      botResponses && botResponses.response && setResponse(botResponses.response);
-      botResponsesFiles && botResponsesFiles.filename && setFileName(botResponsesFiles.filename)
-      botResponsesFiles && botResponsesFiles.url && setUrl(botResponsesFiles.url)
-      botResponses && botResponses.description && setButtonList(botResponses.description)
-      botResponses && botResponses.description && setCoordinates(botResponses.description)
-
-      if(botNestedCommands && botCommandList){ 
-        const nestedCommands = botNestedCommands.map(
-          (nestedCommand, index) => botCommandList.find(
-            command => command.bot_command_id === nestedCommand.bot_child_id
-          ) || botCommandList[index]
-        )
-
-        setCommandsAdded(nestedCommands);
-      }
-    }
-  }, [editMode, botCommandSelected, botCommandList])
 
   useEffect(()=>{
     commandCharge()

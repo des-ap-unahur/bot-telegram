@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { connect } from "react-redux";
+import GlobalStateInterface from '../Interfaces/States/GlobalState.interface';
 
 const WithRequiredPermission = ({ requiredPermission, userPermissions, children}:any) => {
 
@@ -19,7 +20,7 @@ const WithRequiredPermission = ({ requiredPermission, userPermissions, children}
 
 }
 
-const mapStateToProps = (state:any) => ({
+const mapStateToProps = (state:GlobalStateInterface) => ({
   userPermissions: []
 });
 

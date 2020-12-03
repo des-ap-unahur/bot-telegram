@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { GlobalStateInterface } from "../../../Interfaces/GlobalState.interface";
+import GlobalStateInterface from "../../../Interfaces/States/GlobalState.interface";
 import PollAction from "../../../Store/Actions/Poll.action";
 import UserTypesAction from "../../../Store/Actions/UserTypes.action";
 import GetPolls from './GetPolls.component';

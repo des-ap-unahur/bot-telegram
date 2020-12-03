@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { useHistory } from 'react-router';
-import { GlobalStateInterface } from '../Interfaces/GlobalState.interface';
+import GlobalStateInterface from '../Interfaces/States/GlobalState.interface';
 
 
 const RedirectWithLogin = ({auth}:any) => {

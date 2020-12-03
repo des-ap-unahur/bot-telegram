@@ -3,7 +3,7 @@ import auth from './Auth.reducer';
 import poll from './Poll.reducer';
 import userTypes from './UserTypes.reducer';
 import botCommands from './BotCommands.reducer';
-import botSubsUsers from './BotSubsUsers.reducer';
+import botUsers from './BotUsers.reducer';
 import commandTypes from './CommandTypes.reducer';
 import response from './Response.reducer';
 import nestedCommands from './NestedCommands.reducer';
@@ -14,7 +14,7 @@ const appReducer = combineReducers(
     poll,
     userTypes,
     botCommands,
-    botSubsUsers,
+    botUsers,
     commandTypes,
     response,
     nestedCommands

@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState, useMemo } from 'react';
 import { LanguageContext } from '../../../Config/Lang/Lang.languaje';
-import BotCommands from '../../../Interfaces/BotComands.interface';
+import BotCommands from '../../../Interfaces/Commands/BotComands.interface';
 import GetCommandsContent from './GetCommands.content';
 import { GetCommandsProps, OptionInterface } from './GetCommands.interface';
 

@@ -1,6 +1,6 @@
 import AuthActions from '../Actions/Auth.action';
 import { getLocalValue, setLocalValue } from '../../Utils/LocalStorage.utils'
-import { AuthStateInterface } from '../../Interfaces/AuthStates.interface';
+import AuthStateInterface from '../../Interfaces/States/AuthStates.interface';
 
 const { actionsTypes }: any = AuthActions
 

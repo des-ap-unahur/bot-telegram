@@ -1,5 +1,5 @@
-import { ResponseInterface } from "../../Interfaces/Response.interface";
-import { ResponseFilesInterface } from "../../Interfaces/ResponseFiles.interface";
+import ResponseInterface from "../../Interfaces/Responses/Response.interface";
+import ResponseFilesInterface from "../../Interfaces/Responses/ResponseFiles.interface";
 import builderAsyncActions from "../../Utils/BuilderAsyncActions.utils";
 
 const { actionsTypes, actionCreators } = builderAsyncActions([

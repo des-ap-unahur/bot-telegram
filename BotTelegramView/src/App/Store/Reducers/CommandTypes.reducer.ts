@@ -1,4 +1,4 @@
-import { CommandTypesStateInterface } from '../../Interfaces/CommandTypesState.interface';
+import CommandTypesStateInterface from '../../Interfaces/States/CommandTypesState.interface';
 import CommandTypesAction from '../Actions/CommandTypes.action';
 
 const { actionsTypes }: any = CommandTypesAction;

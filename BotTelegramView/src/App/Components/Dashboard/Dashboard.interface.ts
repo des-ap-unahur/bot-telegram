@@ -1,5 +1,5 @@
-import BotCommands from "../../Interfaces/BotComands.interface";
-import PollInterface from "../../Interfaces/Poll.interface";
+import BotCommands from "../../Interfaces/Commands/BotComands.interface";
+import PollInterface from "../../Interfaces/Polls/Poll.interface";
 
 export interface DashboardProps {
   fetchingPoll: boolean;

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { GlobalStateInterface } from "../../../Interfaces/GlobalState.interface";
+import GlobalStateInterface from "../../../Interfaces/States/GlobalState.interface";
 import AuthAction from "../../../Store/Actions/Auth.action";
 import Login from './Login.component';
 

@@ -1,5 +1,5 @@
 import api from '../Services/Api.service';
-import AsyncActionsParams from '../Interfaces/AsyncActionsParams.interface';
+import AsyncActionsParams from '../Interfaces/Global/AsyncActionsParams.interface';
 
 
 const buildAsyncAction = ({name, endpoint: originEndpoint, method: defaultMethod, response }:AsyncActionsParams) => {
