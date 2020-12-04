@@ -72,6 +72,39 @@ export interface NewCommandProps {
   clearResponseStates: () => void;
 }
 
+export interface NewCommandContentProps {
+  openNewCommand: boolean;
+  language: any;
+  name: string;
+  userTypesOptions: null | OptionInterface[];
+  commandTypesOptions: null | OptionInterface[];
+  fetching: boolean;
+  editMode: boolean;
+  handleChangeInputs: (e: any) => void;
+  command: string;
+  description: string;
+  userType: string | number;
+  commandType: string | number;
+  response: string;
+  fileName: string;
+  url: string;
+  emptyFirstFields: boolean;
+  emptySecondFields: boolean;
+  confirmation: boolean;
+  isAButtonCommand: boolean;
+  coordinates: string;
+  buttonList: string;
+  handleDeleteNestedCommand: (id: number) => void;
+  handleClose: () => void;
+  handleSave: () => void;
+  secondaryInputsActives: boolean;
+  isALocationCommand: boolean;
+  isANestedCommand: boolean;
+  commandsAdded: BotCommands[];
+  commandToAdd: string | number;
+  commandListToOptions: OptionInterface[];
+}
+
 export interface OptionInterface {
   id: number;
   name: string;

@@ -11,7 +11,7 @@ const GetUserTypes = ({ userTypes, fetching, getUserTypesRequest }: GetUserTypes
     if(!userTypes){
       getUserTypesRequest({});
     }
-  },[userTypes])
+  },[userTypes, getUserTypesRequest])
 
   return (
     <GetUserTypesContent

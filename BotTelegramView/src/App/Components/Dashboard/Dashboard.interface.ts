@@ -19,3 +19,18 @@ export interface DashboardProps {
   getTotalCountSubscribersRequest: (requestParams: any) => void;
   getTotalPollsRequest: (requestParams: any) => void;
 }
+
+export interface DashboardContentProps {
+  totalSubscribers: number;
+  newLastAdmission: number;
+  totalPolls: number;
+  totalCommands: number;
+  handleRefreshCommands: () => Promise<void>;
+  fetchingRefresh: boolean;
+  botCommands: BotCommands[] | null;
+  polls: PollInterface[] | null;
+  fetchingPoll: boolean;
+  fetchingBotCommands: boolean;
+  handleRedirectPoll: () => void;
+  handleRedirectCommand: () => void;
+}

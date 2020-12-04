@@ -1,11 +1,9 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
-import RightModal from '../../../../SharedComponents/RightModalComponents/RightModal.component';
 import { useStyles } from '../../GetCommands.style';
 import { NewCommandProps, OptionInterface } from '../../GetCommands.interface';
-import BuildInputs from '../../../../SharedComponents/BuildInputs/BuildInputs.component';
-import { inputFirstConfig, inputNames, inputSecondaryConfig, NestedCommandTableConfig, coordinateOrButtonListInputConfig } from '../../GetCommands.config';
-import SectionAddToTable from '../../../../SharedComponents/SectionAddToTable/SectionAddToTable.component';
+import { inputNames } from '../../GetCommands.config';
 import BotCommands from '../../../../../Interfaces/Commands/BotComands.interface';
+import NewCommandContent from './NewCommand.content';
 
 
 const NewCommand = (props:NewCommandProps) => {
@@ -148,13 +146,26 @@ const NewCommand = (props:NewCommandProps) => {
   }, [commandToAdd, commandsAdded.length, botCommandList])
 
   const commandListToOptions = useMemo<OptionInterface[]>(()=>{
+    if(commandsAdded.length && botCommandList){
+      const commandsFiltered = botCommandList.filter(
+        command => !commandsAdded.find( commandAdded => command.bot_command_id === commandAdded.bot_command_id)
+      )
+
+      return commandsFiltered ?
+        commandsFiltered.map(
+          command=> ({id: Number(command.bot_command_id), name: command.name})
+        ) 
+      :
+        []
+    }
+    
     return botCommandList ?
         botCommandList.map(
           command=> ({id: Number(command.bot_command_id), name: command.name})
         ) 
       :
         []
-  }, [botCommandList])
+  }, [botCommandList, commandsAdded.length])
 
   const postResponse = useCallback(async ()=>{
     if(botCommandSelected && !editMode && postResponseRequest && !responseSelected && !fetching){
@@ -350,72 +361,40 @@ const NewCommand = (props:NewCommandProps) => {
     handleCloseNewCommand();
     clearStatus();
   }
-
-  const inputParams = { 
-    language, 
-    handleChangeInputs,
-    name,
-    command,
-    description,
-    userType,
-    commandType,
-    response,
-    fileName,
-    url,
-    userTypesOptions,
-    commandTypesOptions,
-    emptyFirstFields,
-    emptySecondFields,
-    confirmation,
-    isAButtonCommand, 
-    coordinates,
-    buttonList,
-    editMode
-  };
-
-  const firstInputs = inputFirstConfig(inputParams);
-  const secondaryInputs = inputSecondaryConfig(inputParams);
-  const tableConfig = { language, handleDeleteNestedCommand, editMode };
-  const inputButtonOrCoordinate = coordinateOrButtonListInputConfig(inputParams);
   
   return (
-    <RightModal
-      open={openNewCommand}
-      handleClose={handleClose}
-      title={language.newCommand}
-      handleSave={handleSave}
+    <NewCommandContent
+      name={name}
+      openNewCommand={openNewCommand}
+      language={language}
+      userTypesOptions={userTypesOptions}
+      commandTypesOptions={commandTypesOptions}
       fetching={Boolean(fetching)}
-    >
-      <div className={contentSize}>
-        {
-          firstInputs.map(
-            (input, index) => <BuildInputs key={'first' + index} input={input}/>
-          )
-        }
-        {
-          secondaryInputsActives && secondaryInputs.map(
-            (input, index) => <BuildInputs key={'secondary' + index} input={input}/>
-          )
-        }
-        {
-          (isAButtonCommand || isALocationCommand) && 
-            <BuildInputs input={inputButtonOrCoordinate}/>
-        }
-        {
-          isANestedCommand && 
-            <SectionAddToTable
-              config={NestedCommandTableConfig(tableConfig)}
-              dataset={commandsAdded}
-              title={language.addCommand}
-              value={commandToAdd}
-              list={commandListToOptions}
-              handleChange={handleChangeInputs}
-              loader={Boolean(fetching)}
-              disabled={editMode}
-            />
-        }
-      </div>
-    </RightModal>
+      editMode={editMode}
+      handleChangeInputs={handleChangeInputs}
+      command={command}
+      description={description}
+      userType={userType}
+      commandType={commandType}
+      response={response}
+      fileName={fileName}
+      url={url}
+      emptyFirstFields={emptyFirstFields}
+      emptySecondFields={emptySecondFields}
+      confirmation={confirmation}
+      isAButtonCommand={isAButtonCommand}
+      coordinates={coordinates}
+      buttonList={buttonList}
+      handleDeleteNestedCommand={handleDeleteNestedCommand}
+      handleClose={handleClose}
+      handleSave={handleSave}
+      secondaryInputsActives={secondaryInputsActives}
+      isALocationCommand={isALocationCommand}
+      isANestedCommand={isANestedCommand}
+      commandsAdded={commandsAdded}
+      commandToAdd={commandToAdd}
+      commandListToOptions={commandListToOptions}
+    />
   );
 }
 

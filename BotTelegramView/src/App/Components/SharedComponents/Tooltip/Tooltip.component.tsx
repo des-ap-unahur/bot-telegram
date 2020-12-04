@@ -10,7 +10,7 @@ const ControlledTooltips = ({children, title, click, setClick}: TooltipProps) =>
       setOpen(false)
       setClick(false)
     }
-  }, [click])
+  }, [click, setClick])
 
   useLayoutEffect(()=>{
     closeTooltip()

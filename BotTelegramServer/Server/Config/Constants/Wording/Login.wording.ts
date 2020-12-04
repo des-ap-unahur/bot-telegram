@@ -3,5 +3,6 @@ export const loginWording = {
   mailIsInUse: "El mail esta en uso",
   userIsInUse: "El nombre de usuario esta en uso",
   userDoesNotExist: "El usuario no existe.",
-  errorWithUserPassword: "Error en la contraseña"
+  errorWithUserPassword: "Error en la contraseña",
+  sessionFinished: "Sesion terminada"
 }

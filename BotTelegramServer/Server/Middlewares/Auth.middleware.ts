@@ -7,11 +7,13 @@ import {
   encryptPassword,
   compareLogin,
   createToken,
+  verifyToken
 } from "../Utils/Auth.utils";
 import { HttpStatus } from "../Config/Server/HTTPStatus.config";
 import { configServer } from "../Config/Server/Server.config";
+import { nonSecurePaths, timeToExpired } from "../Config/Auth/Auth.config";
 
-const { userIsInUse, mailIsInUse, errorWithUserPassword, userDoesNotExist } = loginWording;
+const { userIsInUse, mailIsInUse, errorWithUserPassword, userDoesNotExist, sessionFinished } = loginWording;
 
 class Auth {
   register = async (req, res): Promise<void> => {
@@ -20,7 +22,7 @@ class Auth {
       await encryptPassword(newUser);
       const user = await UserBackOfficeRepository.post(newUser);
       res.status(HttpStatus.OK).send({
-        token: createToken(newUser, configServer.get('SECRET_KEY'), "24h"),
+        token: createToken(newUser, configServer.get('SECRET_KEY'), timeToExpired),
         user: user,
       });
     }
@@ -35,7 +37,7 @@ class Auth {
     if (passwordSuccess) {
       const { back_user_id, user_role_id, username, first_name, last_name, email } = userFound;
       res.send({
-        token: createToken(userFound, configServer.get('SECRET_KEY'), "24h"),
+        token: createToken(userFound, configServer.get('SECRET_KEY'), timeToExpired),
         user: { back_user_id, user_role_id, username, first_name, last_name, email }
       });
     }
@@ -71,6 +73,23 @@ class Auth {
     }
 
     return passwordSuccess;
+  }
+
+  verifyToken = async (req, res, next) =>  {
+    const token = req.headers['x-access-token'];
+    const { path } = req;
+    
+    if (nonSecurePaths.includes(path)) {
+      return next();
+    } else if (!token) {
+      return res.status(HttpStatus.FORBIDDEN).send({ 
+        auth: false, message: sessionFinished
+      });
+    }
+
+    const decoded = verifyToken(String(token));
+    req.userId = decoded.id;
+    next();
   }
 }
 

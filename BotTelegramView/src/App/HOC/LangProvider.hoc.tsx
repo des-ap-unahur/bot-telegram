@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { language, LanguageContext } from '../Config/Lang/Lang.languaje';
+import { language, LanguageContext, languageOptions } from '../Config/Lang/Lang.languaje';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import authActions from "../Store/Actions/Auth.action";
@@ -10,26 +10,19 @@ import LangProviderInterface from '../Interfaces/Language/LangProvider.interface
 const actionCreators = Object.assign({}, authActions.actionCreators);
 
 const LanguageProvider = ({children, changeAuthLanguage, langAuth }: LangProviderInterface) => {
-  const { ES, EN } = language;
+  const { ES } = language;
   const [ languageProvider, setLanguageProvider ] = useState(ES);
   const [ lang, setLang ] = useState(langAuth)
 
   useEffect(()=> {
     lang && setLocalValue('lang', lang)
-    
-    switch(langAuth){
-      case 'ES':
-        setLanguageProvider(ES)
-        break;
-      case 'EN':
-        setLanguageProvider(EN)
-        break;
-      default:
-        setLanguageProvider(ES)
-    }
-    
+
+    languageOptions.find( 
+      langOption =>  langOption.lang === langAuth && setLanguageProvider(langOption.value)
+    )
+
     langAuth && setLang(langAuth)
-  }, [lang, langAuth])
+  }, [lang, langAuth, languageOptions.length])
   
   const changeLanguage = (e:any): void => {
     changeAuthLanguage(e.target.value)
