@@ -4,6 +4,9 @@ class BotUserSchema{
   @IsOptional()
   @IsNumber()
   bot_user_id: number;
+  @IsOptional()
+  @IsNumber()
+  guarani_user_id: number;
   @IsNotEmpty()
   @IsNumber()
   user_type_id: number;

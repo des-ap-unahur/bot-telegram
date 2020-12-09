@@ -18,7 +18,7 @@ class BotPollController {
   private polls: Poll[];
   private responses: PollResponses[];
   private currentQuestionId: number;
-  private pollCallback: (command: CommandInterface | null) => void;
+  private pollCallback: (command: CommandInterface | null, id: number) => any;
   private botUser: BotUsers | null; 
 
   constructor() {
@@ -154,7 +154,7 @@ class BotPollController {
         this.getPolls().then(
           () => this.showAvailablePolls(ctx)
         );
-        this.pollCallback(command);
+        this.pollCallback(command, botUser.tel_user_id);
       }
     }
   };
@@ -165,9 +165,9 @@ class BotPollController {
     this.polls = [];
     this.responses = [];
     this.currentQuestionId = null;
+    this.pollCallback(null, this.botUser.tel_user_id);
     this.botUser = null;
-    this.pollCallback(null);
   };
 }
 
-export default new BotPollController();
+export default BotPollController;
