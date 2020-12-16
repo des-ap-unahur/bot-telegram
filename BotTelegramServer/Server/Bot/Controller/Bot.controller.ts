@@ -57,14 +57,14 @@ class BotController {
     );
 
     if ((!userLogued && user) || this.refresh) {
-      await this.setMyCommands(user.user_type_id)
+      await this.setMyCommands(user.user_type_id).catch(e=> console.log(e))
       this.botUsers.push(user);
       return
     } else if (userLogued && user) {
-      await this.setMyCommands(user.user_type_id)
+      await this.setMyCommands(user.user_type_id).catch(e=> console.log(e))
       return
     }
-    await this.setMyCommands()
+    await this.setMyCommands().catch(e=> console.log(e))
     return
   };
 
