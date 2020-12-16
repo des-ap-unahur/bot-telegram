@@ -4,41 +4,18 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Bot_nested_commands', [
       {
-        bot_father_id: 8,
-        bot_child_id: 9,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        bot_father_id: 9,
+        bot_child_id: 7,
+        createdAt: "2020-11-30T14:10:18.000Z",
+        updatedAt: "2020-11-30T14:10:18.000Z"
       },
       {
-        bot_father_id: 8,
-        bot_child_id: 10,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        bot_father_id: 8,
-        bot_child_id: 11,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        bot_father_id: 14,
-        bot_child_id: 9,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        bot_father_id: 14,
-        bot_child_id: 10,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        bot_father_id: 14,
-        bot_child_id: 11,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
+        bot_nested_command_id: 7,
+        bot_father_id: 9,
+        bot_child_id: 8,
+        createdAt: "2020-11-30T14:10:18.000Z",
+        updatedAt: "2020-11-30T14:10:18.000Z"
+      }
     ]);
   },
   down: (queryInterface, Sequelize) => {

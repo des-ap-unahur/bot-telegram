@@ -142,7 +142,7 @@ class BotPollController {
   callPoll = (text: string, ctx: TelegrafContext, commands: CommandInterface[], pollCommand: CommandInterface | null): void => {
     
     if(pollCommand){
-      this.runPoll(text, ctx);
+      this.runPoll(text, ctx).catch(e => console.log(e));
     } else {
       const command = commands.find(
         (command) => command.command === pollCommandText && 

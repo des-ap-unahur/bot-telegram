@@ -4,47 +4,34 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Bot_responses', [
       {
-        bot_id: 9,
-        response: "La carrera de Informática y Sistemas consiste en la gestión, el mantenimiento, el desarrollo y la innovación de todo aquello que engloba el ámbito de la tecnología. Es indispensable que un estudiante de la Ingeniería en Informática posea interés en sistemas informáticos, algoritmos y programación, software, hardware y sistemas de organización de datos.",
-        description: "Descripcion de la carrera Informatica",
-        parameter:"",
+        bot_id: 1,
+        response:"Los comandos disponibles, son: ",
+        description: "muestra los comandos disponibles",
+        parameter: "",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        bot_id: 10,
-        response: "La Carrera de Física es una disciplina que se encarga del estudio de la materia, la energía y el movimiento, como también de sus interacciones. Tiene como objetivo conocer al universo y comprender los diferentes fenómenos que en él se manifiestan.",
-        description: "Descripcion de la carrera Fisica",
-        parameter:"",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        bot_id: 11,
-        response: "La Licenciatura en Química forma profesionales capaces para trabajar con sustancias químicas de cualquier tipo y desarrollar trabajos de investigación y tecnológicos en el área. Los Licenciados en Química pueden desempeñarse en laboratorios, industrias y oficinas científico-técnicas.",
-        description: "Descripcion de la carrera Lic. Quimica",
-        parameter:"",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        bot_id: 4,
+        bot_id: 2,
         response:`
-        ¡Bienvenido al botTestUnahur!
+        ¡Bienvenido a info bot! 👋
 
-        Características (por ahora):
-        - Ubicacion de la unahur
-        - Programas de carreras
-        - Oferta Academica
-        - Encuestas
-        Recorda que tenes que registrarte para acceder a diferentes 
-        acciones!
+        Este bot responde a las siguientes consultas:
 
-        *Primero te pido que te registres, podes hacerlo
+        - 🗺  Ubicación de la unahur.
+
+        - 📋 Programa de carreras.
+
+        - 📄 Oferta Académica.
+
+        - 📆 Calendario Academico.
+
+
+        ❗ Primero te pido que te registres, podes hacerlo
          apretando aca /Registrarme o escribiendo el comando.
       
-        *Escribe /Ayuda para ver los comando disponibles
-      `,
+        ❗ Escribe /Ayuda para ver los comando disponibles
+        `,
         description: "Comando iniciar muestra una serie de comandos disponibles",
         parameter:"",
         createdAt: new Date(),
@@ -52,20 +39,6 @@ module.exports = {
       },
       {
         bot_id: 3,
-        response: "Ubicación de la universidad",
-        description: "Ubicación de la universidad",
-        parameter:"-34.618246,-58.637199",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        bot_id: 2,
-        response: "plan de estudios Tec.universitaria en informatica",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        bot_id: 5,
         response: "Por favor, enviame tu numero para configurar tu usuario.",
         description: "Envio de numero de user",
         parameter: "Enviar mi numero",
@@ -73,23 +46,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
-        bot_id: 7,
-        response: "Mail de bienvenida al bot telegram de la UNAHUR.",
-        description: "se le pide al usuario que ingrese un mail",
-        parameter: "Bienvenido al bot telegram UNAHUR",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        bot_id: 12,
-        response: "Plan de estudio de informatica.",
-        description: "Se manda al usuario un mail con el pdf del programa",
-        parameter: "http://www.unahur.edu.ar/sites/default/files/2017-10/Tecnicatura%20Universitaria%20en%20Inform%C3%A1tica.pdf",
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        bot_id: 6,
+        bot_id: 4,
         response:`
         Genial, pudimos verificar tu perfil y quedo de la siguiente manera 
         NOMBRE   ---> :name
@@ -105,29 +62,66 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        bot_id: 7,
+        response: `
+        TÍTULO: Técnico/a Universitario/a en Informática
+        DURACIÓN: 3 años 
+        PERFIL DEL EGRESADO: El egresado (o la egresada) es un técnico universitario cuya área de acción principal es la problemática de la construcción de software, que se corresponde con las tareas tradicionalmente conocidas como diseño y programación o codificación
+        Más info: http://unahur.edu.ar/es/tecnicatura-universitaria-informatica
+        `,
+        description: "Describe duración y perfil de la carrera",
+        parameter: "",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
         bot_id: 8,
-        response:"Las carreras disponibles son: ",
-        description: "botones con las carreras",
+        response: `
+        TÍTULO: Licenciado/a en Informática 
+        DURACIÓN DE LA CARRERA: 5 años 
+        PERFIL DEL EGRESADO: El licenciado en informática de la Universidad Nacional de Hurlingham está enfocado en dar respuestas a necesidades de la sociedad, empresas y organismos a través de procesos de puesta en funcionamiento de herramientas informáticas ya sea desde la construcción de las mismas, como así también desde la adaptación de soluciones existentes, principalmente del ámbito del software libre. Posee una gran formación ética profesional, y una estrecha relación con el sector productivo regional. Con alta capacidad de desarrollo de proyectos propios, está preparado para intervenir en el ámbito público, privado y académico. 
+        Más info: http://unahur.edu.ar/es/licenciatura-en-informatica 
+        `,
+        description: "Describe el perfil de la carrera de grado de Licenciatura",
         parameter: "",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        bot_id: 1,
-        response:"Los comandos disponibles, son: ",
-        description: "muestra los comandos disponibles",
+        bot_id: 9,
+        response: "Estas son nuestras carreras, elegí una y te contamos sobre ella",
+        description: "Describe las opciones de carreras de informática en UNAHUR",
         parameter: "",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        bot_id: 14,
-        response:"Las carreras disponibles son: ",
-        description: "botones con las carreras",
+        bot_id: 10,
+        response: `
+        🗓  CALENDARIO ACADÉMICO: Estas son las próximas semanas https://informaticaunahur.github.io/assets-bot/calendario-actual-1.png 
+        - Si querés ver el calendario académico completo ingresá en este enlace:  http://unahur.edu.ar/es/calendario-academico`
+        ,
+        description: "Muestra link al calendario y las semanas más importantes",
         parameter: "",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        bot_id: 11,
+        response: "Este es el plan de estudios de la licenciatura en informática",
+        description: "Adjunta el PDF del plan de estudios",
+        parameter: "",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        bot_id: 12,
+        response: "El horario sobre la charla de materias de verano es a las 19 hs.",
+        description: "Muestra el horario de la charla respecto a las materias de verano.",
+        parameter: "",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
     ]);
   },
   down: (queryInterface, Sequelize) => {

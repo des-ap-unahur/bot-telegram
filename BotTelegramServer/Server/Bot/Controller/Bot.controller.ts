@@ -151,7 +151,6 @@ class BotController {
         this.callPollCommand
       );
     } else if (!pollToResponse && user && textEqualsPollText){
-      console.log(user, '------ user')
       const poll = new BotPollController(user);
       const user_id = user.tel_user_id;
       const pollToResponse: PollPendingForUser = {poll, user_id}
