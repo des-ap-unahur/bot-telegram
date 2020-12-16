@@ -44,7 +44,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.20",
     "morgan": "^1.10.0",
     "nodemon": "^1.19.4",
     "pretty-quick": "^1.11.1",

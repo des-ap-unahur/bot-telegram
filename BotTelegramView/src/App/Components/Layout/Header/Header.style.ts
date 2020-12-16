@@ -46,6 +46,7 @@ export const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     marginRight: '30px',
+    marginBottom: '6px'
   },
   hide: {
     display: 'none',

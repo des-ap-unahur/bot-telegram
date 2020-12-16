@@ -21,13 +21,13 @@ class BotPollController {
   private pollCallback: (command: CommandInterface | null, id: number) => any;
   private botUser: BotUsers | null; 
 
-  constructor() {
+  constructor( user: BotUsers ) {
     this.questions = [];
     this.poll = null;
     this.polls = [];
     this.responses = [];
     this.currentQuestionId = 0;
-    this.botUser = null;
+    this.botUser = user;
   }
 
   setCallback = (callback): void => {
@@ -115,7 +115,7 @@ class BotPollController {
 
   endPoll = async (text: string): Promise<void> => {
     await PollResponsesRepository.post(this.responses);
-    await this.clearPollStatus();
+    await this.clearPollStatus().catch(err => console.log(err));
   };
 
   finishPoll = async (text: string, ctx: TelegrafContext): Promise<void> => {
@@ -129,7 +129,7 @@ class BotPollController {
 
   forceFinishPoll = async (text) => {
     if(removeSensitiveCase(text) === removeSensitiveCase(exitCommand)){
-      await this.clearPollStatus();
+      await this.clearPollStatus().catch(err => console.log(err));
     }
   }
 
@@ -139,7 +139,7 @@ class BotPollController {
     await this.finishPoll(text,ctx);
   }
 
-  callPoll = (text: string, ctx: TelegrafContext, commands: CommandInterface[], pollCommand: CommandInterface | null, botUser: BotUsers): void => {
+  callPoll = (text: string, ctx: TelegrafContext, commands: CommandInterface[], pollCommand: CommandInterface | null): void => {
     
     if(pollCommand){
       this.runPoll(text, ctx);
@@ -150,22 +150,21 @@ class BotPollController {
       );
 
       if (command) {
-        this.botUser = botUser;
         this.getPolls().then(
           () => this.showAvailablePolls(ctx)
         );
-        this.pollCallback(command, botUser.tel_user_id);
+        this.pollCallback(command, this.botUser.tel_user_id);
       }
     }
   };
 
-  clearPollStatus = (): void => {
+  clearPollStatus = async (): Promise<void> => {
     this.questions = [];
     this.poll = null;
     this.polls = [];
     this.responses = [];
     this.currentQuestionId = null;
-    this.pollCallback(null, this.botUser.tel_user_id);
+    this.botUser && await this.pollCallback(null, this.botUser.tel_user_id);
     this.botUser = null;
   };
 }

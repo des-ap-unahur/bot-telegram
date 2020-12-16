@@ -60,7 +60,7 @@ class BotController {
       await this.setMyCommands(user.user_type_id)
       this.botUsers.push(user);
       return
-    } else if (userLogued) {
+    } else if (userLogued && user) {
       await this.setMyCommands(user.user_type_id)
       return
     }
@@ -100,6 +100,7 @@ class BotController {
       studentCommands: this.studentCommands,
       teacherCommands: this.teacherCommands
     }
+    this.botCommands = []
     this.contactCommand = buildContactCommand(this.botCommands);
   };
 
@@ -128,39 +129,41 @@ class BotController {
   };
 
   setCallPoll = (command: CommandInterface | null, id: number) => {
-    if(command === null){
+    if(!command){
       const pollListUpdated = this.pollPending.filter(poll => poll.user_id !== id);
       this.pollPending = pollListUpdated;
+      this.callPollCommand = command;
     } else {
       this.callPollCommand = command;
     }
   };
 
   execCallPoll = async (ctx: TelegrafContext, text: string, user: BotUsers | null, commands:CommandInterface[]): Promise<void> => {
-    const pollToResponse = this.pollPending.find(poll => poll.user_id === user.tel_user_id);
+    const pollToResponse = this.pollPending.find(poll => user && poll.user_id === user.tel_user_id);
     const textEqualsPollText = removeSensitiveCase(pollCommandText).includes(removeSensitiveCase(text));
-    if(pollToResponse){
+
+    if(pollToResponse && user){
       await pollToResponse.poll.setCallback(this.setCallPoll);
       await pollToResponse.poll.callPoll(
         text,
         ctx,
         commands,
-        this.callPollCommand,
-        user
+        this.callPollCommand
       );
-    } else if (user && textEqualsPollText){
-      const poll = new BotPollController();
+    } else if (!pollToResponse && user && textEqualsPollText){
+      console.log(user, '------ user')
+      const poll = new BotPollController(user);
       const user_id = user.tel_user_id;
-
+      const pollToResponse: PollPendingForUser = {poll, user_id}
       await poll.setCallback(this.setCallPoll);
       await poll.callPoll(
         text,
         ctx,
         commands,
-        this.callPollCommand,
-        user
+        this.callPollCommand
       );
-      this.pollPending.push({poll, user_id});
+
+      this.pollPending = [pollToResponse, ...this.pollPending];
     }
   };
 
@@ -180,7 +183,7 @@ class BotController {
       command => {
         const commandDescription = command.botResponses ? command.botResponses.description : withOutDescription
 
-        return {command: command.tel_command.toLowerCase(), description: capitalize(commandDescription)}
+        return {command: command.tel_command.toLowerCase(), description: capitalize(String(commandDescription))}
       }
     )
     await this.bot.telegram.setMyCommands(commands);
@@ -209,9 +212,17 @@ class BotController {
 
           this.notUnderstandMessage(text, ctx, commands);
 
-          this.execCallPoll(ctx, text, user, commands).catch(err => console.log(err));
+          try{
+            this.execCallPoll(ctx, text, user, commands);
+          } catch (e) {
+            console.log(e)
+          }
         } else {
-          this.execCallPoll(ctx, text, user, commands).catch(err => console.log(err));
+          try{
+            this.execCallPoll(ctx, text, user, commands);
+          } catch (e) {
+            console.log(e)
+          }
         }
       })
     );

@@ -20,6 +20,8 @@ const RedirectWithLogin = ({auth}:any) => {
       const isAValidRoute = validRoutes.includes(path);
 
       !isAValidRoute && history.push('/dashboard');
+    } else {
+      history.push('/login');
     }
   }, [auth, history])
 

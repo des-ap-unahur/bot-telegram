@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useEffect, useCallback } from 'react';
-import { useStyles } from '../../GetCommands.style';
 import { NewCommandProps, OptionInterface } from '../../GetCommands.interface';
 import { inputNames } from '../../GetCommands.config';
 import BotCommands from '../../../../../Interfaces/Commands/BotComands.interface';
@@ -47,7 +46,6 @@ const NewCommand = (props:NewCommandProps) => {
     updateBotCommandRequest,
     updateResponseRequest
   } = props;
-  const { contentSize } = useStyles();
 
   const clearStatus = async () => {
     selectBotCommand && selectBotCommand(null)

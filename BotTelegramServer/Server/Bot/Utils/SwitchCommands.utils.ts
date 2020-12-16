@@ -4,7 +4,7 @@ import { userTypes } from "../Constants/Bot.constans";
 import CommandInterface from "../Interfaces/Command.interface";
 
 export const switchCommands = async (ctx: TelegrafContext, commands: any, users: BotUsers[], callBack: (commands: CommandInterface[], user: BotUsers | null) => void) => {
-  const telegram_user_id: number = ctx.message.chat.id;
+  const telegram_user_id: number = ctx.message.chat.id | ctx.chat.id;
   const {
     comunityCommands,
     studentCommands,
