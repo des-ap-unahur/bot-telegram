@@ -34,9 +34,10 @@ class BotPollController {
     this.pollCallback = callback;
   }
 
-  getPolls = async (): Promise<void> => {
+  getPolls = async (): Promise<Poll[]> => {
     const polls: Poll[] = await PollRepository.getAll();
     this.polls = polls ? polls : [];
+    return polls
   };
 
   showAvailablePolls = (ctx: TelegrafContext): void => {
@@ -151,7 +152,14 @@ class BotPollController {
 
       if (command) {
         this.getPolls().then(
-          () => this.showAvailablePolls(ctx)
+          async (polls) => {
+            if(!polls.length){
+              ctx.reply('No hay encuestas disponibles')
+              this.clearPollStatus()
+            } else {
+              this.showAvailablePolls(ctx)
+            }
+          }
         );
         this.pollCallback(command, this.botUser.tel_user_id);
       }
