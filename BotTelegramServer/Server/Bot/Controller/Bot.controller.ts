@@ -170,8 +170,9 @@ class BotController {
     const commandFiltered: BotCommand[] = await type ? 
       this.commandsWithoutContact.filter(
         command =>
-          command.user_type_id === type ||
-          command.user_type_id === userTypes.comunity
+          (command.user_type_id === type ||
+          command.user_type_id === userTypes.comunity) &&
+          command.tel_command.length <= 31
       )
     :
       this.commandsWithoutContact.filter(
@@ -182,7 +183,7 @@ class BotController {
       command => {
         const commandDescription = command.botResponses ? command.botResponses.description : withOutDescription
 
-        return {command: command.tel_command.toLowerCase(), description: capitalize(String(commandDescription).substring(0, 30))}
+        return {command: command.tel_command.toLowerCase(), description: capitalize(String(commandDescription))}
       }
     )
     await this.bot.telegram.setMyCommands(commands);
