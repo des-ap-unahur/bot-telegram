@@ -26,7 +26,15 @@ module.exports = {
         phone_number: "1161311076",
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
+      {
+        dni: "17261762",
+        email: "informatica@unahur.edu.ar",
+        phone_number: "1154993391",
+        profile: "Estudiante",
+        createdAt: new Date(),
+        updatedAt: new Date()
+    }
     ]);
   },
   down: (queryInterface, Sequelize) => {
