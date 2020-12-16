@@ -57,14 +57,14 @@ class BotController {
     );
 
     if ((!userLogued && user) || this.refresh) {
-      await this.setMyCommands(user.user_type_id).catch(e=> console.log(e))
+      await this.setMyCommands(user.user_type_id)
       this.botUsers.push(user);
       return
     } else if (userLogued && user) {
-      await this.setMyCommands(user.user_type_id).catch(e=> console.log(e))
+      await this.setMyCommands(user.user_type_id)
       return
     }
-    await this.setMyCommands().catch(e=> console.log(e))
+    await this.setMyCommands()
     return
   };
 
@@ -186,7 +186,7 @@ class BotController {
         return {command: command.tel_command.toLowerCase(), description: capitalize(String(commandDescription))}
       }
     )
-    await this.bot.telegram.setMyCommands(commands);
+    await this.bot.telegram.setMyCommands(commands).catch();
   }
 
   runCommands = async (): Promise<void> => {
@@ -212,17 +212,9 @@ class BotController {
 
           this.notUnderstandMessage(text, ctx, commands);
 
-          try{
-            this.execCallPoll(ctx, text, user, commands);
-          } catch (e) {
-            console.log(e)
-          }
+          this.execCallPoll(ctx, text, user, commands).catch();
         } else {
-          try{
-            this.execCallPoll(ctx, text, user, commands);
-          } catch (e) {
-            console.log(e)
-          }
+          this.execCallPoll(ctx, text, user, commands).catch();
         }
       })
     );

@@ -154,7 +154,8 @@ class BotPollController {
         this.getPolls().then(
           async (polls) => {
             if(!polls.length){
-              ctx.reply('No hay encuestas disponibles')
+              const { noSurveysAvailable } = botWording;
+              ctx.reply(noSurveysAvailable)
               this.clearPollStatus()
             } else {
               this.showAvailablePolls(ctx)
