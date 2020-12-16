@@ -182,7 +182,7 @@ class BotController {
       command => {
         const commandDescription = command.botResponses ? command.botResponses.description : withOutDescription
 
-        return {command: command.tel_command.toLowerCase(), description: capitalize(String(commandDescription).substring(0, 31))}
+        return {command: command.tel_command.toLowerCase(), description: capitalize(String(commandDescription).substring(0, 30))}
       }
     )
     await this.bot.telegram.setMyCommands(commands);
