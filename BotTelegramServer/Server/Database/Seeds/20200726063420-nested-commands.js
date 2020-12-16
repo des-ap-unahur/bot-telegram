@@ -6,15 +6,15 @@ module.exports = {
       {
         bot_father_id: 9,
         bot_child_id: 7,
-        createdAt: "2020-11-30T14:10:18.000Z",
-        updatedAt: "2020-11-30T14:10:18.000Z"
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         bot_nested_command_id: 7,
         bot_father_id: 9,
         bot_child_id: 8,
-        createdAt: "2020-11-30T14:10:18.000Z",
-        updatedAt: "2020-11-30T14:10:18.000Z"
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     ]);
   },

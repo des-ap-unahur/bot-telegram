@@ -40,8 +40,8 @@ module.exports = {
         tel_last_name: "UNAHUR",
         tel_first_name: "Informática",
         tel_username: "Informática",
-        createdAt: "2020-11-27T22:21:11.000Z",
-        updatedAt: "2020-11-27T22:21:11.000Z",
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ]);
   },
