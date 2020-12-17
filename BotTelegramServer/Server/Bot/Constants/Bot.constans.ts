@@ -8,7 +8,7 @@ export const userTypes = {
   comunity: 3
 }
 
-export const withOutDescription = '   '
+export const withOutDescription = '...'
 
 export const botUserTypes = [
   {name: "Estudiante", id: userTypes.student},
