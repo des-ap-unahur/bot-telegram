@@ -27,7 +27,6 @@ class BotController {
   private botCommands: BotCommand[];
   private commandsWithoutContact: BotCommands[];
   private bot: Telegraf<TelegrafContext>;
-  private callPollCommand: CommandInterface | null;
   private botUsers: BotUsers[];
   private pollPending: PollPendingForUser[];
   private refresh: boolean;
@@ -40,7 +39,6 @@ class BotController {
     this.comunityCommands = [];
     this.studentCommands = [];
     this.teacherCommands = [];
-    this.callPollCommand = null;
     this.botUsers = [];
     this.pollPending = [];
     this.refresh = false
@@ -128,38 +126,28 @@ class BotController {
     ) && invalidMessageCommand(ctx);
   };
 
-  setCallPoll = (command: CommandInterface | null, id: number) => {
-    if(!command){
-      const pollListUpdated = this.pollPending.filter(poll => poll.user_id !== id);
-      this.pollPending = pollListUpdated;
-      this.callPollCommand = command;
-    } else {
-      this.callPollCommand = command;
-    }
+  removeUserFromPoll = (id: number) => {
+    const pollListUpdated = this.pollPending.filter(poll => poll.user_id !== id);
+    this.pollPending = pollListUpdated;
   };
 
-  execCallPoll = async (ctx: TelegrafContext, text: string, user: BotUsers | null, commands:CommandInterface[]): Promise<void> => {
+  execCallPoll = async (ctx: TelegrafContext, text: string, user: BotUsers | null): Promise<void> => {
     const pollToResponse = this.pollPending.find(poll => user && poll.user_id === user.tel_user_id);
     const textEqualsPollText = removeSensitiveCase(pollCommandText).includes(removeSensitiveCase(text));
 
     if(pollToResponse && user){
-      await pollToResponse.poll.setCallback(this.setCallPoll);
       await pollToResponse.poll.callPoll(
         text,
-        ctx,
-        commands,
-        this.callPollCommand
+        ctx
       );
     } else if (!pollToResponse && user && textEqualsPollText){
-      const poll = new BotPollController(user);
+      const poll = new BotPollController(user, this.removeUserFromPoll);
       const user_id = user.tel_user_id;
-      const pollToResponse: PollPendingForUser = {poll, user_id}
-      await poll.setCallback(this.setCallPoll);
+      const pollToResponse: PollPendingForUser = { poll, user_id }
+
       await poll.callPoll(
         text,
-        ctx,
-        commands,
-        this.callPollCommand
+        ctx
       );
 
       this.pollPending = [pollToResponse, ...this.pollPending];
@@ -181,7 +169,8 @@ class BotController {
     
     const commands = await commandFiltered.map(
       command => {
-        const commandDescription = command.botResponses ? command.botResponses.description : withOutDescription
+        const validDescription = command.botResponses && command.botResponses.description.length <= 31;
+        const commandDescription = validDescription ? command.botResponses.description : withOutDescription
 
         return {command: command.tel_command.toLowerCase(), description: capitalize(String(commandDescription))}
       }
@@ -212,9 +201,9 @@ class BotController {
 
           this.notUnderstandMessage(text, ctx, commands);
 
-          this.execCallPoll(ctx, text, user, commands).catch();
+          this.execCallPoll(ctx, text, user).catch();
         } else {
-          this.execCallPoll(ctx, text, user, commands).catch();
+          this.execCallPoll(ctx, text, user).catch();
         }
       })
     );

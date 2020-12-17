@@ -18,19 +18,18 @@ class BotPollController {
   private polls: Poll[];
   private responses: PollResponses[];
   private currentQuestionId: number;
-  private pollCallback: (command: CommandInterface | null, id: number) => any;
+  private pollCallback: (id: number) => void;
+  private nextStep: boolean;
   private botUser: BotUsers | null; 
 
-  constructor( user: BotUsers ) {
+  constructor( user: BotUsers, callback: (id: number) => void ) {
     this.questions = [];
     this.poll = null;
     this.polls = [];
     this.responses = [];
     this.currentQuestionId = 0;
     this.botUser = user;
-  }
-
-  setCallback = (callback): void => {
+    this.nextStep = false;
     this.pollCallback = callback;
   }
 
@@ -114,7 +113,7 @@ class BotPollController {
     }
   }
 
-  endPoll = async (text: string): Promise<void> => {
+  endPoll = async (): Promise<void> => {
     await PollResponsesRepository.post(this.responses);
     await this.clearPollStatus().catch(err => console.log(err));
   };
@@ -123,7 +122,7 @@ class BotPollController {
     const { thankYouForAnsweringTheSurvey } = botWording;
 
     if (!this.polls.length && removeSensitiveCase(text) !== removeSensitiveCase(exitCommand)) {
-      await this.endPoll(text);
+      await this.endPoll();
       await ctx.reply(thankYouForAnsweringTheSurvey);
     }
   }
@@ -136,35 +135,28 @@ class BotPollController {
 
   runPoll = async (text: string, ctx: TelegrafContext): Promise<void>  => {
     await this.forceFinishPoll(text);
-    await this.selectPollOrResponse(text, ctx);
+    await this.selectPollOrResponse(text, ctx).catch();
     await this.finishPoll(text,ctx);
   }
 
-  callPoll = (text: string, ctx: TelegrafContext, commands: CommandInterface[], pollCommand: CommandInterface | null): void => {
-    
-    if(pollCommand){
+  callPoll = (text: string, ctx: TelegrafContext): void => {
+    if(this.nextStep){
       this.runPoll(text, ctx).catch(e => console.log(e));
     } else {
-      const command = commands.find(
-        (command) => command.command === pollCommandText && 
-        removeSensitiveCase(text) === removeSensitiveCase(pollCommandText)
-      );
-
-      if (command) {
-        this.getPolls().then(
-          async (polls) => {
-            if(!polls.length){
-              const { noSurveysAvailable } = botWording;
-              ctx.reply(noSurveysAvailable)
-              this.clearPollStatus()
-            } else {
-              this.showAvailablePolls(ctx)
-            }
+      this.getPolls().then(
+        async (polls) => {
+          if(!polls.length){
+            const { noSurveysAvailable } = botWording;
+            ctx.reply(noSurveysAvailable)
+            this.clearPollStatus();
+          } else {
+            this.showAvailablePolls(ctx)
+            this.nextStep = true;
           }
-        );
-        this.pollCallback(command, this.botUser.tel_user_id);
-      }
+        }
+      );
     }
+    
   };
 
   clearPollStatus = async (): Promise<void> => {
@@ -173,7 +165,7 @@ class BotPollController {
     this.polls = [];
     this.responses = [];
     this.currentQuestionId = null;
-    this.botUser && await this.pollCallback(null, this.botUser.tel_user_id);
+    this.botUser && await this.pollCallback(this.botUser.tel_user_id);
     this.botUser = null;
   };
 }
