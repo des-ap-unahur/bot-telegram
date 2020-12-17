@@ -175,11 +175,10 @@ class BotController {
         return {command: command.tel_command.toLowerCase(), description: capitalize(String(commandDescription))}
       }
     )
-    try {
-      await this.bot.telegram.setMyCommands(commands).catch();
-    } catch (e) {
 
-    }
+    try {
+      await this.bot.telegram.setMyCommands(commands);
+    } catch {}
   }
 
   runCommands = async (): Promise<void> => {
