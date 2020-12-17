@@ -169,13 +169,17 @@ class BotController {
     
     const commands = await commandFiltered.map(
       command => {
-        const validDescription = command.botResponses && command.botResponses.description.length <= 31;
+        const validDescription = command.botResponses;
         const commandDescription = validDescription ? command.botResponses.description : withOutDescription
 
         return {command: command.tel_command.toLowerCase(), description: capitalize(String(commandDescription))}
       }
     )
-    await this.bot.telegram.setMyCommands(commands).catch();
+    try {
+      await this.bot.telegram.setMyCommands(commands).catch();
+    } catch (e) {
+
+    }
   }
 
   runCommands = async (): Promise<void> => {
