@@ -98,8 +98,8 @@ class BotController {
       studentCommands: this.studentCommands,
       teacherCommands: this.teacherCommands
     }
-    this.botCommands = []
     this.contactCommand = buildContactCommand(this.botCommands);
+    this.botCommands = []
   };
 
   execCommand = (text: string, ctx: TelegrafContext, commands:CommandInterface[]): void => {

@@ -1,7 +1,7 @@
 import buildAsyncAction from './BuildAsyncAction.utils'
 import AsyncActionsParams from '../Interfaces/Global/AsyncActionsParams.interface'
 
-const builderAsyncActions = (actionsData: Array<AsyncActionsParams>) => {
+const builderAsyncActions = (actionsData: AsyncActionsParams[]) => {
   const actionsTypes = {}
   const actionCreators = {}
 
